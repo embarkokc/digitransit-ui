@@ -1,11 +1,16 @@
 # syntax = docker/dockerfile:1.4
-FROM node:10 as builder
+FROM node:10-alpine as builder
 
 WORKDIR /opt/digitransit-ui
 
 ENV \
   # We mimick common CI/CD systems so that tools don't assume a "normal" dev env.
   CI=true
+
+# install dependencies for npm packages
+RUN \
+  # required vor sharp, which builds libvips using node-gyp
+  apk add --no-cache python3 make g++ vips-dev
 
 COPY .yarnrc.yml package.json yarn.lock lerna.json ./
 COPY .yarn ./.yarn
@@ -34,7 +39,7 @@ RUN \
   yarn build && \
   rm -rf node_modules/.cache
 
-FROM node:10
+FROM node:10-alpine
 MAINTAINER Reittiopas version: 0.1
 
 WORKDIR /opt/digitransit-ui

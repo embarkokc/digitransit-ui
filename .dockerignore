@@ -9,6 +9,8 @@ Makefile
 docker-compose.yml
 win-launch-scripts/
 docs/
+/test
+
 node_modules
 /.yarn
 !/.yarn/plugins

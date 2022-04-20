@@ -1,5 +1,8 @@
+# syntax = docker/dockerfile:1.4
 FROM node:10
 MAINTAINER Reittiopas version: 0.1
+
+WORKDIR /opt/digitransit-ui
 
 EXPOSE 8080
 

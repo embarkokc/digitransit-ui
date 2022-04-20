@@ -3,6 +3,10 @@ FROM node:10 as builder
 
 WORKDIR /opt/digitransit-ui
 
+ENV \
+  # We mimick common CI/CD systems so that tools don't assume a "normal" dev env.
+  CI=true
+
 COPY .yarnrc.yml package.json yarn.lock lerna.json ./
 COPY .yarn ./.yarn
 
@@ -18,7 +22,7 @@ RUN \
   # Tell Playwright not to download browser binaries, as it is only used for testing (not building).
   # https://github.com/microsoft/playwright/blob/v1.16.2/installation-tests/installation-tests.sh#L200-L216
   export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
-  && yarn install --immutable --immutable-cache \
+  && yarn install --immutable --immutable-cache --inline-builds \
   && rm -rf /tmp/phantomjs
 
 # We create another image layer *without* .yarn/cache here, in order to copy the Yarn setup without the cache later.
@@ -43,7 +47,7 @@ COPY --from=builder /opt/digitransit-ui/.yarn ./.yarn
 
 RUN \
   # install production dependencies only
-  yarn install --production --immutable --immutable-cache
+  yarn install --production --immutable --immutable-cache --inline-builds
 
 COPY digitransit-util ./digitransit-util
 COPY digitransit-search-util ./digitransit-search-util

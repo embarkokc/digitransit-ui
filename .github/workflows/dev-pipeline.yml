@@ -39,6 +39,17 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install --immutable
+
+      - name: cache shared components
+        id: cache-shared-components
+        uses: actions/cache@v3
+        with:
+          path: 'digitransit-*'
+          key: ${{ runner.os }}-modules-${{ hashFiles('digitransit-*') }}
+      - name: build shared components
+        if: ${{ steps.cache-shared-components.outputs.cache-hit != 'true' }}
+        run: yarn run build-workspaces
+
   lint:
     runs-on: ubuntu-latest
     strategy:
@@ -74,8 +85,16 @@ jobs:
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install --immutable
 
+      - name: cache shared components
+        id: cache-shared-components
+        uses: actions/cache@v3
+        with:
+          path: 'digitransit-*'
+          key: ${{ runner.os }}-modules-${{ hashFiles('digitransit-*') }}
       - name: Build shared components
+        if: ${{ steps.cache-shared-components.outputs.cache-hit != 'true' }}
         run: yarn run build-workspaces
+
       - name: Run linters
         run: yarn lint
       - name: lint SVG sprites using xmllint
@@ -118,8 +137,16 @@ jobs:
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install --immutable
 
+      - name: cache shared components
+        id: cache-shared-components
+        uses: actions/cache@v3
+        with:
+          path: 'digitransit-*'
+          key: ${{ runner.os }}-modules-${{ hashFiles('digitransit-*') }}
       - name: Build shared components
+        if: ${{ steps.cache-shared-components.outputs.cache-hit != 'true' }}
         run: yarn run build-workspaces
+
       - name: build relay queries
         run: yarn relay
       - name: Run unit tests

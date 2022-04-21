@@ -149,10 +149,21 @@ jobs:
         if: ${{ steps.cache-shared-components.outputs.cache-hit != 'true' }}
         run: yarn run build-workspaces
 
-      - name: Build relay queries
-        run: yarn relay
-      - name: Build UI
-        run: yarn build
+      - name: cache built Relay queries & UI
+        id: cache-ui-build
+        uses: actions/cache@v3
+        with:
+          path: |
+            '_static'
+            'manifest.json'
+            'stats.json'
+            '__generated__'
+            '**/__generated__'
+          key: relay-ui-${{ github.sha }}
+      - name: build Relay queries & UI
+        if: ${{ steps.cache-ui-build.outputs.cache-hit != 'true' }}
+        run: |
+          yarn build
 
   unit-test:
     needs: build

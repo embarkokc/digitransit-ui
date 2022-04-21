@@ -29,6 +29,7 @@ RUN \
   export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
   && yarn install --immutable --immutable-cache --inline-builds \
   && rm -rf /tmp/phantomjs
+RUN ls -l node_modules | wc -l
 
 # We create another image layer *without* .yarn/cache here, in order to copy the Yarn setup without the cache later.
 RUN rm -r .yarn/cache
@@ -56,9 +57,11 @@ COPY .yarnrc.yml package.json yarn.lock lerna.json ./
 COPY config ./config
 COPY --from=builder /opt/digitransit-ui/.yarn ./.yarn
 
+# COPY --from=node-modules /opt/digitransit-ui/node_modules ./node_modules
 RUN \
   # install production dependencies only
   yarn install --production --immutable --immutable-cache --inline-builds
+RUN ls -l node_modules | wc -l
 
 COPY digitransit-util ./digitransit-util
 COPY digitransit-search-util ./digitransit-search-util

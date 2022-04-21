@@ -12,6 +12,8 @@ docs/
 
 node_modules
 /.yarn
+# todo: keep?
+# !/.yarn/install-state.gz
 !/.yarn/plugins
 !/.yarn/releases
 !/.yarn/versions

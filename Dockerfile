@@ -40,7 +40,13 @@ RUN \
   rm -rf node_modules/.cache
 
 FROM node:10-alpine
-MAINTAINER Reittiopas version: 0.1
+LABEL org.opencontainers.image.title="digitransit-ui"
+LABEL org.opencontainers.image.description="open nationwide journey planning platform"
+LABEL org.opencontainers.image.authors="digitransit@hsl.fi"
+LABEL org.opencontainers.image.documentation="https://digitransit.fi"
+LABEL org.opencontainers.image.source="https://github.com/HSLdevcom/digitransit-ui/tree/v3"
+LABEL org.opencontainers.image.revision="3"
+LABEL org.opencontainers.image.licenses="(AGPL-3.0 OR EUPL-1.2)"
 
 WORKDIR /opt/digitransit-ui
 

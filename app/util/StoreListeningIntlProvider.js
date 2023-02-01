@@ -1,4 +1,4 @@
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 
 export default connectToStores(
@@ -6,9 +6,6 @@ export default connectToStores(
   ['PreferencesStore'],
   (context, props) => {
     const language = context.getStore('PreferencesStore').getLanguage();
-
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    addLocaleData(require(`react-intl/locale-data/${language}`));
 
     return {
       locale: language,

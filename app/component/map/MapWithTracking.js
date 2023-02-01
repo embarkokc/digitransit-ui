@@ -7,7 +7,6 @@ import getContext from 'recompose/getContext';
 import isEqual from 'lodash/isEqual';
 import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
-import { intlShape } from 'react-intl';
 import { startLocationWatch } from '../../action/PositionActions';
 import MapContainer from './MapContainer';
 import ToggleMapTracking from '../ToggleMapTracking';
@@ -379,7 +378,7 @@ class MapWithTrackingStateHandler extends React.Component {
 MapWithTrackingStateHandler.contextTypes = {
   executeAction: PropTypes.func,
   getStore: PropTypes.func,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   config: PropTypes.object.isRequired,
 };
 

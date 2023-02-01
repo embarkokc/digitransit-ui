@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
 import getJson from '@digitransit-search-util/digitransit-search-util-get-json';
 import suggestionToLocation from '@digitransit-search-util/digitransit-search-util-suggestion-to-location';
 import connectToStores from 'fluxible-addons-react/connectToStores';
@@ -30,7 +29,7 @@ export default function withSearchContext(
   class ComponentWithSearchContext extends React.Component {
     static contextTypes = {
       config: PropTypes.object.isRequired,
-      intl: intlShape.isRequired,
+      intl: PropTypes.object.isRequired,
       executeAction: PropTypes.func.isRequired,
       getStore: PropTypes.func.isRequired,
     };

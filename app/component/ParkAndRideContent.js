@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { matchShape, routerShape, RedirectException } from 'found';
-import { intlShape } from 'react-intl';
 import moment from 'moment-timezone';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import ParkOrStationHeader from './ParkOrStationHeader';
@@ -260,7 +259,7 @@ ParkAndRideContent.defaultProps = {
 
 ParkAndRideContent.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 const connectedComponent = connectToStores(

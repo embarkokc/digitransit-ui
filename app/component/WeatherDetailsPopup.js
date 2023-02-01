@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '@hsl-fi/modal';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { localizeTime } from '../util/timeUtils';
 
 import Icon from './Icon';
@@ -56,7 +56,7 @@ WeatherDetailsPopup.propTypes = {
 };
 
 WeatherDetailsPopup.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default WeatherDetailsPopup;

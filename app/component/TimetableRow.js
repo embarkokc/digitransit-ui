@@ -3,7 +3,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
-import { intlShape } from 'react-intl';
 
 const TimetableRow = ({ title, stoptimes, showRoutes, timerows }, { intl }) => (
   <div
@@ -77,7 +76,7 @@ TimetableRow.propTypes = {
 };
 
 TimetableRow.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 TimetableRow.defaultProps = {

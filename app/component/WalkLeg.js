@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Link from 'found/Link';
 
 import Icon from './Icon';
@@ -313,7 +313,7 @@ WalkLeg.defaultProps = {
 
 WalkLeg.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default WalkLeg;

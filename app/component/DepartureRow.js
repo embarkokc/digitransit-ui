@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { intlShape } from 'react-intl';
 import { v4 as uuid } from 'uuid';
 import { Link } from 'found';
 import LocalTime from './LocalTime';
@@ -222,6 +221,6 @@ DepartureRow.propTypes = {
 
 DepartureRow.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 export default DepartureRow;

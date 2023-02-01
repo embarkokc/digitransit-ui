@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import shouldUpdate from 'recompose/shouldUpdate';
@@ -56,7 +56,7 @@ const modules = {
 
 class IndexPage extends React.Component {
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     executeAction: PropTypes.func.isRequired,
     getStore: PropTypes.func.isRequired,
     router: routerShape.isRequired,

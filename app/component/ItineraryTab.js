@@ -4,7 +4,7 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import cx from 'classnames';
 import { matchShape, routerShape } from 'found';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 
 import Icon from './Icon';
@@ -85,7 +85,7 @@ class ItineraryTab extends React.Component {
     config: PropTypes.object.isRequired,
     router: routerShape.isRequired,
     match: matchShape.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     getStore: PropTypes.func.isRequired,
   };
 

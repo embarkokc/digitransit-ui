@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { matchShape } from 'found';
-import { intlShape } from 'react-intl';
 import { saveRoutingSettings } from '../../action/SearchSettingsActions';
 
 import SearchSettingsDropdown, {
@@ -62,7 +61,7 @@ BikingOptionsSection.propTypes = {
 
 BikingOptionsSection.contextTypes = {
   match: matchShape.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   executeAction: PropTypes.func.isRequired,
 };
 

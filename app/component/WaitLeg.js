@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'found/Link';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from './Icon';
 import { durationToString, localizeTime } from '../util/timeUtils';
 import ItineraryCircleLineWithIcon from './ItineraryCircleLineWithIcon';
@@ -128,7 +128,7 @@ WaitLeg.propTypes = {
 
 WaitLeg.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default WaitLeg;

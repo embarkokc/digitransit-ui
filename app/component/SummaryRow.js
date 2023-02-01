@@ -2,7 +2,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import Icon from './Icon';
 import LocalTime from './LocalTime';
@@ -116,7 +116,7 @@ export const RouteLeg = ({
 
 RouteLeg.propTypes = {
   leg: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   large: PropTypes.bool.isRequired,
   legLength: PropTypes.number.isRequired,
   fitRouteNumber: PropTypes.bool.isRequired,
@@ -873,7 +873,7 @@ SummaryRow.defaultProps = {
 };
 
 SummaryRow.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   config: PropTypes.object.isRequired,
 };
 

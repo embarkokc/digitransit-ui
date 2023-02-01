@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 
 import AlertList from './AlertList';
 import DepartureCancelationInfo from './DepartureCancelationInfo';
@@ -122,7 +121,7 @@ StopAlerts.propTypes = {
 };
 
 StopAlerts.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default StopAlerts;

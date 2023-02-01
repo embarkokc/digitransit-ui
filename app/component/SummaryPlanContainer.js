@@ -11,7 +11,7 @@ import {
 import { matchShape, routerShape } from 'found';
 import getContext from 'recompose/getContext';
 
-import { intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from './Icon';
 import ItinerarySummaryListContainer from './ItinerarySummaryListContainer';
 import TimeStore from '../store/TimeStore';
@@ -88,7 +88,7 @@ class SummaryPlanContainer extends React.Component {
   static contextTypes = {
     router: routerShape.isRequired,
     match: matchShape.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     executeAction: PropTypes.func.isRequired,
   };
 

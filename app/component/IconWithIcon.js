@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { intlShape } from 'react-intl';
 import Icon from './Icon';
 
 const IconWithIcon = (
@@ -56,7 +55,7 @@ IconWithIcon.propTypes = {
 };
 
 IconWithIcon.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 IconWithIcon.defaultProps = {

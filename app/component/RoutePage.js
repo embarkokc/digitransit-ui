@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import cx from 'classnames';
 import { matchShape, routerShape, RedirectException } from 'found';
 import Icon from './Icon';
@@ -29,7 +29,7 @@ class RoutePage extends React.Component {
   static contextTypes = {
     getStore: PropTypes.func.isRequired,
     executeAction: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
   };
 

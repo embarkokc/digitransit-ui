@@ -1,7 +1,6 @@
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 
 import getLabel from '@digitransit-search-util/digitransit-search-util-get-label';
 import MarkerPopupBottom from '../MarkerPopupBottom';
@@ -18,7 +17,7 @@ import PopupHeader from '../PopupHeader';
 class LocationPopup extends React.Component {
   static contextTypes = {
     config: PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static propTypes = {

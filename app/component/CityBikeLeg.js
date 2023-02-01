@@ -1,4 +1,4 @@
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Link from 'found/Link';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -116,7 +116,7 @@ CityBikeLeg.propTypes = {
 };
 CityBikeLeg.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 const connectedComponent = withBreakpoint(CityBikeLeg);
 export { connectedComponent as default, CityBikeLeg as Component };

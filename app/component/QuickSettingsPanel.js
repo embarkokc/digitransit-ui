@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 
 import RightOffcanvasToggle from './RightOffcanvasToggle';
@@ -19,7 +18,7 @@ class QuickSettingsPanel extends React.Component {
   /* eslint-enable react/no-unused-prop-types */
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     router: routerShape.isRequired,
     match: matchShape.isRequired,
     config: PropTypes.object.isRequired,

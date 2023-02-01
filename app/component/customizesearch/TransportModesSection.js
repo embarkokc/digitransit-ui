@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import cx from 'classnames';
 import { saveRoutingSettings } from '../../action/SearchSettingsActions';
@@ -93,7 +93,7 @@ TransportModesSection.propTypes = {
 };
 
 TransportModesSection.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   executeAction: PropTypes.func.isRequired,
 };
 

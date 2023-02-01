@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { createRefetchContainer, graphql } from 'react-relay';
 import connectToStores from 'fluxible-addons-react/connectToStores';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { matchShape, routerShape, RedirectException } from 'found';
 
 import DepartureListContainer from './DepartureListContainer';
@@ -27,7 +27,7 @@ class StopPageContent extends React.Component {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
   };
 

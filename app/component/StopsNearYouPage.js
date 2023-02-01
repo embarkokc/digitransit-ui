@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { graphql, ReactRelayContext, QueryRenderer } from 'react-relay';
 import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
@@ -69,7 +69,7 @@ class StopsNearYouPage extends React.Component {
     executeAction: PropTypes.func.isRequired,
     headers: PropTypes.object.isRequired,
     getStore: PropTypes.func,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     router: routerShape.isRequired,
   };
 

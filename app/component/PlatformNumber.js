@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 function PlatformNumber({ number, short, isRailOrSubway }) {
   if (!number) {
@@ -41,7 +41,7 @@ PlatformNumber.defaultProps = {
 };
 
 PlatformNumber.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 PlatformNumber.displayName = 'PlatformNumber';

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape } from 'found';
 import CardHeader from './CardHeader';
 import { getJson } from '../util/xhrPromise';
@@ -162,7 +161,7 @@ StopCardHeader.contextTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   executeAction: PropTypes.func.isRequired,
   match: matchShape.isRequired,
 };

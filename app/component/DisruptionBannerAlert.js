@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { intlShape } from 'react-intl';
 
 import Icon from './Icon';
 import TruncatedMessage from './TruncatedMessage';
@@ -117,7 +116,7 @@ DisruptionBannerAlert.defaultProps = {
 };
 
 DisruptionBannerAlert.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   config: PropTypes.object.isRequired,
 };
 

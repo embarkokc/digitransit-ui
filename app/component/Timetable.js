@@ -5,7 +5,7 @@ import uniqBy from 'lodash/uniqBy';
 import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
 import padStart from 'lodash/padStart';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import cx from 'classnames';
 import Icon from './Icon';
@@ -58,7 +58,7 @@ class Timetable extends React.Component {
     router: routerShape.isRequired,
     match: matchShape.isRequired,
     config: PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {

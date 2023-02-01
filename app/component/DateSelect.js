@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import moment from 'moment';
-import { intlShape } from 'react-intl';
 
 import Select from 'react-select';
 import Icon from './Icon';
@@ -119,7 +118,7 @@ DateSelect.propTypes = {
   onDateChange: PropTypes.func.isRequired,
 };
 DateSelect.contextTypes = {
-  intl: intlShape.isRequired, // eslint-disable-line react/no-typos
+  intl: PropTypes.object.isRequired, // eslint-disable-line react/no-typos
 };
 DateSelect.displayName = 'DateSelect';
 

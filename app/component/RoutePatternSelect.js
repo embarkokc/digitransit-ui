@@ -15,7 +15,7 @@ import { routerShape, RedirectException, Link } from 'found';
 import Autosuggest from 'react-autosuggest';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import { enrichPatterns } from '@digitransit-util/digitransit-util';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from './Icon';
 import { isBrowser } from '../util/browser';
 import { PREFIX_ROUTES, PREFIX_STOPS } from '../util/path';
@@ -148,7 +148,7 @@ class RoutePatternSelect extends Component {
     router: routerShape.isRequired,
     config: PropTypes.object, // DT-3317
     getStore: PropTypes.func.isRequired, // DT-3347
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   similarRoutesToOptions = () => {};

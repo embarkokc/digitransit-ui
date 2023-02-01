@@ -1,7 +1,6 @@
 import uniqueId from 'lodash/uniqueId';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 
 const Toggle = ({ toggled, title, onToggle, id }) => {
@@ -42,7 +41,7 @@ Toggle.defaultProps = {
 
 Toggle.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   router: routerShape.isRequired,
   match: matchShape.isRequired,
 };

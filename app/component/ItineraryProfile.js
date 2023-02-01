@@ -1,7 +1,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 
 import { displayDistance } from '../util/geo-utils';
 import { getTotalDistance } from '../util/legUtils';
@@ -60,7 +59,7 @@ ItineraryProfile.defaultProps = {
 
 ItineraryProfile.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default ItineraryProfile;

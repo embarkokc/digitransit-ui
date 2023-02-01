@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape } from 'found';
 import LazilyLoad, { importLazy } from './LazilyLoad';
 import { clearOldSearches, clearFutureRoutes } from '../util/storeUtils';
@@ -134,7 +133,7 @@ AppBarHsl.contextTypes = {
   match: matchShape.isRequired,
   config: PropTypes.object.isRequired,
   getStore: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 AppBarHsl.propTypes = {

@@ -2,7 +2,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { matchShape } from 'found';
 import { AlertSeverityLevelType } from '../constants';
 import {
@@ -303,7 +303,7 @@ StopPageTabs.defaultProps = {
 };
 
 StopPageTabs.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   match: matchShape.isRequired,
 };
 

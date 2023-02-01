@@ -14,7 +14,7 @@ import findIndex from 'lodash/findIndex';
 import pick from 'lodash/pick';
 import get from 'lodash/get';
 import polyline from 'polyline-encoded';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
@@ -314,7 +314,7 @@ class SummaryPage extends React.Component {
     getStore: PropTypes.func,
     router: routerShape.isRequired, // DT-3358
     match: matchShape.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static propTypes = {

@@ -3,7 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from './Icon';
 import DepartureRow from './DepartureRow';
 import { isBrowser } from '../util/browser';
@@ -105,7 +105,7 @@ class DepartureListContainer extends Component {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -422,7 +422,7 @@ DepartureListContainer.contextTypes = {
   executeAction: PropTypes.func.isRequired,
   getStore: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 const containerComponent = createFragmentContainer(DepartureListContainer, {

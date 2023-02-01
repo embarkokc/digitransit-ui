@@ -4,7 +4,6 @@ import capitalize from 'lodash/capitalize';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import Link from 'found/Link';
 
 import ExternalLink from './ExternalLink';
@@ -224,7 +223,7 @@ RouteAlertsRow.propTypes = {
 
 RouteAlertsRow.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 RouteAlertsRow.defaultProps = {

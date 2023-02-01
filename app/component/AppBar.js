@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape } from 'found';
 
 import Icon from './Icon';
@@ -124,7 +123,7 @@ AppBar.propTypes = {
 AppBar.contextTypes = {
   getStore: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   match: matchShape.isRequired,
 };
 

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { saveRoutingSettings } from '../../action/SearchSettingsActions';
 
 import { addAnalyticsEvent } from '../../util/analyticsUtils';
@@ -89,7 +88,7 @@ WalkingOptionsSection.propTypes = {
 };
 
 WalkingOptionsSection.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   executeAction: PropTypes.func.isRequired,
 };
 

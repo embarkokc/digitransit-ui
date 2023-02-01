@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import { isBrowser } from '../util/browser';
@@ -49,7 +48,7 @@ LangSelect.contextTypes = {
   config: PropTypes.object.isRequired,
   router: routerShape.isRequired,
   match: matchShape.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 const connected = connectToStores(

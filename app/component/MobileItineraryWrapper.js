@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { matchShape, routerShape } from 'found';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ItineraryTab from './ItineraryTab';
 import SwipeableTabs from './SwipeableTabs';
 
@@ -77,7 +77,7 @@ MobileItineraryWrapper.propTypes = {
 MobileItineraryWrapper.contextTypes = {
   router: routerShape.isRequired,
   match: matchShape.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default MobileItineraryWrapper;

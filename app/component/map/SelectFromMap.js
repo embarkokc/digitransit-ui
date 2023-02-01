@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
 import { matchShape } from 'found';
-import { intlShape } from 'react-intl';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import getLabel from '@digitransit-search-util/digitransit-search-util-get-label';
 import LocationMarker from './LocationMarker';
@@ -36,7 +35,7 @@ class SelectFromMapPageMap extends React.Component {
   static contextTypes = {
     match: matchShape,
     config: PropTypes.object,
-    intl: intlShape,
+    intl: PropTypes.object,
   };
 
   static propTypes = {

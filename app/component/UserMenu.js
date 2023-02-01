@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import React, { useCallback, useState, useRef, useEffect } from 'react';
-import { intlShape } from 'react-intl';
 import cx from 'classnames';
 import Icon from './Icon';
 import { isKeyboardSelectionEvent } from '../util/browser';
@@ -103,7 +102,7 @@ UserMenu.defaultProps = {
 };
 
 UserMenu.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default UserMenu;

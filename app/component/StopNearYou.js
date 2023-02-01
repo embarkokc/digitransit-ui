@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import { PREFIX_STOPS, PREFIX_TERMINALS } from '../util/path';
@@ -118,7 +118,7 @@ StopNearYou.propTypes = {
 
 StopNearYou.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default connectedComponent;

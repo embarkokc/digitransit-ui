@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { intlShape } from 'react-intl';
 import { matchShape } from 'found';
 
 import AlertList from './AlertList';
@@ -94,7 +93,7 @@ RouteAlertsContainer.propTypes = {
 };
 
 RouteAlertsContainer.contextTypes = {
-  intl: intlShape,
+  intl: PropTypes.object,
   match: matchShape,
 };
 

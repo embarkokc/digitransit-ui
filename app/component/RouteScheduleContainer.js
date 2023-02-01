@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { matchShape, routerShape, RedirectException } from 'found';
 import moment from 'moment';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import sortBy from 'lodash/sortBy';
 import cx from 'classnames';
 import { dayRangePattern } from '@digitransit-util/digitransit-util';
@@ -68,7 +68,7 @@ class RouteScheduleContainer extends PureComponent {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
     match: matchShape.isRequired,
     router: routerShape.isRequired,

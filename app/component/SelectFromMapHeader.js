@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import Icon from './Icon';
 
 const SelectFromMapHeaderComponent = (props, { config, intl }) => {
@@ -89,7 +88,7 @@ SelectFromMapHeaderComponent.defaultProps = {
 
 SelectFromMapHeaderComponent.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default SelectFromMapHeaderComponent;

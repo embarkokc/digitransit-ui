@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 
 export const SettingsDrawer = ({ children, open, className }) => {
@@ -18,7 +17,7 @@ SettingsDrawer.propTypes = {
 
 SettingsDrawer.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   router: routerShape.isRequired,
   match: matchShape.isRequired,
 };

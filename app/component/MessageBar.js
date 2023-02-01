@@ -3,7 +3,6 @@ import connectToStores from 'fluxible-addons-react/connectToStores';
 import uniqBy from 'lodash/uniqBy';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { intlShape } from 'react-intl';
 import { graphql, fetchQuery, ReactRelayContext } from 'react-relay';
 
 import SwipeableTabs from './SwipeableTabs';
@@ -124,7 +123,7 @@ const toMessage = (alert, intl, config) => {
 class MessageBar extends Component {
   static contextTypes = {
     getStore: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     executeAction: PropTypes.func.isRequired,
     config: PropTypes.object.isRequired,
   };

@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import Icon from '../Icon';
 
 const roundToOneDecimal = number => {
@@ -91,7 +90,7 @@ class SearchSettingsDropdown extends React.Component {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {

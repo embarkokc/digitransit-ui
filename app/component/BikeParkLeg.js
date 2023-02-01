@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { displayDistance } from '../util/geo-utils';
 import { durationToString, localizeTime } from '../util/timeUtils';
 import { isKeyboardSelectionEvent } from '../util/browser';
@@ -120,7 +120,7 @@ const BikeParkLeg = (
 };
 BikeParkLeg.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 BikeParkLeg.propTypes = {

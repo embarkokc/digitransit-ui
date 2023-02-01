@@ -1,7 +1,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import DTAutosuggestPanel from '@digitransit-component/digitransit-component-autosuggest-panel';
@@ -37,7 +36,7 @@ class OriginDestinationBar extends React.Component {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     router: routerShape.isRequired,
     getStore: PropTypes.func.isRequired,
     executeAction: PropTypes.func.isRequired,

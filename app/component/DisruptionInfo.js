@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { graphql, QueryRenderer, ReactRelayContext } from 'react-relay';
-import { intlShape } from 'react-intl';
 import LazilyLoad, { importLazy } from './LazilyLoad';
 import Loading from './Loading';
 import DisruptionListContainer from './DisruptionListContainer';
@@ -79,7 +78,7 @@ DisruptionInfo.propTypes = {
 };
 
 DisruptionInfo.contextTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
   config: PropTypes.shape({
     feedIds: PropTypes.arrayOf(PropTypes.string.isRequired),
   }).isRequired,

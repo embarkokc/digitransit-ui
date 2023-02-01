@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactSwipe from 'react-swipe';
-import { intlShape } from 'react-intl';
 import cx from 'classnames';
 import Icon from './Icon';
 import { isKeyboardSelectionEvent } from '../util/browser';
@@ -32,7 +31,7 @@ export default class SwipeableTabs extends React.Component {
   };
 
   static contextTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   componentDidMount() {

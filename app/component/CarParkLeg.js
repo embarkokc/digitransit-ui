@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import cx from 'classnames';
 
 import { Link } from 'found';
@@ -167,7 +167,7 @@ CarParkLeg.propTypes = {
 
 CarParkLeg.contextTypes = {
   config: PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default CarParkLeg;

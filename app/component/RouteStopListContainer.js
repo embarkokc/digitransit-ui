@@ -9,7 +9,7 @@ import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
-import RouteStop from './RouteStop';
+import RouteStop from './RouteStop.okc';
 import withBreakpoint from '../util/withBreakpoint';
 import { getRouteMode } from '../util/modeUtils';
 import { PatternShape, VehicleShape } from '../util/shapes';

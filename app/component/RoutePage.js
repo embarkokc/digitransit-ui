@@ -8,7 +8,6 @@ import Icon from './Icon';
 
 import Loading from './Loading';
 import RouteAgencyInfo from './RouteAgencyInfo';
-import RouteNumber from './RouteNumber';
 import RoutePageControlPanel from './RoutePageControlPanel';
 import { PREFIX_DISRUPTION, PREFIX_ROUTES } from '../util/path';
 import withBreakpoint from '../util/withBreakpoint';
@@ -93,29 +92,25 @@ class RoutePage extends React.Component {
         >
           {breakpoint === 'large' && (
             <BackButton
+              title="Back"
               icon="icon-icon_arrow-collapse--left"
               iconClassName="arrow-icon"
             />
           )}
           <div className="route-header">
-            <div aria-hidden="true">
-              <RouteNumber
-                color={route.color ? `#${route.color}` : null}
-                mode={mode}
-                text=""
-              />
-            </div>
             <div className="route-info">
               <h1
                 className={cx('route-short-name', mode.toLowerCase())}
-                style={{ color: route.color ? `#${route.color}` : null }}
+                embark-not-style={{
+                  color: route.color ? `#${route.color}` : null,
+                }}
               >
                 <span className="sr-only" style={{ whiteSpace: 'pre' }}>
                   {this.context.intl.formatMessage({
                     id: mode.toLowerCase(),
                   })}{' '}
                 </span>
-                {label}
+                Route {label}
               </h1>
               {tripId && headsign && (
                 <div className="trip-destination">

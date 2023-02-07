@@ -89,6 +89,9 @@ export default configMerger(walttiConfig, {
   // Search Stops & Routes should show narrow buttons without text
   narrowNearYouButtons: true,
 
+  // Don't show "in x minutes" before first departure time:
+  minutesToDepartureLimit: 60,
+
   defaultSettings: {
     bikeSpeed: 5.59,
     showBikeAndParkItineraries: false,

@@ -413,6 +413,16 @@ span.itinerary-stop-code {
   font-size: $font-size-normal;
 }
 
+/* Route stops page */
+/* stop-code in route-stops-list has more padding */
+.route-address-row-container .itinerary-stop-code {
+	padding: 10px;
+}
+
+.route-header .route-info .route-short-name {
+	color: $black
+}
+
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;

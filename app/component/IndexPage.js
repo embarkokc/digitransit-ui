@@ -397,22 +397,28 @@ class IndexPage extends React.Component {
                       lang={lang}
                     />
                   </div>
+                  <CtrlPanel.SeparatorLine usePaddingBottom20 />
+                  <h2>Search Stops &amp; Routes</h2>
+                  <StopRouteSearch {...stopRouteSearchProps} />
+                  <>{NearStops(CtrlPanel)}</>
+                  <CtrlPanel.SeparatorLine />
+                  {!trafficNowLink ||
+                    (trafficNowLink[lang] !== '' && (
+                      <>
+                        <h2>Travel Tools</h2>
+                        <TrafficNowLink
+                          lang={lang}
+                          handleClick={this.trafficNowHandler}
+                        />
+                        <CtrlPanel.SeparatorLine />
+                      </>
+                    ))}
+                  <h2>Your Favorites</h2>
                   <FavouritesContainer
                     favouriteModalAction={this.props.favouriteModalAction}
                     onClickFavourite={this.clickFavourite}
                     lang={lang}
                   />
-                  <CtrlPanel.SeparatorLine usePaddingBottom20 />
-                  <>{NearStops(CtrlPanel)}</>
-                  <StopRouteSearch {...stopRouteSearchProps} />
-                  <CtrlPanel.SeparatorLine />
-                  {!trafficNowLink ||
-                    (trafficNowLink[lang] !== '' && (
-                      <TrafficNowLink
-                        lang={lang}
-                        handleClick={this.trafficNowHandler}
-                      />
-                    ))}
                 </CtrlPanel>
               </div>
               {(showSpinner && <OverlayWithSpinner />) || null}

@@ -141,7 +141,7 @@ const translations = {
     'stop-route-station': 'Bus and stop search',
     'today-at': 'today at',
     'tomorrow-at': 'tomorrow at',
-    tram: 'Tram',
+    tram: 'Streetcar',
     track: 'Track',
     'use-own-position': 'Use current location',
     'select-from-map': 'Select position from map',

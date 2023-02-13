@@ -3,7 +3,7 @@ const translations = {
     traffic: 'Aktuelle Verbindungen',
   },
   en: {
-    traffic: 'Changes and disruptions',
+    traffic: 'System Alerts',
   },
   sv: {
     traffic: 'Störningar och ändringar',

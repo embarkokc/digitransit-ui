@@ -35,8 +35,11 @@ input[type='text'] {
 }
 
 /* Plan A Trip Page overrides
-=> See digitransit-compponent-control-panel/src/helpers/styles.scss
+=> See as well digitransit-compponent-control-panel/src/helpers/styles.scss
 */
+.top-bar section.title {
+   padding-left: 56px;
+}
 
 /* Settings overrides*/
 .settings-dropdown-wrapper .settings-dropdown-label .settings-dropdown-label-text {

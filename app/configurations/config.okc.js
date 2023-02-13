@@ -118,8 +118,8 @@ export default configMerger(walttiConfig, {
   title: APP_TITLE,
 
   textLogo: false,
-  logo: 'okc/logo.png',
-  secondaryLogo: 'okc/secondary-logo.png',
+  logo: 'okc/embark-logo.svg',
+  secondaryLogo: 'okc/embark-favicon.svg',
   favicon: './app/configurations/images/okc/secondary-logo.png',
   
   feedIds: ['embark'],

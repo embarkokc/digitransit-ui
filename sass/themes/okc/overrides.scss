@@ -34,6 +34,36 @@ input[type='text'] {
    text-transform: capitalize;
 }
 
+/* Plan A Trip Page overrides
+=> See digitransit-compponent-control-panel/src/helpers/styles.scss
+*/
+
+/* Settings overrides*/
+.settings-dropdown-wrapper .settings-dropdown-label .settings-dropdown-label-text {
+	color: $black;
+}
+
+.settings-mode-option-container .settings-mode-option-label .settings-mode-option-label-text {
+   color: $black;
+}
+
+.settings-header {
+  color: $black;
+  font-weight: $font-weight-bolder;
+}
+
+.mode-option-container label.toggle-label {
+  font-size: $font-size-normal;
+  font-weight: $font-weight-medium;
+}
+
+.mode-option-container .mode-option-block label.mode-name  {
+	font-weight: $font-weight-medium;
+	font-size: $font-size-normal;
+}
+
+/* /Settings overrides*/
+
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;

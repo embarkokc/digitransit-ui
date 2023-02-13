@@ -74,6 +74,10 @@ export default configMerger(walttiConfig, {
   showSwipeableTabs: false,
   showCityBikeOptionAsSingleMode: true,
 
+
+  // Search Stops & Routes should show narrow buttons without text
+  narrowNearYouButtons: true,
+
   defaultSettings: {
     bikeSpeed: 5.59,
     showBikeAndParkItineraries: false,
@@ -181,6 +185,10 @@ export default configMerger(walttiConfig, {
     address: 'Oklahoma City',
     lat: 35.4685,
     lon: -97.5146
+  },
+
+  trafficNowLink: {
+    'en': '/alerts'
   },
 
   menu: {

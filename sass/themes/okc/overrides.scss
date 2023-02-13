@@ -1,3 +1,20 @@
+/* General overrides */
+h1, .h1 {
+	font-size: $font-size-xlarge;
+	font-weight: $font-weight-bold;
+}
+
+body {
+	color: $black;
+}
+
+.container .input {
+    font-family: $font-family;
+    border-radius: 4px;
+    font-size: $font-size-normal;
+    color: $black;
+}
+
 /* OKC top bar styling */
 nav.top-bar {
 	border-bottom-width: 6px;
@@ -28,10 +45,6 @@ nav.top-bar {
 
 .map-route-number {
   color: $black;
-}
-
-input[type='text'] {
-   text-transform: capitalize;
 }
 
 /* Plan A Trip Page overrides

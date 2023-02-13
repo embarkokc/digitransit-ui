@@ -1,0 +1,25 @@
+$black: #000;
+$gray: #686869;
+$font-size-normal: 21px;
+
+.input::placeholder {
+	color: $black;
+	opacity: 1.0;
+}
+
+.container .input {
+    font-family: Arial, sans-serif;
+    border-radius: 4px;
+    font-size: $font-size-normal;
+    color: $black;
+    border: solid 1px #686869;
+    &::placeholder {
+    	font-size: $font-size-normal;
+   		color: $black;
+		opacity: 1;
+	}
+}
+
+.search-result .suggestion-result .suggestion-label {
+	color: $gray;
+}

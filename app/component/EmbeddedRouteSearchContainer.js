@@ -115,10 +115,11 @@ class EmbeddedRouteSearchContainer extends React.Component {
               <a
                 href={systemAlertsPath}
                 target="_top"
-                style={{ color: 'red', textDecoration: 'none' }}
+                style={{ color: '#D6153B', textDecoration: 'none' }}
               >
                 {/* todo: aria-hidden=true */}
-                <Icon img="icon-icon_caution" height={1} /> System Alerts
+                <Icon img="icon-icon_caution" height={1} color="#D6153B" />{' '}
+                System Alerts
               </a>
             </li>
             <li style={{ display: 'inline-block', marginLeft: '2em' }}>
@@ -128,7 +129,12 @@ class EmbeddedRouteSearchContainer extends React.Component {
                 style={{ color: 'inherit', textDecoration: 'none' }}
               >
                 {/* todo: aria-hidden=true */}
-                <Icon img="icon-icon_show-on-map" height={1} /> Plan A Trip
+                <Icon
+                  img="icon-icon_show-on-map"
+                  height={1}
+                  color="#000"
+                />{' '}
+                Plan A Trip
               </a>
             </li>
           </ul>
@@ -141,6 +147,15 @@ class EmbeddedRouteSearchContainer extends React.Component {
 EmbeddedRouteSearchContainer.propTypes = {
   lang: PropTypes.string.isRequired,
   // match: matchShape.isRequired,
+};
+
+EmbeddedRouteSearchContainer.propTypes = {
+  lang: PropTypes.string.isRequired,
+  // match: matchShape.isRequired,
+};
+
+EmbeddedRouteSearchContainer.defaultTypes = {
+  lang: 'en',
 };
 
 export default EmbeddedRouteSearchContainer;

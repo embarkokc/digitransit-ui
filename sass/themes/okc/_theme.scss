@@ -13,8 +13,10 @@ $action-color: $primary-color;
 $viewpoint-marker-color: $primary-color;
 $current-location-color: $primary-color;
 
+$font-family: Arial, sans-serif;
+$heading-font-family: Arial, sans-serif;
+
 /* font sizes */
-$font-size-large: 24px;
 $font-size-xxxxsmall: 0.62rem;
 $font-size-xxxsmall: 0.72rem;
 $font-size-xxsmall: 0.8rem;
@@ -28,6 +30,7 @@ $font-size-xlarge: 32px; // 1.5rem;
 /* font weights */
 $font-weight-medium: 400;
 $font-weight-bolder: 600;
+$font-weight-bold: 900;
 
 /* mode colors */
 $bus-color: $okc-bus-blue;

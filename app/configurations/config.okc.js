@@ -70,6 +70,7 @@ export default configMerger(walttiConfig, {
   showWeatherInformation: false,
   showItineraryMapActions: false,
   showSwipeableTabs: false,
+  showCityBikeOptionAsSingleMode: true,
 
   defaultSettings: {
     bikeSpeed: 5.59,

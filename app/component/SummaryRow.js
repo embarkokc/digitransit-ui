@@ -773,6 +773,7 @@ const SummaryRow = (
                   {itineraryStartAndEndTime}
                 </div>
                 <div className="itinerary-duration">
+                  <Icon img="icon-icon_point-to-point" />
                   <RelativeDuration duration={duration} />
                 </div>
               </div>

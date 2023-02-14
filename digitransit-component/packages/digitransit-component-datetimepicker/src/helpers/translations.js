@@ -26,9 +26,9 @@ const translations = {
     'accessible-title': 'Date and Timepicker',
     'accessible-update-instructions':
       'Changing time parameters will trigger a new search.',
-    arrival: 'Arrival',
+    arrival: 'Arrive By',
     date: 'Date',
-    departure: 'Departure',
+    departure: 'Depart By',
     'departure-now': 'Leaving Now',
     time: 'Time',
     'choose-time': 'Choose Time',

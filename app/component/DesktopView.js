@@ -21,11 +21,13 @@ export default function DesktopView({
           <div className="desktop-title">
             <div className="title-container h2">
               <BackButton
-                title={title}
+                title="Back"
+                titleClassName="back-button-label"
                 icon="icon-icon_arrow-collapse--left"
                 iconClassName="arrow-icon"
                 fallback={bckBtnFallback}
               />
+              <h1>{title}</h1>
             </div>
           </div>
         )}

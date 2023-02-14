@@ -109,16 +109,16 @@ const translations = {
     rail: 'Train',
     required: 'required field',
     search: 'Search',
-    'search-address-or-place': 'Search by address or place name',
+    'search-address-or-place': 'Search by Address or Place Name',
     'search-button-label': 'Search',
-    'search-destination': 'Search destination, route or stop',
-    'search-destination-index': 'Enter destination',
+    'search-destination': 'Search Destination, Route or Stop',
+    'search-destination-index': 'Enter Destination',
     'search-destination-results-but-no-search':
       'View results in the adjacent “Destination” tab',
-    'search-no-results': 'No location',
-    'search-origin': 'Search origin, route or stop',
-    'search-origin-index': 'Enter origin',
-    'search-position': 'Detect location',
+    'search-no-results': 'No Location',
+    'search-origin': 'Search Origin, Route or Stop',
+    'search-origin-index': 'Enter Origin',
+    'search-position': 'Detect Location',
     'search-autosuggest-label-desktop':
       'Venue, place and stopsearch. Navigate list with arrow keys and select with enter key',
     'search-autosuggest-label-mobile':

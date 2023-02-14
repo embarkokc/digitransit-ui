@@ -254,7 +254,9 @@ class SummaryPlanContainer extends React.Component {
         location.query.time &&
         moment.unix(location.query.time).valueOf()) ||
       currentTime;
-    const disableButtons = !itineraries || itineraries.length === 0;
+    // EMBARK: no earlier/later buttons
+    // const disableButtons = !itineraries || itineraries.length === 0;
+    const disableButtons = true;
     const arriveBy = this.context.match.location.query.arriveBy === 'true';
 
     return (

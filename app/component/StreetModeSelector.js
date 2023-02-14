@@ -32,6 +32,7 @@ export const StreetModeSelector = ({
     : {};
   return (
     <div className="street-mode-selector-container">
+      <h3>Health & Fitness</h3>
       <StreetModeSelectorShimmer loading={loading} />
       {!loading && (
         <div className="street-mode-button-row">

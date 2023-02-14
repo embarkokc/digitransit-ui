@@ -6,7 +6,8 @@ $okc-tram-pink: #d51067;
 
 /* main theme colors */
 $black: #000;
-$primary-color: #686869;
+$gray: #686869;
+$primary-color: $gray;
 $secondary-color: #414143;
 $hilight-color: $primary-color;
 $action-color: $primary-color;
@@ -39,7 +40,7 @@ $tram-color: $okc-tram-pink;
 $border-radius-bigger: 4px;
 
 $standalone-btn-color: $primary-color;
-$link-color: $primary-color;
+$link-color: $black;
 
 /* Component palette */
 $desktop-title-color: $primary-color;

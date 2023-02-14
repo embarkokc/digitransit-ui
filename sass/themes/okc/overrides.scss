@@ -41,6 +41,11 @@ nav.top-bar {
 	border-color: currentColor;
 	background-color: $white;
 	border: 1px solid;
+	height: 1.5em;
+
+  	&.walk, &.bicycle_walk {
+		background-color: $gray;
+	}
 }
 
 .vehicle-number-container-v .vehicle-number {
@@ -93,6 +98,41 @@ nav.top-bar {
 	.summary-clickable-area {
 		border-bottom: 1px solid #00f;
 	}
+}
+
+.itinerary-summary-row {
+	.itinerary-legs .leg .route-number {
+		height: 2rem;
+		color: $white;
+		.leg-duration-container .leg-duration {
+			color: $white;
+		}
+		.line .icon {
+			font-size: 32px;
+			height: 1.1em
+		}
+		.vcenter-children.walk .icon {
+			width: 22px;
+			fill: #fff;
+		}
+	}
+	.itinerary-duration-container {
+		font-weight: $font-weight-bold;
+		padding: 20px 0px 10px;
+		/* swap duration and start/end time */
+		.itinerary-start-time-and-end-time {
+	      float: right;
+	   }
+	   .itinerary-duration {
+	   	float: left;
+	   	.icon-container {
+	   		padding-right: 20px;
+	   	}
+	   }
+	   .itinerary-start-date {
+	      float: right;
+	   }
+   }
 }
 
 /* Plan A Trip Page overrides

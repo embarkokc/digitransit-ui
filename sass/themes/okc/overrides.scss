@@ -40,6 +40,15 @@ nav.top-bar {
 	border-bottom-color: $primary-color;
 }
 
+.back-to-embark-link {
+	text-decoration: none;
+	cursor: pointer;
+	margin-right: 60px;
+	.icon-container {
+		margin-left: .5em;
+	}
+}
+
 /* EMBARK leg / vehicle bar styling shall use
    route-color for outline and vehicle symbol */
 .bar {

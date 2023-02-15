@@ -26,7 +26,7 @@ realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
 export default configMerger(walttiConfig, {
   CONFIG,
 
-  appBarLink: { name: 'Embark Oklahoma City', href: 'https://embarkok.com/' },
+  appBarLink: { name: 'Return to EMBARK', href: 'https://embarkok.com/' },
 
   // todo: breaks in moment, it doesn't have an explicit en-us
   availableLanguages: ['en'],

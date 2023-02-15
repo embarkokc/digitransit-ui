@@ -26,7 +26,7 @@ realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
 export default configMerger(walttiConfig, {
   CONFIG,
 
-  appBarLink: { name: 'Embark Oklahoma City', href: 'https://embarkok.com/' },
+  appBarLink: { name: 'Return to EMBARK', href: 'https://embarkok.com/' },
 
   // todo: breaks in moment, it doesn't have an explicit en-us
   availableLanguages: ['en'],
@@ -36,7 +36,7 @@ export default configMerger(walttiConfig, {
 
   URL: {
     OTP: process.env.OTP_URL || `${API_URL}/otp/routers/default/`,
-    MAP: `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
+    MAP: `https://api.maptiler.com/maps/basic-v2-light/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
     STOP_MAP: {
       default: `${API_URL}/otp/routers/default/vectorTiles/stops/`,
     },
@@ -49,16 +49,23 @@ export default configMerger(walttiConfig, {
     PELIAS: `${GEOCODING_BASE_URL}/search`,
     PELIAS_REVERSE_GEOCODER: `${GEOCODING_BASE_URL}/reverse`,
     PELIAS_PLACE: `${GEOCODING_BASE_URL}/place`,
-
+    FONT:
+      '/assets/fonts/Arial.woff',
+    
   },
 
   colors: {
-    primary: '#RRGGBB',
+    primary: '#000000',
     iconColors: {
       'mode-bus': '#009ad7',
       'mode-tram': '#d51067',
       'mode-citybike': '#ea6529',
     },
+  },
+
+  fontWeights: {
+    medium: 400,
+    bolder: 600,
   },
 
   // note: this does not enforce imperial units, but it causes digitransit-ui to guess based on the browser language/locale
@@ -70,6 +77,11 @@ export default configMerger(walttiConfig, {
   showWeatherInformation: false,
   showItineraryMapActions: false,
   showSwipeableTabs: false,
+  showCityBikeOptionAsSingleMode: true,
+
+
+  // Search Stops & Routes should show narrow buttons without text
+  narrowNearYouButtons: true,
 
   defaultSettings: {
     bikeSpeed: 5.59,
@@ -106,13 +118,14 @@ export default configMerger(walttiConfig, {
       corner1: [38.37961661, -102.4335904],
       corner2: [30.643271, -91.82987],
     },
+    zoom: 16,
   },
 
   title: APP_TITLE,
 
   textLogo: false,
-  logo: 'okc/logo.png',
-  secondaryLogo: 'okc/secondary-logo.png',
+  logo: 'okc/embark-logo.svg',
+  secondaryLogo: 'okc/embark-favicon.svg',
   favicon: './app/configurations/images/okc/secondary-logo.png',
   
   feedIds: ['embark'],
@@ -178,6 +191,10 @@ export default configMerger(walttiConfig, {
     address: 'Oklahoma City',
     lat: 35.4685,
     lon: -97.5146
+  },
+
+  trafficNowLink: {
+    'en': '/alerts'
   },
 
   menu: {

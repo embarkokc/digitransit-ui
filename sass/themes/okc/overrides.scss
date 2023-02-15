@@ -1,8 +1,53 @@
+/* General overrides */
+h1, .h1 {
+	font-size: $font-size-xlarge;
+	font-weight: $font-weight-bold;
+}
+
+h2, .h2 {
+	font-size: $font-size-large;
+	font-weight: $font-weight-bolder;
+	letter-spacing: initial;
+}
+
+body {
+	color: $black;
+}
+
+.container .input {
+    font-family: $font-family;
+    border-radius: 4px;
+    font-size: $font-size-normal;
+    color: $black;
+}
+
+.back-button-label {
+  font-size: 0.8em;
+  font-weight: $font-weight-normal;
+  margin: 0.15em 0 0 2.8em;
+}
+
+section.content .desktop .desktop-title h1 {
+	font-weight: $font-weight-bold;
+	color: $black;
+	display: block;
+	margin: 30px 0px 20px 60px;
+}
+
 /* OKC top bar styling */
 nav.top-bar {
 	border-bottom-width: 6px;
 	border-bottom-style: inset;
 	border-bottom-color: $primary-color;
+}
+
+.back-to-embark-link {
+	text-decoration: none;
+	cursor: pointer;
+	margin-right: 60px;
+	.icon-container {
+		margin-left: .5em;
+	}
 }
 
 /* EMBARK leg / vehicle bar styling shall use
@@ -11,6 +56,11 @@ nav.top-bar {
 	border-color: currentColor;
 	background-color: $white;
 	border: 1px solid;
+	height: 1.5em;
+
+  	&.walk, &.bicycle_walk {
+		background-color: $gray;
+	}
 }
 
 .vehicle-number-container-v .vehicle-number {
@@ -30,8 +80,134 @@ nav.top-bar {
   color: $black;
 }
 
-input[type='text'] {
-   text-transform: capitalize;
+.street-mode-selector-container {
+	background-color: #fff;
+	border-top: 1px solid #d5d5d5;
+	border-bottom: 1px solid #d5d5d5;
+
+	h3 {
+		padding: 30px 0px 10px 20px;
+	}
+
+	.street-mode-selector-button-container {
+		border: none;
+		box-shadow: none;
+		padding: 0px 20px;
+		color: $black;
+		flex-basis: 180px;
+	}
+
+	.street-mode-selector-button-content {
+		.street-mode-selector-button-icon .icon-container .icon {
+			fill: $gray;
+		}
+		.street-mode-button-info {
+			display: flex;
+
+			.street-mode-button-length {
+				padding-left: 3px;
+			}
+		}
+	}
+
+	.summary-clickable-area {
+		border-bottom: 1px solid #00f;
+	}
+}
+
+.summary h2 {
+	visibility: visible;
+	padding-left: 60px;
+}
+
+.summary-list-container {
+	border-top: none;
+}
+.itinerary-summary-row {
+	.itinerary-legs .leg .route-number {
+		height: 2rem;
+		color: $white;
+		.leg-duration-container .leg-duration {
+			color: $white;
+		}
+		.line .icon {
+			font-size: 32px;
+			height: 1.1em
+		}
+		.vcenter-children.walk .icon {
+			width: 22px;
+			fill: #fff;
+		}
+	}
+	.itinerary-duration-container {
+		font-weight: $font-weight-bold;
+		padding: 20px 0px 10px;
+		/* swap duration and start/end time */
+		.itinerary-start-time-and-end-time {
+	      float: right;
+	   }
+	   .itinerary-duration {
+	   	float: left;
+	   	.icon-container {
+	   		padding-right: 20px;
+	   	}
+	   }
+	   .itinerary-start-date {
+	      float: right;
+	   }
+   }
+}
+
+/* Plan A Trip Page overrides
+=> See as well digitransit-compponent-control-panel/src/helpers/styles.scss
+*/
+.top-bar section.title {
+   padding-left: 56px;
+}
+
+/* Settings overrides*/
+.settings-dropdown-wrapper .settings-dropdown-label .settings-dropdown-label-text {
+	color: $black;
+}
+
+.settings-mode-option-container .settings-mode-option-label .settings-mode-option-label-text {
+   color: $black;
+}
+
+.settings-header {
+  color: $black;
+  font-weight: $font-weight-bolder;
+}
+
+.mode-option-container label.toggle-label {
+  font-size: $font-size-normal;
+  font-weight: $font-weight-medium;
+}
+
+.mode-option-container .mode-option-block label.mode-name  {
+	font-weight: $font-weight-medium;
+	font-size: $font-size-normal;
+}
+
+/* /Settings overrides*/
+
+/* Nearby stops */
+
+span.itinerary-stop-code {
+	color: $black;
+	border-color: $gray;
+	border-radius: $border-radius;
+	font-size: $font-size-small;
+	font-weight: $font-weight-bolder;
+}
+
+.stop-near-you-left-col {
+	font-size: $font-size-normal;
+	gap: 10px;
+}
+
+.stop-near-you-right-col {
+	font-size: $font-size-normal;
 }
 
 /* mode colors */

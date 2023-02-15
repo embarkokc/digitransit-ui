@@ -20,6 +20,21 @@ const StopNearYou = ({ stop, stopId }, { config, intl }) => {
     ? `/${PREFIX_TERMINALS}/${gtfsId}`
     : `/${PREFIX_STOPS}/${gtfsId}`;
 
+  const stopDescription = description => {
+    const descriptionIconMappings = {
+      Inbound: 'icon-icon_arrow-right',
+      Outbound: 'icon-icon_arrow-left',
+    };
+    const icon = descriptionIconMappings[description];
+
+    return (
+      <div className="stop-near-you-direction">
+        {icon && <Icon img={icon} className="direction-arrow" />}
+        {description}
+      </div>
+    );
+  };
+
   return (
     <span role="listitem">
       <div className="stop-near-you-container">
@@ -34,8 +49,8 @@ const StopNearYou = ({ stop, stopId }, { config, intl }) => {
               <Icon
                 color={config.colors.iconColors[mode]}
                 img={`icon-icon_${mode}-stop`}
-                width={2}
-                height={2}
+                width={3}
+                height={3}
                 ariaLabel={intl.formatMessage({ id: mode })}
               />
             </span>
@@ -51,10 +66,7 @@ const StopNearYou = ({ stop, stopId }, { config, intl }) => {
                 className="itinerary-arrow-icon"
               />
             </div>
-            <div className="stop-near-you-direction">
-              <Icon img="icon-icon_arrow-right" className="direction-arrow" />{' '}
-              Inbound
-            </div>
+            {stopDescription(stop.desc)}
           </div>
         </Link>
       </div>

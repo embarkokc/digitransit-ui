@@ -112,28 +112,29 @@ class CustomizeSearch extends React.Component {
               />
             </div>
           </div>
-          {useCitybikes(config?.cityBike?.networks) && (
-            <div className="settings-section">
-              <div className="settings-option-container">
-                <fieldset>
-                  <legend className="settings-header transport-mode-subheader">
-                    <FormattedMessage
-                      id="citybike-network-header"
-                      defaultMessage={intl.formatMessage({
-                        id: 'citybike-network-headers',
-                        defaultMessage: 'Citybikes and scooters',
-                      })}
-                    />
-                  </legend>
-                  <div className="transport-modes-container">
-                    <CityBikeNetworkSelector
-                      currentOptions={getCitybikeNetworks(config)}
-                    />
-                  </div>
-                </fieldset>
+          {!config?.showCityBikeOptionAsSingleMode &&
+            useCitybikes(config?.cityBike?.networks) && (
+              <div className="settings-section">
+                <div className="settings-option-container">
+                  <fieldset>
+                    <legend className="settings-header transport-mode-subheader">
+                      <FormattedMessage
+                        id="citybike-network-header"
+                        defaultMessage={intl.formatMessage({
+                          id: 'citybike-network-headers',
+                          defaultMessage: 'Citybikes and scooters',
+                        })}
+                      />
+                    </legend>
+                    <div className="transport-modes-container">
+                      <CityBikeNetworkSelector
+                        currentOptions={getCitybikeNetworks(config)}
+                      />
+                    </div>
+                  </fieldset>
+                </div>
               </div>
-            </div>
-          )}
+            )}
           <div className="settings-section">
             <div className="settings-option-container">
               <StreetModeSelectorPanel

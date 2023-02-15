@@ -5,21 +5,47 @@ $okc-bus-blue: #009ad7;
 $okc-tram-pink: #d51067;
 
 /* main theme colors */
-$primary-color: #686869;
+$black: #000;
+$gray: #686869;
+$primary-color: $gray;
 $secondary-color: #414143;
 $hilight-color: $primary-color;
 $action-color: $primary-color;
 $viewpoint-marker-color: $primary-color;
 $current-location-color: $primary-color;
 
+$font-family: Arial, sans-serif;
+$heading-font-family: $font-family;
+$button-font-family: $font-family;
+/* font sizes */
+$font-size-xxxxsmall: 0.62rem;
+$font-size-xxxsmall: 0.72rem;
+$font-size-xxsmall: 0.8rem;
+$font-size-xsmall: 0.87rem;
+$font-size-small: 18px; // 0.92rem
+$font-size-normal: 21px; // 1.0rem
+// $font-size-medium-large: 1.15rem;
+$font-size-large: 24px; // 1.25rem
+$font-size-xlarge: 32px; // 1.5rem;
+
+/* font weights */
+$font-weight-medium: 400;
+$font-weight-bolder: 600;
+$font-weight-bold: 900;
+
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;
 
+$border-radius-bigger: 4px;
+
 $standalone-btn-color: $primary-color;
-$link-color: $primary-color;
+$link-color: $black;
 
 /* Component palette */
 $desktop-title-color: $primary-color;
 $desktop-title-arrow-icon-color: $secondary-color;
 $top-bar-color: #ffffff;
+
+$embark-border-radius: 4px;
+$font-family: Arial, sans-serif;

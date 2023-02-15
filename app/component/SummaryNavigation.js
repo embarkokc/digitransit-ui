@@ -78,12 +78,8 @@ class SummaryNavigation extends React.Component {
       >
         {this.props.breakpoint !== 'large' && (
           <BackButton
-            title={
-              <FormattedMessage
-                id="summary-page.title"
-                defaultMessage="Itinerary suggestions"
-              />
-            }
+            title={<FormattedMessage id="back" defaultMessage="Back" />}
+            titleClassName="back-title"
             icon="icon-icon_arrow-collapse--left"
             iconClassName="arrow-icon"
             fallback={

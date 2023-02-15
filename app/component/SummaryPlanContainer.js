@@ -254,12 +254,14 @@ class SummaryPlanContainer extends React.Component {
         location.query.time &&
         moment.unix(location.query.time).valueOf()) ||
       currentTime;
-    const disableButtons = !itineraries || itineraries.length === 0;
+    // EMBARK: no earlier/later buttons
+    // const disableButtons = !itineraries || itineraries.length === 0;
+    const disableButtons = true;
     const arriveBy = this.context.match.location.query.arriveBy === 'true';
 
     return (
       <div className="summary">
-        <h2 className="sr-only">
+        <h2>
           <FormattedMessage
             id="itinerary-summary-page.description"
             defaultMessage="Route suggestions"

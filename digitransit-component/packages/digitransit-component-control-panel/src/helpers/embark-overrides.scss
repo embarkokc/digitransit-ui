@@ -1,0 +1,51 @@
+$black: #000;
+$gray: #686869;
+$embark-border-radius: 4px;
+$embark-border-radius: 4px;
+$font-family: Arial, sans-serif;
+$font-weight-medium: 500;
+$font-size-normal: 21px;
+$font-size-large: 24px;
+
+.near-you-container {
+  font-size: 16px;
+  margin: 20px 0 0 50px;
+
+  .near-you-title {
+    font-family: $font-family;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-normal;
+    color: $black;
+    position: relative; // to allow icon placement
+
+    svg {
+      position: absolute;
+      left: -1.5em;
+    }
+  }
+
+  .near-you-buttons-container {
+    & > a, & > div {
+      flex: 0;
+    }
+
+    & > a:last-child, & > div:last-child {
+      margin-bottom: unset;
+    }
+
+    .transport-mode-icon-container {
+      border-radius: $embark-border-radius;
+      border: solid 1px $gray;
+
+      svg {
+        width: 44px;
+        height: 44px;
+        margin: auto;
+        @include min-width(tablet)  {
+          width: 44px;
+          height: 44px;
+        }
+      }
+    }
+  }
+}

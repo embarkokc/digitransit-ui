@@ -26,7 +26,7 @@ describe('<Checkbox />', () => {
     expect(wrapper.length).to.equal(1);
     const label = wrapper.find(FormattedMessage);
     expect(label.length).to.equal(1);
-    expect(label.text()).to.equal('City bike');
+    expect(label.text()).to.equal('Spokies');
   });
 
   it('Should work also without labelId', () => {

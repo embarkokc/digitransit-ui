@@ -47,11 +47,6 @@ const AppBar = (
             type="button"
             onClick={e => {
               titleClicked(e);
-              addAnalyticsEvent({
-                category: 'Navigation',
-                action: 'Home',
-                name: null,
-              });
             }}
           >
             <LogoSmall showLogo={showLogo} logo={logo} title={title} />
@@ -103,6 +98,16 @@ const AppBar = (
               </button>
             </div>
           ) : null}
+          <a
+            onClick={e => {
+              e.stopPropagation();
+            }}
+            className="back-to-embark-link"
+            href={config.appBarLink.href}
+          >
+            {config.appBarLink.name}{' '}
+            <Icon img="icon-icon_close" className="icon" />
+          </a>
         </section>
       </nav>
     </>

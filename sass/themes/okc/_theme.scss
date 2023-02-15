@@ -15,14 +15,14 @@ $viewpoint-marker-color: $primary-color;
 $current-location-color: $primary-color;
 
 $font-family: Arial, sans-serif;
-$heading-font-family: Arial, sans-serif;
-
+$heading-font-family: $font-family;
+$button-font-family: $font-family;
 /* font sizes */
 $font-size-xxxxsmall: 0.62rem;
 $font-size-xxxsmall: 0.72rem;
 $font-size-xxsmall: 0.8rem;
 $font-size-xsmall: 0.87rem;
-$font-size-small: 0.92rem;
+$font-size-small: 18px; // 0.92rem
 $font-size-normal: 21px; // 1.0rem
 // $font-size-medium-large: 1.15rem;
 $font-size-large: 24px; // 1.25rem

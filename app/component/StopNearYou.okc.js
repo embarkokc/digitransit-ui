@@ -49,8 +49,8 @@ const StopNearYou = ({ stop, stopId }, { config, intl }) => {
               <Icon
                 color={config.colors.iconColors[mode]}
                 img={`icon-icon_${mode}-stop`}
-                width={2}
-                height={2}
+                width={3}
+                height={3}
                 ariaLabel={intl.formatMessage({ id: mode })}
               />
             </span>

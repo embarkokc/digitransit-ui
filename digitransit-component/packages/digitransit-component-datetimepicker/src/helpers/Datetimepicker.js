@@ -348,22 +348,6 @@ function Datetimepicker({
                 />
               </label>
             </span>
-            <button
-              id={`${htmlId}-now`}
-              type="button"
-              className={styles['departure-now-button']}
-              onClick={() => {
-                changeOpen(false);
-                showScreenreaderCloseAlert();
-                if (onClose) {
-                  onClose();
-                }
-                onNowClick();
-              }}
-              ref={inputRef}
-            >
-              {i18next.t('departure-now', translationSettings)}
-            </button>
             <span className={styles['right-edge']}>
               <button
                 type="button"

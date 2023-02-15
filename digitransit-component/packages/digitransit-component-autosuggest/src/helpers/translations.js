@@ -81,7 +81,7 @@ const translations = {
     'add-via-duration-button-label-open':
       'Open stop duration selector at via point {{index}}',
     airplane: 'Flight',
-    arrival: 'Arrival',
+    arrival: 'Arrive by',
     back: 'Back',
     bikepark: 'Park & Ride for bikes',
     bikerentalstation: 'Bike station',
@@ -93,7 +93,7 @@ const translations = {
     currentposition: 'Current position',
     delete: 'Delete',
     'delete-old-searches-header': 'Do you want to clear the search history?',
-    departure: 'Departure',
+    departure: 'Depart by',
     destination: 'Destination',
     'give-origin': 'Enter your origin.',
     'give-destination': 'Enter your destination',

@@ -2,6 +2,15 @@
 @import '~@hsl-fi/sass/mixins/screen';
 @import '~@hsl-fi/sass/mixins/text';
 
+$font-family: Arial, sans-serif;
+$border-radius: 4px;
+$gray: #686869;
+$lighter-gray: #D5D5D5;
+$black: #000;
+$font-size-smaller: 18px;
+$font-size-normal: 21px;
+$font-size-slighty-bigger: 22px;
+
 @mixin default-focus-outline {
   /* First apply outline that is used in Edge and Firefox */
   outline: 1px dotted #212121;
@@ -28,7 +37,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   border: none;
   padding: 0;
   margin: 0;
-  font-size: 15px;
+  font-size: $font-size-normal;
   font-weight: var(--font-weight-medium);
 
   button, label {
@@ -38,7 +47,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 
   label button {
     cursor: pointer;
-    font-family: 'Gotham Rounded A', 'Gotham Rounded B', 'Roboto', Arial, Georgia, Serif;
+    font-family: $font-family;
   }
 
   .hidden {
@@ -47,7 +56,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 
   .datetimepicker-open-container {
     background-color: #f4f4f5;
-    border-radius: 5px;
+    border-radius: $border-radius;
     padding: 15px;
   }
 
@@ -95,7 +104,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       }
     }
     button, label {
-      font-size: 1em;
+      font-size: $font-size-smaller;
       letter-spacing: -0.5px;
       line-height: 1;
     }
@@ -105,7 +114,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     margin-top: 1px;
     background: none;
     border: none;
-    color: #666666;
+    color: $gray;
     padding: 0;
     @include min-width(tablet)  {
       margin-left: 14px;
@@ -130,13 +139,13 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 
   .departure-or-arrival-container {
     height: calc(1rem + 20px);
-    background-color: #dddddd;
+    background-color: $lighter-gray;
     border-radius: 8px;
     display: flex;
     width: calc(5px + 13em);
   }
   .radio-textbutton-label {
-    color: #333333;
+    color: $black;
     margin: 2px;
     background: none;
     border-radius: 6px;
@@ -146,7 +155,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     height: calc(1rem + 16px);
     text-align: center;
     font-weight: 400;
-    font-size: 15px;
+    font-size: $font-size-smaller;
     line-height: 18px;
     letter-spacing: -0.03em;
     &.active {
@@ -182,7 +191,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     padding: 8px 0;
     width: 6.6875rem;
     background: white;
-    border: 1px solid #888888;
+    border: 1px solid $gray;
     border-radius: 30px;
     margin-left: 11px;
   }
@@ -257,7 +266,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     :global .datetimepicker-select__control {
       cursor: inherit;
       height: 40px;
-      border: 1px solid #888888;
+      border: 1px solid $gray;
     }
     :global .datetimepicker-select__value-container {
       padding: 0;
@@ -277,9 +286,9 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         font-style: normal;
         line-height: 1.33;
         letter-spacing: -0.5px;
-        color: #333333;
+        color: $black;
         font-family: inherit;
-        font-size: 15px;
+        font-size: $font-size-normal;
         font-weight: var(--font-weight-medium);
         &:focus {
           box-shadow: none;
@@ -293,7 +302,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       padding: 0;
       background: #fff;
       max-height: 250px;
-      border-radius: 5px;
+      border-radius: $border-radius;
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.06);
       border: 1px rgba(0,0,0,0.1) solid;
       :global .datetimepicker-select__menu-list {
@@ -301,10 +310,10 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         padding: 0;
         :global .datetimepicker-select__option {
           height: 50px;
-          border-top: 1px solid #dddddd;
+          border-top: 1px solid $gray;
           padding: 13px 0 0 12px;
           letter-spacing: -0.6px;
-          color: #333333;
+          color: $black;
           &--is-selected {
             background: inherit;
           }
@@ -335,14 +344,14 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   z-index: 1000;
 }
 .mobile-modal-content {
-  font-family: 'Gotham Rounded A', 'Gotham Rounded B', 'Roboto', Arial, Georgia, Serif;
+  font-family: $font-family;
   background: white;
   width: 89%;
   position: absolute;
   left: 5.5%;
   padding: 31px 20px 33px 20px;
   top: 80px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   .top-row {
     display: flex;
     justify-content: space-between;
@@ -352,17 +361,17 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       font-size: 20px;
       line-height: 18px;
       letter-spacing: -0.5px;
-      color: #333333;
+      color: $black;
       padding: 6px 0 0 8px;
     }
     .departure-now-button {
       background-color: white;
       font-family: inherit;
       padding: 5px 15px;
-      border: 1px solid #888888;
+      border: 1px solid $gray;
       border-radius: 50px;
       font-weight: var(--font-weight-medium);
-      font-size: 15px;
+      font-size: $font-size-normal;
       line-height: 18px;
       letter-spacing: -0.02em;
       color: var(--color);
@@ -370,20 +379,20 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   }
   .tab-row {
     display: flex;
-    border: 2px solid #dddddd;
-    border-radius: 5px;
+    border: 2px solid $gray;
+    border-radius: $border-radius;
     margin-bottom: 16px;
-    background-color: #dddddd;
+    background-color: $gray;
     .radio-tab-label {
       padding: 9px 0;
-      font-size: 15px;
+      font-size: $font-size-smaller;
       line-height: 18px;
       letter-spacing: -0.5px;
       border-radius: 3px;
       font-weight: normal;
       width: 50%;
       text-align: center;
-      color: #333333;
+      color: $black;
       &.active {
         font-weight: var(--font-weight-medium);
         background-color: #ffffff;
@@ -411,8 +420,8 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       flex-basis: 40%;
     }
     .input-container {
-      border: 1px solid #888888;
-      border-radius: 5px;
+      border: 1px solid $gray;
+      border-radius: $border-radius;
       display: flex;
       align-items: center;
       height: 40px;
@@ -447,7 +456,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         background: none;
         width: 50px;
         margin-left: 10px;
-        color: #333333;
+        color: $black;
         height: 1.5265rem;
       }
       .mobile-input-display {
@@ -468,7 +477,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         font-size: 16px;
         line-height: 1.33;
         letter-spacing: -0.5px;
-        color: #333333;
+        color: $black;
       }
       .mobile-input-hidden {
         font-size: 16px;
@@ -490,7 +499,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         position: absolute;
         width: calc((100% - 50px) * 0.6);
         height: 25px;
-        font-size: 15px;
+        font-size: $font-size-normal;
 
         .suggestion {
           list-style: none;
@@ -515,7 +524,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
           max-height: 250px;
           overflow-x: hidden;
           overflow-y: scroll;
-          border-radius: 5px;
+          border-radius: $border-radius;
           box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.06);
           border: 1px rgba(0,0,0,0.1) solid;
           top: 42px;
@@ -540,7 +549,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
           display: inline-block;
           font-family: inherit;
           line-height: 1.33;
-          color: #333333;
+          color: $black;
           padding-left: 46px;
           &:focus {
             outline: none;
@@ -566,7 +575,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       border-radius: 50px;
       height: 40px;
       color: var(--color);
-      border: 1px solid #888888;
+      border: 1px solid $gray;
       &.ready-button {
         color: white;
         background-color: var(--color);

@@ -5,6 +5,7 @@ import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import shouldUpdate from 'recompose/shouldUpdate';
 import isEqual from 'lodash/isEqual';
+import { ok } from 'assert';
 import DTAutoSuggest from '@digitransit-component/digitransit-component-autosuggest';
 import DTAutosuggestPanel from '@digitransit-component/digitransit-component-autosuggest-panel';
 import { getModesWithAlerts } from '@digitransit-search-util/digitransit-search-util-query-utils';
@@ -19,6 +20,7 @@ import {
   parseLocation,
   sameLocations,
   isItinerarySearchObjects,
+  PREFIX_STOPS,
   PREFIX_NEARYOU,
   PREFIX_ITINERARY_SUMMARY,
 } from '../util/path';
@@ -182,7 +184,11 @@ class IndexPage extends React.Component {
       action: 'ClickFavourite',
       name: null,
     });
-    this.context.executeAction(storeDestination, favourite);
+    // todo: we can't use `getStopRoutePath`, because it expects an object with `.properties`
+    // we have a different data format here
+    ok(favourite.gtfsId, 'favourite.gtfsId must not be empty');
+    const stopPath = `/${PREFIX_STOPS}/${encodeURIComponent(favourite.gtfsId)}`;
+    this.context.router.push(stopPath);
   };
 
   // DT-3551: handle logic for Traffic now link
@@ -413,7 +419,7 @@ class IndexPage extends React.Component {
                         <CtrlPanel.SeparatorLine />
                       </>
                     ))}
-                  <h2>Your Favorites</h2>
+                  <h2>{intl.formatMessage({ id: 'your-favourites' })}</h2>
                   <FavouritesContainer
                     favouriteModalAction={this.props.favouriteModalAction}
                     onClickFavourite={this.clickFavourite}

@@ -65,6 +65,7 @@ export default configMerger(walttiConfig, {
 
   fontWeights: {
     medium: 400,
+    bolder: 600,
   },
 
   // note: this does not enforce imperial units, but it causes digitransit-ui to guess based on the browser language/locale

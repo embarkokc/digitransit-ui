@@ -47,9 +47,11 @@ const FavouriteLocation = ({
       aria-label={ariaLabel}
     >
       <Shimmer active={isLoading} className={styles.shimmer}>
-        <span className={cx(styles.icon, styles[iconId])}>
-          <Icon img={iconId} color={color} />
-        </span>
+        {iconId ? (
+          <span className={cx(styles.icon, styles[iconId])}>
+            <Icon img={iconId} color={color} />
+          </span>
+        ) : null}
         <div className={styles['favourite-location']}>
           <div className={styles.name}>{text}</div>
           <div className={styles.address}>{label}</div>
@@ -250,15 +252,30 @@ class FavouriteBar extends React.Component {
   };
 
   render() {
-    const { fontWeights } = this.props;
+    const { isLoading, fontWeights, favourites, onClickFavourite } = this.props;
 
     if (i18next.language !== this.props.lang) {
       i18next.changeLanguage(this.props.lang);
     }
 
     return (
-      <div style={{ '--font-weight-medium': fontWeights.medium }}>
+      <div style={{
+        '--font-weight-medium': fontWeights.medium,
+        '--font-weight-bolder': fontWeights.bolder
+      }}>
         <div className={styles['favourite-container']}>
+          {favourites.map((item, index) => {
+            const key = item.gid || `favourite-location-${index}`;
+            return (
+              <FavouriteLocation
+                key={key}
+                text={item.type === 'stop' ? item.code : item.name}
+                clickItem={() => onClickFavourite(item)}
+                isLoading={isLoading}
+                color={this.props.color}
+              />
+            );
+          })}
         </div>
       </div>
     );

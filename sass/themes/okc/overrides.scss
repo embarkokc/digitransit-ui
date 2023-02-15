@@ -4,6 +4,11 @@ h1, .h1 {
 	font-weight: $font-weight-bold;
 }
 
+h2, .h2 {
+	font-size: $font-size-large;
+	font-weight: $font-weight-bolder;
+}
+
 body {
 	color: $black;
 }

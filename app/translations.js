@@ -1656,6 +1656,7 @@ const translations = {
     'weather-icon-92': 'Fog',
     where: 'Plan A Trip',
     yesterday: 'Yesterday',
+    'your-favourites': 'Your Favorites',
     zone: 'Zone',
     'zone-info': 'Zone {zone}',
     'zone-unknown': 'Unknown zone',

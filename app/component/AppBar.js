@@ -98,16 +98,18 @@ const AppBar = (
               </button>
             </div>
           ) : null}
-          <a
-            onClick={e => {
-              e.stopPropagation();
-            }}
-            className="back-to-embark-link"
-            href={config.appBarLink.href}
-          >
-            {config.appBarLink.name}{' '}
-            <Icon img="icon-icon_close" className="icon" />
-          </a>
+          {config.appBarLink && (
+            <a
+              onClick={e => {
+                e.stopPropagation();
+              }}
+              className="back-to-embark-link"
+              href={config.appBarLink.href}
+            >
+              {config.appBarLink.name}{' '}
+              <Icon img="icon-icon_close" className="icon" />
+            </a>
+          )}
         </section>
       </nav>
     </>

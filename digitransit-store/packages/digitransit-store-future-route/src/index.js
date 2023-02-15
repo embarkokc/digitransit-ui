@@ -101,7 +101,7 @@ function extractRoute(routeIn) {
   return extractedRoute;
 }
 
-const DEFAULT_ITINERARY_PREFIX = 'reitti';
+const DEFAULT_ITINERARY_PREFIX = 'summary';
 
 export function createUrl(routeIn, pathOpts) {
   const route = extractRoute(routeIn);

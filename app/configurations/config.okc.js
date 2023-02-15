@@ -117,6 +117,7 @@ export default configMerger(walttiConfig, {
       corner1: [38.37961661, -102.4335904],
       corner2: [30.643271, -91.82987],
     },
+    zoom: 16,
   },
 
   title: APP_TITLE,

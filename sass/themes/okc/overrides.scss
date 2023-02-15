@@ -21,17 +21,40 @@ body {
     color: $black;
 }
 
-.back-button-label {
-  font-size: 0.8em;
-  font-weight: $font-weight-normal;
-  margin: 0.15em 0 0 2.8em;
+.button-shared {
+  &:hover {
+    box-shadow: initial;
+  }
 }
+/* page header */
 
-section.content .desktop .desktop-title h1 {
-	font-weight: $font-weight-bold;
-	color: $black;
-	display: block;
-	margin: 30px 0px 20px 60px;
+section.content .desktop .desktop-title {
+	h1 {
+		font-weight: $font-weight-bold;
+		color: $black;
+		display: block;
+	}
+
+	.arrow-icon {
+     margin: 0 0.6em 0 0;
+   }
+
+	.title-container {
+		margin-left: 60px;
+	}
+	.back-button {
+  		button {
+    		position: initial;
+    		left: initial;
+    		top: initial;
+   	}
+   }
+
+	.back-button-label {
+	  font-size: 0.8em;
+	  font-weight: $font-weight-normal;
+	  margin-left: 0.15em;
+	}
 }
 
 /* OKC top bar styling */

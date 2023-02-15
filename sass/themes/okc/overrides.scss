@@ -181,6 +181,25 @@ nav.top-bar {
 
 /* /Settings overrides*/
 
+/* Nearby stops */
+
+span.itinerary-stop-code {
+	color: $black;
+	border-color: $gray;
+	border-radius: $border-radius;
+	font-size: $font-size-small;
+	font-weight: $font-weight-bolder;
+}
+
+.stop-near-you-left-col {
+	font-size: $font-size-normal;
+	gap: 10px;
+}
+
+.stop-near-you-right-col {
+	font-size: $font-size-normal;
+}
+
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;

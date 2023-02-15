@@ -1140,7 +1140,7 @@ const translations = {
     'itinerary-page.update-alert': 'Search results updated',
     'itinerary-summary-page-street-mode.update-alert':
       'Walking and biking results updated',
-    'itinerary-summary-page.description': 'Route suggestions',
+    'itinerary-summary-page.description': 'Choose A Trip',
     'itinerary-summary-page.title': 'Route suggestions',
     'itinerary-summary-row.biking-distance':
       'Total biking distance {totalDistance}.',

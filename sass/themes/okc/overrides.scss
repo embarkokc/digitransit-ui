@@ -105,6 +105,14 @@ nav.top-bar {
 	}
 }
 
+.summary h2 {
+	visibility: visible;
+	padding-left: 60px;
+}
+
+.summary-list-container {
+	border-top: none;
+}
 .itinerary-summary-row {
 	.itinerary-legs .leg .route-number {
 		height: 2rem;

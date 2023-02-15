@@ -261,7 +261,7 @@ class SummaryPlanContainer extends React.Component {
 
     return (
       <div className="summary">
-        <h2 className="sr-only">
+        <h2>
           <FormattedMessage
             id="itinerary-summary-page.description"
             defaultMessage="Route suggestions"

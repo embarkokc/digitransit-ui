@@ -129,6 +129,8 @@ class FavouriteBar extends React.Component {
     fontWeights: PropTypes.shape({
       /** Default value is 500. */
       medium: PropTypes.number,
+      /** Default value is 700. */
+      bolder: PropTypes.number,
     }),
   };
 
@@ -143,6 +145,7 @@ class FavouriteBar extends React.Component {
     color: '#007ac9',
     fontWeights: {
       medium: 500,
+      bolder: 700,
     },
   };
 
@@ -259,10 +262,12 @@ class FavouriteBar extends React.Component {
     }
 
     return (
-      <div style={{
-        '--font-weight-medium': fontWeights.medium,
-        '--font-weight-bolder': fontWeights.bolder
-      }}>
+      <div
+        style={{
+          '--font-weight-medium': fontWeights.medium,
+          '--font-weight-bolder': fontWeights.bolder,
+        }}
+      >
         <div className={styles['favourite-container']}>
           {favourites.map((item, index) => {
             const key = item.gid || `favourite-location-${index}`;

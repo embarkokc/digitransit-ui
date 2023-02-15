@@ -24,17 +24,28 @@ $font-size-large: 24px;
     }
   }
 
-    .near-you-buttons-container {
-      & > a, & > div {
-        flex: 0;
-      }
+  .near-you-buttons-container {
+    & > a, & > div {
+      flex: 0;
+    }
 
-      .transport-mode-icon-container {
-        border-radius: $embark-border-radius;
-        border: solid 1px $gray;
-        max-width: 40px;
-        height: 70%;
+    & > a:last-child, & > div:last-child {
+      margin-bottom: unset;
+    }
 
+    .transport-mode-icon-container {
+      border-radius: $embark-border-radius;
+      border: solid 1px $gray;
+
+      svg {
+        width: 44px;
+        height: 44px;
+        margin: auto;
+        @include min-width(tablet)  {
+          width: 44px;
+          height: 44px;
+        }
       }
     }
+  }
 }

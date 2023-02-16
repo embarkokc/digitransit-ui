@@ -153,6 +153,10 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   text-align: center;
   max-height: 50px;
   cursor: pointer;
+  position: relative;
+  left: -40px;
+  top: 35px;
+  z-index: index($zindex, 'rectangle')+1;
   & + .itinerary-search-control {
     border-left: 1px solid rgba(151, 151, 151, 0.2);
   }
@@ -177,6 +181,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       width: 20px;
       height: 22px;
     }
+    visibility: hidden; // Currently not supported by OTP
   }
   .add-via-point-slack {
     display: flex;
@@ -220,16 +225,16 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 .rectangle-container {
   display: block;
   position: relative;
-  height: 9px;
+  height: 27px; // EMBARK (was 9px);
   z-index: index($zindex, 'rectangle');
   .rectangle {
     position: absolute;
     width: 4px;
-    height: 21px;
+    height: 27px;
     border-radius: 2px;
     background-color: #dddddd;
     margin-left: 25px;
-    margin-top: -5px;
+    margin-top: 0px;
   }
 }
 

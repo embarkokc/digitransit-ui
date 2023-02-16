@@ -81,7 +81,8 @@ export default configMerger(walttiConfig, {
   showSwipeableTabs: false,
   showCityBikeOptionAsSingleMode: true,
   viaPointsEnabled: true,
-
+  includeCarSuggestions: false,
+  includeParkAndRideSuggestions: false,
 
   // Search Stops & Routes should show narrow buttons without text
   narrowNearYouButtons: true,

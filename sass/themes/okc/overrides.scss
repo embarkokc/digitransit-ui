@@ -251,13 +251,32 @@ nav.top-bar {
 }
 
 /* Settings overrides*/
-.settings-dropdown-wrapper .settings-dropdown-label .settings-dropdown-label-text {
+.settings-dropdown-wrapper .settings-dropdown-label {
 	color: $black;
+	font-size: $font-size-normal;
+
+	.settings-dropdown-label-text {
+		color: inherit;
+		font-size: inherit;
+	}
+	.settings-dropdown-label-value {
+		color: inherit;
+		font-size: inherit;
+	}
+}
+.settings-dropdown-wrapper .settings-dropdown .settings-dropdown-choice {
+	color: $black;
+	font-size: $font-size-normal;
+	.kmh-value {
+		color: inherit;
+	}
 }
 
 .customize-search .walk-options-container label.toggle-label {
 	color: $black;
 	font-size: $font-size-normal;
+	margin-top: 5px;
+	margin-left: 20px;
 }
 
 .settings-mode-option-container .settings-mode-option-label .settings-mode-option-label-text {
@@ -274,9 +293,14 @@ nav.top-bar {
   font-weight: $font-weight-medium;
 }
 
-.mode-option-container .mode-option-block label.mode-name  {
-	font-weight: $font-weight-medium;
-	font-size: $font-size-normal;
+.mode-option-container .mode-option-block {
+	.icon {
+		width: 36px;
+	}
+	label.mode-name  {
+		font-weight: $font-weight-medium;
+		font-size: $font-size-normal;
+	}
 }
 
 /* /Settings overrides*/

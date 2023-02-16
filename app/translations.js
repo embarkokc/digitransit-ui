@@ -851,7 +851,7 @@ const translations = {
     'add-home': 'Add Home',
     'add-itinerary-via-point': 'Add via point for itinerary',
     'add-location-to-favourites': 'Add an important location to your Favorites',
-    'add-to-favourites': 'Add to your Favorites',
+    'add-to-favourites': 'Add Favorite',
     'add-via-button-label': 'Add via point',
     'add-via-duration-button-label': 'Set stop duration at via point {index}',
     'add-via-duration-button-label-close':
@@ -1360,7 +1360,7 @@ const translations = {
     realtime: 'Real-time',
     'realtime-matching': 'Real-time integration',
     releases: 'Releases',
-    'remove-favourite': 'Remove from favorites',
+    'remove-favourite': 'Remove Favorite',
     'remove-via-button-label': 'Remove via point {index}',
     'rent-cycle-at': 'Fetch a city bike:',
     'rent-scooter-at': 'Rent a kick scooter at {station} station',

@@ -28,20 +28,7 @@ body {
 }
 /* page header */
 
-section.content .desktop .desktop-title {
-	h1 {
-		font-weight: $font-weight-bold;
-		color: $black;
-		display: block;
-	}
-
-	.arrow-icon {
-     margin: 0 0.6em 0 0;
-   }
-
-	.title-container {
-		margin-left: 60px;
-	}
+.stop-page.header {
 	.back-button {
   		button {
     		position: initial;
@@ -49,11 +36,86 @@ section.content .desktop .desktop-title {
     		top: initial;
    	}
    }
+}
 
-	.back-button-label {
-	  font-size: 0.8em;
-	  font-weight: $font-weight-normal;
-	  margin-left: 0.15em;
+/* Stops page */
+.card-header .card-header-content {
+	flex-direction: column;
+   align-items: initial;
+
+   .favourite-icon {
+	   display: flex;
+	   gap: 10px;
+	   align-items: center;
+	}
+}
+.route-address-row-container .route-stop-address-row {
+   color: $black;
+}
+
+.stop-tab-container {
+	background-color: $gray;
+}
+.stop-tab-singletab + .stop-tab-singletab, .stop-tab-singletab:hover + .stop-tab-singletab {
+    border-left: none;
+}
+.stop-tab-singletab, .stop-tab-singletab:hover {
+    color: #fff;
+}
+
+.stop-tab-singletab.active, .stop-tab-singletab.active:hover, .stop-tab-singletab:hover.active, .stop-tab-singletab:hover.active:hover {
+    background-color: #ffffff;
+    font-weight: 400;
+    color: $black;
+}
+.stop-tab-singletab .no-alerts span {
+	color: inherit;
+}
+
+section.content .desktop {
+
+	.back-button {
+		position: initial;
+
+		button {
+	 		position: initial;
+	 		left: initial;
+	 		top: initial;
+		}
+	}
+
+	.arrow-icon {
+	     margin: 0 0.6em 0 0;
+	}
+
+	.header h1 {
+		font-weight: $font-weight-bold;
+		font-size: $font-size-xlarge;
+		color: $black;
+		display: block;
+		margin-top: 20px;
+	}
+
+	.desktop-title {
+		h1 {
+			font-weight: $font-weight-bold;
+			color: $black;
+			display: block;
+		}
+
+		.arrow-icon {
+	     margin: 0 0.6em 0 0;
+	   }
+
+		.title-container {
+			margin-left: 60px;
+		}
+
+		.back-button-label {
+		  font-size: 0.8em;
+		  font-weight: $font-weight-normal;
+		  margin-left: 0.15em;
+		}
 	}
 }
 
@@ -191,6 +253,11 @@ nav.top-bar {
 /* Settings overrides*/
 .settings-dropdown-wrapper .settings-dropdown-label .settings-dropdown-label-text {
 	color: $black;
+}
+
+.customize-search .walk-options-container label.toggle-label {
+	color: $black;
+	font-size: $font-size-normal;
 }
 
 .settings-mode-option-container .settings-mode-option-label .settings-mode-option-label-text {

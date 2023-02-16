@@ -29,12 +29,14 @@ const CardHeader = (
   },
   { config },
 ) => {
-  const headerTitle = stop.name ? stop.name : name;
+  const headerTitle = code ? `Stop ${code}` : name;
   return (
     <Fragment>
       <div className={cx('card-header', className)}>
         {showBackButton && (
           <BackButton
+            title="Back"
+            titleClassName="back-button-label"
             icon="icon-icon_arrow-collapse--left"
             iconClassName="arrow-icon"
           />
@@ -57,11 +59,7 @@ const CardHeader = (
             </h1>
             <div className="card-sub-header">
               <div className="card-name-container">
-                <AddressRow
-                  desc={description}
-                  code={code}
-                  isTerminal={isTerminal}
-                />
+                <AddressRow desc={description} isTerminal={isTerminal} />
               </div>
               {headerConfig &&
                 config.zones.stops &&

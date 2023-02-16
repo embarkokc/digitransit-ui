@@ -102,22 +102,23 @@ const Favourite = (
     }
   };
 
+  const label =
+    favourite && (!requireLoggedIn || isLoggedIn)
+      ? context.intl.formatMessage({
+          id: 'remove-favourite',
+          defautlMessage: 'Remove favourite selection',
+        })
+      : context.intl.formatMessage({
+          id: 'add-to-favourites',
+          defautlMessage: 'Set favourite',
+        });
+
   return (
     <button
       type="button"
       className={cx('cursor-pointer favourite-icon', className)}
       onClick={onClick}
-      aria-label={
-        favourite && (!requireLoggedIn || isLoggedIn)
-          ? context.intl.formatMessage({
-              id: 'remove-favourite',
-              defautlMessage: 'Remove favourite selection',
-            })
-          : context.intl.formatMessage({
-              id: 'add-to-favourites',
-              defautlMessage: 'Set favourite',
-            })
-      }
+      aria-label={label}
     >
       <Icon
         className={cx('favourite', {
@@ -129,6 +130,7 @@ const Favourite = (
             : 'icon-icon_star-unselected'
         }
       />
+      <span>{label}</span>
       {renderLoginModal()}
     </button>
   );

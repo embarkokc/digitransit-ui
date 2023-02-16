@@ -63,6 +63,7 @@ class StopCardHeader extends React.Component {
   getDescription() {
     let description = '';
 
+    /*
     if (this.headerConfig.showDescription && this.props.stop.desc) {
       description += this.props.stop.desc;
     }
@@ -74,7 +75,9 @@ class StopCardHeader extends React.Component {
     if (this.props.isTerminal && this.props.stop.stops) {
       description = this.props.stop.stops[0].desc;
     }
-
+    */
+    // EMBARK: use stop.name as description
+    description = this.props.stop.name;
     return description;
   }
 
@@ -137,7 +140,9 @@ StopCardHeader.propTypes = {
     lat: PropTypes.number,
     lon: PropTypes.number,
   }),
+  /* eslint-disable react/no-unused-prop-types */
   distance: PropTypes.number,
+  /* eslint-enable react/no-unused-prop-types */
   className: PropTypes.string,
   headingStyle: PropTypes.string,
   icons: PropTypes.arrayOf(PropTypes.node),

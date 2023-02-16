@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 45px;
+  margin-bottom: 15px; // was 45px
   .digitransit-dialog-modal-header {
     font-size: 18px;
     font-weight: var(--font-weight-medium);
@@ -37,7 +37,7 @@
     width: 100%;
     height: 50px;
     font-size: 18px;
-    font-family: 'Gotham Rounded A', 'Gotham Rounded B', 'Roboto', Arial, Georgia, Serif;
+    font-family: Arial, sans-serif;
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.5px;
     background: var(--color);
@@ -48,7 +48,7 @@
     margin: 0;
     border-width: 0;
     transition: background-color 300ms ease-out;
-    border-radius: 25px;
+    border-radius: 4px;
     &.primary {
       text-decoration: none;
       &:active, &:focus, &:hover {

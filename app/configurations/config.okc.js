@@ -80,6 +80,7 @@ export default configMerger(walttiConfig, {
   showItineraryMapActions: false,
   showSwipeableTabs: false,
   showCityBikeOptionAsSingleMode: true,
+  viaPointsEnabled: true,
 
 
   // Search Stops & Routes should show narrow buttons without text

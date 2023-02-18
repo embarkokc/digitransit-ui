@@ -44,7 +44,9 @@ jobs:
           restore-keys: yarn-cache-v3
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
-        run: yarn install --immutable
+        run: |
+          yarn install --immutable
+          yarn run node14-patch
 
       - name: cache shared components
         id: cache-shared-components
@@ -90,7 +92,9 @@ jobs:
           restore-keys: yarn-cache-v3
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
-        run: yarn install --immutable
+        run: |
+          yarn install --immutable
+          yarn run node14-patch
 
       - name: cache shared components
         id: cache-shared-components
@@ -201,7 +205,9 @@ jobs:
           restore-keys: yarn-cache-v3
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
-        run: yarn install --immutable
+        run: |
+          yarn install --immutable
+          yarn run node14-patch
 
       - name: cache shared components
         id: cache-shared-components

@@ -3,8 +3,8 @@ import React from 'react';
 import Link from 'found/Link';
 import { FormattedMessage } from 'react-intl';
 import Icon from './Icon';
-import ItineraryMapAction from './ItineraryMapAction';
 import { durationToString, localizeTime } from '../util/timeUtils';
+import ItineraryMapAction from './ItineraryMapAction';
 import ItineraryCircleLineWithIcon from './ItineraryCircleLineWithIcon';
 import { PREFIX_STOPS } from '../util/path';
 

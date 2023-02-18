@@ -860,6 +860,9 @@ const translations = {
       'Open stop duration selector at via point {index}',
     'add-work': 'Add Work',
     all: 'All',
+    'alternative-legs':
+      'Also {leg1} at {startTime1} and {leg2} at {startTime2}',
+    'alternative-legs-single': 'Also {leg1} at {startTime1}',
     'aria-itinerary-summary':
       'Total journey time {duration}. Departing at {inFuture} {departureTime} and arriving at {arrivalTime}',
     'aria-itinerary-summary-bike-distance':
@@ -1124,6 +1127,7 @@ const translations = {
     'itinerary-feedback-button': 'Send feedback',
     'itinerary-feedback-message': 'Couldn’t find what you were looking for?',
     'itinerary-feedback-placeholder': 'Description (optional)',
+    'itinerary-hide-alternative-legs': 'Hide alternatives',
     'itinerary-hide-stops': 'Hide stops',
     'itinerary-in-the-past':
       'The route search falls within a period that is in the past.',
@@ -1577,6 +1581,7 @@ const translations = {
     'track-short-no-num': 'Track',
     tram: 'Streetcar',
     'tram-with-route-number': 'Streetcar {routeNumber} {headSign}',
+    transfer: 'Transfer',
     transfers: 'Number of transfers',
     'transfers-allowed': 'Transfers allowed',
     'transfers-margin': 'Transfer margin at least',
@@ -1987,6 +1992,9 @@ const translations = {
     'add-via-button-label': 'Lisää välipiste',
     'add-work': 'Lisää työ',
     all: 'Kaikki',
+    'alternative-legs':
+      'Myös {leg1} klo {startTime1} ja {leg2} klo {startTime2}',
+    'alternative-legs-single': 'Myös {leg1} klo {startTime1}',
     'aria-itinerary-summary':
       'Matkan kokonaiskesto {duration}. Lähtö {inFuture} kello {departureTime}. Perillä kello {arrivalTime}.',
     'aria-itinerary-summary-bike-distance':
@@ -2255,6 +2263,7 @@ const translations = {
     'itinerary-feedback-button': 'Lähetä palautetta',
     'itinerary-feedback-message': 'Etkö löytänyt mitä etsit?',
     'itinerary-feedback-placeholder': 'Kuvaus (valinnainen)',
+    'itinerary-hide-alternative-legs': 'Piilota vaihtoehdot',
     'itinerary-hide-stops': 'Piilota pysäkit',
     'itinerary-in-the-past': 'Reittihaun ajankohta on menneisyydessä.',
     'itinerary-in-the-past-link': 'Muuta lähtöajaksi nyt ›',
@@ -2705,6 +2714,7 @@ const translations = {
     'track-short-no-num': 'Raide',
     tram: 'Raitiovaunu',
     'tram-with-route-number': 'Raitiovaunu {routeNumber} {headSign}',
+    transfer: 'Vaihto',
     transfers: 'Vaihtojen määrä',
     'transfers-allowed': 'Saa olla vaihtoja',
     'transfers-margin': 'Vaihtoaika vähintään',
@@ -3908,6 +3918,9 @@ const translations = {
       'Öppna väljaren för varaktighet vid via-punkten',
     'add-work': 'Lägg till arbete',
     all: 'Allt',
+    'alternative-legs':
+      'Också {leg1} kl. {startTime1} och {leg2} kl. {startTime2}',
+    'alternative-legs-single': 'Också {leg1} kl. {startTime1}',
     'aria-itinerary-summary':
       'Den totala restiden {duration}. Avgång {inFuture} klockan {departureTime}. Framme klockan {arrivalTime}',
     'aria-itinerary-summary-bike-distance':
@@ -4165,6 +4178,7 @@ const translations = {
     'itinerary-feedback-button': 'Skicka respons',
     'itinerary-feedback-message': 'Hittade du inte vad du sökte?',
     'itinerary-feedback-placeholder': 'Beskrivning (valfri)',
+    'itinerary-hide-alternative-legs': 'Dölj alternativen',
     'itinerary-hide-stops': 'Dölj hållplatserna',
     'itinerary-in-the-past': 'Datumet kan inte vara i det förflutna.',
     'itinerary-in-the-past-link': 'Jag vill åka nu ›',
@@ -4621,6 +4635,7 @@ const translations = {
     'track-short-no-num': 'Spår',
     tram: 'Spårvagn',
     'tram-with-route-number': 'Spårvagn {routeNumber} {headSign}',
+    transfer: 'Byten',
     transfers: 'Antal byten',
     'transfers-allowed': 'Flera byten',
     'transfers-margin': 'Bytestid minst',

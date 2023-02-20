@@ -275,13 +275,14 @@ module.exports = {
     runtimeChunk: isProduction,
   },
   performance: { hints: false },
-  node: {
-    net: 'empty',
-    tls: 'empty',
-  },
   cache: true,
   resolve: {
     mainFields: ['browser', 'module', 'jsnext:main', 'main'],
+    fallback: {
+      // https://github.com/webpack/webpack/issues/11649
+      net: false,
+      tls: false,
+    },
     alias: {
       lodash: 'lodash-es',
       'lodash.merge': 'lodash-es/merge',

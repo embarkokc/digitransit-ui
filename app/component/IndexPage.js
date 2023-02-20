@@ -408,6 +408,12 @@ class IndexPage extends React.Component {
                   <StopRouteSearch {...stopRouteSearchProps} />
                   <>{NearStops(CtrlPanel)}</>
                   <CtrlPanel.SeparatorLine />
+                  <h2>{intl.formatMessage({ id: 'your-favourites' })}</h2>
+                  <FavouritesContainer
+                    favouriteModalAction={this.props.favouriteModalAction}
+                    onClickFavourite={this.clickFavourite}
+                    lang={lang}
+                  />
                   {!trafficNowLink ||
                     (trafficNowLink[lang] !== '' && (
                       <>
@@ -419,12 +425,6 @@ class IndexPage extends React.Component {
                         <CtrlPanel.SeparatorLine />
                       </>
                     ))}
-                  <h2>{intl.formatMessage({ id: 'your-favourites' })}</h2>
-                  <FavouritesContainer
-                    favouriteModalAction={this.props.favouriteModalAction}
-                    onClickFavourite={this.clickFavourite}
-                    lang={lang}
-                  />
                 </CtrlPanel>
               </div>
               {(showSpinner && <OverlayWithSpinner />) || null}

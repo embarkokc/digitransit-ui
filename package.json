@@ -69,6 +69,7 @@
     "build-store": "lerna run clean --scope '@digitransit-store/*' && NODE_ENV=production SCOPE='@digitransit-store/*' rollup -c ./config/rollup.config.js",
     "node14-patch": "rm -f ./node_modules/react-leaflet/node_modules/@babel/runtime/helpers/esm/package.json"
   },
+  "type": "module",
   "main": "server.js",
   "repository": {
     "type": "git",

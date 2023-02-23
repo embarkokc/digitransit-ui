@@ -414,6 +414,7 @@ class IndexPage extends React.Component {
                     onClickFavourite={this.clickFavourite}
                     lang={lang}
                   />
+                  <CtrlPanel.SeparatorLine usePaddingBottom20 />
                   {!trafficNowLink ||
                     (trafficNowLink[lang] !== '' && (
                       <>

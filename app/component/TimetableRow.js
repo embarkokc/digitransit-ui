@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { intlShape } from 'react-intl';
+import { getAsHours } from '../util/timeUtils';
 
 const TimetableRow = ({ title, stoptimes, showRoutes, timerows }, { intl }) => (
   <div
@@ -15,8 +16,10 @@ const TimetableRow = ({ title, stoptimes, showRoutes, timerows }, { intl }) => (
           : undefined,
     }}
   >
-    <h3 className="title">{title}:</h3>
-    <div className="timetable-printable-title">{title}</div>
+    <h3 className="title">{getAsHours(parseInt(title, 10))}:</h3>
+    <div className="timetable-printable-title">
+      {getAsHours(parseInt(title, 10))}
+    </div>
     <div className="timetable-rowcontainer">
       {stoptimes
         .filter(

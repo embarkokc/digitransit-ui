@@ -126,6 +126,10 @@ export function getFormattedTimeDate(startTime, pattern) {
   return moment(startTime).format(pattern);
 }
 
+export function getAsHours(hours) {
+  const amOrPm = hours >= 12 ? 'pm' : 'am';
+  return `${hours % 12 || 12} ${amOrPm}`;
+}
 /**
  * Returns formatted time
  */

@@ -83,6 +83,7 @@ export default configMerger(walttiConfig, {
   viaPointsEnabled: true,
   includeCarSuggestions: false,
   includeParkAndRideSuggestions: false,
+  minutesToDepartureLimit: 360,
 
   // Search Stops & Routes should show narrow buttons without text
   narrowNearYouButtons: true,

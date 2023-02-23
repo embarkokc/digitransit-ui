@@ -1,11 +1,10 @@
 import cx from 'classnames';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { intlShape, FormattedMessage } from 'react-intl';
 import Icon from './Icon';
-import DepartureRow from './DepartureRow';
+import DeparturesRow from './DeparturesRow';
 import { isBrowser } from '../util/browser';
 import {
   stopRealTimeClient,
@@ -254,79 +253,30 @@ class DepartureListContainer extends Component {
 
     const departureObjs = [];
     const { currentTime, limit, isTerminal, stoptimes } = this.props;
-
-    let serviceDayCutoff = moment.unix(currentTime).startOf('day').unix();
-    let dayCutoff = moment.unix(currentTime).startOf('day').unix();
     const departures = asDepartures(stoptimes)
       .filter(departure => !(isTerminal && departure.isArrival))
       .filter(departure => currentTime < departure.stoptime)
       .slice(0, limit);
 
-    // Add day dividers when day changes and add service day divider after service day changes.
-    // If day divider and service day dividers are added with same departure only show day divider.
-    const departuresWithDayDividers = departures.map(departure => {
-      const serviceDate = moment.unix(departure.serviceDay).format('DDMMYYYY');
-      const dayCutoffDate = moment.unix(dayCutoff).format('DDMMYYYY');
-      const stoptimeDate = moment.unix(departure.stoptime).format('DDMMYYYY');
-      const serviceDayCutoffDate = moment
-        .unix(serviceDayCutoff)
-        .format('DDMMYYYY');
-
-      if (stoptimeDate !== dayCutoffDate && departure.stoptime > dayCutoff) {
-        dayCutoff = moment.unix(departure.stoptime).startOf('day').unix();
-        // eslint-disable-next-line no-param-reassign
-        departure.addDayDivider = true;
+    // EMBARK: Group departures by route_short_name and headsign
+    const groupedDepartures = new Map();
+    const MAX_DEPARTURES_PER_PATTERN = 3;
+    departures.forEach(departure => {
+      const key =
+        departure.trip.pattern.route.shortName + this.getHeadsign(departure);
+      if (groupedDepartures.has(key)) {
+        const deps = groupedDepartures.get(key);
+        if (deps.length < MAX_DEPARTURES_PER_PATTERN) {
+          deps.push(departure);
+        }
+      } else {
+        groupedDepartures.set(key, [departure]);
       }
-
-      if (
-        serviceDate !== serviceDayCutoffDate &&
-        departure.serviceDay > serviceDayCutoff
-      ) {
-        // eslint-disable-next-line no-param-reassign
-        departure.addServiceDayDivider = true;
-        const daysAdd = serviceDate === serviceDayCutoffDate ? 1 : 0;
-        serviceDayCutoff = moment
-          .unix(departure.serviceDay)
-          .startOf('day')
-          .add(daysAdd, 'day')
-          .unix();
-      }
-      return departure;
     });
-
-    let firstDayDepartureCount = 0;
-    departuresWithDayDividers.forEach((departure, index) => {
-      const departureDate = moment.unix(departure.stoptime).format('DDMMYYYY');
-      const nextDay = moment.unix(currentTime).add(1, 'day').unix();
-      if (departure.stoptime < nextDay) {
-        firstDayDepartureCount += 1;
-      }
-
-      // If next 24h has more than 10 departures only show stops for the next 24h
-      if (departure.stoptime > nextDay && firstDayDepartureCount >= 10) {
-        return;
-      }
-
-      if (departure.addDayDivider) {
-        departureObjs.push(
-          <tr key={departureDate}>
-            <td colSpan={isTerminal ? 4 : 3}>
-              <div className="date-row border-bottom">
-                {moment.unix(departure.stoptime).format('dddd D.M.YYYY')}
-              </div>
-            </td>
-          </tr>,
-        );
-      } else if (departure.addServiceDayDivider) {
-        departureObjs.push(
-          <tr key={`${departureDate}_divider`}>
-            <td colSpan={isTerminal ? 4 : 3}>
-              <div className="departure-day-divider" />
-            </td>
-          </tr>,
-        );
-      }
-
+    // No date separator
+    // /EMBARK
+    groupedDepartures.forEach(departureGroup => {
+      const departure = departureGroup[0];
       const id = `${departure.pattern.code}:${departure.stoptime}`;
       const dropoffMessage = getDropoffMessage(
         departure.hasOnlyDropoff,
@@ -351,23 +301,14 @@ class DepartureListContainer extends Component {
         ) : null,
       };
 
-      const nextDeparture = departuresWithDayDividers[index + 1];
-
       const departureObj = (
-        <DepartureRow
+        <DeparturesRow
           key={id}
           departure={row}
-          departureTime={departure.stoptime}
+          departures={departureGroup}
           currentTime={this.props.currentTime}
           showPlatformCode={isTerminal}
           canceled={departure.canceled}
-          className={
-            nextDeparture &&
-            nextDeparture.addServiceDayDivider &&
-            !nextDeparture.addDayDivider
-              ? 'no-border'
-              : ''
-          }
         />
       );
 
@@ -413,6 +354,10 @@ class DepartureListContainer extends Component {
           </thead>
           <tbody>{departureObjs}</tbody>
         </table>
+        <span className="departure-list-legend">
+          <span className="realtime">Realtime arrivals are estimates</span>
+          <span className="scheduled">* Scheduled</span>
+        </span>
       </>
     );
   }

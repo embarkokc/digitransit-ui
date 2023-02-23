@@ -6,6 +6,7 @@ $okc-tram-pink: #d51067;
 
 /* main theme colors */
 $black: #000;
+$lighter-gray: #D5D5D5;
 $gray: #686869;
 $primary-color: $gray;
 $secondary-color: #414143;
@@ -15,12 +16,13 @@ $viewpoint-marker-color: $primary-color;
 $current-location-color: $primary-color;
 
 $font-family: Arial, sans-serif;
+$font-family-narrow: $font-family;
 $heading-font-family: $font-family;
 $button-font-family: $font-family;
 /* font sizes */
 $font-size-xxxxsmall: 0.62rem;
 $font-size-xxxsmall: 0.72rem;
-$font-size-xxsmall: 0.8rem;
+$font-size-xxsmall: 15px;
 $font-size-xsmall: 0.87rem;
 $font-size-small: 18px; // 0.92rem
 $font-size-normal: 21px; // 1.0rem

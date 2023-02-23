@@ -18,73 +18,58 @@ const getMostSevereAlert = (route, trip) => {
   return alerts.sort(alertSeverityCompare)[0];
 };
 
-const DepartureRow = (
-  { departure, departureTime, showPlatformCode, canceled, ...props },
+const DeparturesRow = (
+  { departure, departures, showPlatformCode, canceled, ...props },
   { config, intl },
 ) => {
   const { trip, trip: { route } = {} } = departure;
   const mode = getRouteMode(route);
-
-  const timeDiffInMinutes = Math.floor(
-    (departureTime - props.currentTime) / 60,
+  let { shortName } = departure.trip.route;
+  shortName = (
+    <>
+      <Icon
+        className={mode.toLowerCase()}
+        img={`icon-icon_${mode.toLowerCase()}`}
+        color={`#${route.color}`}
+      />
+      {shortName?.length < 7 ? shortName : ''}
+    </>
   );
-  let icon;
-  let iconColor;
-  let backgroundShape;
-  let sr;
-  if (route?.alerts?.length > 0) {
-    const alert = getMostSevereAlert(route, trip);
-    sr = (
-      <span className="sr-only">
-        {intl.formatMessage({
-          id: 'disruptions-tab.sr-disruptions',
-        })}
-      </span>
-    );
-    icon =
-      alert.alertSeverityLevel !== 'INFO'
-        ? 'icon-icon_caution-white-excl-stroke'
-        : 'icon-icon_info';
-    iconColor = alert.alertSeverityLevel !== 'INFO' ? '#DC0451' : '#888';
-    backgroundShape =
-      alert.alertSeverityLevel !== 'INFO' ? undefined : 'circle';
-  }
   const headsign =
     departure.headsign ||
     departure.trip.tripHeadsign ||
     getHeadsignFromRouteLongName(trip.route);
-  let shownTime;
-  if (timeDiffInMinutes <= 0) {
-    shownTime = intl.formatMessage({
-      id: 'arriving-soon',
-      defaultMessage: 'Now',
-    });
-  } else if (timeDiffInMinutes > config.minutesToDepartureLimit) {
-    shownTime = undefined;
-  } else {
-    shownTime = intl.formatMessage(
-      {
-        id: 'departure-time-in-minutes',
-        defaultMessage: '{minutes} min',
-      },
-      { minutes: timeDiffInMinutes },
-    );
-  }
-  let { shortName } = departure.trip.route;
-  if (shortName?.length > 6 || !shortName?.length) {
-    shortName = (
-      <Icon
-        className={mode.toLowerCase()}
-        img={`icon-icon_${mode.toLowerCase()}`}
-      />
-    );
-  }
 
-  const renderWithLink = (node, first) => {
+  const getShownTime = departureTime => {
+    const timeDiffInMinutes = Math.floor(
+      (departureTime - props.currentTime) / 60,
+    );
+    let shownTime;
+    if (timeDiffInMinutes <= 0) {
+      shownTime = intl.formatMessage({
+        id: 'arriving-soon',
+        defaultMessage: 'Now',
+      });
+    } else if (timeDiffInMinutes > config.minutesToDepartureLimit) {
+      shownTime = <LocalTime time={departureTime} />;
+    } else {
+      shownTime = intl.formatMessage(
+        {
+          id: 'departure-time-in-minutes',
+          defaultMessage: '{minutes} min',
+        },
+        { minutes: timeDiffInMinutes },
+      );
+    }
+
+    return shownTime;
+  };
+
+  const renderWithLink = (node, dep, first) => {
     return (
       <>
         <Link
-          to={`/${PREFIX_ROUTES}/${departure.trip.pattern.route.gtfsId}/${PREFIX_STOPS}/${departure.trip.pattern.code}/${departure.trip.gtfsId}`}
+          to={`/${PREFIX_ROUTES}/${dep.trip.pattern.route.gtfsId}/${PREFIX_STOPS}/${dep.trip.pattern.code}/${dep.trip.gtfsId}`}
           onClick={() => {
             addAnalyticsEvent({
               category: 'Stop',
@@ -101,7 +86,7 @@ const DepartureRow = (
             {
               shortName,
               destination: headsign,
-              time: localizeTime(departureTime * 1000),
+              time: localizeTime(dep.stoptime * 1000),
             },
           )}
         />
@@ -109,6 +94,71 @@ const DepartureRow = (
       </>
     );
   };
+
+  const departureTimeWithLink = dep => {
+    const departureTime = dep.stoptime;
+    const shownTime = getShownTime(departureTime);
+    return renderWithLink(
+      <>
+        <span
+          className={cx('route-time', {
+            realtime: dep.realtime,
+            canceled,
+          })}
+          aria-hidden="true"
+        >
+          {dep.realtime ? '' : '*'}
+          {shownTime}
+        </span>
+        <span className="sr-only">
+          {intl.formatMessage(
+            {
+              id: 'departure-time-sr',
+            },
+            {
+              when: shownTime,
+              time: localizeTime(departureTime * 1000),
+              realTime: dep.realtime
+                ? intl.formatMessage({ id: 'realtime' })
+                : '',
+            },
+          )}
+        </span>
+      </>,
+      dep,
+    );
+  };
+
+  const departureTimes = deps => {
+    return deps.map((dep, index) => (
+      <>
+        {index > 0 ? ', ' : ''}
+        {departureTimeWithLink(dep)}
+      </>
+    ));
+  };
+
+  let icon;
+  let iconColor;
+  let backgroundShape;
+  let sr;
+
+  if (route?.alerts?.length > 0) {
+    const alert = getMostSevereAlert(route, trip);
+    sr = (
+      <span className="sr-only">
+        {intl.formatMessage({
+          id: 'disruptions-tab.sr-disruptions',
+        })}
+      </span>
+    );
+    icon =
+      alert.alertSeverityLevel !== 'INFO'
+        ? 'icon-icon_caution-white-excl-stroke'
+        : 'icon-icon_info';
+    iconColor = alert.alertSeverityLevel !== 'INFO' ? '#DC0451' : '#888';
+    backgroundShape = 'circle'; // alert.alertSeverityLevel !== 'INFO' ? undefined : 'circle';
+  }
 
   return (
     <tr
@@ -124,7 +174,7 @@ const DepartureRow = (
         className={cx('route-number-container', {
           long: shortName.length <= 6 && shortName.length >= 5,
         })}
-        style={{ backgroundColor: `#${departure.trip.route.color}` }}
+        style={{ border: `1px solid #${departure.trip.route.color}` }}
       >
         {renderWithLink(
           <>
@@ -141,6 +191,7 @@ const DepartureRow = (
               </>
             )}
           </>,
+          departures[0],
           true,
         )}
       </td>
@@ -149,47 +200,9 @@ const DepartureRow = (
           <div className="headsign">
             {headsign} {departure.bottomRow && departure.bottomRow}
           </div>,
+          departures[0],
         )}
-      </td>
-      <td className="time-cell">
-        {renderWithLink(
-          <>
-            {shownTime && (
-              <span
-                className={cx('route-arrival', {
-                  realtime: departure.realtime,
-                  canceled,
-                })}
-                aria-hidden="true"
-              >
-                {shownTime}
-              </span>
-            )}
-            <span
-              className={cx('route-time', {
-                realtime: departure.realtime,
-                canceled,
-              })}
-              aria-hidden="true"
-            >
-              <LocalTime time={departureTime} />
-            </span>
-            <span className="sr-only">
-              {intl.formatMessage(
-                {
-                  id: 'departure-time-sr',
-                },
-                {
-                  when: shownTime,
-                  time: localizeTime(departureTime * 1000),
-                  realTime: departure.realtime
-                    ? intl.formatMessage({ id: 'realtime' })
-                    : '',
-                },
-              )}
-            </span>
-          </>,
-        )}
+        <span className="departuretimes">{departureTimes(departures)}</span>
       </td>
       {showPlatformCode && (
         <td className="platform-cell">
@@ -205,23 +218,36 @@ const DepartureRow = (
                 {departure.stop?.platformCode}
               </div>
             </>,
+            departures[0],
           )}
         </td>
       )}
+      <td className="time-cell">
+        {renderWithLink(
+          <Icon img="icon-icon_arrow-collapse--right" />,
+          departures[0],
+        )}
+      </td>
     </tr>
   );
 };
-DepartureRow.propTypes = {
+DeparturesRow.propTypes = {
   departure: PropTypes.object.isRequired,
-  departureTime: PropTypes.number.isRequired,
+  departures: PropTypes.array.isRequired,
   currentTime: PropTypes.number.isRequired,
   showPlatformCode: PropTypes.bool,
   canceled: PropTypes.bool,
   className: PropTypes.string,
 };
 
-DepartureRow.contextTypes = {
+DeparturesRow.defaultProps = {
+  canceled: false,
+  className: '',
+  showPlatformCode: false,
+};
+
+DeparturesRow.contextTypes = {
   config: PropTypes.object.isRequired,
   intl: intlShape.isRequired,
 };
-export default DepartureRow;
+export default DeparturesRow;

@@ -18,12 +18,12 @@ export const getTimePeriod = ({ currentTime, startTime, endTime, intl }) => {
   const at = intl.formatMessage({
     id: 'at-time',
   });
-  const defaultFormat = `D.M.YYYY [${at}] HH:mm`;
+  const defaultFormat = `LT - MM/DD/YYYY`;
   const start = capitalize(
     startTime.calendar(currentTime, {
-      lastDay: `[${intl.formatMessage({ id: 'yesterday' })} ${at}] HH:mm`,
-      sameDay: `[${intl.formatMessage({ id: 'today' })} ${at}] HH:mm`,
-      nextDay: `[${intl.formatMessage({ id: 'tomorrow' })} ${at}] HH:mm`,
+      lastDay: `[${intl.formatMessage({ id: 'yesterday' })} ${at}] LT`,
+      sameDay: `[${intl.formatMessage({ id: 'today' })} ${at}] LT`,
+      nextDay: `[${intl.formatMessage({ id: 'tomorrow' })} ${at}] LT`,
       lastWeek: defaultFormat,
       nextWeek: defaultFormat,
       sameElse: defaultFormat,
@@ -33,7 +33,7 @@ export const getTimePeriod = ({ currentTime, startTime, endTime, intl }) => {
     return start;
   }
   const end = endTime.calendar(startTime, {
-    sameDay: 'HH:mm',
+    sameDay: 'LT',
     nextDay: defaultFormat,
     nextWeek: defaultFormat,
     sameElse: defaultFormat,

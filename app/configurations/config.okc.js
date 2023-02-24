@@ -1,5 +1,11 @@
 /* eslint-disable */
-import configMerger from '../util/configMerger';
+import configMerger from '../util/configMerger.js';
+
+import { BIKEAVL_WITHMAX } from '../util/citybikes.js';
+
+import walttiConfig from './config.waltti.js';
+import _realtimeUtils from './realtimeUtils.js';
+const { embark: realtimeOkc } = _realtimeUtils;
 
 const CONFIG = 'okc';
 const APP_TITLE = 'Embark Oklahoma City';
@@ -12,16 +18,11 @@ const OTP_URL = process.env.OTP_URL || API_URL
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
 
-const walttiConfig = require('./config.waltti').default;
-
 const minLat = 35.12616660;
 const maxLat = 35.75717549;
 const minLon = -97.90289458;
 const maxLon = -97.08659510;
 
-import { BIKEAVL_WITHMAX } from '../util/citybikes';
-
-const realtimeOkc = require('./realtimeUtils').default.embark;
 realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
 
 export default configMerger(walttiConfig, {

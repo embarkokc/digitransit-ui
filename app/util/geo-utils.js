@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import unzip from 'lodash/unzip';
+import unzip from 'lodash/unzip.js';
 
 import distance from '@digitransit-search-util/digitransit-search-util-distance';
-import { isImperial } from './browser';
+import { isImperial } from './browser.js';
 
 const FEET_PER_METER = 3.2808399;
 const FEET_PER_MILE = 5280;

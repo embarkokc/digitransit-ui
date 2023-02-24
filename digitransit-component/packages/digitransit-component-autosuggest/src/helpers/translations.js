@@ -134,7 +134,7 @@ const translations = {
     'stop-near-you': 'Enter Stop or Route ID',
     'stop-near-you-airplane': 'Search flights or airports',
     'stop-near-you-bus': 'Enter Stop or Route ID',
-    'stop-near-you-citybike': 'Enter city bike station ID',
+    'stop-near-you-citybike': 'Enter Spokies Station ID',
     'stop-near-you-rail': 'Search train routes or stations',
     'stop-near-you-subway': 'Search metro routes or stations ',
     'stop-near-you-tram': 'Enter Stop or Route ID',

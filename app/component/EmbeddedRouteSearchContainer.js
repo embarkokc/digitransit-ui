@@ -89,8 +89,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
       modeSet: config.iconModeSet,
     };
 
-    // TODO this path is not handled by digitransit-ui
-    const systemAlertsPath = '/systemalerts';
+    const systemAlertsPath = '/alerts';
     return (
       <div
         className="embedded-seach-container embedded-route-search-container"

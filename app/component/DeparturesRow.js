@@ -172,7 +172,7 @@ const DeparturesRow = (
     >
       <td
         className={cx('route-number-container', {
-          long: shortName.length <= 6 && shortName.length >= 5,
+          long: shortName.length >= 5 && shortName.length <= 6,
         })}
         style={{ border: `1px solid #${departure.trip.route.color}` }}
       >
@@ -209,11 +209,10 @@ const DeparturesRow = (
           {renderWithLink(
             <>
               <div
-                className={
-                  !departure.stop?.platformCode
-                    ? 'platform-code empty'
-                    : 'platform-code'
-                }
+                className={cx(
+                  'platform-code',
+                  departure.stop?.platformCode ? '' : 'empty',
+                )}
               >
                 {departure.stop?.platformCode}
               </div>

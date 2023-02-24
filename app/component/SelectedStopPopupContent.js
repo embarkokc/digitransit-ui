@@ -4,19 +4,17 @@ import React from 'react';
 const SelectedStopPopupContent = ({ stop }) => (
   <div className="origin-popup">
     <div className="origin-popup-header">
-      <div className="selected-stop-header">{stop.name}</div>
+      <div className="selected-stop-header">Stop {stop.code}</div>
     </div>
-    {(stop.code || stop.desc) && (
-      <div>
-        <div className="origin-popup-name">
-          <div className="selected-stop-popup">
-            {stop.code && <p className="card-code">{stop.code}</p>}
-            <span className="description">{stop.desc}</span>
-          </div>
+    <div>
+      <div className="origin-popup-name">
+        <div className="selected-stop-popup">
+          <p className="card-code">{stop.name}</p>
+          <span className="description">{stop.desc}</span>
         </div>
-        <div className="shade-to-white" />
       </div>
-    )}
+      <div className="shade-to-white" />
+    </div>
   </div>
 );
 

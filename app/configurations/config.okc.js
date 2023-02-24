@@ -79,6 +79,7 @@ export default configMerger(walttiConfig, {
   showWeatherInformation: false,
   showItineraryMapActions: false,
   showSwipeableTabs: false,
+  showSpacesAvailable: false,
   showCityBikeOptionAsSingleMode: true,
   viaPointsEnabled: true,
   includeCarSuggestions: false,

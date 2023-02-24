@@ -48,7 +48,9 @@ const CityBikeStopContent = ({ bikeRentalStation, showIcon }, { config }) => {
         totalSpaces={totalSpaces}
         fewAvailableCount={fewAvailableCount}
         fewerAvailableCount={fewerAvailableCount}
-        useSpacesAvailable={citybikeCapacity === BIKEAVL_WITHMAX}
+        useSpacesAvailable={
+          config.showSpacesAvailable && citybikeCapacity === BIKEAVL_WITHMAX
+        }
       />
     </div>
   );

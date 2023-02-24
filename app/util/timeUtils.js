@@ -127,7 +127,7 @@ export function getFormattedTimeDate(startTime, pattern) {
 }
 
 export function getAsHours(hours) {
-  const amOrPm = hours >= 12 ? 'pm' : 'am';
+  const amOrPm = hours % 24 >= 12 ? 'pm' : 'am';
   return `${hours % 12 || 12} ${amOrPm}`;
 }
 /**

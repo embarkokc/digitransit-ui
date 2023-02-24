@@ -37,15 +37,13 @@ const CityBikeStopNearYou = ({ stop, currentMode }, { intl }) => {
             </div>
           </div>
           <div className="stop-near-you-right-col">
-            <div className="stop-near-you-name">
-              {stop.name}
-              <Icon
-                img="icon-icon_arrow-collapse--right"
-                className="itinerary-arrow-icon"
-              />
-            </div>
+            <div className="stop-near-you-name">{stop.name}</div>
             <CityBikeStopContent bikeRentalStation={stop} showIcon={false} />
           </div>
+          <Icon
+            img="icon-icon_arrow-collapse--right"
+            className="itinerary-arrow-icon"
+          />
         </Link>
       </div>
     </span>

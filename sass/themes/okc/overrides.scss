@@ -63,23 +63,23 @@ body {
    font-size: $font-size-normal;
 }
 
-.stop-tab-container {
+.tab-container {
   background-color: $gray;
   margin: 34px 64px 16px 64px;
 }
-.stop-tab-singletab + .stop-tab-singletab, .stop-tab-singletab:hover + .stop-tab-singletab {
+.tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
   border-left: none;
 }
-.stop-tab-singletab, .stop-tab-singletab:hover {
+.tab-singletab, .tab-singletab:hover {
   color: #fff;
 }
 
-.stop-tab-singletab.active, .stop-tab-singletab.active:hover, .stop-tab-singletab:hover.active, .stop-tab-singletab:hover.active:hover {
+.tab-singletab.active, .tab-singletab.active:hover, .tab-singletab:hover.active, .tab-singletab:hover.active:hover {
   background-color: #ffffff;
   font-weight: 400;
   color: $black;
 }
-.stop-tab-singletab .no-alerts span {
+.tab-singletab .no-alerts span {
   color: inherit;
 }
 

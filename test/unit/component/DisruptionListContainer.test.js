@@ -102,7 +102,7 @@ describe('<DisruptionListContainer />', () => {
       },
     };
     const wrapper = shallowWithIntl(<DisruptionListContainer {...props} />);
-    expect(wrapper.find('.stop-tab-container.collapsed')).to.have.lengthOf(1);
+    expect(wrapper.find('.tab-container.collapsed')).to.have.lengthOf(1);
   });
 
   it('should display the severity level selector', () => {
@@ -132,7 +132,7 @@ describe('<DisruptionListContainer />', () => {
       },
     };
     const wrapper = shallowWithIntl(<DisruptionListContainer {...props} />);
-    expect(wrapper.find('.stop-tab-container.collapsed')).to.have.lengthOf(0);
-    expect(wrapper.find('.stop-tab-container')).to.have.lengthOf(1);
+    expect(wrapper.find('.tab-container.collapsed')).to.have.lengthOf(0);
+    expect(wrapper.find('.tab-container')).to.have.lengthOf(1);
   });
 });

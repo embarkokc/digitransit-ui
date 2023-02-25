@@ -438,8 +438,6 @@ class RoutePageControlPanel extends React.Component {
 
     const useCurrentTime = activeTab === Tab.Stops; // DT-3182
 
-    const countOfButtons = 3;
-
     let disruptionIcon;
     if (disruptionClassName === 'active-disruption-alert') {
       disruptionIcon = (
@@ -487,7 +485,7 @@ class RoutePageControlPanel extends React.Component {
           )}
           {/* eslint-disable jsx-a11y/interactive-supports-focus */}
           <div
-            className="route-tabs"
+            className="tab-container"
             role="tablist"
             onKeyDown={e => {
               const tabs = [Tab.Stops, Tab.Timetable, Tab.Disruptions];
@@ -513,7 +511,9 @@ class RoutePageControlPanel extends React.Component {
             {/* eslint-enable jsx-a11y/interactive-supports-focus */}
             <button
               type="button"
-              className={cx({ 'is-active': activeTab === Tab.Stops })}
+              className={cx('tab-singletab', {
+                active: activeTab === Tab.Stops,
+              })}
               onClick={() => {
                 this.changeTab(Tab.Stops);
               }}
@@ -522,17 +522,16 @@ class RoutePageControlPanel extends React.Component {
               {...(activeTab === Tab.Stops ? { id: 'route-tab' } : {})}
               ref={this.stopTabRef}
               aria-selected={activeTab === Tab.Stops}
-              style={{
-                '--totalCount': `${countOfButtons}`,
-              }}
             >
-              <div>
+              <div className="tab-singletab-container">
                 <FormattedMessage id="stops" defaultMessage="Stops" />
               </div>
             </button>
             <button
               type="button"
-              className={cx({ 'is-active': activeTab === Tab.Timetable })}
+              className={cx('tab-singletab', {
+                active: activeTab === Tab.Timetable,
+              })}
               onClick={() => {
                 this.changeTab(Tab.Timetable);
               }}
@@ -540,19 +539,16 @@ class RoutePageControlPanel extends React.Component {
               role="tab"
               ref={this.timetableTabRef}
               aria-selected={activeTab === Tab.Timetable}
-              style={{
-                '--totalCount': `${countOfButtons}`,
-              }}
             >
-              <div>
+              <div className="tab-singletab-container">
                 <FormattedMessage id="timetable" defaultMessage="Timetable" />
               </div>
             </button>
             <button
               type="button"
-              className={cx({
+              className={cx('tab-singletab', {
                 activeAlert: hasActiveAlert,
-                'is-active': activeTab === Tab.Disruptions,
+                active: activeTab === Tab.Disruptions,
               })}
               onClick={() => {
                 this.changeTab(Tab.Disruptions);
@@ -561,12 +557,9 @@ class RoutePageControlPanel extends React.Component {
               role="tab"
               ref={this.disruptionTabRef}
               aria-selected={activeTab === Tab.Disruptions}
-              style={{
-                '--totalCount': `${countOfButtons}`,
-              }}
             >
               <div
-                className={`tab-route-disruption ${
+                className={`tab-singletab-container tab-route-disruption ${
                   disruptionClassName || `no-alerts`
                 }`}
               >

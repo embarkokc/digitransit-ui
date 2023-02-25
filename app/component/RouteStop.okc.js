@@ -3,36 +3,16 @@ import React from 'react';
 import Link from 'found/Link';
 import { FormattedMessage, intlShape } from 'react-intl';
 import cx from 'classnames';
-import AddressRow from './AddressRow';
-import TripLink from './TripLink';
-import FuzzyTripLink from './FuzzyTripLink';
+import StopCode from './StopCode';
 import ServiceAlertIcon from './ServiceAlertIcon';
 import { fromStopTime } from './DepartureTime';
-import ZoneIcon from './ZoneIcon';
 import { getActiveAlertSeverityLevel } from '../util/alertUtils';
 import { PREFIX_STOPS } from '../util/path';
 import { addAnalyticsEvent } from '../util/analyticsUtils';
-import { getZoneLabel } from '../util/legUtils';
-import { estimateItineraryDistance } from '../util/geo-utils';
-import getVehicleState from '../util/vehicleStateUtils';
 import Icon from './Icon';
-import { VehicleShape } from '../util/shapes';
 
 const RouteStop = (
-  {
-    className,
-    currentTime,
-    first,
-    last,
-    mode,
-    stop,
-    nextStop,
-    vehicle,
-    displayNextDeparture,
-    shortName,
-    prevStop,
-    hideDepartures,
-  },
+  { className, currentTime, last, stop, displayNextDeparture, hideDepartures },
   { config, intl },
 ) => {
   const patternExists =
@@ -111,57 +91,8 @@ const RouteStop = (
     return text;
   };
 
-  const getVehicleTripLink = () => {
-    let vehicleTripLink;
-    let vehicleState;
-    if (vehicle) {
-      const maxDistance = vehicle.mode === 'rail' ? 100 : 50;
-      const { realtimeDeparture, realtimeArrival, serviceDay } = firstDeparture;
-      const arrivalTimeToStop = (serviceDay + realtimeArrival) * 1000;
-      const departureTimeFromStop = (serviceDay + realtimeDeparture) * 1000;
-      const vehicleTime = vehicle.timestamp * 1000;
-      const distanceToStop = estimateItineraryDistance(stop, {
-        lat: vehicle.lat,
-        lon: vehicle.long,
-      });
-      vehicleState = getVehicleState(
-        distanceToStop,
-        maxDistance,
-        vehicleTime,
-        arrivalTimeToStop,
-        departureTimeFromStop,
-        first,
-        last,
-      );
-      vehicleTripLink = vehicle.tripId ? (
-        <TripLink
-          key={vehicle.id}
-          vehicle={vehicle}
-          shortName={shortName}
-          mode={mode}
-        />
-      ) : (
-        <FuzzyTripLink
-          stopName={vehicleState === 'arriving' ? prevStop?.name : stop?.name}
-          nextStopName={
-            vehicleState === 'arriving' ? stop?.name : nextStop?.name
-          }
-          mode={mode}
-          key={vehicle.id}
-          vehicle={vehicle}
-        />
-      );
-    }
-    return (
-      <div className={cx('route-stop-now', vehicleState)}>
-        {vehicleTripLink}
-      </div>
-    );
-  };
   return (
     <li className={cx('route-stop location-details_container ', className)}>
-      {getVehicleTripLink()}
-
       <div className="route-stop-row_content-container">
         <Link
           as="button"
@@ -193,7 +124,8 @@ const RouteStop = (
                     )}
                 </div>
               )}
-              <AddressRow desc={stop.desc} code={stop.code} />
+
+              <StopCode code={stop.code} />
             </div>
             <div className="route-details-right-column">
               <div className="route-details-upper-row">
@@ -221,15 +153,6 @@ const RouteStop = (
                 </div>
               </div>
               <div className="route-details-bottom-row">
-                {config.zones.stops && stop.zoneId ? (
-                  <ZoneIcon
-                    className="itinerary-zone-icon"
-                    zoneId={getZoneLabel(stop.zoneId, config)}
-                    showUnknown={false}
-                  />
-                ) : (
-                  <div className="itinerary-zone-icon" />
-                )}
                 {patternExists && (
                   <div
                     key={firstDeparture.scheduledDeparture}
@@ -276,8 +199,6 @@ const RouteStop = (
 };
 
 RouteStop.propTypes = {
-  color: PropTypes.string,
-  vehicle: VehicleShape,
   stop: PropTypes.shape({
     code: PropTypes.string,
     name: PropTypes.string,
@@ -307,33 +228,17 @@ RouteStop.propTypes = {
       }),
     ),
   }).isRequired,
-  nextStop: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-  prevStop: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-  mode: PropTypes.string,
   className: PropTypes.string,
   currentTime: PropTypes.number.isRequired,
-  first: PropTypes.bool,
   last: PropTypes.bool,
   displayNextDeparture: PropTypes.bool,
-  shortName: PropTypes.string,
   hideDepartures: PropTypes.bool,
 };
 
 RouteStop.defaultProps = {
   className: undefined,
-  color: null,
   displayNextDeparture: true,
-  first: false,
   last: false,
-  mode: undefined,
-  nextStop: null,
-  prevStop: null,
-  shortName: undefined,
-  vehicle: undefined,
 };
 
 RouteStop.contextTypes = {

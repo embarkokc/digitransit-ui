@@ -24,34 +24,33 @@ function DepartureTime(props, context) {
     <React.Fragment>
       {!props.isNextDeparture && (
         <>
-          <span className="sr-only">
-            {shownTime
-              ? context.intl.formatMessage(
+          {shownTime && (
+            <>
+              <span className="sr-only">
+                {context.intl.formatMessage(
                   {
                     id: 'stop-departure-time-future',
                     defaultMessage: 'Departure time is in {minutes} minutes',
                   },
                   { minutes: timeDiffInMinutes },
-                )
-              : context.intl.formatMessage({
-                  id: 'stop-departure-time-past',
-                  defaultMessage: 'Departure time was at',
-                })}
-          </span>
-          <span
-            style={props.style}
-            className={cx(
-              'time',
-              {
-                realtime: props.realtime,
-                canceled: props.canceled,
-              },
-              props.className,
-            )}
-            aria-hidden
-          >
-            {shownTime}
-          </span>
+                )}
+              </span>
+              <span
+                style={props.style}
+                className={cx(
+                  'time',
+                  {
+                    realtime: props.realtime,
+                    canceled: props.canceled,
+                  },
+                  props.className,
+                )}
+                aria-hidden
+              >
+                {shownTime}
+              </span>
+            </>
+          )}
         </>
       )}
       <span

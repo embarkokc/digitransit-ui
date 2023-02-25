@@ -28,7 +28,7 @@ import ScrollableWrapper from './ScrollableWrapper';
 import getTestData from './RouteScheduleDebugData';
 import { localizeTime } from '../util/timeUtils';
 
-const DATE_FORMAT2 = 'D.M.YYYY';
+const DATE_FORMAT2 = 'MMM. D';
 
 const isTripCanceled = trip =>
   trip.stoptimes &&
@@ -392,8 +392,8 @@ class RouteScheduleContainer extends PureComponent {
             type="button"
             disabled={dayArray.length === 1 && separatedMultiDays.length < 2}
             key={tab}
-            className={cx({
-              'is-active': selected,
+            className={cx('tab-singletab', {
+              active: selected,
             })}
             onClick={() => {
               this.changeDate(tabDate.format(DATE_FORMAT));
@@ -402,15 +402,14 @@ class RouteScheduleContainer extends PureComponent {
             tabIndex={selected ? 0 : -1}
             role="tab"
             aria-selected={selected}
-            style={{
-              '--totalCount': `${count}`,
-            }}
           >
-            {getTranslatedDayString(
-              this.context.intl.locale,
-              dayRangePattern(tab.split('')),
-              true,
-            )}
+            <div className="tab-singletab-container">
+              {getTranslatedDayString(
+                this.context.intl.locale,
+                dayRangePattern(tab.split('')),
+                true,
+              )}
+            </div>
           </button>
         );
       });
@@ -419,7 +418,7 @@ class RouteScheduleContainer extends PureComponent {
         /* eslint-disable jsx-a11y/interactive-supports-focus */
         return (
           <div
-            className="route-tabs days"
+            className="tab-container days"
             role="tablist"
             onKeyDown={e => {
               const tabCount = count;
@@ -950,19 +949,19 @@ class RouteScheduleContainer extends PureComponent {
     }
     return (
       <>
+        {this.props.route && this.props.route.patterns && (
+          <RoutePageControlPanel
+            match={this.props.match}
+            route={this.props.route}
+            breakpoint={this.props.breakpoint}
+            noInitialServiceDay
+          />
+        )}
         <ScrollableWrapper
           className={`route-schedule-container ${
             this.props.breakpoint !== 'large' ? 'mobile' : ''
           }`}
         >
-          {this.props.route && this.props.route.patterns && (
-            <RoutePageControlPanel
-              match={this.props.match}
-              route={this.props.route}
-              breakpoint={this.props.breakpoint}
-              noInitialServiceDay
-            />
-          )}
           <div className="route-schedule-ranges">
             <span className="current-range">{data[2][0]}</span>
             <div className="other-ranges-dropdown">

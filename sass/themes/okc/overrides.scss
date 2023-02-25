@@ -38,8 +38,8 @@ body {
       position: initial;
       left: initial;
       top: initial;
+    }
   }
-   }
 }
 
 /* embedded route search widget (Embark start page) */
@@ -140,6 +140,7 @@ body {
   align-items: center;
   background-color: white;
   color: $black;
+  min-height: inherit;
 }
 
 section.content .desktop {
@@ -421,6 +422,108 @@ span.itinerary-stop-code {
 
 .route-header .route-info .route-short-name {
 	color: $black
+}
+
+.route-details-left-column {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.route-details-right-column {
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.location-details_container .route-stop-row_content-container button {
+  .route-details_container .route-stop-name {
+    font-size: $font-size-small;
+  }
+  .route-details-bottom-row {
+    justify-content: flex-start;
+  }
+  .route-stop-time {
+    color: $black;
+    span.time {
+      font-size: $font-size-xxsmall;
+      &.next {
+        color: $black;
+      }
+      &.first {
+        width: inherit;
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+.route-stop-container {
+  display: flex;
+
+  .itinerary-stop-code {
+    width: 50px;
+    height: 37px;
+    font-size: $font-size-xxsmall;
+    font-weight: $font-weight-normal;
+    border-color: #ADADAD;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.trip-separator {
+    width: 55%;
+    border-top: 2px solid $gray;
+
+    svg {
+      top: -18px;
+    }
+}
+.route-schedule-container .tab-container {
+  margin: 0px;
+}
+
+.trip-from, .trip-to {
+  width: 80px;
+  text-align: right;
+}
+
+.route-pattern-select {
+  margin: 1px 0 18px 0;
+  padding-bottom: 34px;
+  border-bottom: 1px solid $lighter-gray;
+
+  .route-pattern-toggle, .react-autosuggest__container {
+    border: 1px solid $gray;
+    margin: 0px 60px 0px 60px;
+    width: inherit;
+    font-size: $font-size-normal;
+    line-height: 1em;
+
+    .input-display {
+      font-size: $font-size-normal;
+    }
+  }
+
+}
+
+.route-container {
+  background-color: inherit;
+  //margin: 5px 20px 0 20px;
+  margin: initial;
+  padding-bottom: 5px;
+  &.bp-large {
+    //margin: 0 72px 0 $margin-left-right-large;
+    margin: initial;
+    box-shadow: none;
+    padding-bottom: 0px;
+    border: inherit;
+  }
+  .trip-page-alert-container {
+    display: flex;
+    height: 50px;
+  }
 }
 
 /* mode colors */

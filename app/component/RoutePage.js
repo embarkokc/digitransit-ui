@@ -4,7 +4,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, intlShape } from 'react-intl';
 import cx from 'classnames';
 import { matchShape, routerShape, RedirectException } from 'found';
-import Icon from './Icon';
 
 import Loading from './Loading';
 import RouteAgencyInfo from './RouteAgencyInfo';
@@ -13,15 +12,9 @@ import { PREFIX_DISRUPTION, PREFIX_ROUTES } from '../util/path';
 import withBreakpoint from '../util/withBreakpoint';
 import BackButton from './BackButton'; // DT-3472
 import { isBrowser } from '../util/browser';
-import LazilyLoad, { importLazy } from './LazilyLoad';
 import { getRouteMode } from '../util/modeUtils';
 import AlertBanner from './AlertBanner';
 import { hasMeaningfulData } from '../util/alertUtils';
-
-const modules = {
-  FavouriteRouteContainer: () =>
-    importLazy(import('./FavouriteRouteContainer')),
-};
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RoutePage extends React.Component {
@@ -52,7 +45,6 @@ class RoutePage extends React.Component {
     const { breakpoint, router, route, error } = this.props;
     const { config } = this.context;
     const tripId = this.props.match.params?.tripId;
-    const patternId = this.props.match.params?.patternId;
 
     // Render something in client side to clear SSR
     if (isBrowser && error && !route) {
@@ -72,8 +64,6 @@ class RoutePage extends React.Component {
     }
     const mode = getRouteMode(route);
     const label = route.shortName ? route.shortName : route.longName || '';
-    const headsign =
-      patternId && route.patterns.find(p => p.code === patternId).headsign;
 
     return (
       <div className={cx('route-page-container')}>
@@ -85,7 +75,7 @@ class RoutePage extends React.Component {
           </h1>
         </div>
         <div
-          className={cx('route-container', {
+          className={cx('card-header', 'header', 'route-container', {
             'bp-large': breakpoint === 'large',
           })}
           aria-live="polite"
@@ -93,12 +83,13 @@ class RoutePage extends React.Component {
           {breakpoint === 'large' && (
             <BackButton
               title="Back"
+              titleClassName="back-button-label"
               icon="icon-icon_arrow-collapse--left"
               iconClassName="arrow-icon"
             />
           )}
-          <div className="route-header">
-            <div className="route-info">
+          <div className="card-header-content route-header">
+            <div className="card-header-wrapper route-info">
               <h1
                 className={cx('route-short-name', mode.toLowerCase())}
                 embark-not-style={{
@@ -112,14 +103,16 @@ class RoutePage extends React.Component {
                 </span>
                 Route {label}
               </h1>
-              {tripId && headsign && (
+              {/* No trip headsign for EMBARK 
+                tripId && headsign && (
                 <div className="trip-destination">
                   <Icon className="in-text-arrow" img="icon-icon_arrow-right" />
                   <div className="destination-headsign">{headsign}</div>
                 </div>
-              )}
+              ) */}
             </div>
-            {!tripId && (
+
+            {/* !tripId && (
               <LazilyLoad modules={modules}>
                 {({ FavouriteRouteContainer }) => (
                   <FavouriteRouteContainer
@@ -128,7 +121,7 @@ class RoutePage extends React.Component {
                   />
                 )}
               </LazilyLoad>
-            )}
+            ) */}
           </div>
           {tripId && hasMeaningfulData(route.alerts) && (
             <div className="trip-page-alert-container">

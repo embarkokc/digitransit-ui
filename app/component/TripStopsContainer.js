@@ -37,6 +37,14 @@ function TripStopsContainer({ breakpoint, match, trip, route }) {
 
   return (
     <>
+      {route && route.patterns && (
+        <RoutePageControlPanel
+          match={match}
+          route={route}
+          breakpoint={breakpoint}
+          tripStartTime={tripStartTime}
+        />
+      )}
       <ScrollableWrapper
         className={cx('route-page-content', {
           'bp-large': breakpoint === 'large',
@@ -44,14 +52,6 @@ function TripStopsContainer({ breakpoint, match, trip, route }) {
         id="trip-route-page-content"
         onScroll={debounce(handleScroll, 100, { leading: true })}
       >
-        {route && route.patterns && (
-          <RoutePageControlPanel
-            match={match}
-            route={route}
-            breakpoint={breakpoint}
-            tripStartTime={tripStartTime}
-          />
-        )}
         <TripStopListContainer
           key="list"
           trip={trip}

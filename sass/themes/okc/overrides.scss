@@ -29,12 +29,15 @@ body {
 }
 /* page header */
 
-.stop-page.header {
+.back-button button {
+  font-size: $font-size-normal;
+}
+
+.card-header.header {
   padding-bottom: 30px;
   border-bottom: 1px solid $lighter-gray;
   .back-button {
     button {
-      font-size: $font-size-normal;
       position: initial;
       left: initial;
       top: initial;
@@ -66,6 +69,7 @@ body {
 .tab-container {
   background-color: $gray;
   margin: 34px 64px 16px 64px;
+  border: 1px solid #000;
 }
 .tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
   border-left: none;

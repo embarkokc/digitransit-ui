@@ -335,7 +335,7 @@ export default async function (req, res, next) {
         res.write(getAnalyticsInitCode(config.GTMid));
 
         const preloads = [
-          { as: 'style', href: config.URL.FONT },
+          // { as: 'style', href: config.URL.FONT },
           {
             as: 'style',
             href: `${ASSET_URL}/${assets[`${config.CONFIG}_theme.css`]}`,
@@ -380,9 +380,9 @@ export default async function (req, res, next) {
           );
       }
 
-      res.write(
-        `<link rel="stylesheet" type="text/css" href="${config.URL.FONT}"/>\n`,
-      );
+      // res.write(
+      //   `<link rel="stylesheet" type="text/css" href="${config.URL.FONT}"/>\n`,
+      // );
 
       res.write(`<script>\n${polyfills}\n</script>\n`);
 

@@ -51,8 +51,7 @@ export default configMerger(walttiConfig, {
     PELIAS: `${GEOCODING_BASE_URL}/search`,
     PELIAS_REVERSE_GEOCODER: `${GEOCODING_BASE_URL}/reverse`,
     PELIAS_PLACE: `${GEOCODING_BASE_URL}/place`,
-    FONT:
-      '/assets/fonts/Arial.woff',
+    FONT: null,
     
   },
 

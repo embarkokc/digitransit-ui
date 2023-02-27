@@ -134,7 +134,7 @@ export default configMerger(walttiConfig, {
   textLogo: false,
   logo: 'okc/embark-logo.svg',
   secondaryLogo: 'okc/embark-favicon.svg',
-  favicon: './app/configurations/images/okc/secondary-logo.png',
+  favicon: './app/configurations/images/okc/favicon.png',
   
   feedIds: ['embark'],
 

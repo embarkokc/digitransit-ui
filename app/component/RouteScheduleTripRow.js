@@ -2,7 +2,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Icon from '@digitransit-component/digitransit-component-icon';
 
 function RouteScheduleTripRow(props) {
   return (
@@ -15,9 +14,7 @@ function RouteScheduleTripRow(props) {
         >
           {props.departureTime}
         </div>
-        <div className="trip-separator">
-          <Icon img="arrow" color="#888888" />
-        </div>
+        <div className="trip-separator" />
         <div
           className={cx('trip-to', 'trip-label', {
             canceled: props.isCanceled,

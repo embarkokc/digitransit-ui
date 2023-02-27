@@ -68,7 +68,7 @@ body {
 
 .tab-container {
   background-color: $gray;
-  margin: 34px 64px 16px 64px;
+  margin: 34px 56px 16px 56px;
   border: 1px solid #000;
 }
 .tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
@@ -476,9 +476,18 @@ span.itinerary-stop-code {
   }
 }
 
+.route-schedule-dropdowns .dd-header-title,
+.route-schedule-dropdowns .dd-select .dd__placeholder,
+.route-schedule-dropdowns .dd-select .dd-right__placeholder {
+  color: $black;
+}
+.route-schedule-dropdowns .dd-header-title {
+  font-size: $font-size-xxsmall;
+}
+
 .trip-separator {
-    width: 55%;
-    border-top: 2px solid $gray;
+    width: 60%;
+    border-top: 4px dotted $gray;
 
     svg {
       top: -18px;
@@ -500,7 +509,7 @@ span.itinerary-stop-code {
 
   .route-pattern-toggle, .react-autosuggest__container {
     border: 1px solid $gray;
-    margin: 0px 60px 0px 60px;
+    margin: 0px 56px 0px 56px;
     width: inherit;
     font-size: $font-size-normal;
     line-height: 1em;

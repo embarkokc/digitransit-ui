@@ -23,7 +23,7 @@
   height: 100%;
 }
 
-.stop-page.header {
+.card-header.header {
   @include font-medium;
   @media print {
     padding-left: 0;
@@ -154,7 +154,7 @@
   }
 }
 
-.stop-tab-container {
+.tab-container {
   display: flex;
   background-color: #dddddd;
   border-radius: 5px;
@@ -165,13 +165,13 @@
   }
 }
 
-.stop-tabs-fillerline {
+.tabs-fillerline {
   height: 10px;
   background: $white;
 }
 
-.stop-tab-singletab,
-.stop-tab-singletab:hover {
+.tab-singletab,
+.tab-singletab:hover {
   display: flex;
   align-items: center;
   min-height: 3em;
@@ -189,7 +189,7 @@
   text-decoration: none;
   font-weight: normal;
 
-  + .stop-tab-singletab {
+  + .tab-singletab {
     border-left: 1px solid $light-gray;
   }
 
@@ -228,7 +228,7 @@
   }
 }
 
-.stop-tab-singletab-container {
+.tab-singletab-container {
   display: block;
   margin: 0 auto;
   letter-spacing: -0.4px;
@@ -717,11 +717,11 @@ hr.action-bar {
     margin: 1px 16px 16px 16px;
   }
 
-  .stop-tab-container {
+  .tab-container {
     border-bottom: none;
     margin: 0em 16px 16px 16px;
   }
-  .stop-tabs-fillerline {
+  .tabs-fillerline {
     height: 5px;
   }
   .stop-page-departure-wrapper {

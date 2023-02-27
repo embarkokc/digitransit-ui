@@ -48,18 +48,18 @@ class PatternStopsContainer extends React.PureComponent {
 
     return (
       <>
+        {this.props.route && this.props.route.patterns && (
+          <RoutePageControlPanel
+            match={this.props.match}
+            route={this.props.route}
+            breakpoint={this.props.breakpoint}
+          />
+        )}
         <ScrollableWrapper
           className={cx('route-page-content', {
             'bp-large': this.props.breakpoint === 'large',
           })}
         >
-          {this.props.route && this.props.route.patterns && (
-            <RoutePageControlPanel
-              match={this.props.match}
-              route={this.props.route}
-              breakpoint={this.props.breakpoint}
-            />
-          )}
           {routeId && constantOperationRoutes[routeId] && (
             <div className="stop-constant-operation-container bottom-padding">
               <div style={{ width: '95%' }}>

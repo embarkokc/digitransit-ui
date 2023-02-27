@@ -63,10 +63,6 @@ $margin-left-right: 21.3px;
     }
   }
 }
-.route-page-container {
-  background-color: $white;
-  padding-top: 48px;
-}
 
 .route-notification {
   display: flex;
@@ -973,14 +969,7 @@ $margin-left-right: 21.3px;
   }
 }
 .route-container {
-  background-color: white;
-  margin: 5px 20px 0 20px;
-  padding-bottom: 5px;
-  &.bp-large {
-    margin: 0 72px 0 $margin-left-right-large;
-    box-shadow: none;
-  }
-  .trip-page-alert-container {
+  .trip-page-alert-container {
     display: flex;
     height: 50px;
   }
@@ -993,7 +982,7 @@ $margin-left-right: 21.3px;
   }
 
   @media print {
-    .route-tabs {
+    .tab-container {
       display: none;
     }
   }
@@ -1004,43 +993,6 @@ $margin-left-right: 21.3px;
 }
 // Tabs
 .route-tabs {
-  height: 2.5em;
-  min-height: 2.5em;
-  display: flex;
-  background-color: $light-gray;
-  border: 2px solid $light-gray;
-  border-radius: 8px;
-  margin: 0;
-
-  button {
-    width: calc(100% / var(--totalCount));
-    font-size: $font-size-small;
-    text-align: center;
-    letter-spacing: -0.42px;
-    border-radius: 6px;
-    color: #333;
-    font-weight: normal;
-    &.is-active {
-      font-weight: $font-weight-medium;
-      background-color: $white;
-    }
-    &:disabled {
-      color: #333;
-      font-weight: $font-weight-medium;
-      background-color: $white;
-      cursor: default;
-      opacity: 1;
-      box-shadow: none;
-      &:focus, &:hover {
-        color: inherit;
-        background: $white;
-      }
-    }
-    .no-alerts > span {
-      color: #888;
-    }
-  }
-
   .tab-route-disruption {
     .icon-container {
       margin-right: 5px;

@@ -20,19 +20,20 @@
 }
 
 /* STOP PAGE */
+.header.card-header {
+  //display: flex;
+  padding: 48px 60px 0em 60px;
+  position: relative;
+  flex: 0 0 auto;
+  overflow: hidden;
+  min-height: 3em;
+  .link-arrow {
+    display: none;
+  }
+}
+
 .stop-page {
   overflow-y: auto;
-  &.card-header {
-    //display: flex;
-    padding: 48px 60px 0em 60px;
-    position: relative;
-    flex: 0 0 auto;
-    overflow: hidden;
-    min-height: 3em;
-    .link-arrow {
-      display: none;
-    }
-  }
   .card-sub-header {
     margin-top: -7px;
     min-height: 2.75rem;

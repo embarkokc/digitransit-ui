@@ -4,10 +4,9 @@ import Link from 'found/Link';
 import cx from 'classnames';
 import { PREFIX_ROUTES, PREFIX_STOPS } from '../util/path';
 import { convertTo24HourFormat } from '../util/timeUtils';
-import RouteNumber from './RouteNumber';
 import { getRouteMode } from '../util/modeUtils';
 
-export default function RouteHeader({ route, pattern, card, trip, className }) {
+export default function RouteHeader({ route, pattern, trip, className }) {
   const mode = getRouteMode(route);
 
   let tripEl;
@@ -35,12 +34,7 @@ export default function RouteHeader({ route, pattern, card, trip, className }) {
   return (
     <div className={cx('route-header', className)}>
       <h1 className={mode}>
-        <RouteNumber
-          card={card}
-          mode={mode}
-          text={routeLine}
-          color={route.color ? `#${route.color}` : 'currentColor'}
-        />
+        <span>Route {routeLine}</span>
         {tripEl}
       </h1>
     </div>
@@ -57,5 +51,4 @@ RouteHeader.propTypes = {
   trip: PropTypes.string,
   pattern: PropTypes.shape({ code: PropTypes.string.isRequired }),
   className: PropTypes.string,
-  card: PropTypes.bool,
 };

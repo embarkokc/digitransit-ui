@@ -148,7 +148,7 @@ function StopPageTabs({ stop }, { intl, match }) {
     <div>
       {/* eslint-disable jsx-a11y/interactive-supports-focus */}
       <div
-        className="stop-tab-container"
+        className="tab-container"
         role="tablist"
         onKeyDown={e => {
           const tabs = [Tab.RightNow, Tab.Timetable, Tab.Disruptions];
@@ -174,7 +174,7 @@ function StopPageTabs({ stop }, { intl, match }) {
         {/* eslint-enable jsx-a11y/interactive-supports-focus */}
         <button
           type="button"
-          className={cx('stop-tab-singletab', {
+          className={cx('tab-singletab', {
             active: activeTab === Tab.RightNow,
           })}
           onClick={() => {
@@ -190,7 +190,7 @@ function StopPageTabs({ stop }, { intl, match }) {
           tabIndex={focusedTab === Tab.RightNow ? 0 : -1}
           aria-selected={activeTab === Tab.RightNow}
         >
-          <div className="stop-tab-singletab-container">
+          <div className="tab-singletab-container">
             <div>
               <FormattedMessage id="right-now" defaultMessage="right now" />
             </div>
@@ -198,7 +198,7 @@ function StopPageTabs({ stop }, { intl, match }) {
         </button>
         <button
           type="button"
-          className={cx('stop-tab-singletab', {
+          className={cx('tab-singletab', {
             active: activeTab === Tab.Timetable,
           })}
           onClick={() => {
@@ -214,7 +214,7 @@ function StopPageTabs({ stop }, { intl, match }) {
           tabIndex={focusedTab === Tab.Timetable ? 0 : -1}
           aria-selected={activeTab === Tab.Timetable}
         >
-          <div className="stop-tab-singletab-container">
+          <div className="tab-singletab-container">
             <div>
               <FormattedMessage id="timetable" defaultMessage="timetable" />
             </div>
@@ -222,7 +222,7 @@ function StopPageTabs({ stop }, { intl, match }) {
         </button>
         <button
           type="button"
-          className={cx('stop-tab-singletab', {
+          className={cx('tab-singletab', {
             active: activeTab === Tab.Disruptions,
             'alert-active': hasActiveAlert || stopRoutesWithAlerts.length > 0,
             'service-alert-active':
@@ -241,7 +241,7 @@ function StopPageTabs({ stop }, { intl, match }) {
           tabIndex={focusedTab === Tab.Disruptions ? 0 : -1}
           aria-selected={activeTab === Tab.Disruptions}
         >
-          <div className="stop-tab-singletab-container">
+          <div className="tab-singletab-container">
             <div className={`${disruptionClassName || `no-alerts`}`}>
               {disruptionIcon}
               <FormattedMessage id="disruptions" />

@@ -29,17 +29,20 @@ body {
 }
 /* page header */
 
-.stop-page.header {
+.back-button button {
+  font-size: $font-size-normal;
+}
+
+.card-header.header {
   padding-bottom: 30px;
   border-bottom: 1px solid $lighter-gray;
   .back-button {
     button {
-      font-size: $font-size-normal;
       position: initial;
       left: initial;
       top: initial;
+    }
   }
-   }
 }
 
 /* embedded route search widget (Embark start page) */
@@ -63,23 +66,24 @@ body {
    font-size: $font-size-normal;
 }
 
-.stop-tab-container {
+.tab-container {
   background-color: $gray;
-  margin: 34px 64px 16px 64px;
+  margin: 34px 56px 16px 56px;
+  border: 1px solid #000;
 }
-.stop-tab-singletab + .stop-tab-singletab, .stop-tab-singletab:hover + .stop-tab-singletab {
+.tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
   border-left: none;
 }
-.stop-tab-singletab, .stop-tab-singletab:hover {
+.tab-singletab, .tab-singletab:hover {
   color: #fff;
 }
 
-.stop-tab-singletab.active, .stop-tab-singletab.active:hover, .stop-tab-singletab:hover.active, .stop-tab-singletab:hover.active:hover {
+.tab-singletab.active, .tab-singletab.active:hover, .tab-singletab:hover.active, .tab-singletab:hover.active:hover {
   background-color: #ffffff;
   font-weight: 400;
   color: $black;
 }
-.stop-tab-singletab .no-alerts span {
+.tab-singletab .no-alerts span {
   color: inherit;
 }
 
@@ -140,6 +144,7 @@ body {
   align-items: center;
   background-color: white;
   color: $black;
+  min-height: inherit;
 }
 
 section.content .desktop {
@@ -411,6 +416,127 @@ span.itinerary-stop-code {
 
 .stop-near-you-right-col {
   font-size: $font-size-normal;
+}
+
+/* Route stops page */
+/* stop-code in route-stops-list has more padding */
+.route-address-row-container .itinerary-stop-code {
+	padding: 10px;
+}
+
+.route-header .route-info .route-short-name {
+	color: $black
+}
+
+.route-details-left-column {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.route-details-right-column {
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.location-details_container .route-stop-row_content-container button {
+  .route-details_container .route-stop-name {
+    font-size: $font-size-small;
+  }
+  .route-details-bottom-row {
+    justify-content: flex-start;
+  }
+  .route-stop-time {
+    color: $black;
+    span.time {
+      font-size: $font-size-xxsmall;
+      &.next {
+        color: $black;
+      }
+      &.first {
+        width: inherit;
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+.route-stop-container {
+  display: flex;
+
+  .itinerary-stop-code {
+    width: 50px;
+    height: 37px;
+    font-size: $font-size-xxsmall;
+    font-weight: $font-weight-normal;
+    border-color: #ADADAD;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.route-schedule-dropdowns .dd-header-title,
+.route-schedule-dropdowns .dd-select .dd__placeholder,
+.route-schedule-dropdowns .dd-select .dd-right__placeholder {
+  color: $black;
+}
+.route-schedule-dropdowns .dd-header-title {
+  font-size: $font-size-xxsmall;
+}
+
+.trip-separator {
+    width: 60%;
+    border-top: 4px dotted $gray;
+
+    svg {
+      top: -18px;
+    }
+}
+.route-schedule-container .tab-container {
+  margin: 0px;
+}
+
+.trip-from, .trip-to {
+  width: 80px;
+  text-align: right;
+}
+
+.route-pattern-select {
+  margin: 1px 0 18px 0;
+  padding-bottom: 34px;
+  border-bottom: 1px solid $lighter-gray;
+
+  .route-pattern-toggle, .react-autosuggest__container {
+    border: 1px solid $gray;
+    margin: 0px 56px 0px 56px;
+    width: inherit;
+    font-size: $font-size-normal;
+    line-height: 1em;
+
+    .input-display {
+      font-size: $font-size-normal;
+    }
+  }
+
+}
+
+.route-container {
+  background-color: inherit;
+  //margin: 5px 20px 0 20px;
+  margin: initial;
+  padding-bottom: 5px;
+  &.bp-large {
+    //margin: 0 72px 0 $margin-left-right-large;
+    margin: initial;
+    box-shadow: none;
+    padding-bottom: 0px;
+    border: inherit;
+  }
+  .trip-page-alert-container {
+    display: flex;
+    height: 50px;
+  }
 }
 
 /* mode colors */

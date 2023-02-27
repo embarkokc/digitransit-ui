@@ -11,7 +11,7 @@ function DepartureTime(props, context) {
   const timeDiffInMinutes = Math.floor(
     (props.departureTime - props.currentTime) / 60,
   );
-  if (timeDiffInMinutes <= -1) {
+  if (props.hideMinutesToDeparture || timeDiffInMinutes <= -1) {
     shownTime = undefined;
   } else if (timeDiffInMinutes <= context.config.minutesToDepartureLimit) {
     shownTime = context.intl.formatMessage(
@@ -24,34 +24,33 @@ function DepartureTime(props, context) {
     <React.Fragment>
       {!props.isNextDeparture && (
         <>
-          <span className="sr-only">
-            {shownTime
-              ? context.intl.formatMessage(
+          {shownTime && (
+            <>
+              <span className="sr-only">
+                {context.intl.formatMessage(
                   {
                     id: 'stop-departure-time-future',
                     defaultMessage: 'Departure time is in {minutes} minutes',
                   },
                   { minutes: timeDiffInMinutes },
-                )
-              : context.intl.formatMessage({
-                  id: 'stop-departure-time-past',
-                  defaultMessage: 'Departure time was at',
-                })}
-          </span>
-          <span
-            style={props.style}
-            className={cx(
-              'time',
-              {
-                realtime: props.realtime,
-                canceled: props.canceled,
-              },
-              props.className,
-            )}
-            aria-hidden
-          >
-            {shownTime}
-          </span>
+                )}
+              </span>
+              <span
+                style={props.style}
+                className={cx(
+                  'time',
+                  {
+                    realtime: props.realtime,
+                    canceled: props.canceled,
+                  },
+                  props.className,
+                )}
+                aria-hidden
+              >
+                {shownTime}
+              </span>
+            </>
+          )}
         </>
       )}
       <span
@@ -98,11 +97,13 @@ DepartureTime.propTypes = {
   useUTC: PropTypes.bool,
   showCancelationIcon: PropTypes.bool,
   isNextDeparture: PropTypes.bool,
+  hideMinutesToDeparture: PropTypes.bool,
 };
 
 DepartureTime.defaultProps = {
   showCancelationIcon: false,
   isNextDeparture: false,
+  hideMinutesToDeparture: false,
 };
 
 DepartureTime.contextTypes = {
@@ -145,11 +146,13 @@ export const fromStopTime = (
   currentTime,
   showCancelationIcon = true,
   isNextDeparture = false,
+  hideMinutesToDeparture = false,
 ) => (
   <DepartureTime
     currentTime={currentTime}
     {...mapStopTime(stoptime)}
     showCancelationIcon={showCancelationIcon}
     isNextDeparture={isNextDeparture}
+    hideMinutesToDeparture={hideMinutesToDeparture}
   />
 );

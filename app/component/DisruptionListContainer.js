@@ -105,12 +105,12 @@ function DisruptionListContainer(
   return (
     <div className="disruption-list-container">
       <div
-        className={cx('stop-tab-container', {
+        className={cx('tab-container', {
           collapsed: !disruptionCount || !infoCount,
         })}
       >
         <div
-          className={cx('stop-tab-singletab', {
+          className={cx('tab-singletab', {
             active: showDisruptions,
           })}
           onClick={() => setShowDisruptions(true)}
@@ -120,7 +120,7 @@ function DisruptionListContainer(
           role="button"
           tabIndex="0"
         >
-          <div className="stop-tab-singletab-container">
+          <div className="tab-singletab-container">
             <div>
               <Icon
                 className="stop-page-tab_icon caution"
@@ -135,7 +135,7 @@ function DisruptionListContainer(
           </div>
         </div>
         <div
-          className={cx('stop-tab-singletab', {
+          className={cx('tab-singletab', {
             active: !showDisruptions,
           })}
           onClick={() => setShowDisruptions(false)}
@@ -145,7 +145,7 @@ function DisruptionListContainer(
           role="button"
           tabIndex="0"
         >
-          <div className="stop-tab-singletab-container">
+          <div className="tab-singletab-container">
             <div>
               <Icon className="stop-page-tab_icon info" img="icon-icon_info" />
             </div>

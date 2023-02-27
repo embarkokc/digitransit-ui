@@ -69,7 +69,8 @@ const DeparturesRow = (
     return (
       <>
         <Link
-          to={`/${PREFIX_ROUTES}/${dep.trip.pattern.route.gtfsId}/${PREFIX_STOPS}/${dep.trip.pattern.code}/${dep.trip.gtfsId}`}
+          // to={`/${PREFIX_ROUTES}/${dep.trip.pattern.route.gtfsId}/${PREFIX_STOPS}/${dep.trip.pattern.code}/${dep.trip.gtfsId}`}
+          to={`/${PREFIX_ROUTES}/${dep.trip.pattern.route.gtfsId}/${PREFIX_STOPS}/${dep.trip.pattern.code}`}
           onClick={() => {
             addAnalyticsEvent({
               category: 'Stop',
@@ -95,10 +96,10 @@ const DeparturesRow = (
     );
   };
 
-  const departureTimeWithLink = dep => {
+  const departureTimeElement = dep => {
     const departureTime = dep.stoptime;
     const shownTime = getShownTime(departureTime);
-    return renderWithLink(
+    return (
       <>
         <span
           className={cx('route-time', {
@@ -124,18 +125,20 @@ const DeparturesRow = (
             },
           )}
         </span>
-      </>,
-      dep,
+      </>
     );
   };
 
   const departureTimes = deps => {
-    return deps.map((dep, index) => (
-      <>
-        {index > 0 ? ', ' : ''}
-        {departureTimeWithLink(dep)}
-      </>
-    ));
+    return renderWithLink(
+      deps.map((dep, index) => (
+        <>
+          {index > 0 ? ', ' : ''}
+          {departureTimeElement(dep)}
+        </>
+      )),
+      deps[0],
+    );
   };
 
   let icon;

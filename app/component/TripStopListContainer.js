@@ -8,7 +8,7 @@ import groupBy from 'lodash/groupBy';
 import values from 'lodash/values';
 import moment from 'moment';
 import { getRouteMode } from '../util/modeUtils';
-import TripRouteStop from './TripRouteStop';
+import TripRouteStop from './TripRouteStop.okc';
 import withBreakpoint from '../util/withBreakpoint';
 
 class TripStopListContainer extends React.PureComponent {

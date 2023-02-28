@@ -223,10 +223,12 @@ section.content {
   border-color: currentColor;
   background-color: $white;
   border: 1px solid;
-  height: 1.5em;
+  height: 48px;
 
   &.walk, &.bicycle_walk {
-    background-color: $gray;
+    border: 1px solid $gray;
+    background-color: $white;
+    color: $black;
   }
 }
 
@@ -264,17 +266,28 @@ section.content {
     box-shadow: none;
     padding: 0px 20px;
     color: $black;
-    flex-basis: 180px;
+    flex-basis: initial;
   }
 
   .street-mode-selector-button-content {
+    margin: initial;
     .street-mode-selector-button-icon .icon-container .icon {
       fill: $gray;
     }
     .street-mode-button-info {
       display: flex;
+      align-items: baseline;
 
+      margin-top: 4px;
+      .street-mode-button-time {
+          font-size: $font-size-small;
+          font-weight: $font-weight-medium;
+          height: initial;
+          line-height: 1em;
+          white-space: nowrap;
+      }
       .street-mode-button-length {
+        font-size: $font-size-xxsmall;
         padding-left: 3px;
       }
     }
@@ -290,23 +303,43 @@ section.content {
   padding-left: 60px;
 }
 
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.citybike, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle_walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.car {
+display: inherit;
+min-width: unset;
+}
+
 .summary-list-container {
   border-top: none;
 }
 .itinerary-summary-row {
+  &.bp-large .action-arrow-click-area {
+    padding: 17px 15px 0 20px;
+  }
+  .itinerary-first-leg-start-time-container .itinerary-first-leg-start-time .start-time {
+    font-weight: $font-weight-bold;
+  }
+
   .itinerary-legs .leg .route-number {
-    height: 2rem;
+    height: initial;
     color: $white;
     .leg-duration-container .leg-duration {
-      color: $white;
+      color: $black;
+      font-size: $font-size-xxsmall;
     }
     .line .icon {
-      font-size: 32px;
-      height: 1.1em
+      font-size: 43px;
     }
     .vcenter-children.walk .icon {
-      width: 22px;
-      fill: #fff;
+      width: 28px;
+      fill: $gray;
+      margin-left: 4px;
+    }
+    .special-icon {
+      height: inherit;
+    }
+    .vehicle-number-container-v .vehicle-number {
+      font-weight: $font-weight-normal;
+      font-size: $font-size-normal;
     }
   }
   .itinerary-duration-container {
@@ -338,9 +371,16 @@ div.map .leaflet-container .leaflet-control-attribution a {
 .top-bar section.title {
    padding-left: 56px;
 }
-.right-offcanvas-toggle .settings-button-text {
-  margin-top: 0px;
-  font-size: $font-size-small;
+.right-offcanvas-toggle {
+  .settings-button-text {
+    margin-top: 0px;
+    font-size: $font-size-small;
+  }
+  > div {
+    > div {
+      align-items: center;
+    }
+  }
 }
 
 /* Settings overrides*/

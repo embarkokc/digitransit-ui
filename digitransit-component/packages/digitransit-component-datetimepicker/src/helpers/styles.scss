@@ -63,6 +63,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   .top-row-container {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     &.closed {
       margin: 11px 0 6px 18px;
     }
@@ -82,8 +83,8 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       position: relative;
       top: 1px;
       svg {
-        width: 14px;
-        height: 10px;
+        width: 16px;
+        height: 15px;
       }
     }
     .close-icon {

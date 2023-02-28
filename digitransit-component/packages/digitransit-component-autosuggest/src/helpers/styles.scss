@@ -184,7 +184,7 @@ input[type='text'] {
 button.clear-input {
   display: flex;
   position: absolute;
-  padding: 14px 0;
+  padding: 23px 0; // EMBARK Input height change to 60px requires more padding
   right: 0px;
   width: 44px;
   height: 100%;

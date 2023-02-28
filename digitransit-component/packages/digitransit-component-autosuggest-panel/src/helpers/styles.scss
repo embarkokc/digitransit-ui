@@ -35,6 +35,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   flex: 1 0 100%;
   input[type='text'] {
     margin: 0;
+    height: 60px; // EMBARK
   }
 }
 
@@ -157,7 +158,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   cursor: pointer;
   position: relative;
   left: -40px;
-  top: 35px;
+  top: 48px; // EMBARK 60px height of input requires more
   z-index: index($zindex, 'rectangle')+1;
   & + .itinerary-search-control {
     border-left: 1px solid rgba(151, 151, 151, 0.2);

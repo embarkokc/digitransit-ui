@@ -3,12 +3,12 @@ import moment from 'moment';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { matchShape, routerShape } from 'found';
+import { Link, matchShape, routerShape } from 'found';
 import { TransportMode } from '../constants';
-import RouteNumber from './RouteNumber';
 import Icon from './Icon';
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
+import { getStopPath, getRoutePath } from '../util/path';
 import { typeToName } from '../util/gtfs';
 import { getAvailableTransportModeConfigs } from '../util/modeUtils';
 import { replaceQueryParams } from '../util/queryUtils';
@@ -73,43 +73,71 @@ export function AlertEntity({ entityData }, { config }) {
   // eslint-disable-next-line react/prop-types
   const { __typename } = entityData;
 
-  if (__typename === 'Route') {
-    const { mode, color, shortName } = entityData;
-    return (
-      <RouteNumber
-        mode={mode}
-        color={color}
-        text={shortName}
-        // TODO `card`?
-        // TODO `withBar`?
-        // TODO `icon`
-      />
+  let entity = null;
+  if (__typename === 'Agency') {
+    entity = <Icon img="icon-icon_caution" color="#D6153B" />;
+  } else if (__typename === 'Route') {
+    // todo: fallback color?
+    const { gtfsId, mode, color = '#686869', shortName } = entityData;
+    const href = getRoutePath({ gtfsId });
+    // this is copied & tweaked from DeparturesRow.js
+    // todo: merge this code with RouteNumber.js & the implementation in DeparturesRow.js
+    entity = (
+      <span
+        className={cx('route-number-container', {
+          // todo: remove `<=`?
+          long: shortName.length >= 5 && shortName.length <= 6,
+        })}
+        style={{ borderColor: color }}
+      >
+        <Link to={href}>
+          <Icon
+            className={mode.toLowerCase()}
+            img={`icon-icon_${mode.toLowerCase()}`}
+            color={color}
+            ariaLabel={`${mode} icon`}
+          />
+          <span className="route-number">{shortName}</span>
+        </Link>
+      </span>
     );
-  }
-  if (__typename === 'RouteType') {
+  } else if (__typename === 'RouteType') {
     const { routeType } = entityData;
     // TODO what if this fails?
     const mode = typeToName[routeType];
-    if (!mode) {
-      return <span>?</span>;
+    if (mode) {
+      const color = config.colors.iconColors[`mode-${mode}`];
+      entity = (
+        <Icon
+          img={`icon-icon_${mode}`}
+          ariaLabel={`${mode} icon`}
+          color={color}
+        />
+      );
+    } else {
+      entity = <span>?</span>;
     }
-    return <Icon img={`icon-icon_${mode}`} ariaLabel={`${mode} icon`} />;
-  }
-  if (__typename === 'Stop') {
-    const { vehicleMode } = entityData;
-    const mode = vehicleMode.toLowerCase();
-    return (
-      <Icon
-        img={`icon-icon_stop_${mode}`}
-        color={
-          config.colors.iconColors[`mode-${mode}`] || config.colors.primary
-        }
-        ariaLabel={`${mode} stop icon`}
-      />
+  } else if (__typename === 'Stop') {
+    const { gtfsId, code } = entityData;
+    const href = getStopPath({ gtfsId });
+    entity = (
+      <span className="stop-code-container">
+        <Link to={href}>
+          <span className="stop-code">{code}</span>
+        </Link>
+      </span>
     );
   }
-  // TODO Agency?
-  return null;
+
+  // eslint-disable-next-line react/prop-types
+  const lowerCasedTypename = __typename.toLowerCase();
+  return entity ? (
+    <span
+      className={`alerts-view-alert-alert-entity alerts-view-alert-alert-entity__${lowerCasedTypename}`}
+    >
+      {entity}
+    </span>
+  ) : null;
 }
 
 export function Alert({ alertData }) {
@@ -121,9 +149,6 @@ export function Alert({ alertData }) {
     effectiveEndDate,
   } = alertData;
   const entities = Array.isArray(alertData.entities) ? alertData.entities : [];
-
-  // eslint-disable-next-line no-underscore-dangle
-  const affectsWholeAgency = entities.some(e => e.__typename === 'Agency');
 
   const start = effectiveStartDate ? (
     <time
@@ -146,19 +171,14 @@ export function Alert({ alertData }) {
   const startEnd = start && end ? [start, ' – ', end] : [start, end];
 
   return (
-    <div
-      id={id}
-      className={cx('alerts-view-alert', {
-        'general-notice': affectsWholeAgency,
-      })}
-    >
+    <div id={id} className="alerts-view-alert">
       <div className="alerts-view-alert-entities">
         {entities.map(entityData => (
           <AlertEntity key={entityData.id} entityData={entityData} />
         ))}
       </div>
       {/* todo: i18n, proper fallback heading */}
-      <h3>{alertHeaderText || 'notice'}</h3>
+      <h2>{alertHeaderText || 'notice'}</h2>
       <p className="alerts-view-alert-time-frame">{startEnd}</p>
       <p>{alertDescriptionText}</p>
     </div>
@@ -338,25 +358,33 @@ export function AlertsView(props, context) {
   };
 
   return (
-    <DesktopOrMobile
-      desktop={() => (
-        <DesktopView
-          title={<FormattedMessage id="alerts-page-title" />}
-          scrollable={false}
-          // hiding the back button also hides the title 🙄
-          // todo: show title even if back button is hidden
-          bckBtnVisible
-          content={renderSearchDialog()}
-          map={renderAlertsList()}
-        />
-      )}
-      mobile={() => (
-        <MobileView
-          searchBox={renderSearchDialog()}
-          content={renderAlertsList()}
-        />
-      )}
-    />
+    <div
+      className="alerts-view"
+      style={{
+        '--font-weight-medium': config.fontWeights.medium,
+        '--font-weight-bolder': config.fontWeights.bolder,
+      }}
+    >
+      <DesktopOrMobile
+        desktop={() => (
+          <DesktopView
+            title={<FormattedMessage id="alerts-page-title" />}
+            scrollable={false}
+            // hiding the back button also hides the title 🙄
+            // todo: show title even if back button is hidden
+            bckBtnVisible
+            content={renderSearchDialog()}
+            map={renderAlertsList()}
+          />
+        )}
+        mobile={() => (
+          <MobileView
+            searchBox={renderSearchDialog()}
+            content={renderAlertsList()}
+          />
+        )}
+      />
+    </div>
   );
 }
 
@@ -401,6 +429,7 @@ AlertEntity.propTypes = {
 };
 AlertEntity.contextTypes = {
   config: PropTypes.object.isRequired,
+  router: routerShape.isRequired,
 };
 
 const AlertPropTypes = PropTypes.shape({

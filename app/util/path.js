@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import trimEnd from 'lodash/trimEnd';
 import trimStart from 'lodash/trimStart';
 import toPairs from 'lodash/toPairs';
+import { ok } from 'assert';
 import {
   otpToLocation,
   locationToOTP,
@@ -131,6 +132,16 @@ export const getIndexPath = (origin, destination, indexPath) => {
     encodeURIComponent(isEmpty(origin) ? '-' : origin),
     encodeURIComponent(isEmpty(destination) ? '-' : destination),
   ].join('/');
+};
+
+export const getStopPath = ({ gtfsId }) => {
+  ok(gtfsId, 'gtfsId must not be empty');
+  return `/${pathJoin([PREFIX_STOPS, gtfsId])}`;
+};
+
+export const getRoutePath = ({ gtfsId }) => {
+  ok(gtfsId, 'gtfsId must not be empty');
+  return `/${pathJoin([PREFIX_ROUTES, gtfsId])}`;
 };
 
 export const getStopRoutePath = searchObj => {

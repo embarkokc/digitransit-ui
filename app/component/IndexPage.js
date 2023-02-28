@@ -5,7 +5,6 @@ import { matchShape, routerShape } from 'found';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import shouldUpdate from 'recompose/shouldUpdate';
 import isEqual from 'lodash/isEqual';
-import { ok } from 'assert';
 import DTAutoSuggest from '@digitransit-component/digitransit-component-autosuggest';
 import DTAutosuggestPanel from '@digitransit-component/digitransit-component-autosuggest-panel';
 import { getModesWithAlerts } from '@digitransit-search-util/digitransit-search-util-query-utils';
@@ -16,11 +15,11 @@ import storeDestination from '../action/destinationActions';
 import withSearchContext from './WithSearchContext';
 import {
   getPathWithEndpointObjects,
+  getStopPath,
   getStopRoutePath,
   parseLocation,
   sameLocations,
   isItinerarySearchObjects,
-  PREFIX_STOPS,
   PREFIX_NEARYOU,
   PREFIX_ITINERARY_SUMMARY,
 } from '../util/path';
@@ -184,10 +183,7 @@ class IndexPage extends React.Component {
       action: 'ClickFavourite',
       name: null,
     });
-    // todo: we can't use `getStopRoutePath`, because it expects an object with `.properties`
-    // we have a different data format here
-    ok(favourite.gtfsId, 'favourite.gtfsId must not be empty');
-    const stopPath = `/${PREFIX_STOPS}/${encodeURIComponent(favourite.gtfsId)}`;
+    const stopPath = getStopPath({ gtfsId: favourite.gtfsId });
     this.context.router.push(stopPath);
   };
 

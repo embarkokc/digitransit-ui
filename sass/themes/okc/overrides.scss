@@ -308,6 +308,19 @@ display: inherit;
 min-width: unset;
 }
 
+.itinerary-summary-row .itinerary-legs .leg.bike_park,
+.itinerary-summary-row .itinerary-legs .leg.car_park {
+  min-width: 48px;
+  border: 1px solid $gray;
+  height: initial;
+}
+
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon {
+  width: 40px;
+  height: 40px;
+  color: $gray;
+}
+
 .summary-list-container {
   border-top: none;
 }
@@ -360,6 +373,7 @@ min-width: unset;
      }
    }
 }
+
 /* Map */
 div.map .leaflet-container .leaflet-control-attribution a {
   color: $gray;

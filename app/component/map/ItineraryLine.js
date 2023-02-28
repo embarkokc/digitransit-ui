@@ -59,6 +59,8 @@ class ItineraryLine extends React.Component {
         return;
       }
       const nextLeg = this.props.legs[i + 1];
+      const legColor =
+        leg.route && leg.route.color ? `#${leg.route.color}` : null;
 
       let mode = getRouteMode({ mode: leg.mode, type: leg.route?.type });
 
@@ -91,7 +93,7 @@ class ItineraryLine extends React.Component {
 
       objs.push(
         <Line
-          color={leg.route && leg.route.color ? `#${leg.route.color}` : null}
+          color={legColor}
           key={`${this.props.hash}_${i}_${mode}`}
           geometry={geometry}
           mode={isCallAgencyPickupType(leg) ? 'call' : mode.toLowerCase()}
@@ -124,6 +126,7 @@ class ItineraryLine extends React.Component {
             .forEach(place =>
               objs.push(
                 <StopMarker
+                  colorOverride={legColor}
                   disableModeIcons
                   stop={place.stop}
                   key={`intermediate-${place.stop.gtfsId}`}
@@ -177,9 +180,7 @@ class ItineraryLine extends React.Component {
                     nextLeg?.interlineWithPreviousLeg &&
                     interliningWithRoute !== leg.route.shortName
                   }
-                  color={
-                    leg.route && leg.route.color ? `#${leg.route.color}` : null
-                  }
+                  color={legColor}
                   leg={{
                     from: leg.from,
                     to: nextLeg?.interlineWithPreviousLeg ? nextLeg.to : leg.to,
@@ -198,6 +199,7 @@ class ItineraryLine extends React.Component {
             objs.push(
               <StopMarker
                 key={`${i},${leg.mode}marker,from`}
+                colorOverride={legColor}
                 disableModeIcons
                 stop={{
                   ...leg.from,
@@ -213,6 +215,7 @@ class ItineraryLine extends React.Component {
             objs.push(
               <StopMarker
                 key={`${i},${leg.mode}marker,to`}
+                colorOverride={legColor}
                 disableModeIcons
                 stop={{
                   ...leg.to,

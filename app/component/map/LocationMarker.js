@@ -25,7 +25,7 @@ export default function LocationMarker({
     }
   };
   const validType = getValidType(type);
-  const sideLength = isLarge ? 30 : 24;
+  const sideLength = isLarge ? 50 : 24;
   return (
     <IconMarker
       position={position}

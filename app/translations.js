@@ -859,6 +859,8 @@ const translations = {
     'add-via-duration-button-label-open':
       'Open stop duration selector at via point {index}',
     'add-work': 'Add Work',
+    'alerts-page-modes-select-label': 'Filter Alerts',
+    'alerts-page-title': 'System Alerts',
     all: 'All',
     'aria-itinerary-summary':
       'Total journey time {duration}. Departing at {inFuture} {departureTime} and arriving at {arrivalTime}',
@@ -1225,6 +1227,14 @@ const translations = {
     'minute-short': 'min',
     minutes: 'min',
     'minutes-or-route': 'Min / Route',
+    'modes-select-dropdown-aria-label':
+      'services selection dropdown menu, currently selected: {selectedModes}',
+    'modes-select-dropdown-aria-message-change': 'mode {mode} selected',
+    'modes-select-dropdown-aria-message-focused': 'mode {mode} focused',
+    'modes-select-dropdown-aria-message-guidance':
+      'select one or more modes from a dropdown menu',
+    'modes-select-dropdown-label': 'select services',
+    'modes-select-dropdown-placeholder': 'select one of more services',
     'modes.to-bike': 'city bike station',
     'modes.to-bike-park': 'bike park',
     'modes.to-bus': 'bus stop',

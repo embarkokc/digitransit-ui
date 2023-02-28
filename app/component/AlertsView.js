@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import moment from 'moment';
 import cx from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import { matchShape, routerShape } from 'found';
 import { TransportMode } from '../constants';
 import RouteNumber from './RouteNumber';
 import Icon from './Icon';
+import DesktopView from './DesktopView';
+import MobileView from './MobileView';
 import { typeToName } from '../util/gtfs';
+import { getAvailableTransportModeConfigs } from '../util/modeUtils';
+import { replaceQueryParams } from '../util/queryUtils';
+import { DesktopOrMobile } from '../util/withBreakpoint';
+import ModesSelectDropdown from './ModesSelectDropdown';
 
 const sortAlerts = (a, b) => {
   // Agency alerts first
@@ -19,6 +27,36 @@ const sortAlerts = (a, b) => {
   }
   // otherwise sort by effectiveStartDate, ascending
   return (a.effectiveStartDate || 0) - (b.effectiveStartDate || 0);
+};
+
+const alertMatchesModes = (alert, modes) => {
+  if (!alert.entities) {
+    // eslint-disable-next-line no-console
+    console.info('not showing alert because it has not entities', alert);
+    return false;
+  }
+
+  return alert.entities.some(entity => {
+    // eslint-disable-next-line no-underscore-dangle
+    if (entity.__typename === 'Agency') {
+      return true;
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    if (entity.__typename === 'Route') {
+      return modes.includes(entity.mode);
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    if (entity.__typename === 'RouteType') {
+      // TODO what if this fails?
+      const mode = typeToName[entity.routeType]?.toUpperCase();
+      return modes.includes(mode);
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    if (entity.__typename === 'Stop') {
+      return modes.includes(entity.vehicleMode);
+    }
+    return false;
+  });
 };
 
 // TODO
@@ -127,8 +165,25 @@ export function Alert({ alertData }) {
   );
 }
 
-// eslint-disable-next-line no-unused-vars
-export default function AlertsView(props) {
+export function AlertsList(props) {
+  const { alerts } = props;
+
+  return (
+    <section className="alerts-list">
+      {alerts.map(alertData => (
+        <Alert key={alertData.id} alertData={alertData} />
+      ))}
+    </section>
+  );
+}
+
+export function AlertsView(props, context) {
+  const { router, match, config } = context;
+
+  const ALL_MODES = useMemo(() => {
+    return getAvailableTransportModeConfigs(config).map(({ name }) => name);
+  }, [config]);
+
   // todo: don't mock data anymore
   // const {alerts} = props;
   // id
@@ -245,17 +300,63 @@ export default function AlertsView(props) {
       ],
     },
   ];
-  const alerts = _mockAlerts.sort(sortAlerts);
+  let alerts = _mockAlerts.sort(sortAlerts);
+
+  const query = match.location?.query || {};
+  let modes = null; // a.k.a. no modes configured
+  if ('modes' in query) {
+    if (query.modes === '') {
+      modes = [];
+    } else {
+      modes = query.modes.split(',');
+    }
+  }
+  if (modes !== null) {
+    alerts = alerts.filter(alert => alertMatchesModes(alert, modes));
+  }
+
+  const renderAlertsList = () => {
+    return <AlertsList alerts={alerts} />;
+  };
+
+  const renderSearchDialog = () => {
+    const setModesFilter = newModes => {
+      replaceQueryParams(router, match, { modes: newModes.join(',') });
+    };
+    return (
+      <section className="alerts-view-search-dialog">
+        <ModesSelectDropdown
+          id="alerts-page-modes-select"
+          labelId="alerts-page-modes-select-label"
+          // selectedModes={modes !== null ? modes : ALL_MODES}
+          defaultModes={modes !== null ? modes : ALL_MODES}
+          availableModes={ALL_MODES}
+          onSelectedModesChange={setModesFilter}
+        />
+      </section>
+    );
+  };
 
   return (
-    <div className="alerts-view">
-      <section>{/* {todo: filter UI} */}</section>
-      <section>
-        {alerts.map(alertData => (
-          <Alert key={alertData.id} alertData={alertData} />
-        ))}
-      </section>
-    </div>
+    <DesktopOrMobile
+      desktop={() => (
+        <DesktopView
+          title={<FormattedMessage id="alerts-page-title" />}
+          scrollable={false}
+          // hiding the back button also hides the title 🙄
+          // todo: show title even if back button is hidden
+          bckBtnVisible
+          content={renderSearchDialog()}
+          map={renderAlertsList()}
+        />
+      )}
+      mobile={() => (
+        <MobileView
+          searchBox={renderSearchDialog()}
+          content={renderAlertsList()}
+        />
+      )}
+    />
   );
 }
 
@@ -313,11 +414,21 @@ const AlertPropTypes = PropTypes.shape({
 });
 
 Alert.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
   alertData: AlertPropTypes.isRequired,
 };
 
-AlertsView.propTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  alerts: PropTypes.arrayOf(AlertPropTypes).isRequired,
+const alertsPropType = PropTypes.arrayOf(AlertPropTypes);
+AlertsList.propTypes = {
+  alerts: alertsPropType.isRequired,
 };
+
+AlertsView.propTypes = {
+  alerts: alertsPropType.isRequired,
+};
+AlertsView.contextTypes = {
+  config: PropTypes.object.isRequired,
+  router: routerShape.isRequired,
+  match: matchShape.isRequired,
+};
+
+export default AlertsView;

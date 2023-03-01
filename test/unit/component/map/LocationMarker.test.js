@@ -15,8 +15,8 @@ describe('<LocationMarker />', () => {
     };
     const wrapper = shallowWithIntl(<LocationMarker {...props} />);
     const { icon } = wrapper.props();
-    expect(icon.iconSize).to.deep.equal([30, 30]);
-    expect(icon.iconAnchor).to.deep.equal([15, 30]);
+    expect(icon.iconSize).to.deep.equal([50, 50]);
+    expect(icon.iconAnchor).to.deep.equal([25, 50]);
   });
 
   it('should apply the className based on type', () => {

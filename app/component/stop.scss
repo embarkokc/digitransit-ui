@@ -179,7 +179,7 @@
   font-size: $font-size-xxsmall;
   border-radius: 3px;
   cursor: pointer;
-  color: #333333;
+  color: $black;
   text-align: center;
   transition: 0.1s all ease-in;
   padding-top: 0;
@@ -345,7 +345,7 @@
   .route-headsign {
     font-family: $font-family-narrow;
     font-weight: $font-weight-book;
-    color: #333;
+    color: $black;
     flex: 1;
     padding-left: $padding-medium;
     overflow: clip;
@@ -354,7 +354,7 @@
   .route-time {
     font-size: $font-size-small;
     font-weight: $font-weight-medium;
-    color: #333;
+    color: $black;
     &.realtime {
       color: $realtime-color;
     }
@@ -364,7 +364,7 @@
   }
   .platform-code {
     background: #f4f4f5;
-    color: #333333;
+    color: $black;
     width: 28px;
     height: 24px;
     border-radius: 4px;
@@ -394,7 +394,7 @@
     .route-headsign {
       padding-left: $padding-medium;
       font-weight: $font-weight-book;
-      color: #333;
+      color: $black;
       flex: 1;
       overflow: clip;
       white-space: normal;

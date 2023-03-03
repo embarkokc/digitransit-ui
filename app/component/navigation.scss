@@ -9,13 +9,13 @@
     @return #ffffff;
   }
   @else {
-    @return #333333;
+    @return $black;
   }
 }
 
 /* foundation override */
 $menu-slide: 'transform 200ms ease';
-$offcanvas-background: #333333;
+$offcanvas-background: $black;
 $offcanvas-background-hover: scale-color($gray, $lightness: -30%);
 $offcanvas-background-active: scale-color($gray, $lightness: -30%);
 
@@ -140,7 +140,7 @@ $content-background-color: $background-color;
     margin: 0px 2px;
     &.selected {
       color: $white;
-      background-color: #333333;
+      background-color: $black;
     }
   }
 }
@@ -334,7 +334,7 @@ $content-background-color: $background-color;
   letter-spacing: -0.6;
   text-align: center;
   vertical-align: text-top;
-  color: #333333;
+  color: $black;
   position: relative;
   white-space: nowrap;
 }
@@ -457,7 +457,7 @@ $content-background-color: $background-color;
 }
 
 .menu-content {
-  background-color: #333;
+  background-color: $black;
   position: fixed;
   left: auto;
   right: 0px;
@@ -557,7 +557,7 @@ section.content {
       }
       .title-container {
         @include font-medium;
-        color: #333333; // DT-3358: was $primary-font-color
+        color: $black; // DT-3358: was $primary-font-color
         margin: 50px 0 16px 0;
         line-height: 1;
         .back-button {
@@ -571,7 +571,7 @@ section.content {
       h1 {
         @include font-medium;
         font-family: $heading-font-family;
-        color: #333333; // DT-3358: was $primary-font-color
+        color: $black; // DT-3358: was $primary-font-color
         // line-height: 1;
         display: inline;
       }

@@ -373,7 +373,7 @@ $margin-left-right: 21.3px;
             align-items: center;
             justify-content: center;
             background: #f4f4f5;
-            color: #333333;
+            color: $black;
             width: 24px;
             height: 17px;
             border-radius: 4px;
@@ -578,7 +578,7 @@ $margin-left-right: 21.3px;
       font-size: 15px;
       line-height: 18px;
       letter-spacing: -0.03em;
-      color: #333;
+      color: $black;
     }
   }
 }
@@ -768,7 +768,7 @@ $margin-left-right: 21.3px;
     font-size: 18px;
     line-height: 22px;
     letter-spacing: -0.03em;
-    color: #333333;
+    color: $black;
   }
 
   .other-ranges-dropdown {
@@ -786,7 +786,7 @@ $margin-left-right: 21.3px;
     position: relative;
     background-color: #fff;
     font-size: 9pt;
-    color: #333;
+    color: $black;
     height: 30px;
     line-height: 24px;
     font-weight: $font-weight-medium;
@@ -1049,7 +1049,7 @@ $margin-left-right: 21.3px;
     letter-spacing: -0.03em;
     padding: 13px 32px 13px 16px;
     text-align: left;
-    color: #333;
+    color: $black;
     &:focus {
       outline: none;
       border-color: $primary-color;
@@ -1225,7 +1225,7 @@ $margin-left-right: 21.3px;
       white-space: nowrap;
 
       .similar-route-name {
-        color: #333333;
+        color: $black;
         font-style: normal;
         font-weight: $font-weight-medium;
         font-size: 15px;

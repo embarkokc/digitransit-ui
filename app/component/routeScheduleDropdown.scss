@@ -36,7 +36,7 @@
     box-shadow: none;
 
     &:focus-within {
-      outline: 2px auto #333 !important;
+      outline: 2px auto $black !important;
     }
   }
 
@@ -115,7 +115,7 @@
     font-size: 15px;
     line-height: 18px;
     letter-spacing: -0.03em;
-    color: #333;
+    color: $black;
     white-space: nowrap;
     &:not(:last-child) {
       border-bottom: 1px solid #dddddd;

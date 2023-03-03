@@ -129,7 +129,7 @@
     border-radius: 5px;
     font-weight: normal;
     font-size: 13px;
-    color: #333333;
+    color: $black;
     line-height: 16px;
     white-space: normal;
 
@@ -145,7 +145,7 @@
     padding-top: 8px;
     width: 100%;
     max-width: 100%;
-    color: #333333;
+    color: $black;
 
     .itinerary-first-leg-start-time {
       font-size: 13px;
@@ -423,7 +423,7 @@
           height: 0.67em;
           width: 0.67em;
           margin-bottom: 1px;
-          color: #333333;
+          color: $black;
         }
       }
       .icon-badge {

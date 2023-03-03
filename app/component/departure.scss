@@ -166,7 +166,7 @@
 
 .platform-code {
   background: #f4f4f5;
-  color: #333333;
+  color: $black;
   width: 28px;
   height: 24px;
   border-radius: 4px;
@@ -228,7 +228,7 @@
 }
 
 .departure-row:focus-within {
-  outline: 2px auto #333 !important;
+  outline: 2px auto $black !important;
 }
 
 .departure-row {
@@ -257,10 +257,10 @@
   }
 
   .headsign {
-    color: #333;
+    color: $black;
   }
   .route-arrival {
-    color: #333;
+    color: $black;
     @include font-medium;
     font-size: 0.75rem;
     padding-right: 8px;

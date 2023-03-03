@@ -106,7 +106,7 @@ const AppBar = (
               className="back-to-embark-link"
               href={config.appBarLink.href}
             >
-              {config.appBarLink.name}{' '}
+              <span>{config.appBarLink.name} </span>
               <Icon img="icon-icon_close" className="icon" />
             </a>
           )}

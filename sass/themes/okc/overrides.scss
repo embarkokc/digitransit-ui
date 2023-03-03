@@ -212,8 +212,11 @@ section.content {
   text-decoration: none;
   cursor: pointer;
   margin-right: 60px;
+  display: flex;
+  align-items: center;
   .icon-container {
     margin-left: .5em;
+    padding-bottom: 4px;
   }
 }
 

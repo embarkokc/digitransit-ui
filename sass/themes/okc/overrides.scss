@@ -219,6 +219,10 @@ section.content {
     margin-left: .5em;
     padding-bottom: 4px;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 /* EMBARK leg / vehicle bar styling shall use

@@ -80,20 +80,7 @@ class ItineraryCircleLineWithIcon extends React.Component {
       return <></>;
     }
     return (
-      <div
-        className={`leg-before-circle circle ${this.props.modeClassName} ${
-          top ? 'top' : ''
-        }`}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={28}
-          height={28}
-          style={{ fill: this.props.color, stroke: this.props.color }}
-        >
-          <circle strokeWidth="4" width={28} cx={11} cy={10} r={6} />
-        </svg>
-      </div>
+      <Icon img={cx(`icon-icon_${this.props.modeClassName}-stop`, { top })} />
     );
   };
 

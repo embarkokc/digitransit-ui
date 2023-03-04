@@ -229,6 +229,9 @@ section.content {
   border: 1px solid;
   height: 48px;
 
+  display: flex;
+  align-items: center;
+
   &.walk, &.bicycle_walk {
     border: 1px solid $gray;
     background-color: $white;
@@ -467,9 +470,17 @@ div.map .leaflet-container .leaflet-control-attribution a {
 span.itinerary-stop-code {
   color: $black;
   border-color: $gray;
-  border-radius: $border-radius;
+  border-radius: $embark-border-radius;
   font-size: $font-size-small;
   font-weight: $font-weight-bolder;
+}
+// TODO: Mockup differs in styling...
+.row.itinerary-row span.itinerary-stop-code {
+  border-color: $lighter-gray;
+  border-radius: $embark-border-radius;
+  font-size: $font-size-xxsmall;
+  font-weight: $font-weight-normal;
+  padding: 3px 7px;
 }
 
 .stop-near-you-left-col {
@@ -628,6 +639,27 @@ div.origin-popup .origin-popup-name {
 div.origin-popup {
   min-width: 350px;
 }
+
+// Trip Itinerary
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row .place {
+  color: #686869;
+  font-size: $font-size-small;
+}
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-action .itinerary-leg-action-content {
+  font-size: $font-size-small;
+}
+.address-container .address {
+  font-size: $font-size-normal;
+}
+.bp-large .row.itinerary-row .itinerary-time-column .itinerary-time-column-time {
+    font-size: $font-size-normal;
+}
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route {
+  background-color: inherit;
+}
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row > :first-child {
+  max-width: inherit; // no arrow, so size needs not to be restricted
+}
 .row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row .itinerary-leg-row {
 
   &.stop {
@@ -639,6 +671,67 @@ div.origin-popup {
   }
 }
 
+.row.itinerary-row .itinerary-instruction-column .interline-info-container {
+  border: inherit;
+  color: $gray;
+  margin-top: initial;
+}
+.small-2 {
+    width: 25%;
+}
+.itinerary-summary .duration span {
+  visibility: hidden; // Hide duration span
+}
+.duration--itinerary-summary, .distance--itinerary-summary {
+  align-items: center; // Align midddle after departure time removal
+}
+
+.vehicle-number {
+  font-weight: $font-weight-normal;
+}
+
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route, .row.itinerary-row .itinerary-instruction-column .itinerary-via-leg-duration {
+  font-size: $font-size-small;
+  color: $gray;
+}
+
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container {
+  font-size: $font-size-normal;
+  padding: 0px 7px 0px 1px;
+  height: inherit;
+  .bar {
+    height: 48px;
+  }
+}
+
+.row.itinerary-row .leg-before-line.walk {
+  height: 30%;
+  top: 40px;
+  &:first-child {
+    height: 19%;
+    top: 55px;
+  }
+}
+
+.row.itinerary-row .leg-before :last-child {
+    bottom: -3.5em;
+}
+
+.itinerary-summary .divider-top {
+  visibility: hidden;
+}
+
+.itinerary-summary .divider-bottom {
+  position: relative;
+  width: 600px;
+  left: -60px;
+}
+
+.walk-distance {
+  display: flex;
+  gap: 5px;
+}
+
 .secondary-button.print {
     border: inherit;
     padding: 0px 5px 15px 3px;
@@ -648,4 +741,41 @@ div.origin-popup {
     .icon-container {
       padding-right: 7px;
     }
+}
+
+.row.itinerary-row .leg-before-line.bus,
+.row.itinerary-row .leg-before-line.tram {
+  height: calc(100% - 4em);
+  top: 3.5em;
+  border-radius: 4px;
+}
+
+.row.itinerary-row .leg-before.bus,
+.row.itinerary-row .leg-before.tram {
+  .icon-container {
+    left: -12px;
+    position: absolute;
+  }
+  .icon {
+    height: 3em;
+    width: 3em;
+  }
+}
+.itinerary-leg-container .row.itinerary-row .leg-before.bus,
+.itinerary-leg-container .row.itinerary-row .leg-before.tram {
+  .icon {
+    height: 2em;
+  }
+}
+.itinerary-leg-container .row.itinerary-row:last-child .leg-before.bus,
+.itinerary-leg-container .row.itinerary-row:last-child .leg-before.tram {
+  .icon-container:last-child .icon {
+    height: 3em;
+  }
+}
+
+.row.itinerary-row .leg-before-line.walk.bottom {
+  background-position-y: 7px;
+  height: 10%;
+  top: 85%;
 }

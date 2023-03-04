@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="11"
-    height="20"
-    fill="#ccc"
-    stroke="#aaa" 
+    width="10"
+    height="13"
+    fill="#686869"
+    stroke="#686869" 
     >
         <circle
-        stroke="#aaa"
+        stroke="#686869"
         strokeWidth="2"
         cx="5"
         cy="6"
-        r="5"
+        r="3"
         />
-        <circle strokeWidth="1" cx="5" cy="5" r="5" />
+        <circle strokeWidth="1" cx="5" cy="5" r="3" />
 </svg>

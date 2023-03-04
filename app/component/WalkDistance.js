@@ -26,10 +26,10 @@ function WalkDistance(props, { config, intl }) {
         />
       </span>
       <Icon img={icon} className={cx(props.mode)} />
-      <span aria-hidden className="walk-distance">
+      <div aria-hidden className="walk-distance">
         {walkDuration}
         <span data-text={walkDistance} />
-      </span>
+      </div>
     </span>
   );
 }

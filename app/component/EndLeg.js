@@ -35,7 +35,7 @@ function EndLeg(props, context) {
         </div>
       </div>
       <div className={`leg-before ${modeClassName}`} aria-hidden="true">
-        <div className={`leg-before-circle circle ${modeClassName}`} />
+        <div className={`leg-before-circle el circle ${modeClassName}`} />
         <div className="itinerary-icon-container">
           <Icon
             img="icon-icon_mapMarker-to"

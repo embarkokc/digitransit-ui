@@ -73,18 +73,7 @@ function IntermediateLeg(
       <div className={`leg-before ${modeClassName}`}>
         <Icon img={`icon-icon_${modeClassName}-stop`} />
         <div style={{ color }} className={`leg-before-line ${modeClassName}`} />
-        {isLastPlace && (
-          <div className={`leg-before-circle circle ${mode.toLowerCase()}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={28}
-              height={28}
-              style={{ fill: '#fff' }}
-            >
-              <circle strokeWidth="4" width={28} cx={11} cy={10} r={6} />
-            </svg>
-          </div>
-        )}
+        {isLastPlace && <Icon img={`icon-icon_${modeClassName}-stop`} />}
       </div>
       <div
         className={`small-9 columns itinerary-instruction-column intermediate ${modeClassName}`}

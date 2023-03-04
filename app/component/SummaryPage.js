@@ -2450,6 +2450,9 @@ class SummaryPage extends React.Component {
               />
             </div>
           );
+          // EMBARK override content with activeTab only
+          content = itineraryTabs[activeIndex];
+
           return (
             <DesktopView
               title={

@@ -135,7 +135,9 @@ function WalkLeg(
                 : 'itinerary-leg-first-row'
             }
           >
-            <div className="itinerary-leg-row">
+            <div
+              className={cx('itinerary-leg-row', { stop: leg[toOrFrom].stop })}
+            >
               {leg[toOrFrom].stop ? (
                 <Link
                   onClick={e => {
@@ -144,13 +146,14 @@ function WalkLeg(
                   to={`/${PREFIX_STOPS}/${leg[toOrFrom].stop.gtfsId}`}
                 >
                   {returnNotice || leg[toOrFrom].name}
-                  {leg[toOrFrom].stop && (
+                  {/* EMBARK no arrow
+                    leg[toOrFrom].stop && (
                     <Icon
                       img="icon-icon_arrow-collapse--right"
                       className="itinerary-arrow-icon"
                       color={config.colors.primary}
                     />
-                  )}
+                  ) */}
                   <ServiceAlertIcon
                     className="inline-icon"
                     severityLevel={getActiveAlertSeverityLevel(

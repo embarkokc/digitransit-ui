@@ -384,7 +384,7 @@ class TransitLeg extends React.Component {
               first: index === 0,
             })}
           >
-            <div className="itinerary-leg-row">
+            <div className="itinerary-leg-row stop">
               <Link
                 onClick={e => {
                   e.stopPropagation();
@@ -397,11 +397,6 @@ class TransitLeg extends React.Component {
                 to={`/${PREFIX_STOPS}/${leg.from.stop.gtfsId}`}
               >
                 {leg.from.name}
-                <Icon
-                  img="icon-icon_arrow-collapse--right"
-                  className="itinerary-arrow-icon"
-                  color={config.colors.primary}
-                />
               </Link>
               <ServiceAlertIcon
                 className="inline-icon"

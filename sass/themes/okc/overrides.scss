@@ -628,6 +628,17 @@ div.origin-popup .origin-popup-name {
 div.origin-popup {
   min-width: 350px;
 }
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row .itinerary-leg-row {
+
+  &.stop {
+    display: flex;
+    gap: 5px;
+  }
+  a {
+    font-size: $font-size-normal;
+  }
+}
+
 .secondary-button.print {
     border: inherit;
     padding: 0px 5px 15px 3px;

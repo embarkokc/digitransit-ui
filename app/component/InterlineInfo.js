@@ -3,7 +3,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { durationToString } from '../util/timeUtils';
 import { getHeadsignFromRouteLongName } from '../util/legUtils';
-import Icon from './Icon';
 
 const InterlineInfo = ({ legs, leg }) => {
   let totalWait = 0;
@@ -21,7 +20,6 @@ const InterlineInfo = ({ legs, leg }) => {
     <div className="interline-info-container">
       {legs.length === 1 && (
         <>
-          <Icon img="icon-icon_wait" />
           <FormattedMessage
             id="itinerary-summary.interline-wait"
             values={{
@@ -46,7 +44,6 @@ const InterlineInfo = ({ legs, leg }) => {
       )}
       {legs.length > 1 && (
         <>
-          <Icon img="icon-icon_wait" />
           <FormattedMessage
             id="itinerary-summary.interline-wait-multiple-legs"
             values={{

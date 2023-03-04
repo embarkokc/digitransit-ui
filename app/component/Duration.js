@@ -45,6 +45,7 @@ function Duration(props) {
         {props.futureText !== '' && props.multiRow && (
           <span data-text={futureText} />
         )}
+        {/* EMBARK: Hide Duration span
         <span
           data-text={
             props.multiRow && props.futureText !== ''
@@ -52,6 +53,7 @@ function Duration(props) {
               : `${futureText} ${startTime} - ${endTime}`
           }
         />
+        */}
       </span>
     </span>
   );

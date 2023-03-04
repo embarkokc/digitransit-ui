@@ -628,3 +628,13 @@ div.origin-popup .origin-popup-name {
 div.origin-popup {
   min-width: 350px;
 }
+.secondary-button.print {
+    border: inherit;
+    padding: 0px 5px 15px 3px;
+    height: inherit;
+    font-size: $font-size-xxsmall;
+    font-weight: $font-weight-normal;
+    .icon-container {
+      padding-right: 7px;
+    }
+}

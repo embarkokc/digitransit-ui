@@ -406,12 +406,8 @@ class ItineraryLegs extends React.Component {
       />,
     );
 
-    legs.push(
-      <ItineraryProfile
-        itinerary={itinerary}
-        printItinerary={this.printItinerary}
-      />,
-    );
+    // EMBARK show print button not in ItineraryProfile but above
+    legs.push(<ItineraryProfile itinerary={itinerary} />);
 
     return (
       <span className="itinerary-list-container" role="list">

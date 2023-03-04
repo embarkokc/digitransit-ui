@@ -3,6 +3,7 @@ import React from 'react';
 import cx from 'classnames';
 import Duration from './Duration';
 import WalkDistance from './WalkDistance';
+import SecondaryButton from './SecondaryButton';
 
 const ItinerarySummary = ({
   itinerary,
@@ -13,6 +14,11 @@ const ItinerarySummary = ({
   isMultiRow,
   isMobile,
 }) => {
+  const printItinerary = e => {
+    e.stopPropagation();
+    window.print();
+  };
+
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -50,6 +56,13 @@ const ItinerarySummary = ({
           mode="car"
         />
       )}
+      <SecondaryButton
+        ariaLabel="print"
+        buttonName="print"
+        buttonClickAction={printItinerary}
+        buttonIcon="icon-icon_print"
+        smallSize
+      />
       <div className={cx('divider-bottom')} />
     </div>
   );

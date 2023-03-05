@@ -214,6 +214,7 @@ export function AlertsView(props, context) {
   // effectiveEndDate
   // entities {
   //   ...on Route {
+  //     __typename
   //     id
   //     gtfsId
   //     shortName
@@ -222,6 +223,7 @@ export function AlertsView(props, context) {
   //     color
   //   }
   //   ...on Stop {
+  //     __typename
   //     id
   //     gtfsId
   //     code
@@ -229,12 +231,13 @@ export function AlertsView(props, context) {
   //     vehicleMode
   //   }
   //   ...on Agency {
+  //     __typename
   //     id
   //     name
   //     url
   //   }
   //   ...on RouteType {
-  //     id
+  //     __typename
   //     routeType
   //   }
   //   # todo: how to handle others?

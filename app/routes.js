@@ -446,18 +446,31 @@ export default config => {
               effectiveEndDate
               entities {
                 ... on Route {
+                  __typename
+                  id
                   gtfsId
                   shortName
-                  longName
+                  # longName(language: $language)
                   mode
                   color
                 }
                 ... on Stop {
-                  locationType
+                  __typename
+                  id
                   gtfsId
                   code
                   # name(language: $language)
                   vehicleMode
+                }
+                ... on Agency {
+                  __typename
+                  id
+                  name
+                  url
+                }
+                ... on RouteType {
+                  __typename
+                  routeType
                 }
                 # todo: how to handle others?
               }

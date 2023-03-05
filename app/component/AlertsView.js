@@ -15,20 +15,6 @@ import { replaceQueryParams } from '../util/queryUtils';
 import { DesktopOrMobile } from '../util/withBreakpoint';
 import ModesSelectDropdown from './ModesSelectDropdown';
 
-const sortAlerts = (a, b) => {
-  // Agency alerts first
-  // eslint-disable-next-line no-underscore-dangle
-  if (a.__typename === 'Agency' && b.__typename !== 'Agency') {
-    return -1;
-  }
-  // eslint-disable-next-line no-underscore-dangle
-  if (a.__typename !== 'Agency' && b.__typename === 'Agency') {
-    return 1;
-  }
-  // otherwise sort by effectiveStartDate, ascending
-  return (a.effectiveStartDate || 0) - (b.effectiveStartDate || 0);
-};
-
 const alertMatchesModes = (alert, modes) => {
   if (!alert.entities) {
     // eslint-disable-next-line no-console
@@ -204,127 +190,6 @@ export function AlertsView(props, context) {
     return getAvailableTransportModeConfigs(config).map(({ name }) => name);
   }, [config]);
 
-  // todo: don't mock data anymore
-  // const {alerts} = props;
-  // id
-  // # alertId
-  // alertHeaderText
-  // alertDescriptionText
-  // effectiveStartDate
-  // effectiveEndDate
-  // entities {
-  //   ...on Route {
-  //     __typename
-  //     id
-  //     gtfsId
-  //     shortName
-  //     # longName(language: $language)
-  //     mode
-  //     color
-  //   }
-  //   ...on Stop {
-  //     __typename
-  //     id
-  //     gtfsId
-  //     code
-  //     # name(language: $language)
-  //     vehicleMode
-  //   }
-  //   ...on Agency {
-  //     __typename
-  //     id
-  //     name
-  //     url
-  //   }
-  //   ...on RouteType {
-  //     __typename
-  //     routeType
-  //   }
-  //   # todo: how to handle others?
-  // }
-  // eslint-disable-next-line no-underscore-dangle
-  const _mockAlerts = [
-    {
-      id: 'epofkewpofkwek',
-      alertHeaderText: 'everything is burning',
-      alertDescriptionText:
-        'literally everything broke down. sorry. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum nibh.',
-      effectiveStartDate: Date.parse('2023-01-27T10:10-06:00'),
-      effectiveEndDate: Date.parse('2023-02-10T00:00-06:00'),
-      entities: [
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __typename: 'Agency',
-          id: 'wqpdowhefoewfnhewoifjf',
-          name: 'Embark',
-          url: 'https://embarkok.com/',
-        },
-      ],
-    },
-    {
-      id: 'eoifjqfoij',
-      alertHeaderText: 'strikes affecting all bus routes',
-      alertDescriptionText:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum nibh tellus molestie nunc non blandit massa. Quam elementum.',
-      effectiveStartDate: Date.parse('2023-02-04T00:00-06:00'),
-      effectiveEndDate: Date.parse('2023-02-08T00:00-06:00'),
-      entities: [
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __typename: 'RouteType',
-          id: 'ewoifjeoijfoij',
-          routeType: 3,
-        },
-      ],
-    },
-    {
-      id: 'cwqdjonoiwww',
-      alertHeaderText: 'construction on 123',
-      alertDescriptionText:
-        'it also affects stop 1234. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum nibh tellus molestie nunc non blandit massa. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis.',
-      effectiveStartDate: Date.parse('2023-01-27T10:10-06:00'),
-      effectiveEndDate: Date.parse('2023-02-10T00:00-06:00'),
-      entities: [
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __typename: 'Route',
-          id: 'podkspdkqpdokq',
-          gtfsId: 'route-123',
-          shortName: '123',
-          longName: 'one Two thrEE',
-          mode: 'BUS',
-          color: '$ff0000',
-        },
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __typename: 'Stop',
-          id: 'sdjwpddpqdp',
-          gtfsId: 'stop-abc',
-          code: '1234',
-          vehicleMode: 'BUS',
-        },
-      ],
-    },
-    {
-      id: 'poifi23oirn',
-      alertHeaderText: 'stop closed because of a concert',
-      alertDescriptionText: 'woohoooo',
-      effectiveStartDate: Date.parse('2023-02-02T00:00-06:00'),
-      effectiveEndDate: Date.parse('2023-02-03T00:00-06:00'),
-      entities: [
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __typename: 'Stop',
-          id: 'p2oeijeoi3r3',
-          gtfsId: 'stop-bcd',
-          code: '2345',
-          vehicleMode: 'TRAM',
-        },
-      ],
-    },
-  ];
-  let alerts = _mockAlerts.sort(sortAlerts);
-
   const query = match.location?.query || {};
   let modes = null; // a.k.a. no modes configured
   if ('modes' in query) {
@@ -334,6 +199,8 @@ export function AlertsView(props, context) {
       modes = query.modes.split(',');
     }
   }
+
+  let { alerts } = props;
   if (modes !== null) {
     alerts = alerts.filter(alert => alertMatchesModes(alert, modes));
   }

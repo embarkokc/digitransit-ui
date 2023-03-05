@@ -197,10 +197,15 @@ section.content .desktop {
 
 /* OKC top bar styling */
 nav.top-bar {
+  flex-shrink: 0;
   height: 100px;
   border-bottom-width: 6px;
   border-bottom-style: inset;
   border-bottom-color: $primary-color;
+}
+section.content {
+  // subtract height of the top bar
+  max-height: calc(100vh - 100px);
 }
 
 .back-to-embark-link {

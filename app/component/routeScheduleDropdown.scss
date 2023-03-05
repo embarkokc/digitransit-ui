@@ -1,4 +1,4 @@
-.dd-container {
+.route-schedule-dropdown.dd-container {
   flex-grow: 1;
   flex-basis: 10rem;
 }
@@ -26,7 +26,7 @@
   }
 }
 
-.dd-select {
+.route-schedule-dropdown .dd-select {
   width: 100%;
 
   .dd__control, .dd-right__control, .dd-timerange__control {

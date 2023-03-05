@@ -60,7 +60,10 @@ export default function RouteScheduleDropdown(props, context) {
 
   return (
     <div
-      className={cx('dd-container', labelId ? 'withLabel' : '')}
+      className={cx(
+        'route-schedule-dropdown dd-container',
+        labelId ? 'withLabel' : '',
+      )}
       aria-live="off"
     >
       {labelId && (

@@ -326,10 +326,11 @@ min-width: unset;
   height: initial;
 }
 
-.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon {
-  width: 40px;
-  height: 40px;
-  color: $gray;
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon,
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait .icon {
+  width: 28px;
+  height: 28px;
+  fill: $gray;
 }
 
 .summary-list-container {
@@ -339,8 +340,11 @@ min-width: unset;
   &.bp-large .action-arrow-click-area {
     padding: 17px 15px 0 20px;
   }
-  .itinerary-first-leg-start-time-container .itinerary-first-leg-start-time .start-time {
-    font-weight: $font-weight-bold;
+  .itinerary-first-leg-start-time-container .itinerary-first-leg-start-time {
+    font-size: $font-size-xxsmall;
+    .start-time {
+      font-weight: $font-weight-bold;
+    }
   }
 
   .itinerary-legs .leg .route-number {
@@ -645,12 +649,18 @@ div.origin-popup {
 }
 
 // Trip Itinerary
+.row.itinerary-row .itinerary-instruction-column .divider {
+  border-width: 0;
+}
 .row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row .place {
   color: #686869;
   font-size: $font-size-small;
 }
-.row.itinerary-row .itinerary-instruction-column .itinerary-leg-action .itinerary-leg-action-content {
-  font-size: $font-size-small;
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-action {
+  border-top-width: 0;
+  .itinerary-leg-action-content {
+    font-size: $font-size-small;
+  }
 }
 .address-container .address {
   font-size: $font-size-normal;
@@ -661,8 +671,15 @@ div.origin-popup {
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route {
   background-color: inherit;
 }
-.row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row > :first-child {
-  max-width: inherit; // no arrow, so size needs not to be restricted
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row {
+  border-top-width: 0;
+  > :first-child {
+    max-width: inherit; // no arrow, so size needs not to be restricted
+  }
+}
+.row.itinerary-row .itinerary-instruction-column .disruption {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 .row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row .itinerary-leg-row {
 

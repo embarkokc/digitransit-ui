@@ -15,6 +15,20 @@ import { replaceQueryParams } from '../util/queryUtils';
 import { DesktopOrMobile } from '../util/withBreakpoint';
 import ModesSelectDropdown from './ModesSelectDropdown';
 
+const sortAlerts = (a, b) => {
+  // Agency alerts first
+  // eslint-disable-next-line no-underscore-dangle
+  if (a.__typename === 'Agency' && b.__typename !== 'Agency') {
+    return -1;
+  }
+  // eslint-disable-next-line no-underscore-dangle
+  if (a.__typename !== 'Agency' && b.__typename === 'Agency') {
+    return 1;
+  }
+  // otherwise sort by effectiveStartDate, ascending
+  return (a.effectiveStartDate || 0) - (b.effectiveStartDate || 0);
+};
+
 const alertMatchesModes = (alert, modes) => {
   if (!alert.entities) {
     // eslint-disable-next-line no-console
@@ -200,7 +214,7 @@ export function AlertsView(props, context) {
     }
   }
 
-  let { alerts } = props;
+  let alerts = props.alerts.sort(sortAlerts);
   if (modes !== null) {
     alerts = alerts.filter(alert => alertMatchesModes(alert, modes));
   }

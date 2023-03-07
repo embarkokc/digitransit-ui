@@ -90,7 +90,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
     };
 
     const systemAlertsPath = '/alerts';
-    return (
+    const container = (
       <div
         className="embedded-seach-container embedded-route-search-container"
         id="#app"
@@ -140,6 +140,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
         </div>
       </div>
     );
+    return <div className="route-search-page">{container}</div>;
   }
 }
 

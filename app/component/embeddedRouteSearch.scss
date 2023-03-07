@@ -1,7 +1,27 @@
-.embedded-route-search-container {
-    padding-left: 1em;
-    padding-right: 1em;
+.route-search-page {
+    height: 100%;
+    max-height: initial;
+    background-color: transparent;
+    background-image: url("https://embark.indagodigital.dev/assets/images/content/51358494652_d97d604079_k.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .embedded-route-search-container {
+        margin-top: 6em;
+        margin-left: 6em;
+        padding-left: 1em;
+        padding-right: 1em;
+        background-color: white;
+        border-radius: 4px;
+    }
+    .embedded-route-search-container.embedded-seach-container {
+        width: initial;
+        max-width: 26em;
+        height: initial;
+    }
 }
+
 .embedded-route-search-container-heading {
     line-height: 1.5em;
 }

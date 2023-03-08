@@ -204,7 +204,7 @@ nav.top-bar {
   border-bottom-style: inset;
   border-bottom-color: $primary-color;
 }
-section.content {
+nav.top-bar + section.content {
   // subtract height of the top bar
   max-height: calc(100vh - 100px);
 }

@@ -198,10 +198,15 @@ body {
 /* OKC top bar styling */
 nav.top-bar {
   flex-shrink: 0;
-  height: 100px;
+  height: 81px;
   border-bottom-width: 6px;
   border-bottom-style: inset;
   border-bottom-color: $primary-color;
+
+  .logo {
+    height: 100%;
+    min-height: 27px;
+  }
 }
 nav.top-bar + section.content {
   // subtract height of the top bar
@@ -397,7 +402,7 @@ div.map .leaflet-container .leaflet-control-attribution a {
 => See as well digitransit-compponent-control-panel/src/helpers/styles.scss
 */
 .top-bar section.title {
-   padding-left: 56px;
+   padding-left: 50px;
 }
 .right-offcanvas-toggle {
   .settings-button-text {

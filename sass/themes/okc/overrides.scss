@@ -176,6 +176,8 @@ body {
       font-weight: $font-weight-bold;
       color: $black;
       display: block;
+      margin-top: 20px;
+      line-height: 42px;
     }
 
     .arrow-icon {
@@ -185,14 +187,14 @@ body {
     .title-container {
       margin-left: 60px;
     }
-
-    .back-button-label {
-      font-size: $font-size-normal;
-      font-weight: $font-weight-normal;
-      margin-left: 0.15em;
-      padding-top: 3px;
-    }
   }
+}
+
+.back-button-label {
+  font-size: $font-size-normal;
+  font-weight: $font-weight-normal;
+  padding-top: 3px;
+  line-height: 21px;
 }
 
 /* OKC top bar styling */
@@ -514,6 +516,22 @@ span.itinerary-stop-code {
 }
 .stops-near-you-page .stop-near-you-container .stop-near-you-inner-container .stop-near-you-right-col .stop-near-you-direction {
   align-items: flex-start; // CHECK vertical align with inbound/outbound symbol
+}
+
+.citybike-content-container {
+  height: initial;
+  .availability-container .sub-header-h4 {
+    color: $black;
+    font-size: $font-size-normal;
+  }
+  .icon-container .icon {
+    width: 3em;
+    height: 3em;
+  }
+}
+
+.citybike-stop-content {
+  padding: 0px 60px 0px 48px;
 }
 
 /* Route stops page */

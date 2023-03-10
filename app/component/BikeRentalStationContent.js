@@ -55,54 +55,56 @@ const BikeRentalStationContent = (
     : undefined;
 
   return (
-    <div className="bike-station-page-container">
+    <>
       <ParkOrStationHeader
         parkOrStation={bikeRentalStation}
         breakpoint={breakpoint}
       />
-      <CityBikeStopContent bikeRentalStation={bikeRentalStation} />
-      {cityBike.showFullInfo && isFull && (
-        <div className="citybike-full-station-guide">
-          <FormattedMessage id="citybike-return-full" />
-          <a
-            onClick={e => {
-              e.stopPropagation();
-            }}
-            className="external-link-citybike"
-            href={returnInstructionsUrl}
-          >
-            {' '}
-            <FormattedMessage id="citybike-return-full-link" />{' '}
-          </a>
-        </div>
-      )}
-      {(cityBikeBuyUrl || cityBikeNetworkUrl) && (
-        <div className="citybike-use-disclaimer">
-          <h2 className="disclaimer-header">
-            <FormattedMessage id="citybike-start-using" />
-          </h2>
-          <div className="disclaimer-content">
-            {buyInstructions || (
-              <a className="external-link-citybike" href={cityBikeNetworkUrl}>
-                <FormattedMessage id="citybike-start-using-info" />{' '}
-              </a>
-            )}
-          </div>
-          {isClient && cityBikeBuyUrl && (
+      <div className="citybike-stop-content">
+        <CityBikeStopContent bikeRentalStation={bikeRentalStation} />
+        {cityBike.showFullInfo && isFull && (
+          <div className="citybike-full-station-guide">
+            <FormattedMessage id="citybike-return-full" />
             <a
               onClick={e => {
                 e.stopPropagation();
               }}
-              className="external-link"
-              href={cityBikeBuyUrl}
+              className="external-link-citybike"
+              href={returnInstructionsUrl}
             >
-              <FormattedMessage id="citybike-purchase-link" />
-              <Icon img="icon-icon_external-link-box" />
+              {' '}
+              <FormattedMessage id="citybike-return-full-link" />{' '}
             </a>
-          )}
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+        {(cityBikeBuyUrl || cityBikeNetworkUrl) && (
+          <div className="citybike-use-disclaimer">
+            <h2 className="disclaimer-header">
+              <FormattedMessage id="citybike-start-using" />
+            </h2>
+            <div className="disclaimer-content">
+              {buyInstructions || (
+                <a className="external-link-citybike" href={cityBikeNetworkUrl}>
+                  <FormattedMessage id="citybike-start-using-info" />{' '}
+                </a>
+              )}
+            </div>
+            {isClient && cityBikeBuyUrl && (
+              <a
+                onClick={e => {
+                  e.stopPropagation();
+                }}
+                className="external-link"
+                href={cityBikeBuyUrl}
+              >
+                <FormattedMessage id="citybike-purchase-link" />
+                <Icon img="icon-icon_external-link-box" />
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 BikeRentalStationContent.propTypes = {

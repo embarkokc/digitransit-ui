@@ -495,6 +495,13 @@ span.itinerary-stop-code {
   padding: 3px 7px;
 }
 
+.stops-near-you-page .stop-near-you-container {
+  width: calc(100% + 20px); // remove lolipop padding
+  .stop-near-you-inner-container {
+    width: calc(100% + 10px);
+  }
+}
+
 .stop-near-you-left-col {
   font-size: $font-size-normal;
   gap: 10px;
@@ -502,6 +509,11 @@ span.itinerary-stop-code {
 
 .stop-near-you-right-col {
   font-size: $font-size-normal;
+  flex-grow: 1;
+  line-height: 1; // vertical align with inbound/outbound symbol
+}
+.stops-near-you-page .stop-near-you-container .stop-near-you-inner-container .stop-near-you-right-col .stop-near-you-direction {
+  align-items: flex-start; // CHECK vertical align with inbound/outbound symbol
 }
 
 /* Route stops page */

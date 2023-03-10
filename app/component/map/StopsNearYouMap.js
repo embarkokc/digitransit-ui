@@ -130,7 +130,7 @@ const getLocationMarker = location => {
   return (
     <LazilyLoad modules={locationMarkerModules} key="from">
       {({ LocationMarker }) => (
-        <LocationMarker position={location} type="from" />
+        <LocationMarker position={location} type="from" isLarge />
       )}
     </LazilyLoad>
   );

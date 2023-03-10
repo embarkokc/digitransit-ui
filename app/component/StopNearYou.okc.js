@@ -30,7 +30,7 @@ const StopNearYou = ({ stop, stopId }, { config, intl }) => {
     return (
       <div className="stop-near-you-direction">
         {icon && <Icon img={icon} className="direction-arrow" />}
-        {description}
+        <span>{description}</span>
       </div>
     );
   };

@@ -55,7 +55,7 @@ const BikeRentalStationContent = (
     : undefined;
 
   return (
-    <div className="bike-station-page-container">
+    <>
       <ParkOrStationHeader
         parkOrStation={bikeRentalStation}
         breakpoint={breakpoint}
@@ -102,7 +102,7 @@ const BikeRentalStationContent = (
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 BikeRentalStationContent.propTypes = {

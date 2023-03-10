@@ -38,16 +38,18 @@ const ParkOrBikeStationHeader = ({ parkOrStation, breakpoint }, { config }) => {
   const { name, bikeParkId, stationId } = parkOrStation;
   const parkHeaderId = bikeParkId ? 'bike-park' : 'car_park';
   return (
-    <div className="bike-station-header">
+    <div className="card-header stop-page header">
       {breakpoint === 'large' && (
         <BackButton
+          title="Back"
+          titleClassName="back-button-label"
           icon="icon-icon_arrow-collapse--left"
           iconClassName="arrow-icon"
         />
       )}
-      <div className="header">
+      <div className="card-header-content">
         <h1>{name}</h1>
-        <div className="bike-station-sub-header">
+        <div className="card-sub-header">
           <FormattedMessage
             id={stationId ? 'citybike-station-no-id' : parkHeaderId}
           />
@@ -58,16 +60,16 @@ const ParkOrBikeStationHeader = ({ parkOrStation, breakpoint }, { config }) => {
             </span>
           )}
         </div>
+        {stationId && (
+          <LazilyLoad modules={modules}>
+            {({ FavouriteBikeRentalStationContainer }) => (
+              <FavouriteBikeRentalStationContainer
+                bikeRentalStation={parkOrStation}
+              />
+            )}
+          </LazilyLoad>
+        )}
       </div>
-      {stationId && (
-        <LazilyLoad modules={modules}>
-          {({ FavouriteBikeRentalStationContainer }) => (
-            <FavouriteBikeRentalStationContainer
-              bikeRentalStation={parkOrStation}
-            />
-          )}
-        </LazilyLoad>
-      )}
     </div>
   );
 };

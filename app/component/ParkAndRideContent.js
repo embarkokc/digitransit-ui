@@ -141,7 +141,7 @@ const ParkAndRideContent = (
   const showSpacesAvailable = !realtime && spacesAvailable;
 
   return (
-    <div className="bike-station-page-container">
+    <>
       <ParkOrStationHeader parkOrStation={park} />
       <div className="park-content-container">
         <Icon img={`icon-icon_${prePostFix}`} height={2.4} width={2.4} />
@@ -224,7 +224,7 @@ const ParkAndRideContent = (
           </a>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

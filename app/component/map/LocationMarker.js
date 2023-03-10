@@ -64,7 +64,7 @@ LocationMarker.propTypes = {
 
 LocationMarker.defaultProps = {
   className: undefined,
-  isLarge: false,
+  isLarge: true, // EMBARK
   type: 'via',
   disabled: false,
 };

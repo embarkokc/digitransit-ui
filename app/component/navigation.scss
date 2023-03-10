@@ -513,14 +513,14 @@ $content-background-color: $background-color;
   }
 }
 
-section.content {
+#mainContent {
   background-color: $content-background-color;
   position: relative;
   display: flex;
   flex-direction: column;
   flex: 0 1 100%;
 
-  .mobile {
+  > .mobile {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -530,7 +530,7 @@ section.content {
     }
   }
 
-  .desktop {
+  > .desktop {
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -630,7 +630,7 @@ section.content {
 }
 
 @media print {
-  section.content {
+  #mainContent {
     height: auto;
     display: block;
 

@@ -8,8 +8,9 @@ $font-size-normal: 21px;
 }
 
 .container .input {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     border-radius: 4px;
+    height: 64px;
     font-size: $font-size-normal;
     color: $black;
     &::placeholder {

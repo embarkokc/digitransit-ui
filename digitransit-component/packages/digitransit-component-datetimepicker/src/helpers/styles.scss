@@ -149,8 +149,8 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     color: $black;
     margin: 2px;
     background: none;
-    border-radius: 6px;
-    padding: 9px 0;
+    border-radius: 4px; // EMBARK, was: 6px;
+    padding: 7px 0; // EMBARK, was: 9px 0;
     width: 50%;
     cursor: pointer;
     height: calc(1rem + 16px);
@@ -207,7 +207,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     transition: transform 0.2s;
     position: relative;
     top: -8px;
-    right: -8px;
+    right: 0px; // EMBARK right align with time input, was: -8px;
     border: 0;
     font-weight: normal;
     background: none;

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
+import cx from 'classnames';
 import DTAutoSuggest from '@digitransit-component/digitransit-component-autosuggest';
+import withBreakpoint from '../util/withBreakpoint';
 import Icon from './Icon';
 
 import LazilyLoad, { importLazy } from './LazilyLoad';
@@ -47,7 +49,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
 
   render() {
     const { config } = this.context;
-    const { lang } = this.props;
+    const { lang, breakpoint } = this.props;
     const { trafficNowLink, colors, fontWeights } = config;
     const { secondaryLogoPath } = this;
     const color = colors.primary;
@@ -68,6 +70,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
       stopAndRouteSearchTargets.push('ParkingAreas');
     }
 
+    const isMobile = this.props.breakpoint !== 'large';
     const stopRouteSearchProps = {
       appElement: '#app',
       icon: 'search',
@@ -87,13 +90,20 @@ class EmbeddedRouteSearchContainer extends React.Component {
       fontWeights,
       modeIconColors: config.colors.iconColors,
       modeSet: config.iconModeSet,
+      // todo: `isEmbedded: true`?
+      // todo: pick based on props.breakpoint?
+      isMobile,
     };
 
     const systemAlertsPath = '/alerts';
     const container = (
+      // todo: detect mobile devices using props.breakpoint?
       <div
-        className="embedded-seach-container embedded-route-search-container"
-        id="#app"
+        className={cx('embedded-seach-container embedded-route-search-container', {
+          mobile: isMobile,
+          desktop: !isMobile,
+        })}
+        // id="#app"
       >
         <div className="control-panel-container">
           <h1 className="embedded-route-search-container-heading">
@@ -106,7 +116,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
             ) : null}
             Find A Ride
           </h1>
-          <StopRouteSearch isMobile {...stopRouteSearchProps} />
+          <StopRouteSearch {...stopRouteSearchProps} />
           <ul
             style={{ listStyle: 'none', paddingLeft: 0, fontWeight: 'normal' }}
           >
@@ -158,4 +168,8 @@ EmbeddedRouteSearchContainer.defaultTypes = {
   lang: 'en',
 };
 
-export default EmbeddedRouteSearchContainer;
+const EmbeddedRouteSearchContainerWithBreakpoint = withBreakpoint(EmbeddedRouteSearchContainer);
+export {
+  EmbeddedRouteSearchContainer as Component,
+  EmbeddedRouteSearchContainerWithBreakpoint as default,
+};

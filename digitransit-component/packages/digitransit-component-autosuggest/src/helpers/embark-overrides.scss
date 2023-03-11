@@ -18,6 +18,10 @@ $font-size-normal: 21px;
    		color: $black;
 		opacity: 1;
 	}
+    @include min-width(tablet) {
+      font-size: $font-size-normal;
+      height: 64px;
+    }
 }
 
 .search-result .suggestion-result .suggestion-label {

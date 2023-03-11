@@ -68,22 +68,21 @@ body {
 
 .tab-container {
   background-color: $gray;
-  margin: 34px 56px 16px 56px;
-  border: 1px solid #000;
+  margin: 34px 56px 16px 58px;
 }
 .tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
   border-left: none;
 }
-.tab-singletab, .tab-singletab:hover {
+.tab-singletab {
   color: #fff;
 }
 
-.tab-singletab.active, .tab-singletab.active:hover, .tab-singletab:hover.active, .tab-singletab:hover.active:hover {
+.tab-singletab.active, .tab-singletab.active:hover, .tab-singletab:hover {
   background-color: #ffffff;
   font-weight: 400;
   color: $black;
 }
-.tab-singletab .no-alerts span {
+.tab-singletab .no-alerts span, .tab-singletab:hover .no-alerts span {
   color: inherit;
 }
 
@@ -103,6 +102,21 @@ body {
   .route-arrival {
   color: inherit;
   }
+
+  .route-number-container .route-number {
+    justify-content: flex-start; // center;
+    gap: 5px;
+    align-items: center;
+    display: flex;
+    .icon-container {
+      position: unset;
+    }
+  }
+}
+
+.desktop .stop-page.departure-list .departure-row .route-headsign {
+  padding-left: $padding-medium;
+  padding-right: $padding-medium;
 }
 
 .stop-page.departure-list .departure-row .route-number-container {
@@ -116,6 +130,10 @@ body {
     color: inherit;
   }
 }
+.stop-page.departure-list .departure-row .route-number-container .route-number .icon-container {
+  // move icon left to compensate svg padding
+  left: -5px;
+}
 
 .departure-list-legend {
   font-style: italic;
@@ -127,8 +145,11 @@ body {
   }
 }
 
-.stop-page.departure-list .departure-row {
-  padding: 20px 0px 20px 0px;
+.stop-page.departure-list {
+  padding: 0px 0px 15px 0px;
+  .departure-row {
+    padding: 20px 0px 20px 0px;
+  }
 }
 
 .stop-page-departure-wrapper {

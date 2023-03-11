@@ -60,8 +60,8 @@ input[type='text'] {
       box-shadow: 0px 0px 2px 1px var(--hover-color);
     }
     @include min-width(tablet) {
-      font-size: 15px;
-      height: 44px;
+      font-size: 21px; // EMBARK, was: 15px;
+      height: 64px; //EMBARK, was: 44px;
       padding-left: 49px;
     }
 

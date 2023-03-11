@@ -1470,7 +1470,7 @@ const translations = {
     'select-map-layers-header': 'Show on map',
     'select-position': 'Select your location from your previous searches',
     'select-route': 'Select {mode} route {shortName} to {headsign}',
-    'selected-routes': 'Selected lines',
+    'selected-routes': 'Selected Route',
     send: 'Send',
     'separate-ticket-required':
       'A separate ticket is required for this part of the itinerary.',

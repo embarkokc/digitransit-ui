@@ -11,6 +11,7 @@ import MobileView from './MobileView';
 import { getStopPath, getRoutePath } from '../util/path';
 import { typeToName } from '../util/gtfs';
 import { getAvailableTransportModeConfigs } from '../util/modeUtils';
+import { localizeTime } from '../util/timeUtils';
 import { replaceQueryParams } from '../util/queryUtils';
 import { DesktopOrMobile } from '../util/withBreakpoint';
 import ModesSelectDropdown from './ModesSelectDropdown';
@@ -65,7 +66,7 @@ const alertMatchesModes = (alert, modes) => {
 // we need a localized "current-year-aware" formatting
 // with Luxon, one might use https://moment.github.io/luxon/api-docs/index.html#datetimetolocaleparts ?
 const localizeDate = dateTime => {
-  return moment(dateTime).format('dd L');
+  return moment.unix(dateTime).format('L');
 };
 
 const AgencyAlertEntity = ({ alert }) => {
@@ -131,6 +132,19 @@ const renderableAlertEntities = new Map([
   ['Stop', StopAlertEntity],
 ]);
 
+const DateTime = ({ timestamp, classNamePrefix, children }) => {
+  const pref = classNamePrefix ? `-${classNamePrefix}` : '';
+  return (
+    <time
+      key={`alert-${pref}datetime`}
+      className={`alerts-view-alert-${pref}datetime`}
+      dateTime={new Date(timestamp).toISOString()}
+    >
+      {children}
+    </time>
+  );
+};
+
 export function AlertEntity(props) {
   // it is in fact defined in the prop types :/
   // eslint-disable-next-line react/prop-types
@@ -167,25 +181,32 @@ export function Alert({ alertData }) {
   } = alertData;
   const entities = Array.isArray(alertData.entities) ? alertData.entities : [];
 
-  const start = effectiveStartDate ? (
-    <time
-      key="alert-start-date"
-      className="alerts-view-alert-start-date"
-      dateTime={new Date(effectiveStartDate).toISOString()}
-    >
-      {localizeDate(effectiveStartDate)}
-    </time>
-  ) : null;
-  const end = effectiveEndDate ? (
-    <time
-      key="alert-end-date"
-      className="alerts-view-alert-end-date"
-      dateTime={new Date(effectiveEndDate).toISOString()}
-    >
-      {localizeDate(effectiveEndDate)}
-    </time>
-  ) : null;
-  const startEnd = start && end ? [start, ' – ', end] : [start, end];
+  const renderFullDateTime = (timestamp, classNamePrefix = '') => {
+    return (
+      <DateTime timestamp={timestamp} classNamePrefix={classNamePrefix}>
+        {localizeDate(timestamp)} {localizeTime(timestamp)}
+      </DateTime>
+    );
+  };
+  const renderTimeOnly = (timestamp, classNamePrefix = '') => {
+    return (
+      <DateTime timestamp={timestamp} classNamePrefix={classNamePrefix}>
+        {localizeTime(timestamp)}
+      </DateTime>
+    );
+  };
+  let dateTimeEls = null;
+  if (effectiveStartDate && effectiveEndDate) {
+    dateTimeEls = [
+      renderFullDateTime(effectiveStartDate, 'start'),
+      ' – ',
+      renderFullDateTime(effectiveEndDate, 'end'),
+    ];
+  } else if (effectiveStartDate) {
+    dateTimeEls = ['from ', renderFullDateTime(effectiveStartDate)];
+  } else if (effectiveEndDate) {
+    dateTimeEls = ['until ', renderFullDateTime(effectiveEndDate)];
+  }
 
   const renderedEntities = entities
     .filter(entity => {
@@ -201,7 +222,7 @@ export function Alert({ alertData }) {
       <div className="alerts-view-alert-entities">{renderedEntities}</div>
       {/* todo: i18n, proper fallback heading */}
       <h2>{alertHeaderText || 'notice'}</h2>
-      <p className="alerts-view-alert-time-frame">{startEnd}</p>
+      <p className="alerts-view-alert-time-frame">{dateTimeEls}</p>
       <p>{alertDescriptionText}</p>
     </div>
   );
@@ -337,6 +358,12 @@ const AlertEntityPropType = PropTypes.oneOfType([
   AgencyPropTypes,
   RouteTypePropTypes,
 ]);
+
+DateTime.propTypes = {
+  timestamp: PropTypes.number.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+};
 
 const AlertPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,

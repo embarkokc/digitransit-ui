@@ -182,13 +182,16 @@ export function Alert({ alertData }) {
   ) : null;
   const startEnd = start && end ? [start, ' – ', end] : [start, end];
 
+  const renderedEntities = entities
+    .filter(entity => {
+      // eslint-disable-next-line no-underscore-dangle
+      return renderableAlertEntities.has(entity.__typename);
+    })
+    .map(entity => <AlertEntity key={entity.id} entity={entity} />);
+
   return (
     <div id={id} className="alerts-view-alert">
-      <div className="alerts-view-alert-entities">
-        {entities.map(entity => (
-          <AlertEntity key={entity.id} entity={entity} />
-        ))}
-      </div>
+      <div className="alerts-view-alert-entities">{renderedEntities}</div>
       {/* todo: i18n, proper fallback heading */}
       <h2>{alertHeaderText || 'notice'}</h2>
       <p className="alerts-view-alert-time-frame">{startEnd}</p>
@@ -228,6 +231,12 @@ export function AlertsView(props, context) {
 
   let alerts = props.alerts
     .filter(alert => Array.isArray(alert.entities))
+    .filter(alert => {
+      return alert.entities.some(ae =>
+        // eslint-disable-next-line no-underscore-dangle
+        renderableAlertEntities.has(ae.__typename),
+      );
+    })
     .sort(sortAlerts);
   if (modes !== null) {
     alerts = alerts.filter(alert => alertMatchesModes(alert, modes));

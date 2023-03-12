@@ -34,7 +34,7 @@ export default function ModesSelectDropdown(props, context) {
     availableModes,
     onSelectedModesChange,
   } = props;
-  const { intl } = context;
+  const { intl, config } = context;
 
   const modeAsOption = mode => ({
     value: mode,
@@ -115,6 +115,13 @@ export default function ModesSelectDropdown(props, context) {
         defaultValue={defaultOptions}
         // shown when no options are selected, among other situations
         placeholder={intl.formatMessage({ id: placeholderLabelId })}
+        styles={{
+          noOptionsMessage: () => ({
+            color: config.colors.primary,
+            padding: `8px 12px`,
+            textAlign: 'center',
+          }),
+        }}
       />
     </div>
   );

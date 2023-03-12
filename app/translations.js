@@ -1234,7 +1234,7 @@ const translations = {
     'modes-select-dropdown-aria-message-guidance':
       'select one or more modes from a dropdown menu',
     'modes-select-dropdown-label': 'select services',
-    'modes-select-dropdown-placeholder': 'select one of more services',
+    'modes-select-dropdown-placeholder': 'Select one of more services',
     'modes.to-bike': 'city bike station',
     'modes.to-bike-park': 'bike park',
     'modes.to-bus': 'bus stop',

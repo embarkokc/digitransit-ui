@@ -78,8 +78,9 @@ const AgencyAlertEntity = ({ alert }) => {
   return <Icon img="icon-icon_caution" className={severityClassName} />;
 };
 const RouteAlertEntity = ({ entity }) => {
-  // todo: fallback color?
-  const { gtfsId, mode, color = '#686869', shortName } = entity;
+  const { gtfsId, mode, shortName } = entity;
+  // OTP provides the hex code without `#`
+  const color = `#${entity.color || '686869'}`
   const href = getRoutePath({ gtfsId });
   // this is copied & tweaked from DeparturesRow.js
   // todo: merge this code with RouteNumber.js & the implementation in DeparturesRow.js

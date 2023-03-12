@@ -68,74 +68,86 @@ const localizeDate = dateTime => {
   return moment(dateTime).format('dd L');
 };
 
-export function AlertEntity({ entityData }, { config }) {
+const AgencyAlertEntity = () => {
+  return <Icon img="icon-icon_caution" color="#D6153B" />;
+};
+const RouteAlertEntity = ({ entity }) => {
+  // todo: fallback color?
+  const { gtfsId, mode, color = '#686869', shortName } = entity;
+  const href = getRoutePath({ gtfsId });
+  // this is copied & tweaked from DeparturesRow.js
+  // todo: merge this code with RouteNumber.js & the implementation in DeparturesRow.js
+  return (
+    <span
+      className={cx('route-number-container', {
+        // todo: remove `<=`?
+        long: shortName.length >= 5 && shortName.length <= 6,
+      })}
+      style={{ borderColor: color }}
+    >
+      <Link to={href}>
+        <Icon
+          className={mode.toLowerCase()}
+          img={`icon-icon_${mode.toLowerCase()}`}
+          color={color}
+          ariaLabel={`${mode} icon`}
+        />
+        <span className="route-number">{shortName}</span>
+      </Link>
+    </span>
+  );
+};
+const RouteTypeAlertEntity = ({ entity }, { config }) => {
+  const { routeType } = entity;
+  const mode = typeToName[routeType];
+  if (!mode) {
+    return <span>?</span>;
+  }
+  const color = config.colors.iconColors[`mode-${mode}`];
+  return (
+    <Icon img={`icon-icon_${mode}`} ariaLabel={`${mode} icon`} color={color} />
+  );
+};
+const StopAlertEntity = ({ entity }) => {
+  const { gtfsId, code } = entity;
+  const href = getStopPath({ gtfsId });
+  return (
+    <span className="stop-code-container">
+      <Link to={href}>
+        <span className="stop-code">{code}</span>
+      </Link>
+    </span>
+  );
+};
+const renderableAlertEntities = new Map([
+  ['Agency', AgencyAlertEntity],
+  ['Route', RouteAlertEntity],
+  ['RouteType', RouteTypeAlertEntity],
+  ['Stop', StopAlertEntity],
+]);
+
+export function AlertEntity(props) {
   // it is in fact defined in the prop types :/
   // eslint-disable-next-line react/prop-types
-  const { __typename } = entityData;
+  const { __typename } = props.entity;
 
-  let entity = null;
-  if (__typename === 'Agency') {
-    entity = <Icon img="icon-icon_caution" color="#D6153B" />;
-  } else if (__typename === 'Route') {
-    // todo: fallback color?
-    const { gtfsId, mode, color = '#686869', shortName } = entityData;
-    const href = getRoutePath({ gtfsId });
-    // this is copied & tweaked from DeparturesRow.js
-    // todo: merge this code with RouteNumber.js & the implementation in DeparturesRow.js
-    entity = (
-      <span
-        className={cx('route-number-container', {
-          // todo: remove `<=`?
-          long: shortName.length >= 5 && shortName.length <= 6,
-        })}
-        style={{ borderColor: color }}
-      >
-        <Link to={href}>
-          <Icon
-            className={mode.toLowerCase()}
-            img={`icon-icon_${mode.toLowerCase()}`}
-            color={color}
-            ariaLabel={`${mode} icon`}
-          />
-          <span className="route-number">{shortName}</span>
-        </Link>
-      </span>
+  const Component = renderableAlertEntities.get(__typename);
+  if (!renderableAlertEntities.has(__typename)) {
+    const err = new Error(
+      `invalid/unsupported AlertEntity: __typename = ${__typename}`,
     );
-  } else if (__typename === 'RouteType') {
-    const { routeType } = entityData;
-    // TODO what if this fails?
-    const mode = typeToName[routeType];
-    if (mode) {
-      const color = config.colors.iconColors[`mode-${mode}`];
-      entity = (
-        <Icon
-          img={`icon-icon_${mode}`}
-          ariaLabel={`${mode} icon`}
-          color={color}
-        />
-      );
-    } else {
-      entity = <span>?</span>;
-    }
-  } else if (__typename === 'Stop') {
-    const { gtfsId, code } = entityData;
-    const href = getStopPath({ gtfsId });
-    entity = (
-      <span className="stop-code-container">
-        <Link to={href}>
-          <span className="stop-code">{code}</span>
-        </Link>
-      </span>
-    );
+    err.entity = props.entity;
+    throw err;
   }
+  const renderedEntity = <Component {...props} />;
 
   // eslint-disable-next-line react/prop-types
   const lowerCasedTypename = __typename.toLowerCase();
-  return entity ? (
+  return renderedEntity ? (
     <span
       className={`alerts-view-alert-alert-entity alerts-view-alert-alert-entity__${lowerCasedTypename}`}
     >
-      {entity}
+      {renderedEntity}
     </span>
   ) : null;
 }
@@ -173,8 +185,8 @@ export function Alert({ alertData }) {
   return (
     <div id={id} className="alerts-view-alert">
       <div className="alerts-view-alert-entities">
-        {entities.map(entityData => (
-          <AlertEntity key={entityData.id} entityData={entityData} />
+        {entities.map(entity => (
+          <AlertEntity key={entity.id} entity={entity} />
         ))}
       </div>
       {/* todo: i18n, proper fallback heading */}
@@ -214,7 +226,9 @@ export function AlertsView(props, context) {
     }
   }
 
-  let alerts = props.alerts.sort(sortAlerts);
+  let alerts = props.alerts
+    .filter(alert => Array.isArray(alert.entities))
+    .sort(sortAlerts);
   if (modes !== null) {
     alerts = alerts.filter(alert => alertMatchesModes(alert, modes));
   }
@@ -308,8 +322,18 @@ const AlertEntityPropType = PropTypes.oneOfType([
   RouteTypePropTypes,
 ]);
 
+AgencyAlertEntity.propTypes = {};
+RouteAlertEntity.propTypes = {
+  entity: AlertEntityPropType.isRequired,
+};
+RouteTypeAlertEntity.propTypes = {
+  entity: AlertEntityPropType.isRequired,
+};
+StopAlertEntity.propTypes = {
+  entity: AlertEntityPropType.isRequired,
+};
 AlertEntity.propTypes = {
-  entityData: AlertEntityPropType.isRequired,
+  entity: AlertEntityPropType.isRequired,
 };
 AlertEntity.contextTypes = {
   config: PropTypes.object.isRequired,

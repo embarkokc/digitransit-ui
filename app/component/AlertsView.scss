@@ -124,6 +124,22 @@
 		}
 	}
 
+	.icon.alerts-alert-severity-level-unknown-severity {
+		fill: $gray;
+	}
+	.icon.alerts-alert-severity-level-info {
+		fill: $gray;
+	}
+	.icon.alerts-alert-severity-level-warning {
+		// todo: use yellow from Embark branding?
+		fill: #f39c12;
+	}
+	.icon.alerts-alert-severity-level-severe {
+		// todo
+		// fill: $red;
+		fill: #D6153B;
+	}
+
 	.alerts-view-alert-time-frame {
 		color: $dark-gray;
 		font-size: 85%;

@@ -444,6 +444,7 @@ export default config => {
               alertDescriptionText
               effectiveStartDate
               effectiveEndDate
+              alertSeverityLevel
               entities {
                 ... on Route {
                   __typename

@@ -68,8 +68,13 @@ const localizeDate = dateTime => {
   return moment(dateTime).format('dd L');
 };
 
-const AgencyAlertEntity = () => {
-  return <Icon img="icon-icon_caution" color="#D6153B" />;
+const AgencyAlertEntity = ({ alert }) => {
+  const severity = alert.alertSeverityLevel || 'UNKNOWN_SEVERITY';
+  // poor man's kebab-case implementation
+  const severityClassName = `alerts-alert-severity-level-${severity
+    .replace(/_/, '')
+    .toLowerCase()}`;
+  return <Icon img="icon-icon_caution" className={severityClassName} />;
 };
 const RouteAlertEntity = ({ entity }) => {
   // todo: fallback color?
@@ -187,7 +192,9 @@ export function Alert({ alertData }) {
       // eslint-disable-next-line no-underscore-dangle
       return renderableAlertEntities.has(entity.__typename);
     })
-    .map(entity => <AlertEntity key={entity.id} entity={entity} />);
+    .map(entity => (
+      <AlertEntity key={entity.id} entity={entity} alert={alertData} />
+    ));
 
   return (
     <div id={id} className="alerts-view-alert">
@@ -331,7 +338,20 @@ const AlertEntityPropType = PropTypes.oneOfType([
   RouteTypePropTypes,
 ]);
 
-AgencyAlertEntity.propTypes = {};
+const AlertPropTypes = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  // alertId
+  alertHeaderText: PropTypes.string,
+  alertDescriptionText: PropTypes.string.isRequired,
+  effectiveStartDate: PropTypes.number,
+  effectiveEndDate: PropTypes.number,
+  alertSeverityLevel: PropTypes.string,
+  entities: PropTypes.arrayOf(AlertEntityPropType),
+});
+
+AgencyAlertEntity.propTypes = {
+  alert: AlertPropTypes.isRequired,
+};
 RouteAlertEntity.propTypes = {
   entity: AlertEntityPropType.isRequired,
 };
@@ -342,22 +362,13 @@ StopAlertEntity.propTypes = {
   entity: AlertEntityPropType.isRequired,
 };
 AlertEntity.propTypes = {
+  alert: AlertPropTypes.isRequired,
   entity: AlertEntityPropType.isRequired,
 };
 AlertEntity.contextTypes = {
   config: PropTypes.object.isRequired,
   router: routerShape.isRequired,
 };
-
-const AlertPropTypes = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  // alertId
-  alertHeaderText: PropTypes.string,
-  alertDescriptionText: PropTypes.string.isRequired,
-  effectiveStartDate: PropTypes.number,
-  effectiveEndDate: PropTypes.number,
-  entities: PropTypes.arrayOf(AlertEntityPropType),
-});
 
 Alert.propTypes = {
   alertData: AlertPropTypes.isRequired,

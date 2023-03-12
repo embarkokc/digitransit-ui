@@ -197,11 +197,25 @@ export function Alert({ alertData }) {
   };
   let dateTimeEls = null;
   if (effectiveStartDate && effectiveEndDate) {
-    dateTimeEls = [
-      renderFullDateTime(effectiveStartDate, 'start'),
-      ' – ',
-      renderFullDateTime(effectiveEndDate, 'end'),
-    ];
+    if (effectiveStartDate === effectiveEndDate) {
+      dateTimeEls = [renderFullDateTime(effectiveStartDate)];
+    } else if (
+      localizeDate(effectiveStartDate) === localizeDate(effectiveEndDate)
+    ) {
+      // same day, different time
+      dateTimeEls = [
+        renderFullDateTime(effectiveStartDate, 'start'),
+        ' – ',
+        renderTimeOnly(effectiveEndDate, 'end'),
+      ];
+    } else {
+      // different day
+      dateTimeEls = [
+        renderFullDateTime(effectiveStartDate, 'start'),
+        ' – ',
+        renderFullDateTime(effectiveEndDate, 'end'),
+      ];
+    }
   } else if (effectiveStartDate) {
     dateTimeEls = ['from ', renderFullDateTime(effectiveStartDate)];
   } else if (effectiveEndDate) {

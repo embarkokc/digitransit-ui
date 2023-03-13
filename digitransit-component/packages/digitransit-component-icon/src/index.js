@@ -78,107 +78,105 @@ import SearchRailStationDigitransit from './assets/search-rail-station-digitrans
 import SearchTramStopDigitransit from './assets/search-tram-stop-digitransit.svg';
 import Funicular from './assets/funicular.svg';
 
-const IconMap = style => {
+const IconMap = (props = {}) => {
   return {
-    airplane: <Airplane style={style} />,
-    arrow: <Arrow style={style} />,
-    bus: <Bus style={style} />,
-    busstop: <Busstop style={style} />,
-    caution: <CautionWhite style={style} />,
-    city: <City style={style} />,
-    citybike: <CityBikeStopDefault style={style} />,
-    edit: <Edit style={style} />,
-    ferry: <Ferry style={style} />,
-    home: <Home style={style} />,
-    locate: <Locate style={style} />,
-    map: <Map style={style} />,
-    place: <Place style={style} />,
-    rail: <Rail style={style} />,
-    school: <School style={style} />,
-    shopping: <Shopping style={style} />,
-    sport: <Sport style={style} />,
-    star: <Star style={style} />,
-    station: <Station style={style} />,
-    subway: <Subway style={style} />,
-    tram: <Tram style={style} />,
-    work: <Work style={style} />,
-    close: <Close style={style} />,
-    'mapMarker-via': <MapmarkerVia style={style} />,
-    'bike-park': <BikePark style={style} />,
-    'car-park': <CarPark style={style} />,
-    mapMarker: <Mapmarker style={style} />,
-    search: <Search style={style} />,
-    plus: <Plus style={style} />,
-    attention: <Attention style={style} />,
-    'arrow-dropdown': <Dropdown style={style} />,
-    time: <Time style={style} />,
-    ellipsis: <Ellipsis style={style} />,
-    opposite: <Opposite style={style} />,
-    viapoint: <Viapoint style={style} />,
-    calendar: <Calendar style={style} />,
-    'select-from-map': <SelectFromMap style={style} />,
-    'caution-white': <CautionWhite style={style} />,
-    trash: <Trash style={style} />,
-    'mode-bus': <ModeBus style={style} />,
-    'mode-bus-express': <ModeBusExpress style={style} />,
-    'mode-bus-local': <ModeBusLocal style={style} />,
-    'mode-rail': <ModeRail style={style} />,
-    'mode-tram': <ModeTram style={style} />,
-    'mode-subway': <Subway style={style} />,
-    'mode-ferry': <ModeFerry style={style} />,
-    'mode-citybike': <ModeCitybike style={style} />,
-    'mode-digitransit-bus': <SearchBusStationDigitransit style={style} />,
-    'mode-digitransit-rail': <SearchRailStationDigitransit style={style} />,
-    'mode-digitransit-ferry': <SearchFerryDigitransit style={style} />,
-    'mode-digitransit-tram': <ModeDigiTram style={style} />,
-    'mode-digitransit-citybike': <ModeDigiCitybike style={style} />,
-    'mode-digitransit-airplane': <ModeAirplane style={style} />,
-    'mode-digitransit-subway': <Subway style={style} />,
-    'mode-digitransit-funicular': <ModeDigiFunicular style={style} />,
-    'mode-waltti-bus': <BusWaltti style={style} />,
-    'mode-waltti-citybike': <CitybikeWaltti style={style} />,
-    'mode-waltti-ferry': <FerryWaltti style={style} />,
-    'mode-waltti-rail': <RailWaltti style={style} />,
-    'mode-waltti-tram': <TramWaltti style={style} />,
-    'future-route': <FutureRoute style={style} />,
-    position: <Position style={style} />,
-    'search-street-name': <SearchStreetName style={style} />,
-    check: <Check style={style} />,
-    'search-bus-stop-default': <SearchBusStopDefault style={style} />,
+    airplane: <Airplane {...props} />,
+    arrow: <Arrow {...props} />,
+    bus: <Bus {...props} />,
+    busstop: <Busstop {...props} />,
+    caution: <CautionWhite {...props} />,
+    city: <City {...props} />,
+    citybike: <CityBikeStopDefault {...props} />,
+    edit: <Edit {...props} />,
+    ferry: <Ferry {...props} />,
+    home: <Home {...props} />,
+    locate: <Locate {...props} />,
+    map: <Map {...props} />,
+    place: <Place {...props} />,
+    rail: <Rail {...props} />,
+    school: <School {...props} />,
+    shopping: <Shopping {...props} />,
+    sport: <Sport {...props} />,
+    star: <Star {...props} />,
+    station: <Station {...props} />,
+    subway: <Subway {...props} />,
+    tram: <Tram {...props} />,
+    work: <Work {...props} />,
+    close: <Close {...props} />,
+    'mapMarker-via': <MapmarkerVia {...props} />,
+    'bike-park': <BikePark {...props} />,
+    'car-park': <CarPark {...props} />,
+    mapMarker: <Mapmarker {...props} />,
+    search: <Search {...props} />,
+    plus: <Plus {...props} />,
+    attention: <Attention {...props} />,
+    'arrow-dropdown': <Dropdown {...props} />,
+    time: <Time {...props} />,
+    ellipsis: <Ellipsis {...props} />,
+    opposite: <Opposite {...props} />,
+    viapoint: <Viapoint {...props} />,
+    calendar: <Calendar {...props} />,
+    'select-from-map': <SelectFromMap {...props} />,
+    'caution-white': <CautionWhite {...props} />,
+    trash: <Trash {...props} />,
+    'mode-bus': <ModeBus {...props} />,
+    'mode-bus-express': <ModeBusExpress {...props} />,
+    'mode-bus-local': <ModeBusLocal {...props} />,
+    'mode-rail': <ModeRail {...props} />,
+    'mode-tram': <ModeTram {...props} />,
+    'mode-subway': <Subway {...props} />,
+    'mode-ferry': <ModeFerry {...props} />,
+    'mode-citybike': <ModeCitybike {...props} />,
+    'mode-digitransit-bus': <SearchBusStationDigitransit {...props} />,
+    'mode-digitransit-rail': <SearchRailStationDigitransit {...props} />,
+    'mode-digitransit-ferry': <SearchFerryDigitransit {...props} />,
+    'mode-digitransit-tram': <ModeDigiTram {...props} />,
+    'mode-digitransit-citybike': <ModeDigiCitybike {...props} />,
+    'mode-digitransit-airplane': <ModeAirplane {...props} />,
+    'mode-digitransit-subway': <Subway {...props} />,
+    'mode-digitransit-funicular': <ModeDigiFunicular {...props} />,
+    'mode-waltti-bus': <BusWaltti {...props} />,
+    'mode-waltti-citybike': <CitybikeWaltti {...props} />,
+    'mode-waltti-ferry': <FerryWaltti {...props} />,
+    'mode-waltti-rail': <RailWaltti {...props} />,
+    'mode-waltti-tram': <TramWaltti {...props} />,
+    'future-route': <FutureRoute {...props} />,
+    position: <Position {...props} />,
+    'search-street-name': <SearchStreetName {...props} />,
+    check: <Check {...props} />,
+    'search-bus-stop-default': <SearchBusStopDefault {...props} />,
     'search-bus-stop-express-default': (
-      <SearchBusStopExpressDefault style={style} />
+      <SearchBusStopExpressDefault {...props} />
     ),
-    'search-rail-stop-default': <SearchRailStopDefault style={style} />,
-    'search-ferry-default': <SearchFerryDefault style={style} />,
-    'search-ferry-stop-default': <SearchFerryStopDefault style={style} />,
-    'search-tram-stop-default': <SearchTramStopDefault style={style} />,
-    'citybike-stop-digitransit': <CityBikeStopDigitransit style={style} />,
+    'search-rail-stop-default': <SearchRailStopDefault {...props} />,
+    'search-ferry-default': <SearchFerryDefault {...props} />,
+    'search-ferry-stop-default': <SearchFerryStopDefault {...props} />,
+    'search-tram-stop-default': <SearchTramStopDefault {...props} />,
+    'citybike-stop-digitransit': <CityBikeStopDigitransit {...props} />,
     'citybike-stop-digitransit-secondary': (
-      <CityBikeStopDigitransitSecondary style={style} />
+      <CityBikeStopDigitransitSecondary {...props} />
     ),
-    'citybike-stop-default': <CityBikeStopDefault style={style} />,
+    'citybike-stop-default': <CityBikeStopDefault {...props} />,
     'citybike-stop-default-secondary': (
-      <CityBikeStopDefaultSecondary style={style} />
+      <CityBikeStopDefaultSecondary {...props} />
     ),
-    'search-airplane-digitransit': <SearchAirplaneDigitransit style={style} />,
+    'search-airplane-digitransit': <SearchAirplaneDigitransit {...props} />,
     'search-bus-station-digitransit': (
-      <SearchBusStationDigitransit style={style} />
+      <SearchBusStationDigitransit {...props} />
     ),
-    'search-bus-stop-digitransit': <SearchBusStopDigitransit style={style} />,
+    'search-bus-stop-digitransit': <SearchBusStopDigitransit {...props} />,
     'search-bustram-stop-digitransit': (
-      <SearchBusTramStopDigitransit style={style} />
+      <SearchBusTramStopDigitransit {...props} />
     ),
-    'search-ferry-digitransit': <SearchFerryDigitransit style={style} />,
-    'search-ferry-stop-digitransit': (
-      <SearchFerryStopDigitransit style={style} />
-    ),
-    'search-funicular-stop-digitransit': <ModeDigiFunicular style={style} />,
-    'search-rail-stop-digitransit': <SearchRailStopDigitransit style={style} />,
+    'search-ferry-digitransit': <SearchFerryDigitransit {...props} />,
+    'search-ferry-stop-digitransit': <SearchFerryStopDigitransit {...props} />,
+    'search-funicular-stop-digitransit': <ModeDigiFunicular {...props} />,
+    'search-rail-stop-digitransit': <SearchRailStopDigitransit {...props} />,
     'search-rail-station-digitransit': (
-      <SearchRailStationDigitransit style={style} />
+      <SearchRailStationDigitransit {...props} />
     ),
-    'search-tram-stop-digitransit': <SearchTramStopDigitransit style={style} />,
-    funicular: <Funicular style={style} />,
+    'search-tram-stop-digitransit': <SearchTramStopDigitransit {...props} />,
+    funicular: <Funicular {...props} />,
   };
 };
 
@@ -193,14 +191,17 @@ const IconMap = style => {
  *    rotate={90}     // How many degrees to rotate image, optional
  * />
  */
-const Icon = ({ color, img, height, width, rotate }) => {
+const Icon = ({ className = null, color, img, height, width, rotate }) => {
   const style = {
     fill: color || null,
     height: height ? `${height}em` : null,
     width: width ? `${width}em` : null,
     transform: rotate ? `rotate(${rotate}deg)` : null,
   };
-  const icons = IconMap(style);
+  const icons = IconMap({
+    className,
+    style,
+  });
   if (img === 'locate' && color && color.toUpperCase() !== '#007AC9') {
     return <React.Fragment>{icons.position}</React.Fragment>;
   }
@@ -208,6 +209,7 @@ const Icon = ({ color, img, height, width, rotate }) => {
 };
 
 Icon.propTypes = {
+  className: PropTypes.string,
   color: PropTypes.string,
   height: PropTypes.number,
   img: PropTypes.string.isRequired,
@@ -216,6 +218,7 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
+  className: null,
   color: undefined,
   height: undefined,
   width: undefined,

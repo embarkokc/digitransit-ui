@@ -43,10 +43,16 @@ function patternTextWithIcon(pattern) {
     if (i === -1) {
       return text;
     }
-    return (
-      <>
+    /* return (<>
         {text.slice(0, i)}
         <Icon className="in-text-arrow" img="icon-icon_arrow-right-long" />
+        <span className="sr-only">➔</span>
+        {text.slice(i + 1)}
+      </>
+    );
+    */
+    return (
+      <>
         <span className="sr-only">➔</span>
         {text.slice(i + 1)}
       </>

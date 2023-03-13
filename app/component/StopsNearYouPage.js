@@ -490,12 +490,16 @@ class StopsNearYouPage extends React.Component {
                     />
                   )}
                   {renderSearch && (
-                    <StopsNearYouSearch
-                      mode={nearByStopMode}
-                      breakpoint={this.props.breakpoint}
-                      lang={this.props.lang}
-                    />
+                    <>
+                      <StopsNearYouSearch
+                        mode={nearByStopMode}
+                        breakpoint={this.props.breakpoint}
+                        lang={this.props.lang}
+                      />
+                      <div className="divider-bottom" />
+                    </>
                   )}
+
                   {this.state.showCityBikeTeaser &&
                     nearByStopMode === 'CITYBIKE' &&
                     (cityBikeBuyUrl || cityBikeNetworkUrl) && (

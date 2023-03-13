@@ -72,6 +72,10 @@ function RouteLine(props) {
     ? props.filteredStops.map(stop => stop.stopId)
     : [];
 
+  const routeColor = props.pattern.route.color
+    ? `#${props.pattern.route.color}`
+    : null;
+
   if (!props.vehiclePosition) {
     const markers = props.pattern
       ? props.pattern.stops
@@ -84,6 +88,7 @@ function RouteLine(props) {
               }`}
               mode={modeClass + (props.thin ? ' thin' : '')}
               thin={props.thin}
+              colorOverride={routeColor}
             />
           ))
       : false;

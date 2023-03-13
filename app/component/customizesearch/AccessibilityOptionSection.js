@@ -31,8 +31,8 @@ const AccessibilityOptionSection = ({ currentSettings }, { executeAction }) => {
           <Icon
             className="wheelchair-icon"
             img="icon-icon_wheelchair"
-            height={2}
-            width={2}
+            height={1.7}
+            width={1.7}
           />
           <span className="accessibility-label">
             <FormattedMessage

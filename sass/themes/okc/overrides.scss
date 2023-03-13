@@ -477,15 +477,28 @@ div.map .leaflet-container .leaflet-control-attribution a {
   font-weight: $font-weight-bold;
 }
 
+.settings-dropdown-wrapper .fake-select-arrow {
+  height: .7em;
+  width: .7em;
+}
+
 .settings-dropdown-wrapper .settings-dropdown-label {
   color: $black;
   font-size: $font-size-normal;
+  padding: 0;
+  align-items: center;
 
+  .settings-dropdown-text-container {
+    margin: 16px 0;
+  }
   .settings-dropdown-label-text {
+    margin: 20px 0;
     color: inherit;
     font-size: inherit;
   }
   .settings-dropdown-label-value {
+    float: none;
+    margin: 0;
     color: inherit;
     font-size: inherit;
   }
@@ -497,21 +510,46 @@ div.map .leaflet-container .leaflet-control-attribution a {
     color: inherit;
   }
 }
+.settings-dropdown-wrapper .icon-container {
+  float: none;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.customize-search .walk-options-container {
+  padding-left: 16px;
+}
 
 .customize-search .walk-options-container label.toggle-label {
   color: $black;
   font-size: $font-size-normal;
-  margin-top: 5px;
-  margin-left: 20px;
+  margin-top: 20px;
+  margin-left: 0;
+
+  .toggle-label-text {
+    padding-top: 0;
+  }
 }
 
-.settings-mode-option-container .settings-mode-option-label .settings-mode-option-label-text {
-   color: $black;
+.settings-mode-option-container .settings-mode-option-label {
+  padding: 0;
+  .settings-mode-option-label-text-container {
+    align-items: center;
+  }
+  .settings-mode-option-label-text {
+    color: $black;
+  }
 }
 
 .settings-header {
   color: $black;
   font-weight: $font-weight-bolder;
+  padding-left: 16px;
+}
+
+.mode-option-container {
+  border-bottom: 1px solid #d5d5d5;
 }
 
 .mode-option-container label.toggle-label {
@@ -520,16 +558,64 @@ div.map .leaflet-container .leaflet-control-attribution a {
 }
 
 .mode-option-container .mode-option-block {
+  min-height: initial;
+  margin: 12px 0;
+
   .icon {
+    margin-top: 0;
     width: 36px;
+    height: 36px;
+    vertical-align: middle;
   }
+  // todo: there also is `div.mode-name`
   label.mode-name  {
     font-weight: $font-weight-medium;
     font-size: $font-size-normal;
+    align-items: center;
+    > span {
+      margin-top: 0;
+      line-height: inherit;
+    }
+  }
+
+  .accessibility-container .wheelchair-icon {
+    height: 36px;
+    width: 36px;
   }
 }
 
-/* /Settings overrides*/
+.customize-search {
+  .settings-section {
+    padding-bottom: 0;
+    border-bottom: 1px solid #d5d5d5;
+  }
+
+  .toggle-container .icon-container {
+    margin: 0 14.72px;
+  }
+
+  .option-toggle-container {
+    align-self: initial;
+  }
+
+  .avoid-transfers-container .settings-header {
+    font-weight: 400;
+  }
+
+  .accessibility-container {
+    height: initial;
+    margin: 12px 0;
+    padding: 0;
+
+    .wheelchair-icon {
+      vertical-align: middle;
+    }
+  }
+}
+
+.street-modes-container .settings-dropdown-wrapper {
+  margin-left: 66px;
+}
 
 /* Nearby stops */
 

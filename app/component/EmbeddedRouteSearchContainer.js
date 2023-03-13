@@ -99,10 +99,13 @@ class EmbeddedRouteSearchContainer extends React.Component {
     const container = (
       // todo: detect mobile devices using props.breakpoint?
       <div
-        className={cx('embedded-seach-container embedded-route-search-container', {
-          mobile: isMobile,
-          desktop: !isMobile,
-        })}
+        className={cx(
+          'embedded-seach-container embedded-route-search-container',
+          {
+            mobile: isMobile,
+            desktop: !isMobile,
+          },
+        )}
         // id="#app"
       >
         <div className="control-panel-container">
@@ -157,18 +160,16 @@ class EmbeddedRouteSearchContainer extends React.Component {
 EmbeddedRouteSearchContainer.propTypes = {
   lang: PropTypes.string.isRequired,
   // match: matchShape.isRequired,
-};
-
-EmbeddedRouteSearchContainer.propTypes = {
-  lang: PropTypes.string.isRequired,
-  // match: matchShape.isRequired,
+  breakpoint: PropTypes.string.isRequired,
 };
 
 EmbeddedRouteSearchContainer.defaultTypes = {
   lang: 'en',
 };
 
-const EmbeddedRouteSearchContainerWithBreakpoint = withBreakpoint(EmbeddedRouteSearchContainer);
+const EmbeddedRouteSearchContainerWithBreakpoint = withBreakpoint(
+  EmbeddedRouteSearchContainer,
+);
 export {
   EmbeddedRouteSearchContainer as Component,
   EmbeddedRouteSearchContainerWithBreakpoint as default,

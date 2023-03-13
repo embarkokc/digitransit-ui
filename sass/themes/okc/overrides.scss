@@ -294,6 +294,9 @@ nav.top-bar + section.content {
   background-color: #fff;
   border-top: 1px solid $lighter-gray;
   border-bottom: 1px solid $lighter-gray;
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 25px;
 
   h3 {
     padding: 30px 0px 10px 20px;
@@ -339,6 +342,11 @@ nav.top-bar + section.content {
 .summary h2 {
   visibility: visible;
   padding-left: 60px;
+  margin-bottom: 10px;
+}
+
+.summary-navigation-container {
+  position: relative; // Set relative, to allow positioning of itinerary-search-control
 }
 
 .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.citybike, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle_walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.car {
@@ -360,12 +368,23 @@ min-width: unset;
   fill: $gray;
 }
 
+.itinerary-summary-row .itinerary-legs {
+  gap: 2px;
+}
+
 .summary-list-container {
   border-top: none;
 }
 .itinerary-summary-row {
+  .action-arrow {
+    display: initial;
+    align-items: initial;
+    top: 52px;
+    position: relative;
+  }
   &.bp-large .action-arrow-click-area {
     padding: 17px 15px 0 20px;
+    margin-left: 0px;
   }
   .itinerary-first-leg-start-time-container .itinerary-first-leg-start-time {
     font-size: $font-size-xxsmall;
@@ -414,6 +433,18 @@ min-width: unset;
       float: right;
      }
    }
+}
+
+.itinerary-summary-row .summary-clickable-area {
+  padding-bottom: 20px;
+}
+
+.itinerary-summary-row.bp-large .summary-clickable-area {
+  max-width: calc(100% - 60px);
+}
+
+.desktop .itinerary-summary-row:before {
+  height: calc(100% - 37px);
 }
 
 /* Map */

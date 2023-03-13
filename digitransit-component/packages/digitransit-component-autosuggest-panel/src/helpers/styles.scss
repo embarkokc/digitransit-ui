@@ -156,9 +156,9 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   text-align: center;
   max-height: 50px;
   cursor: pointer;
-  position: relative;
-  left: -40px;
-  top: 48px; // EMBARK 60px height of input requires more
+  position: absolute; // EMBARK absolute positioning, inputs get full width
+  right: 60px; // EMBARK
+  top: 65px; // EMBARK
   z-index: index($zindex, 'rectangle')+1;
   & + .itinerary-search-control {
     border-left: 1px solid rgba(151, 151, 151, 0.2);
@@ -175,7 +175,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     }
   }
   .add-via-point {
-    display: flex;
+    display: none; // (was flex), don't display as via-point is currently not supported by OTP2.0
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -184,7 +184,6 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       width: 20px;
       height: 22px;
     }
-    visibility: hidden; // Currently not supported by OTP
   }
   .add-via-point-slack {
     display: flex;

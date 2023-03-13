@@ -684,6 +684,17 @@ span.itinerary-stop-code {
   text-align: right;
 }
 
+.route-page-action-bar {
+  display: none;
+}
+
+.after-scrollable-area {
+  display: none;
+  @include min-width(tablet) {
+    display: none; // EMBARK
+  }
+}
+
 .route-pattern-select {
   margin: 1px 0 18px 0;
   padding-bottom: 34px;

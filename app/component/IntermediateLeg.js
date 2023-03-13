@@ -71,9 +71,11 @@ function IntermediateLeg(
           )}
       </div>
       <div className={`leg-before ${modeClassName}`}>
-        <Icon img={`icon-icon_${modeClassName}-stop`} />
+        <Icon img={`icon-icon_${modeClassName}-stop`} color={color} />
         <div style={{ color }} className={`leg-before-line ${modeClassName}`} />
-        {isLastPlace && <Icon img={`icon-icon_${modeClassName}-stop`} />}
+        {isLastPlace && (
+          <Icon img={`icon-icon_${modeClassName}-stop`} color={color} />
+        )}
       </div>
       <div
         className={`small-9 columns itinerary-instruction-column intermediate ${modeClassName}`}

@@ -28,7 +28,7 @@ import ScrollableWrapper from './ScrollableWrapper';
 import getTestData from './RouteScheduleDebugData';
 import { localizeTime } from '../util/timeUtils';
 
-const DATE_FORMAT2 = 'MMM. D';
+const DATE_FORMAT2 = 'MMM D';
 
 const isTripCanceled = trip =>
   trip.stoptimes &&

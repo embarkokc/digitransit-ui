@@ -86,6 +86,7 @@ class TrafficNowLink extends React.Component {
           <div className={styles.caution}>
             {' '}
             <Icon
+              className={styles.icon}
               img="caution-white"
               color="#DC0451"
               height={1.375}
@@ -97,7 +98,13 @@ class TrafficNowLink extends React.Component {
           </div>
 
           <span>
-            <Icon width={0.8125} height={1.1875} img="arrow" color="#007ac9" />
+            <Icon
+              className={styles.arrow}
+              width={0.8125}
+              height={1.1875}
+              img="arrow"
+              color="#007ac9"
+            />
           </span>
         </div>
       </h2>

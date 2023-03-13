@@ -8,14 +8,15 @@ $font-size-medium: 21px; // was 18px
 $font-size-smaller: 18px; // was 16px
 
 .text {
-  display: flex;
-  line-height: 1;
+  // display: flex; // EMBARK
+  // line-height: 1; // EMBARK
   font-size: $font-size-medium;
   padding-left: 15px;
   font-weight: var(--font-weight-medium);
   letter-spacing: -0.67px;
   color: $black;
-  margin-left: -1px;
+  // margin-left: -1px; // EMBARK
+  vertical-align: middle; // EMBARK
 
   @include min-width(tablet) {
     font-size: 20px;
@@ -38,7 +39,15 @@ $font-size-smaller: 18px; // was 16px
 .caution {
   margin-top: 0;
   margin-right: 10px;
-  display: flex;
+  // display: flex; // EMBARK
+}
+
+.icon {
+  vertical-align: middle; // EMBARK
+}
+
+.arrow {
+  vertical-align: middle; // EMBARK
 }
 
 .container {

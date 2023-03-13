@@ -148,7 +148,10 @@ class OriginDestinationBar extends React.Component {
           refPoint={refPoint}
           originPlaceHolder="search-origin-index"
           destinationPlaceHolder="search-destination-index"
-          showMultiPointControls={this.context.config.viaPointsEnabled}
+          showMultiPointControls={
+            this.context.config.viaPointsEnabled ||
+            this.context.config.switchOriginDestinationEnabled
+          }
           viaPoints={this.props.viaPoints}
           updateViaPoints={this.updateViaPoints}
           addAnalyticsEvent={addAnalyticsEvent}

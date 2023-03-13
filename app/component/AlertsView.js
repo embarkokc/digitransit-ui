@@ -80,7 +80,7 @@ const AgencyAlertEntity = ({ alert }) => {
 const RouteAlertEntity = ({ entity }) => {
   const { gtfsId, mode, shortName } = entity;
   // OTP provides the hex code without `#`
-  const color = `#${entity.color || '686869'}`
+  const color = `#${entity.color || '686869'}`;
   const href = getRoutePath({ gtfsId });
   // this is copied & tweaked from DeparturesRow.js
   // todo: merge this code with RouteNumber.js & the implementation in DeparturesRow.js

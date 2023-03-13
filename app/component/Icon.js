@@ -79,6 +79,8 @@ function Icon({
         id={id}
         style={{
           fill: color || null,
+          // for embark, we let some SVG icons use `--fill`, but fall back to their own color
+          '--fill': color || null,
           height: height ? `${height}em` : null,
           width: width ? `${width}em` : null,
           outline: 0,

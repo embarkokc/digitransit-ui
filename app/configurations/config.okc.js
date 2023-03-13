@@ -168,10 +168,6 @@ export default configMerger(walttiConfig, {
       spokies: {
         capacity: BIKEAVL_WITHMAX,
         enabled: true,
-        season: {
-          start: new Date(new Date().getFullYear(), 0, 1),
-          end: new Date(new Date().getFullYear(), 1, 31),
-        },
         icon: 'citybike',
         name: {
           en: 'Spokies',

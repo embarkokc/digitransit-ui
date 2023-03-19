@@ -975,17 +975,27 @@ div.origin-popup {
   border-radius: 4px;
 }
 
+.itinerary-icon-container {
+  left: 4px; // To center align start/end marker
+}
+.row.itinerary-row .leg-before.first .leg-before-line {
+    height: calc(100% - 3em); // shorten transit leg bar if itinerary's first leg is transit leg
+}
+
 .row.itinerary-row .leg-before.bus,
 .row.itinerary-row .leg-before.tram {
-  .icon-container {
+  &:not(.first) .icon-container,
+  > .icon-container:last-child {
     left: -12px;
     position: absolute;
   }
-  .icon {
+  &:not(.first) .icon, // bus/tram lolipop icon at leg start, if not first leg in itinerary
+  > :last-child .icon { // bus/tram lolipop icon at leg end
     height: 3em;
     width: 3em;
   }
 }
+
 .itinerary-leg-container .row.itinerary-row .leg-before.bus,
 .itinerary-leg-container .row.itinerary-row .leg-before.tram {
   .icon {

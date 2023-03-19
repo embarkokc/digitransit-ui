@@ -355,6 +355,26 @@ display: inherit;
 min-width: unset;
 }
 
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .icon {
+  height: 1em;
+  width: 1em;
+  position: relative;
+  font-size: 43px;
+}
+
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .vehicle-number-container-v {
+  width: inherit;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  .vehicle-number {
+    left: inherit;
+    width: inherit;
+    padding: 0px;
+  }
+}
+
 .itinerary-summary-row .itinerary-legs .leg.bike_park,
 .itinerary-summary-row .itinerary-legs .leg.car_park {
   min-width: 48px;

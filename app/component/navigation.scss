@@ -520,7 +520,8 @@ $content-background-color: $background-color;
   flex-direction: column;
   flex: 0 1 100%;
 
-  > .mobile {
+  > .mobile,
+  .alerts-view > .mobile {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -530,7 +531,8 @@ $content-background-color: $background-color;
     }
   }
 
-  > .desktop {
+  > .desktop,
+  .alerts-view > .desktop {
     display: flex;
     flex-direction: row;
     height: 100%;

@@ -168,7 +168,8 @@ body {
   min-height: inherit;
 }
 
-#mainContent > .desktop {
+#mainContent > .desktop,
+#mainContent .alerts-view > .desktop {
   .back-button {
     position: initial;
 

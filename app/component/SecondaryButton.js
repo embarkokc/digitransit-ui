@@ -9,6 +9,7 @@ const secondaryButton = (props, context) => {
   const className = cx([
     'secondary-button',
     props.buttonName,
+    props.className,
     { small: props.smallSize },
   ]);
   return (
@@ -34,6 +35,7 @@ secondaryButton.propTypes = {
   buttonName: PropTypes.string.isRequired,
   buttonClickAction: PropTypes.func.isRequired,
   buttonIcon: PropTypes.string,
+  className: PropTypes.string,
   smallSize: PropTypes.bool,
 };
 

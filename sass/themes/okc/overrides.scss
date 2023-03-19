@@ -898,11 +898,16 @@ div.origin-popup {
 .small-2 {
     width: 25%;
 }
-.itinerary-summary .duration span {
-  visibility: hidden; // Hide duration span
+.itinerary-summary .duration {
+  font-size: $font-size-normal;
+  span {
+    display: none; // Hide duration span
+  }
 }
 .duration--itinerary-summary, .distance--itinerary-summary {
   align-items: center; // Align midddle after departure time removal
+  top: initial;
+  padding-bottom: initial;
 }
 
 .vehicle-number {
@@ -958,7 +963,8 @@ div.origin-popup {
     font-size: $font-size-xxsmall;
     font-weight: $font-weight-normal;
     .icon-container {
-      padding-right: 7px;
+      padding-left: 2px;
+      padding-right: 1px;
     }
 }
 
@@ -997,4 +1003,63 @@ div.origin-popup {
   background-position-y: 7px;
   height: 10%;
   top: 85%;
+}
+
+.okc-icon-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  line-height: 1;
+  .icon-container {
+    height: 1em;
+  }
+}
+
+.itinerary-summary-info-row {
+  display: flex;
+  gap: 40px;
+  padding-bottom: 20px;
+}
+
+.distance--itinerary-summary {
+  padding-left: 2px;
+  gap: 15px;
+  .icon-container {
+    line-height: 1;
+  }
+}
+
+.itinerary-summary {
+  padding-left: 20px;
+}
+
+// Reset all HSL icon settings
+.itinerary-summary .icon {
+  margin-right: initial;
+  margin-top: initial;
+  position: initial;
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+
+  &.clock {
+    height: 1em;
+    width: 1em;
+    top: initial;
+  }
+  &.walk {
+    height: 1em;
+    width: 1em;
+    top: initial;
+  }
+  &.bike {
+    height: 1em;
+    width: 1em;
+    top: initial;
+  }
+  &.car {
+    height: 1em;
+    width: 1em;
+    top: initial;
+  }
 }

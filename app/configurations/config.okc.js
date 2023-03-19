@@ -104,6 +104,7 @@ export default configMerger(walttiConfig, {
 
   realtime: { embark: realtimeOkc },
 
+  // do not show classic DT TicketInformation, as OKC has it's one
   showTicketInformation: false,
   useTicketIcons: false,
 

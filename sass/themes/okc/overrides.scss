@@ -384,8 +384,8 @@ min-width: unset;
 
 .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon,
 .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait .icon {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   fill: $gray;
 }
 
@@ -955,12 +955,32 @@ div.origin-popup {
   }
 }
 
-.row.itinerary-row .leg-before-line.walk {
+.row.itinerary-row .leg-before.bicycle .route-number {
+  top: 84px;
+  right: 8px;
+
+  .icon {
+    color: #686869;
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+// shift walk line 1 px left
+.row.itinerary-row .leg-before-line.walk,
+.row.itinerary-row .leg-before-line.bicycle_walk,
+.row.itinerary-row .leg-before-line.car-park-walk {
   height: 30%;
   top: 40px;
+  left: 7px;
   &:first-child {
-    height: 19%;
+    height: 12%;
     top: 55px;
+  }
+  &.bottom {
+    background-position-y: 7px;
+    height: 10%;
+    top: 87%;
   }
 }
 
@@ -1053,12 +1073,6 @@ div.origin-popup {
     stroke: initial;
     width: 3em;
   }
-}
-
-.row.itinerary-row .leg-before-line.walk.bottom {
-  background-position-y: 7px;
-  height: 10%;
-  top: 85%;
 }
 
 .okc-icon-button {

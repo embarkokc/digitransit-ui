@@ -888,6 +888,9 @@ div.origin-popup {
 }
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route {
   background-color: inherit;
+  > a {
+    text-decoration: none; // route-number should not have be underligned
+  }
 }
 .row.itinerary-row .itinerary-instruction-column .itinerary-leg-first-row {
   border-top-width: 0;
@@ -942,9 +945,13 @@ div.origin-popup {
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container {
   font-size: $font-size-normal;
   padding: 0px 7px 0px 1px;
+  min-width: initial;
   height: inherit;
   .bar {
     height: 48px;
+  }
+  .route-number {
+    padding-right: 8px;
   }
 }
 
@@ -998,8 +1005,13 @@ div.origin-popup {
 .itinerary-icon-container {
   left: 4px; // To center align start/end marker
 }
-.row.itinerary-row .leg-before.first .leg-before-line {
-    height: calc(100% - 3em); // shorten transit leg bar if itinerary's first leg is transit leg
+
+// start position/length of leg line must reflect lolipops sizes when trip starts with transit leg
+.row.itinerary-row .leg-before.first .leg-before-line.bus,
+.row.itinerary-row .leg-before.first .leg-before-line.tram,
+ {
+  height: calc(100% - 6em);
+  top: 6em;
 }
 
 .row.itinerary-row .leg-before.bus,
@@ -1026,6 +1038,20 @@ div.origin-popup {
 .itinerary-leg-container .row.itinerary-row:last-child .leg-before.tram {
   .icon-container:last-child .icon {
     height: 3em;
+  }
+}
+
+// position/size of stop symbol at when trip starts with transit leg
+.leg-before-circle.circle.bus.top,
+.leg-before-circle.circle.tram.top {
+  .icon-container {
+    position: absolute;
+    left: -12px;
+  }
+  .icon{
+    height: 3em;
+    stroke: initial;
+    width: 3em;
   }
 }
 

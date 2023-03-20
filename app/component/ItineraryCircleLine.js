@@ -41,21 +41,11 @@ class ItineraryCircleLine extends React.Component {
   };
 
   getMarker = top => {
-    const circleMarker = (
-      <div
-        className={`leg-before-circle circle ${this.props.modeClassName} ${
-          top ? 'top' : ''
-        }`}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={28}
-          height={28}
-          style={{ fill: this.props.color, stroke: this.props.color }}
-        >
-          <circle strokeWidth="4" width={28} cx={11} cy={10} r={6} />
-        </svg>
-      </div>
+    const stopMarker = (
+      <Icon
+        img={`icon-icon_${this.props.modeClassName}-stop`}
+        color={this.props.color}
+      />
     );
     if (this.isFirstChild() && top) {
       return (
@@ -66,7 +56,13 @@ class ItineraryCircleLine extends React.Component {
               className="itinerary-icon from from-it"
             />
           </div>
-          {circleMarker}
+          <div
+            className={`leg-before-circle circle ${this.props.modeClassName} ${
+              top ? 'top' : ''
+            }`}
+          >
+            {stopMarker}
+          </div>
         </>
       );
     }
@@ -87,12 +83,7 @@ class ItineraryCircleLine extends React.Component {
         </div>
       );
     }
-    return (
-      <Icon
-        img={`icon-icon_${this.props.modeClassName}-stop`}
-        color={this.props.color}
-      />
-    );
+    return stopMarker;
   };
 
   render() {

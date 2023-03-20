@@ -1149,3 +1149,7 @@ div.origin-popup {
     top: initial;
   }
 }
+.itinerary-summary-row .itinerary-legs .special-icon.bus .icon,
+.itinerary-summary-row .itinerary-legs .special-icon.tram .icon {
+  vertical-align: middle;
+}

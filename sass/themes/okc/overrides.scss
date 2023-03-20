@@ -382,10 +382,20 @@ min-width: unset;
   height: initial;
 }
 
-.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon,
-.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait .icon {
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle > .icon,
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait > .icon {
+  // reset HSL styles
+  width: unset;
+  height: unset;
+}
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon-container .icon {
   width: 36px;
   height: 36px;
+  fill: $gray;
+}
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait .icon-container .icon {
+  width: 28px;
+  height: 28px;
   fill: $gray;
 }
 
@@ -421,10 +431,16 @@ min-width: unset;
       color: $black;
       font-size: $font-size-xxsmall;
     }
+    .vcenter-children.wait .leg-duration-container {
+      // match upstream style with waiting legs too
+      padding-left: 5px;
+    }
+
     .line .icon {
       font-size: 43px;
     }
-    .vcenter-children.walk .icon {
+    .vcenter-children.walk .icon,
+    .vcenter-children.wait .icon {
       width: 28px;
       fill: $gray;
       margin-left: 4px;

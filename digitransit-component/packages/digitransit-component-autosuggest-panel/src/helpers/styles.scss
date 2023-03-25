@@ -8,7 +8,8 @@ $black: #000;
 $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   map-buttons, context-panel, search-panel, search-overlay, stop-route-station-input, destination-input,
   viapoint-input-5, viapoint-input-4, viapoint-input-3, viapoint-input-2,
-  viapoint-input-1, origin-input, search-input-focus, search-input-icon, rectangle, autosuggest-suggestion-container, front;
+  rectangle,
+  viapoint-input-1, origin-input, search-input-focus, search-input-icon, autosuggest-suggestion-container, front;
 
 .autosuggest-panel {
   width: 100%;
@@ -159,7 +160,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   position: absolute; // EMBARK absolute positioning, inputs get full width
   right: 60px; // EMBARK
   top: 65px; // EMBARK
-  z-index: index($zindex, 'rectangle')+1;
+  z-index: index($zindex, 'rectangle');
   & + .itinerary-search-control {
     border-left: 1px solid rgba(151, 151, 151, 0.2);
   }

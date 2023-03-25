@@ -46,7 +46,7 @@ li:last-child > div.suggestion-item-container.mobile {
     flex-direction: column;
     position: absolute;
     padding-left: 49px;
-    padding-right: 27px;
+    padding-right: 40px;// EMBARK: tweak padding because we don't word-wrap
 
     .suggestion-name {
       margin: 0;
@@ -55,14 +55,15 @@ li:last-child > div.suggestion-item-container.mobile {
       font-size: 15px !important;
       letter-spacing: -0.5px;
       line-height: 1.5;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      // EMBARK: we want to see the whole name
+      white-space: normal;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
 
       @include min-width(tablet) {
         font-size: 18px !important;
         letter-spacing: -0.43px;
-        line-height: 1;
+        line-height: 1.2;// EMBARK: increase because we don't word-wrap
       }
 
       &.favouriteCustom {

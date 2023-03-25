@@ -1,5 +1,6 @@
 $font-weight-medium: 500;
 $primary-color: #007ac9;
+$gray: #888888;
 $suggestion-highlight-background-color: #F4F4F5;
 
 $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
@@ -62,8 +63,8 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     overflow-y: scroll;
     border-radius: 5px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.06);
-    border: 1px rgba(0,0,0,0.1) solid;
-    top: 35px;
+    border: 1px solid $gray;
+    top: 100%;
     width: calc(100% + 45px); // 43px == width of icon next to input
     ul {
       padding: 0;

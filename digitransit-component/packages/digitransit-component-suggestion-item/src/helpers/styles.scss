@@ -3,11 +3,14 @@
 @import '~@hsl-fi/sass/mixins/screen';
 @import '~@hsl-fi/sass/mixins/text';
 
+$gray: #888888;
+
 .suggestion-item-container {
   display: flex;
-  min-height: 25;
+  padding-top: 10px;
+  padding-bottom: 10px;
   &.futureroute {
-    min-height: 79px;
+    min-height: 99px;
   }
 }
 
@@ -23,7 +26,7 @@
 }
 
 li:not(:first-child) > div.suggestion-item-container {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid $gray;
 }
 
 li:last-child > div.suggestion-item-container.mobile {

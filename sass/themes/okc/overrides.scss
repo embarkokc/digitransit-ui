@@ -819,22 +819,64 @@ span.itinerary-stop-code {
 }
 
 .route-pattern-select {
-  margin: 1px 0 18px 0;
+  margin: 1px 60px 18px 60px;
   padding-bottom: 34px;
   border-bottom: 1px solid $lighter-gray;
 
   .route-pattern-toggle, .react-autosuggest__container {
-    border: 1px solid $gray;
-    margin: 0px 56px 0px 56px;
-    width: inherit;
+    border-color: $gray;
     font-size: $font-size-normal;
-    line-height: 1em;
-
-    .input-display {
-      font-size: $font-size-normal;
-    }
+  }
+  .route-pattern-toggle,
+  .react-autosuggest__container .input-display {
+    padding: 20px 13px;
+    padding-right: calc(13px + 16px + 13px); // regular padding + arrow icon + spacing
+    font-size: $font-size-normal;
+    line-height: 1;
   }
 
+  .icon-container {
+    position: absolute;
+    right: 13px;
+    top: 12px; // todo
+    height: calc(100% - 2 * 12px);
+    display: flex;
+    align-items: center;
+    .icon {
+      color: $primary-color;
+      position: static;
+      right: unset;
+      top: unset;
+    }
+  }
+  .route-pattern-toggle .icon-container .icon {
+    width: 19px;
+  }
+
+  .react-autosuggest__container .react-autosuggest__suggestions-container {
+    top: calc(100% + 10px);
+    border: 1px solid $gray;
+    .react-autosuggest__section-container {
+      &:not(:first-child) {
+        border-top-color: $gray;
+      }
+      .react-autosuggest__section-title {
+        border-bottom-color: $gray;
+      }
+      ul .react-autosuggest__suggestion {
+        padding: 20px 13px;
+        padding-right: calc(13px + 16px + 13px); // regular padding + arrow icon + spacing
+        &:not(:last-child) {
+          border-bottom-color: $gray;
+        }
+        .icon-container .icon.check {
+          position: static;
+          right: unset;
+          top: unset;
+        }
+      }
+    }
+  }
 }
 
 .route-container {

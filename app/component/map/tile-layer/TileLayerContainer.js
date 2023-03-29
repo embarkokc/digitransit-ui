@@ -174,7 +174,7 @@ class TileLayerContainer extends GridLayer {
       this.props.lang,
     );
     tile.onSelectableTargetClicked = (
-      selectableTargets,
+      unfilteredSelectableTargets,
       coords,
       forceOpen = false,
     ) => {
@@ -184,6 +184,20 @@ class TileLayerContainer extends GridLayer {
       } = this.props;
       const { coords: prevCoords } = this.state;
       const popup = map._popup; // eslint-disable-line no-underscore-dangle
+
+      const selectableTargets = unfilteredSelectableTargets
+        .filter(
+          target =>
+            target.layer === 'realTimeVehicle' ||
+            isFeatureLayerEnabled(target.feature, target.layer, mapLayers),
+        )
+        .filter(
+          // EMBARK citybike stations without vehicles should not be selected
+          target =>
+            target.layer !== 'citybike' ||
+            target.feature.properties.vehiclesAvailable > 0,
+        );
+
       // navigate to citybike stop page if single stop is clicked
       if (
         selectableTargets.length === 1 &&
@@ -254,11 +268,7 @@ class TileLayerContainer extends GridLayer {
       }
 
       this.setState({
-        selectableTargets: selectableTargets.filter(
-          target =>
-            target.layer === 'realTimeVehicle' ||
-            isFeatureLayerEnabled(target.feature, target.layer, mapLayers),
-        ),
+        selectableTargets,
         coords,
       });
     };

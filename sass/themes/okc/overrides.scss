@@ -168,6 +168,24 @@ body {
   min-height: inherit;
 }
 
+// Timetable
+.timetablerow-linetime {
+  min-width: 4.5em;
+  justify-content: flex-end;
+  height: 44px;
+}
+
+.timetable-note h2 {
+  visibility: hidden;
+}
+.stop-page-content-wrapper {
+  .after-scrollable-area, .print-button-container {
+    visibility: hidden;
+  }
+}
+
+// --------
+
 #mainContent > .desktop,
 #mainContent .alerts-view > .desktop {
   .back-button {
@@ -916,11 +934,6 @@ span.itinerary-stop-code {
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;
-
-// Departures Schedule
-.timetablerow-linetime {
-  min-width: 4.5em;
-}
 
 // Popup
 .selected-stop-header {

@@ -11,7 +11,7 @@ import cx from 'classnames';
 import Icon from './Icon';
 import FilterTimeTableModal from './FilterTimeTableModal';
 import TimeTableOptionsPanel from './TimeTableOptionsPanel';
-import TimetableRow from './TimetableRow';
+import TimetableRow from './TimetableRow.okc';
 import { RealtimeStateType } from '../constants';
 import SecondaryButton from './SecondaryButton';
 import { addAnalyticsEvent } from '../util/analyticsUtils';

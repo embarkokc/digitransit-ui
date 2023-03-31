@@ -4,7 +4,7 @@ import React from 'react';
 import { mockContext } from '../helpers/mock-context';
 
 import Timetable from '../../../app/component/Timetable';
-import TimetableRow from '../../../app/component/TimetableRow';
+import TimetableRow from '../../../app/component/TimetableRow.okc';
 import SecondaryButton from '../../../app/component/SecondaryButton';
 import { shallowWithIntl } from '../helpers/mock-intl-enzyme';
 import * as timetables from '../../../app/configurations/timetableConfigUtils';

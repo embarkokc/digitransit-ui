@@ -371,6 +371,10 @@ nav.top-bar + section.content {
   font-size: 43px;
 }
 
+.row.itinerary-row .itinerary-instruction-column.intermediate .itinerary-leg-row-intermediate {
+    justify-content: space-between;
+}
+
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .vehicle-number-container-v {
   width: inherit;
   display: flex;

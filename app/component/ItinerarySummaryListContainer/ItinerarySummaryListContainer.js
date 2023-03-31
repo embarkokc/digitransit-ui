@@ -402,6 +402,7 @@ const containerComponent = createFragmentContainer(
             stop {
               gtfsId
               zoneId
+              code
               platformCode
               alerts {
                 alertSeverityLevel

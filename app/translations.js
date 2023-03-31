@@ -1152,7 +1152,7 @@ const translations = {
     'itinerary-summary-row.first-departure':
       '{vehicle} leaves at {departureTime} from stop {stopName}.',
     'itinerary-summary-row.first-leg-start-time':
-      'Leaves at {firstDepartureTime} {firstDepartureStopType} {firstDepartureStop}{firstDeparturePlatform}',
+      'Leaves at {firstDepartureTime} {firstDepartureStopType} {firstDepartureStop} ({firstDepartureStopCode}) {firstDeparturePlatform}',
     'itinerary-summary-row.first-leg-start-time-citybike':
       'Departure at {firstDepartureTime} from {firstDepartureStop} bike station',
     'itinerary-summary-row.no-transit-legs': 'Leave when it suits you',

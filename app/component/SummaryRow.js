@@ -546,6 +546,7 @@ const SummaryRow = (
       } else {
         firstDepartureStopType = 'from-stop';
       }
+      const firstDepartureStopCode = firstDeparture.from.stop.code;
       let firstDeparturePlatform;
       if (firstDeparture.from.stop.platformCode) {
         const comma = ', ';
@@ -614,6 +615,7 @@ const SummaryRow = (
                 <FormattedMessage id={firstDepartureStopType} />
               ),
               firstDepartureStop: stopNames[0],
+              firstDepartureStopCode,
               firstDeparturePlatform,
             }}
           />

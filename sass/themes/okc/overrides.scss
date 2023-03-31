@@ -415,7 +415,15 @@ nav.top-bar + section.content {
 
 .itinerary-summary-row .itinerary-legs {
   gap: 2px;
-  .leg {
+  // Because most legs have a min-width (e.g. because their icons need to be visible),
+  // with a sufficiently large number of legs, they might take up space beyond their
+  // container, so we make the container scrollable.
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  .leg.walk.render-icon,
+  .leg.bicycle.render-icon,
+  .leg.wait.render-icon {
     min-width: 36px; // bicycle is wider
   }
 }

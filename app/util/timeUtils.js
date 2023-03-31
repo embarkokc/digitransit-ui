@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const TIME_PATTERN = 'LT';
-export const DATE_PATTERN = 'dd D.M.';
+export const DATE_PATTERN = 'ddd MM/DD';
 
 // converts the given parameter into a string in format HHmm
 // Input: time - seconds since midnight

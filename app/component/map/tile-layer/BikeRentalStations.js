@@ -111,7 +111,7 @@ class BikeRentalStations {
   };
 
   draw = (feature, zoomedIn) => {
-    const { id, network } = feature.properties;
+    const { id, network, vehiclesAvailable } = feature.properties;
     if (!this.shouldShowStation(id, network)) {
       return;
     }
@@ -120,6 +120,10 @@ class BikeRentalStations {
       getCityBikeNetworkConfig(getCityBikeNetworkId(network), this.config),
     );
     const isHilighted = this.tile.hilightedStops?.includes(id);
+    // EMBARK: do not render stations with no available bikes
+    if (vehiclesAvailable === 0 && !isHilighted) {
+      return;
+    }
 
     if (zoomedIn) {
       this.drawLargeIcon(feature, iconName, isHilighted);

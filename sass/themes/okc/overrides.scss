@@ -355,8 +355,13 @@ nav.top-bar + section.content {
 }
 
 .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.citybike, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle_walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.car {
-display: inherit;
-min-width: unset;
+  display: inherit;
+  min-width: unset;
+}
+
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon {
+  padding-top: 5px; // should be center aligned
+  margin-left: 0px;
 }
 
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .icon {
@@ -388,6 +393,9 @@ min-width: unset;
 
 .itinerary-summary-row .itinerary-legs {
   gap: 2px;
+  .leg {
+    min-width: 36px; // bicycle is wider
+  }
 }
 
 .summary-list-container {

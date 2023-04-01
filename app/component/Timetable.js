@@ -9,7 +9,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import cx from 'classnames';
 import Icon from './Icon';
-import FilterTimeTableModal from './FilterTimeTableModal';
+// import FilterTimeTableModal from './FilterTimeTableModal';
 import TimeTableOptionsPanel from './TimeTableOptionsPanel';
 import TimetableRow from './TimetableRow.okc';
 import { RealtimeStateType } from '../constants';
@@ -68,7 +68,7 @@ class Timetable extends React.Component {
     }
     this.state = {
       showRoutes: [],
-      showFilterModal: false,
+      // showFilterModal: false,
       oldStopId: this.props.stop.gtfsId,
     };
   }
@@ -132,12 +132,16 @@ class Timetable extends React.Component {
   };
 
   resetStopOptions = id => {
-    this.setState({ showRoutes: [], showFilterModal: false, oldStopId: id });
+    this.setState({
+      showRoutes: [],
+      // showFilterModal: false,
+      oldStopId: id,
+    });
   };
 
-  showModal = val => {
-    this.setState({ showFilterModal: val });
-  };
+  // showModal = val => {
+  //   this.setState({ showFilterModal: val });
+  // };
 
   mapStopTimes = stoptimesObject =>
     stoptimesObject
@@ -323,14 +327,14 @@ class Timetable extends React.Component {
       <>
         <ScrollableWrapper>
           <div className="timetable scroll-target">
-            {this.state.showFilterModal === true ? (
+            {/* {this.state.showFilterModal === true ? (
               <FilterTimeTableModal
                 stop={this.props.stop}
                 setRoutes={this.setRouteVisibilityState}
                 showFilterModal={this.showModal}
                 showRoutesList={this.state.showRoutes}
               />
-            ) : null}
+            ) : null} */}
             <div className="timetable-topbar">
               <DateSelect
                 startDate={this.props.propsForDateSelect.startDate}
@@ -351,7 +355,7 @@ class Timetable extends React.Component {
               />
               <TimeTableOptionsPanel
                 showRoutes={this.state.showRoutes}
-                showFilterModal={this.showModal}
+                // showFilterModal={this.showModal}
                 stop={this.props.stop}
               />
             </div>

@@ -40,6 +40,11 @@
       flex-basis: 50%;
       font-size: 18px;
       .dd-select {
+        height: 100%;
+        .dd__control {
+          height: 100%;
+          border: initial;
+        }
         .dd__indicators {
           padding-right: 8px;
         }

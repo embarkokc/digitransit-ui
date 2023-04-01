@@ -34,6 +34,19 @@
       }
     }
   }
+
+  .timetable-topbar {
+    .stop-schedule-route-select {
+      flex-basis: 50%;
+      font-size: 18px;
+      .dd-select {
+        .dd__indicators {
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+
   .timetable-note {
     border-top: 1px solid $light-gray;
     padding-top: 19px;

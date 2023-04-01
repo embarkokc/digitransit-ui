@@ -1523,6 +1523,13 @@ const translations = {
     'stop-page.right-now.loaded': 'stop page loaded',
     'stop-page.title': 'Stop {name} - {code}',
     'stop-page.title-short': 'Stop',
+    'stop-schedule-route-select-aria-label':
+      'route selection dropdown menu, currently selected: {selectedRoute}',
+    'stop-schedule-route-select-aria-message-change': 'route {route} selected',
+    'stop-schedule-route-select-aria-message-focused': 'route {route} focused',
+    'stop-schedule-route-select-aria-message-guidance':
+      'select one or more routes from a dropdown menu',
+    'stop-schedule-route-select-label': 'select routes',
     'stop-virtual-monitor': 'Stop display',
     stops: 'Stops',
     'stops-near-you.description': 'Stop timetables and vehicles near your',

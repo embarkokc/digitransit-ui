@@ -184,6 +184,14 @@ body {
   }
 }
 
+.date-select {
+  border: initial;
+  .route-schedule__control .route-schedule__value-container .route-schedule__placeholder .left-column {
+    border-right: initial; // no vertical bar
+    font-size: $font-size-small;
+  }
+}
+
 // --------
 
 #mainContent > .desktop,

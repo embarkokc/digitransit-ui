@@ -6,6 +6,29 @@ import { intlShape } from 'react-intl';
 import Select from 'react-select';
 import Icon from './Icon';
 
+const DropdownIndicator = ({ innerProps }, { config }) => {
+  return (
+    <span className="dd__indicator dd__dropdown-indicator" {...innerProps}>
+      <Icon
+        // className="arrow-dropdown"
+        img="icon-icon_arrow-collapse"
+        height={0.625}
+        width={0.625}
+        color={config.colors.primary}
+      />
+    </span>
+  );
+};
+
+DropdownIndicator.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  innerProps: PropTypes.object.isRequired,
+};
+DropdownIndicator.contextTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  config: PropTypes.object.isRequired,
+};
+
 function DateSelect(props, context) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,7 +54,7 @@ function DateSelect(props, context) {
   for (let i = 0; i < 58; i++) {
     dates.push({
       value: date.add(1, 'd').format(props.dateFormat),
-      label: date.format('dd D.M.'),
+      label: date.format('ddd MM/DD'),
     });
   }
   const dateList = dates.map(option => {
@@ -72,7 +95,7 @@ function DateSelect(props, context) {
       className="date-select"
       classNamePrefix={classNamePrefix}
       components={{
-        DropdownIndicator: () => null,
+        DropdownIndicator,
         IndicatorSeparator: () => null,
       }}
       inputId={`aria-input-${id}`}
@@ -97,15 +120,12 @@ function DateSelect(props, context) {
       options={dateList}
       placeholder={
         <>
-          <span className="left-column">
-            <span className="combobox-label">
-              {context.intl.formatMessage({ id: 'day', defaultMessage: 'day' })}
-            </span>
-            <span className="selected-value">{selectedDate.textLabel}</span>
-          </span>
           <div>
             <Icon id="route-schedule-date-icon" img="icon-icon_calendar" />
           </div>
+          <span className="left-column">
+            <span className="selected-value">{selectedDate.textLabel}</span>
+          </span>
         </>
       }
       value={selectedDate.value}

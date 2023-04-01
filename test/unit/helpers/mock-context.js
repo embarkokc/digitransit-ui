@@ -13,7 +13,11 @@ const noop = () => {};
  * their propType requirements.
  */
 export const mockContext = {
-  config: {},
+  config: {
+    colors: {
+      primary: '#123456',
+    },
+  },
   executeAction: noop,
   getStore: () => ({
     on: noop,

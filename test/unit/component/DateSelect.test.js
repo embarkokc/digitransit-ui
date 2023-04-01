@@ -4,6 +4,7 @@ import React from 'react';
 import moment from 'moment-timezone';
 import Select from 'react-select';
 
+import { mockContext, mockChildContextTypes } from '../helpers/mock-context';
 import { mountWithIntl, shallowWithIntl } from '../helpers/mock-intl-enzyme';
 import configureMoment from '../../../app/util/configure-moment';
 import DateSelect from '../../../app/component/DateSelect';
@@ -27,13 +28,16 @@ describe('<DateSelect />', () => {
   });
 
   it('should render today and tomorrow as text, others as weekday abbreviation with date', () => {
-    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />);
+    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />, {
+      context: mockContext,
+      childContextTypes: mockChildContextTypes,
+    });
     const { options } = wrapper.find(Select).props();
 
     expect(options[0].textLabel).to.equal('Today');
     expect(options[1].textLabel).to.equal('Tomorrow');
-    expect(options[2].textLabel).to.equal('Th 3.1.');
-    expect(options[29].textLabel).to.equal('We 30.1.');
+    expect(options[2].textLabel).to.equal('Thu 01/03');
+    expect(options[29].textLabel).to.equal('Wed 01/30');
   });
 
   it('should use moment locale for weekday abbreviation', () => {
@@ -53,14 +57,20 @@ describe('<DateSelect />', () => {
     };
     configureMoment('fi', configWithMoment);
 
-    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />);
+    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />, {
+      context: mockContext,
+      childContextTypes: mockChildContextTypes,
+    });
     const { options } = wrapper.find(Select).props();
 
-    expect(options[2].textLabel).to.equal('to 3.1.');
+    expect(options[2].textLabel).to.equal('to 01/03');
   });
 
   it('should have selectedDate selected', () => {
-    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />);
+    const wrapper = mountWithIntl(<DateSelect {...defaultProps} />, {
+      context: mockContext,
+      childContextTypes: mockChildContextTypes,
+    });
     const selectValue = wrapper.find(Select).props().value;
 
     expect(selectValue).to.equal('20190102');

@@ -2,9 +2,20 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { intlShape } from 'react-intl';
 import uniqBy from 'lodash/uniqBy';
+import sortBy from 'lodash/sortBy';
 import Select from 'react-select';
 import Icon from './Icon';
 // import RouteScheduleDropdown from './RouteScheduleDropdown';
+
+export const getTripPatternsAvailableForSelection = stop => {
+  const patterns = uniqBy(
+    stop.stoptimesForServiceDate
+      .filter(stoptimesInPattern => stoptimesInPattern.stoptimes.length > 0)
+      .map(stoptimesInPattern => stoptimesInPattern.pattern),
+    tripPattern => tripPattern.code,
+  );
+  return sortBy(patterns, tripPattern => tripPattern.route.shortName);
+};
 
 // todo: DRY with ModesSelectDropdown
 const DropdownIndicator = ({ innerProps }, { config }) => {
@@ -34,12 +45,7 @@ const TimeTableOptionsPanel = (props, context) => {
   const { stop, showRoutes, setShowRoutes } = props;
   const { intl } = context;
 
-  const patterns = uniqBy(
-    stop.stoptimesForServiceDate
-      .filter(stoptimesInPattern => stoptimesInPattern.stoptimes.length > 0)
-      .map(stoptimesInPattern => stoptimesInPattern.pattern),
-    pattern => pattern.code,
-  );
+  const patterns = getTripPatternsAvailableForSelection(stop);
   if (patterns.length === 0) {
     return null;
   }

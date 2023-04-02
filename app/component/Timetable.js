@@ -10,7 +10,9 @@ import { matchShape, routerShape } from 'found';
 import cx from 'classnames';
 import Icon from './Icon';
 // import FilterTimeTableModal from './FilterTimeTableModal';
-import TimeTableOptionsPanel from './TimeTableOptionsPanel.okc';
+import TimeTableOptionsPanel, {
+  getTripPatternsAvailableForSelection,
+} from './TimeTableOptionsPanel.okc';
 import TimetableRow from './TimetableRow.okc';
 import { RealtimeStateType } from '../constants';
 import SecondaryButton from './SecondaryButton';
@@ -81,9 +83,8 @@ class Timetable extends React.Component {
   };
 
   componentDidMount = () => {
-    const fallbackRoute = this.props.stop.stoptimesForServiceDate.find(
-      stoptimesInPattern => stoptimesInPattern.stoptimes.length > 0,
-    )?.pattern.code;
+    const patterns = getTripPatternsAvailableForSelection(this.props.stop);
+    const fallbackRoute = patterns[0]?.code;
     this.setState({
       showRoutes: this.context.match.location.query.routes?.split(',') || [
         fallbackRoute,

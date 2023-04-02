@@ -35,7 +35,7 @@ body {
 
 .card-header.header {
   padding-bottom: 30px;
-  border-bottom: 1px solid $lighter-gray;
+  border-bottom: 1px solid $light-gray;
   .back-button {
     button {
       position: initial;
@@ -323,8 +323,8 @@ nav.top-bar + section.content {
 }
 .street-mode-selector-container {
   background-color: #fff;
-  border-top: 1px solid $lighter-gray;
-  border-bottom: 1px solid $lighter-gray;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
   padding-bottom: 15px;
   margin-bottom: 5px;
   margin-top: 25px;
@@ -715,7 +715,7 @@ span.itinerary-stop-code {
 }
 // TODO: Mockup differs in styling...
 .row.itinerary-row span.itinerary-stop-code {
-  border-color: $lighter-gray;
+  border-color: $light-gray;
   border-radius: $embark-border-radius;
   font-size: $font-size-xxsmall;
   font-weight: $font-weight-normal;
@@ -871,7 +871,7 @@ span.itinerary-stop-code {
 .route-pattern-select {
   margin: 1px 60px 18px 60px;
   padding-bottom: 34px;
-  border-bottom: 1px solid $lighter-gray;
+  border-bottom: 1px solid $light-gray;
 
   .route-pattern-toggle, .react-autosuggest__container {
     border-color: $gray;

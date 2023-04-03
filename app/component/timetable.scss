@@ -50,12 +50,10 @@
     .dd__control {
       height: 100%;
       border: initial;
-      &.dd__control--is-focused,
-      &.dd__control:hover{
-        // TODO does not apply currently (?)
-        border-color: $light-gray;
+      .icon-container {
+        line-height: 1em; // size of its child (the icon)
       }
-      }
+    }
     .dd__indicators {
       padding-right: 8px;
     }

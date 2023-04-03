@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { intlShape } from 'react-intl';
 import uniqBy from 'lodash/uniqBy';
 import sortBy from 'lodash/sortBy';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import Icon from './Icon';
 // import RouteScheduleDropdown from './RouteScheduleDropdown';
 
@@ -78,9 +78,26 @@ const TimeTableOptionsPanel = (props, context) => {
         className="dd-select"
         classNamePrefix="dd"
         components={{
+          // We don't want to specify inline components' prop types.
+          // eslint-disable-next-line react/prop-types
+          Control: ({ children, ...rest }) => (
+            <components.Control {...rest}>
+              <Icon
+                id="stop-schedule-route-select-icon"
+                img="icon-icon_point-to-point"
+              />
+              {children}
+            </components.Control>
+          ),
           DropdownIndicator,
           ClearIndicator: null,
           IndicatorSeparator: null,
+        }}
+        styles={{
+          control: baseStyles => ({
+            ...baseStyles,
+            boxShadow: null,
+          }),
         }}
         inputId={inputDomId}
         aria-label={intl.formatMessage(

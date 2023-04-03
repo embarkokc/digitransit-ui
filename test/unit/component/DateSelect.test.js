@@ -71,8 +71,9 @@ describe('<DateSelect />', () => {
       context: mockContext,
       childContextTypes: mockChildContextTypes,
     });
-    const selectValue = wrapper.find(Select).props().value;
+    const selectOption = wrapper.find(Select).props().value;
 
-    expect(selectValue).to.equal('20190102');
+    expect(selectOption.value).to.equal('20190102');
+    expect(selectOption.textLabel).to.equal('Tomorrow');
   });
 });

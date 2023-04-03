@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { intlShape } from 'react-intl';
 
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import Icon from './Icon';
 
 const DropdownIndicator = ({ innerProps }, { config }) => {
@@ -71,7 +71,7 @@ function DateSelect(props, context) {
       ),
     };
   });
-  const selectedDate = dateList.find(d => d.value === props.selectedDate);
+  const selectedOption = dateList.find(d => d.value === props.selectedDate);
   const id = 'route-schedule-datepicker';
   const classNamePrefix = 'route-schedule';
 
@@ -95,6 +95,14 @@ function DateSelect(props, context) {
       className="date-select"
       classNamePrefix={classNamePrefix}
       components={{
+        // We don't want to specify inline components' prop types.
+        // eslint-disable-next-line react/prop-types
+        Control: ({ children, ...rest }) => (
+          <components.Control {...rest}>
+            <Icon id="route-schedule-date-icon" img="icon-icon_calendar" />
+            {children}
+          </components.Control>
+        ),
         DropdownIndicator,
         IndicatorSeparator: () => null,
       }}
@@ -106,29 +114,19 @@ function DateSelect(props, context) {
             })}.
             ${context.intl.formatMessage({
               id: 'route-page.pattern-chosen',
-            })} ${selectedDate.textLabel}`}
+            })} ${selectedOption.textLabel}`}
       isSearchable={false}
       name={id}
       menuIsOpen={isMenuOpen}
-      onChange={e => {
-        props.onDateChange(e.value);
+      onChange={newSelectedOption => {
+        props.onDateChange(newSelectedOption.value);
         onMenuClose();
       }}
       closeMenuOnSelect
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}
       options={dateList}
-      placeholder={
-        <>
-          <div>
-            <Icon id="route-schedule-date-icon" img="icon-icon_calendar" />
-          </div>
-          <span className="left-column">
-            <span className="selected-value">{selectedDate.textLabel}</span>
-          </span>
-        </>
-      }
-      value={selectedDate.value}
+      value={selectedOption}
     />
   );
 }

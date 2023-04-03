@@ -60,15 +60,7 @@ function DateSelect(props, context) {
   const dateList = dates.map(option => {
     return {
       value: option.value,
-      textLabel: option.label,
-      label: (
-        <>
-          <span>{option.label}</span>
-          {option.value === props.selectedDate && (
-            <Icon img="icon-icon_check" height={1.1525} width={0.904375} />
-          )}
-        </>
-      ),
+      label: option.label,
     };
   });
   const selectedOption = dateList.find(d => d.value === props.selectedDate);
@@ -83,11 +75,11 @@ function DateSelect(props, context) {
         onChange: ({ value }) =>
           `${context.intl.formatMessage({
             id: 'route-page.pattern-chosen',
-          })} ${value.textLabel}`,
+          })} ${value.label}`,
         onFilter: () => '',
         onFocus: ({ context: itemContext, focused }) => {
           if (itemContext === 'menu') {
-            return focused.textLabel;
+            return focused.label;
           }
           return '';
         },

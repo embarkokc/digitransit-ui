@@ -34,10 +34,10 @@ describe('<DateSelect />', () => {
     });
     const { options } = wrapper.find(Select).props();
 
-    expect(options[0].textLabel).to.equal('Today');
-    expect(options[1].textLabel).to.equal('Tomorrow');
-    expect(options[2].textLabel).to.equal('Thu 01/03');
-    expect(options[29].textLabel).to.equal('Wed 01/30');
+    expect(options[0].label).to.equal('Today');
+    expect(options[1].label).to.equal('Tomorrow');
+    expect(options[2].label).to.equal('Thu 01/03');
+    expect(options[29].label).to.equal('Wed 01/30');
   });
 
   it('should use moment locale for weekday abbreviation', () => {
@@ -63,7 +63,7 @@ describe('<DateSelect />', () => {
     });
     const { options } = wrapper.find(Select).props();
 
-    expect(options[2].textLabel).to.equal('to 01/03');
+    expect(options[2].label).to.equal('to 01/03');
   });
 
   it('should have selectedDate selected', () => {
@@ -74,6 +74,6 @@ describe('<DateSelect />', () => {
     const selectOption = wrapper.find(Select).props().value;
 
     expect(selectOption.value).to.equal('20190102');
-    expect(selectOption.textLabel).to.equal('Tomorrow');
+    expect(selectOption.label).to.equal('Tomorrow');
   });
 });

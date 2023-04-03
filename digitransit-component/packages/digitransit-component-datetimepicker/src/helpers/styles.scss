@@ -5,7 +5,7 @@
 $font-family: Arial, Helvetica, sans-serif;
 $border-radius: 4px;
 $gray: #686869;
-$lighter-gray: #D5D5D5;
+$light-gray: #D5D5D5;
 $black: #000;
 $font-size-smaller: 18px;
 $font-size-normal: 21px;
@@ -140,7 +140,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 
   .departure-or-arrival-container {
     height: calc(1rem + 20px);
-    background-color: $lighter-gray;
+    background-color: $light-gray;
     border-radius: 8px;
     display: flex;
     width: calc(5px + 13em);

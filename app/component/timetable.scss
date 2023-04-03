@@ -34,6 +34,38 @@
       }
     }
   }
+
+  // EMBARK
+  .timetable-topbar {
+    .stop-schedule-route-select {
+      flex-basis: 50%;
+      font-size: 18px;
+    }
+  }
+  .dd-select {
+    height: 100%;
+    &.dd-select--is-focused {
+      border-color: $light-gray;
+    }
+    .dd__control {
+      height: 100%;
+      border: initial;
+      .icon-container {
+        line-height: 1em; // size of its child (the icon)
+      }
+    }
+    .dd__indicators {
+      padding-right: 8px;
+    }
+    .dd__option--is-focused {
+      background-color: $light-gray;
+    }
+    .dd__option--is-selected {
+      background-color: $gray;
+      color: #fff;
+    }
+  }
+
   .timetable-note {
     border-top: 1px solid $light-gray;
     padding-top: 19px;

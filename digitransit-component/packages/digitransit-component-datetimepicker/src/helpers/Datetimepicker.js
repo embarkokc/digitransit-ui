@@ -164,7 +164,7 @@ function Datetimepicker({
     } else if (time.isSame(moment().add(1, 'day'), 'day')) {
       formatted = i18next.t('tomorrow', translationSettings);
     } else {
-      formatted = time.format('dd D.M.');
+      formatted = time.format('ddd MM/DD');
     }
     formatted = `${formatted.charAt(0).toUpperCase()}${formatted.slice(1)}`;
     return formatted;

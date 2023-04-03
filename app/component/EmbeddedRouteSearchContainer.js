@@ -14,6 +14,10 @@ import withSearchContext from './WithSearchContext';
 import { getStopRoutePath } from '../util/path';
 import { useCitybikes } from '../util/modeUtils';
 
+// Embark: we need to style only the route search page's <body>. Because the components
+// above this one don't provide the means to do this, we do it here. 🙈
+const BODY_CLASS_NAME = 'route-search-page';
+
 const modules = {
   EmbeddedRouteSearch: () => importLazy(import('./StopsNearYouContainer')),
 };
@@ -28,6 +32,8 @@ class EmbeddedRouteSearchContainer extends React.Component {
   secondaryLogoPath = null;
 
   componentDidMount() {
+    document.body.classList.add(BODY_CLASS_NAME);
+
     const { secondaryLogo } = this.context.config;
 
     // eslint-disable-next-line no-underscore-dangle
@@ -45,6 +51,10 @@ class EmbeddedRouteSearchContainer extends React.Component {
           err,
         );
       });
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove(BODY_CLASS_NAME);
   }
 
   render() {

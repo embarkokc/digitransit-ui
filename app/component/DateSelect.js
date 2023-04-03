@@ -3,8 +3,33 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { intlShape } from 'react-intl';
 
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import Icon from './Icon';
+
+const DAYS_IN_ADVANCE = 58; // two months - 2 days
+
+const DropdownIndicator = ({ innerProps }, { config }) => {
+  return (
+    <span className="dd__indicator dd__dropdown-indicator" {...innerProps}>
+      <Icon
+        // className="arrow-dropdown"
+        img="icon-icon_arrow-collapse"
+        height={0.625}
+        width={0.625}
+        color={config.colors.primary}
+      />
+    </span>
+  );
+};
+
+DropdownIndicator.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  innerProps: PropTypes.object.isRequired,
+};
+DropdownIndicator.contextTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  config: PropTypes.object.isRequired,
+};
 
 function DateSelect(props, context) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,27 +53,19 @@ function DateSelect(props, context) {
     value: date.add(1, 'd').format(props.dateFormat),
   });
 
-  for (let i = 0; i < 58; i++) {
+  for (let i = 0; i < DAYS_IN_ADVANCE; i++) {
     dates.push({
       value: date.add(1, 'd').format(props.dateFormat),
-      label: date.format('dd D.M.'),
+      label: date.format('ddd MM/DD'),
     });
   }
   const dateList = dates.map(option => {
     return {
       value: option.value,
-      textLabel: option.label,
-      label: (
-        <>
-          <span>{option.label}</span>
-          {option.value === props.selectedDate && (
-            <Icon img="icon-icon_check" height={1.1525} width={0.904375} />
-          )}
-        </>
-      ),
+      label: option.label,
     };
   });
-  const selectedDate = dateList.find(d => d.value === props.selectedDate);
+  const selectedOption = dateList.find(d => d.value === props.selectedDate);
   const id = 'route-schedule-datepicker';
   const classNamePrefix = 'route-schedule';
 
@@ -60,11 +77,11 @@ function DateSelect(props, context) {
         onChange: ({ value }) =>
           `${context.intl.formatMessage({
             id: 'route-page.pattern-chosen',
-          })} ${value.textLabel}`,
+          })} ${value.label}`,
         onFilter: () => '',
         onFocus: ({ context: itemContext, focused }) => {
           if (itemContext === 'menu') {
-            return focused.textLabel;
+            return focused.label;
           }
           return '';
         },
@@ -72,8 +89,22 @@ function DateSelect(props, context) {
       className="date-select"
       classNamePrefix={classNamePrefix}
       components={{
-        DropdownIndicator: () => null,
+        // We don't want to specify inline components' prop types.
+        // eslint-disable-next-line react/prop-types
+        Control: ({ children, ...rest }) => (
+          <components.Control {...rest}>
+            <Icon id="route-schedule-date-icon" img="icon-icon_calendar" />
+            {children}
+          </components.Control>
+        ),
+        DropdownIndicator,
         IndicatorSeparator: () => null,
+      }}
+      styles={{
+        control: baseStyles => ({
+          ...baseStyles,
+          boxShadow: null,
+        }),
       }}
       inputId={`aria-input-${id}`}
       aria-label={`
@@ -83,32 +114,19 @@ function DateSelect(props, context) {
             })}.
             ${context.intl.formatMessage({
               id: 'route-page.pattern-chosen',
-            })} ${selectedDate.textLabel}`}
+            })} ${selectedOption.textLabel}`}
       isSearchable={false}
       name={id}
       menuIsOpen={isMenuOpen}
-      onChange={e => {
-        props.onDateChange(e.value);
+      onChange={newSelectedOption => {
+        props.onDateChange(newSelectedOption.value);
         onMenuClose();
       }}
       closeMenuOnSelect
       onMenuOpen={onMenuOpen}
       onMenuClose={onMenuClose}
       options={dateList}
-      placeholder={
-        <>
-          <span className="left-column">
-            <span className="combobox-label">
-              {context.intl.formatMessage({ id: 'day', defaultMessage: 'day' })}
-            </span>
-            <span className="selected-value">{selectedDate.textLabel}</span>
-          </span>
-          <div>
-            <Icon id="route-schedule-date-icon" img="icon-icon_calendar" />
-          </div>
-        </>
-      }
-      value={selectedDate.value}
+      value={selectedOption}
     />
   );
 }

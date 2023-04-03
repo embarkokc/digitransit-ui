@@ -1152,7 +1152,7 @@ const translations = {
     'itinerary-summary-row.first-departure':
       '{vehicle} leaves at {departureTime} from stop {stopName}.',
     'itinerary-summary-row.first-leg-start-time':
-      'Leaves at {firstDepartureTime} {firstDepartureStopType} {firstDepartureStop}{firstDeparturePlatform}',
+      'Leaves at {firstDepartureTime} {firstDepartureStopType} {firstDepartureStop} ({firstDepartureStopCode}) {firstDeparturePlatform}',
     'itinerary-summary-row.first-leg-start-time-citybike':
       'Departure at {firstDepartureTime} from {firstDepartureStop} bike station',
     'itinerary-summary-row.no-transit-legs': 'Leave when it suits you',
@@ -1209,12 +1209,12 @@ const translations = {
     'main-menu-label-open': 'Open the main menu',
     'main-mode': "I'm traveling by",
     map: 'Map',
-    'map-layer-citybike': 'Rental bike stations',
+    'map-layer-citybike': 'Spokies stations',
     'map-layer-park-and-ride': 'Park & ride sites',
     'map-layer-stop-bus': 'Bus stops',
     'map-layer-stop-ferry': 'Ferries',
     'map-layer-stop-funicular': 'Funiculars',
-    'map-layer-stop-tram': 'Streetcar stops',
+    'map-layer-stop-tram': 'Streetcar pylons',
     'map-layer-terminal-bus': 'Bus terminals',
     'map-layer-terminal-rail': 'Train stations',
     'map-layer-terminal-subway': 'Metro stations',
@@ -1470,7 +1470,7 @@ const translations = {
     'select-map-layers-header': 'Show on map',
     'select-position': 'Select your location from your previous searches',
     'select-route': 'Select {mode} route {shortName} to {headsign}',
-    'selected-routes': 'Selected lines',
+    'selected-routes': 'Selected Route',
     send: 'Send',
     'separate-ticket-required':
       'A separate ticket is required for this part of the itinerary.',
@@ -1523,6 +1523,13 @@ const translations = {
     'stop-page.right-now.loaded': 'stop page loaded',
     'stop-page.title': 'Stop {name} - {code}',
     'stop-page.title-short': 'Stop',
+    'stop-schedule-route-select-aria-label':
+      'route selection dropdown menu, currently selected: {selectedRoute}',
+    'stop-schedule-route-select-aria-message-change': 'route {route} selected',
+    'stop-schedule-route-select-aria-message-focused': 'route {route} focused',
+    'stop-schedule-route-select-aria-message-guidance':
+      'select one or more routes from a dropdown menu',
+    'stop-schedule-route-select-label': 'select routes',
     'stop-virtual-monitor': 'Stop display',
     stops: 'Stops',
     'stops-near-you.description': 'Stop timetables and vehicles near your',

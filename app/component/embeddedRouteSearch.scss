@@ -1,8 +1,19 @@
-.route-search-page {
+// The Embark website has a background image and embeds digitransit's route search
+// page using an iframe. As long as the route search page is shown, we want all
+// "major" elements (body, #mainContent, etc.) to be transparent, so that the
+// background image is visible.
+// Whenever any other digitransit page is shown, the following styles do not apply.
+// app/component/EmbeddedRouteSearchContainer.js adds this class to <body>.
+body.route-search-page {
+    background-color: transparent !important;
+    #mainContent {
+        background-color: transparent;
+    }
+}
+
+body.route-search-page .route-search-page {
     height: 100%;
     max-height: initial;
-    background-color: transparent;
-    background-image: url("https://embark.indagodigital.dev/assets/images/content/51358494652_d97d604079_k.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

@@ -12,6 +12,7 @@ function IntermediateLeg(
     color,
     mode,
     name,
+    stopCode,
     arrivalTime,
     realTime,
     focusFunction,
@@ -95,6 +96,11 @@ function IntermediateLeg(
               </span>
               {` ${name}`}
             </div>
+            {stopCode && (
+              <div className="stop-code-container">
+                <span className="itinerary-stop-code">{stopCode}</span>
+              </div>
+            )}
           </div>
         </Link>
       </div>
@@ -111,6 +117,7 @@ IntermediateLeg.propTypes = {
   color: PropTypes.string,
   showCurrentZoneDelimiter: PropTypes.bool,
   showZoneLimits: PropTypes.bool,
+  stopCode: PropTypes.string,
   previousZoneId: PropTypes.string,
   currentZoneId: PropTypes.string,
   nextZoneId: PropTypes.string,
@@ -126,6 +133,7 @@ IntermediateLeg.defaultProps = {
   currentZoneId: undefined,
   nextZoneId: undefined,
   isCanceled: false,
+  stopCode: undefined,
 };
 
 IntermediateLeg.contextTypes = {

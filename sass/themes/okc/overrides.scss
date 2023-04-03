@@ -35,7 +35,7 @@ body {
 
 .card-header.header {
   padding-bottom: 30px;
-  border-bottom: 1px solid $lighter-gray;
+  border-bottom: 1px solid $light-gray;
   .back-button {
     button {
       position: initial;
@@ -168,6 +168,49 @@ body {
   min-height: inherit;
 }
 
+// Timetable
+.timetablerow-linetime {
+  min-width: 4.5em;
+  justify-content: flex-end;
+  height: 44px;
+}
+
+.timetable-note h2 {
+  visibility: hidden;
+}
+.stop-page-content-wrapper {
+  .after-scrollable-area, .print-button-container {
+    visibility: hidden;
+  }
+}
+
+.date-select {
+  border: initial;
+  font-size: $font-size-small;
+  .route-schedule__control > .icon-container {
+    width: auto;
+    height: auto;
+  }
+  .route-schedule__control .route-schedule__value-container .route-schedule__placeholder .left-column {
+    border-right: initial; // no vertical bar
+  }
+  .route-schedule__option {
+    font-weight: $font-weight-book;
+    svg {
+      position: relative;
+    }
+    &.route-schedule__option--is-focused {
+      background-color: $light-gray;
+    }
+    &.route-schedule__option--is-selected {
+      background-color: $gray;
+      color: $white;
+    }
+  }
+}
+
+// --------
+
 #mainContent > .desktop,
 #mainContent .alerts-view > .desktop {
   .back-button {
@@ -282,6 +325,10 @@ nav.top-bar + section.content {
   border-color: currentColor;
   background-color: $white;
   border: 1px solid;
+  height: 25px;
+  padding-top: 3px;
+  padding-left: 2px;
+  font-weight: $font-weight-medium;
 }
 
 .map-route-number {
@@ -293,8 +340,8 @@ nav.top-bar + section.content {
 }
 .street-mode-selector-container {
   background-color: #fff;
-  border-top: 1px solid $lighter-gray;
-  border-bottom: 1px solid $lighter-gray;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
   padding-bottom: 15px;
   margin-bottom: 5px;
   margin-top: 25px;
@@ -351,8 +398,13 @@ nav.top-bar + section.content {
 }
 
 .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.citybike, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.wait, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle_walk, .itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.car {
-display: inherit;
-min-width: unset;
+  display: inherit;
+  min-width: unset;
+}
+
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.bicycle .icon {
+  padding-top: 5px; // should be center aligned
+  margin-left: 0px;
 }
 
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .icon {
@@ -360,6 +412,10 @@ min-width: unset;
   width: 1em;
   position: relative;
   font-size: 43px;
+}
+
+.row.itinerary-row .itinerary-instruction-column.intermediate .itinerary-leg-row-intermediate {
+    justify-content: space-between;
 }
 
 .row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route .bar-container .vehicle-number-container-v {
@@ -384,6 +440,17 @@ min-width: unset;
 
 .itinerary-summary-row .itinerary-legs {
   gap: 2px;
+  // Because most legs have a min-width (e.g. because their icons need to be visible),
+  // with a sufficiently large number of legs, they might take up space beyond their
+  // container, so we make the container scrollable.
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  .leg.walk.render-icon,
+  .leg.bicycle.render-icon,
+  .leg.wait.render-icon {
+    min-width: 36px; // bicycle is wider
+  }
 }
 
 .summary-list-container {
@@ -665,7 +732,7 @@ span.itinerary-stop-code {
 }
 // TODO: Mockup differs in styling...
 .row.itinerary-row span.itinerary-stop-code {
-  border-color: $lighter-gray;
+  border-color: $light-gray;
   border-radius: $embark-border-radius;
   font-size: $font-size-xxsmall;
   font-weight: $font-weight-normal;
@@ -821,7 +888,7 @@ span.itinerary-stop-code {
 .route-pattern-select {
   margin: 1px 60px 18px 60px;
   padding-bottom: 34px;
-  border-bottom: 1px solid $lighter-gray;
+  border-bottom: 1px solid $light-gray;
 
   .route-pattern-toggle, .react-autosuggest__container {
     border-color: $gray;
@@ -900,11 +967,6 @@ span.itinerary-stop-code {
 /* mode colors */
 $bus-color: $okc-bus-blue;
 $tram-color: $okc-tram-pink;
-
-// Departures Schedule
-.timetablerow-linetime {
-  min-width: 4.5em;
-}
 
 // Popup
 .selected-stop-header {

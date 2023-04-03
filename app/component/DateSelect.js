@@ -6,6 +6,8 @@ import { intlShape } from 'react-intl';
 import Select, { components } from 'react-select';
 import Icon from './Icon';
 
+const DAYS_IN_ADVANCE = 58; // two months - 2 days
+
 const DropdownIndicator = ({ innerProps }, { config }) => {
   return (
     <span className="dd__indicator dd__dropdown-indicator" {...innerProps}>
@@ -51,7 +53,7 @@ function DateSelect(props, context) {
     value: date.add(1, 'd').format(props.dateFormat),
   });
 
-  for (let i = 0; i < 58; i++) {
+  for (let i = 0; i < DAYS_IN_ADVANCE; i++) {
     dates.push({
       value: date.add(1, 'd').format(props.dateFormat),
       label: date.format('ddd MM/DD'),

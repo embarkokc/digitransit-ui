@@ -186,13 +186,16 @@ body {
 
 .date-select {
   border: initial;
+  font-size: $font-size-small;
+  .route-schedule__control > .icon-container {
+    width: auto;
+    height: auto;
+  }
   .route-schedule__control .route-schedule__value-container .route-schedule__placeholder .left-column {
     border-right: initial; // no vertical bar
-    font-size: $font-size-small;
   }
   .route-schedule__option {
     font-weight: $font-weight-book;
-    font-size: $font-size-small;
     svg {
       position: relative;
     }
@@ -201,7 +204,7 @@ body {
     }
     &.route-schedule__option--is-selected {
       background-color: $gray;
-      color: $gray;
+      color: $white;
     }
   }
 }

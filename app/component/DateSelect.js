@@ -100,6 +100,12 @@ function DateSelect(props, context) {
         DropdownIndicator,
         IndicatorSeparator: () => null,
       }}
+      styles={{
+        control: baseStyles => ({
+          ...baseStyles,
+          boxShadow: null,
+        }),
+      }}
       inputId={`aria-input-${id}`}
       aria-label={`
             ${context.intl.formatMessage({

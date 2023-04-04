@@ -31,14 +31,14 @@ input[type='text'] {
   display: flex;
   align-items: center;
   border-radius: 5px;
-  height: 60px;
+  height: 66px; // EMBARK give space for larger inputs was 60px;
   justify-content: space-between;
   .right-column {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding-top: 9px;
+//    padding-top: 9px; // EMBARK: in mobile view, no top padding
   }
 }
 
@@ -59,6 +59,7 @@ input[type='text'] {
 }
 
 .combobox-label {
+  display: none; // EMBARK
   position: relative;
   top: -2px;
   font-size: 12px;
@@ -75,8 +76,8 @@ input[type='text'] {
     font-family: 'Gotham Rounded A', 'Gotham Rounded B', 'Roboto', Arial, Georgia, Serif;
     width: 100%;
     position: relative;
-    padding-bottom: 7px;
-    top: 2px;
+    // padding-bottom: 7px; EMABRK
+    // top: 2px; EMBARK
     border: none;
     height: 26px;
     font-weight: normal;
@@ -99,7 +100,7 @@ button.clear-input {
   display: flex;
   align-items: center;
   right: 0px;
-  padding: 0 15px 7px 0;
+  padding: 0 15px 0px 0; // EMBARK, was 0 15px 7px 0;
   height: 26px;
   color: var(--color);
   border: 0px;
@@ -157,9 +158,9 @@ button.clear-input {
   margin-bottom: auto;
   z-index: index($zindex, 'autosuggest-suggestion-container');
   width: 100vw;
-  max-height: calc(100% - 75px);
+  max-height: calc(100% - 81px); // EMBARK give space for larger inputs, was - 75px;
   height: 100%;
-  top: 75px;
+  top: 81px; // EMBARK give space for larger inputs, was 75px;
   left: 0;
   overflow-x: hidden;
   overflow-y: scroll;

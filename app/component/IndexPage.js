@@ -460,18 +460,29 @@ class IndexPage extends React.Component {
                     isMobile
                   />
                   <CtrlPanel.SeparatorLine />
-                  <>{NearStops(CtrlPanel)}</>
+                  <h2>Search Stops &amp; Routes</h2>
                   <div className="stop-route-search-container">
                     <StopRouteSearch isMobile {...stopRouteSearchProps} />
                   </div>
+                  <>{NearStops(CtrlPanel)}</>
+                  <CtrlPanel.SeparatorLine />
+                  <h2>{intl.formatMessage({ id: 'your-favourites' })}</h2>
+                  <FavouritesContainer
+                    favouriteModalAction={this.props.favouriteModalAction}
+                    onClickFavourite={this.clickFavourite}
+                    lang={lang}
+                  />
                   <CtrlPanel.SeparatorLine usePaddingBottom20 />
                   {!trafficNowLink ||
                     (trafficNowLink[lang] !== '' && (
-                      <TrafficNowLink
-                        lang={lang}
-                        handleClick={this.trafficNowHandler}
-                        fontWeights={fontWeights}
-                      />
+                      <>
+                        <h2>Travel Tools</h2>
+                        <TrafficNowLink
+                          lang={lang}
+                          handleClick={this.trafficNowHandler}
+                          fontWeights={fontWeights}
+                        />
+                      </>
                     ))}
                 </CtrlPanel>
               </div>

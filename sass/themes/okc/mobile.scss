@@ -1,0 +1,18 @@
+.mobile.top-bar {
+  height: 66px;
+  min-height: 66px;
+
+  section.title {
+    padding-left: 20px;
+  }
+  .logo {
+    min-height: 21.5px;
+  }
+  .back-to-embark-link {
+    margin-right: 20px;
+
+    span:first-of-type {
+      display: none;
+    }
+  }
+}

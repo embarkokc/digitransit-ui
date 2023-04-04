@@ -144,7 +144,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
                 System Alerts
               </a>
             </li>
-            <li style={{ display: 'inline-block', marginLeft: '2em' }}>
+            <li style={{ display: 'inline-block', marginLeft: '1em' }}>
               <a
                 href="/"
                 target="_top"

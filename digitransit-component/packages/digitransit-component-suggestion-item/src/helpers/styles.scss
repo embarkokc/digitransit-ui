@@ -15,13 +15,13 @@ $gray: #888888;
 }
 
 .mobile {
-  height: 59px;
+  height: 69px; // EMBARK, was 59px;
   margin: 0 10px;
   &.CurrentLocation {
-    height: 50px;
+    height: 69px; // EMBARK, was 50px;
   }
   &.SelectFromMap {
-    height: 50px;
+    height: 69px; // EMBARK, was 50px;
   }
 }
 

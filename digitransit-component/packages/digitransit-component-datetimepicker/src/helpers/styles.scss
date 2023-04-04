@@ -414,11 +414,11 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
     margin-bottom: 25px;
 
     label:first-child {
-      flex-basis: 60%;
+      flex-basis: 50%; // EMBARK, was 60%;
       margin-right: 10px;
     }
     label:nth-child(2) {
-      flex-basis: 40%;
+      flex-basis: 50%; // EMBARK, was 40%;
     }
     .input-container {
       border: 1px solid $gray;
@@ -426,8 +426,8 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       display: flex;
       align-items: center;
       height: 40px;
-      line-height: 1.5;
-      font-size: 100%;
+      // line-height: 1.5; EMBARK
+      // font-size: 100%; // EMBARK
 
       &:focus-within {
         background: rgba(0, 122, 201, 0.06);
@@ -455,7 +455,7 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         border: none;
         outline: none;
         background: none;
-        width: 50px;
+        min-width: 70px; // EMBARK, was 50px;
         margin-left: 10px;
         color: $black;
         height: 1.5265rem;
@@ -475,8 +475,9 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
         font-weight: var(--font-weight-medium);
         font-stretch: normal;
         font-style: normal;
-        font-size: 16px;
-        line-height: 1.33;
+        font-size: 18px; // EMBARK, was 16px;
+        // line-height: 1.33; EMBARK
+        padding: 0px; // EMBARK
         letter-spacing: -0.5px;
         color: $black;
       }

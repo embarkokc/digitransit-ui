@@ -614,6 +614,7 @@ $content-background-color: $background-color;
           width: 100%;
         }
       }
+
     }
 
     .map-content {
@@ -627,6 +628,26 @@ $content-background-color: $background-color;
         width: 100%;
         min-height: 27cm;
       }
+    }
+  }
+
+  // EMBARK: We want the whole content (sidebar on desktop, drawer on mobile) to be scrollable, not just the content below the header. Therefore, we must configure the outer scroll container to scroll-overflow, but not the inner (see below).
+  // outer scroll container
+  // note: on mobile, the drawer is scrollable already
+  & > .desktop .main-content > .scrollable-content-wrapper {
+    overflow-y: auto;
+  }
+  // inner scroll container
+  & > .desktop .main-content > .scrollable-content-wrapper .scrollable-content-wrapper,
+  & > .mobile .drawer-content > .content-container > .scrollable-content-wrapper {
+    max-height: initial;
+    overflow-y: unset;
+    flex-basis: fit-content;
+    & > .scroll-target,
+    .timetable-content-container {
+      max-height: initial;
+      overflow-y: unset;
+      flex-basis: fit-content;
     }
   }
 }

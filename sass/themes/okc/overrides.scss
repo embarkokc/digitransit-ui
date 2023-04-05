@@ -1237,8 +1237,16 @@ div.origin-popup {
   }
 }
 
-.itinerary-summary {
-  padding-left: 20px;
+#mainContent > .mobile .itinerary-summary {
+  padding-left: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.mobile .itinerary-summary .distance--itinerary-summary,
+.mobile .itinerary-summary .duration--itinerary-summary {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 // Reset all HSL icon settings

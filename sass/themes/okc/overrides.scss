@@ -1046,11 +1046,30 @@ div.origin-popup {
   span {
     display: none; // Hide duration span
   }
+  .duration,
+  .walk-distance {
+    margin-right: 0;
+  }
 }
+
+// Some Embark icons are rectangular (instead of square), or their "visual center" is off the physical center. This makes them hard to position so that they look aligned.
+// We give .icon-container a fixed with (note that it's px, not em) and center-align the icon within.
+.itinerary-summary .okc-icon-button .icon-container,
+.itinerary-summary .distance--itinerary-summary .icon-container {
+  width: 20px;
+  text-align: center;
+}
+
+// Upstream, these elements contain >=2 pieces of text beneath each other.
+// We have removed one, so we need to adapt the layout.
 .duration--itinerary-summary, .distance--itinerary-summary {
   align-items: center; // Align midddle after departure time removal
   top: initial;
   padding-bottom: initial;
+}
+
+.fare--itinerary-summary {
+  font-size: 21px;
 }
 
 .vehicle-number {
@@ -1123,16 +1142,12 @@ div.origin-popup {
   gap: 5px;
 }
 
-.secondary-button.print {
+.itinerary-summary .secondary-button.print {
     border: inherit;
-    padding: 0px 5px 15px 3px;
+    padding: 0 0 15px 0;
     height: inherit;
     font-size: $font-size-xxsmall;
     font-weight: $font-weight-normal;
-    .icon-container {
-      padding-left: 2px;
-      padding-right: 1px;
-    }
 }
 
 .row.itinerary-row .leg-before-line.bus,
@@ -1215,7 +1230,7 @@ div.origin-popup {
 }
 
 .distance--itinerary-summary {
-  padding-left: 2px;
+  padding-left: 0;
   gap: 15px;
   .icon-container {
     line-height: 1;

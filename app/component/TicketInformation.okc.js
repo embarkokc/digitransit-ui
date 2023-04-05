@@ -13,7 +13,7 @@ export default function TicketInformation({ fares }, { intl }) {
   }
 
   return (
-    <span className="okc-icon-button">
+    <span className="okc-icon-button fare--itinerary-summary">
       <Icon img="icon-icon_ticket" />
       <span>
         {intl.formatNumber(fares[0].cents / 100, {

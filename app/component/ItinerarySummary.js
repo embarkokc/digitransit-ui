@@ -62,14 +62,16 @@ const ItinerarySummary = ({
           />
         )}
       </div>
-      <SecondaryButton
-        ariaLabel="print"
-        buttonName="print"
-        buttonClickAction={printItinerary}
-        buttonIcon="icon-icon_print"
-        className="okc-icon-button"
-        smallSize
-      />
+      <div className="itinerary-summary-info-row">
+        <SecondaryButton
+          ariaLabel="print"
+          buttonName="print"
+          buttonClickAction={printItinerary}
+          buttonIcon="icon-icon_print"
+          className="okc-icon-button"
+          smallSize
+        />
+      </div>
 
       <div className={cx('divider-bottom')} />
     </div>

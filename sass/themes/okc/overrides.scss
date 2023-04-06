@@ -806,13 +806,16 @@ span.itinerary-stop-code {
 }
 
 .route-details-right-column {
-  overflow: hidden;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .location-details_container .route-stop-row_content-container button {
   .route-details_container .route-stop-name {
     font-size: $font-size-small;
+    white-space: initial;
+    text-align: left;
   }
   .route-details-bottom-row {
     justify-content: flex-start;
@@ -830,6 +833,11 @@ span.itinerary-stop-code {
       }
     }
   }
+}
+
+.route-details-upper-row {
+  height: initial;
+  margin-bottom: initial;
 }
 
 .route-stop-container {

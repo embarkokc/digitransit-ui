@@ -265,7 +265,7 @@ body {
 /* OKC top bar styling */
 nav.top-bar {
   flex-shrink: 0;
-  height: 81px;
+  height: $top-bar-height;
   border-bottom-width: 6px;
   border-bottom-style: inset;
   border-bottom-color: $primary-color;
@@ -276,8 +276,7 @@ nav.top-bar {
   }
 }
 nav.top-bar + section.content {
-  // subtract height of the top bar
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - #{top-bar-height});
 }
 
 .back-to-embark-link {

@@ -908,6 +908,20 @@ class StopsNearYouPage extends React.Component {
   render() {
     const { mode } = this.props.match.params;
     const { phase } = this.state;
+    const title =
+      mode === 'FAVORITE' ? (
+        <FormattedMessage id="nearest-favorites" />
+      ) : (
+        <FormattedMessage
+          id="nearest"
+          defaultMessage="Stops near you"
+          values={{
+            mode: (
+              <FormattedMessage id={`nearest-stops-${mode.toLowerCase()}`} />
+            ),
+          }}
+        />
+      );
 
     if (PH_SHOWSEARCH.includes(phase)) {
       return <div>{this.renderDialogModal()}</div>;
@@ -917,23 +931,7 @@ class StopsNearYouPage extends React.Component {
         <DesktopOrMobile
           desktop={() => (
             <DesktopView
-              title={
-                mode === 'FAVORITE' ? (
-                  <FormattedMessage id="nearest-favorites" />
-                ) : (
-                  <FormattedMessage
-                    id="nearest"
-                    defaultMessage="Stops near you"
-                    values={{
-                      mode: (
-                        <FormattedMessage
-                          id={`nearest-stops-${mode.toLowerCase()}`}
-                        />
-                      ),
-                    }}
-                  />
-                )
-              }
+              title={title}
               bckBtnFallback="back"
               content={this.renderContent()}
               scrollable
@@ -947,6 +945,7 @@ class StopsNearYouPage extends React.Component {
           )}
           mobile={() => (
             <MobileView
+              header={<h1>{title}</h1>}
               content={this.renderContent()}
               map={this.renderMap()}
               searchBox={this.renderSearchBox()}

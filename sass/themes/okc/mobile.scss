@@ -38,4 +38,23 @@
     /* padding: 0 5px 15px; */
     padding: 0 0px 15px;
   }
+
+  /* stops page */
+  .card-header-wrapper h1 {
+    /* font-size: 18px; */
+    /* line-height: 22px; */
+    font-size: 42px;
+    line-height: 42px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .stop-page.card-header {
+    padding-bottom: 20px;
+  }
+
+  .stop-page-content-wrapper {
+    margin-top: 30px;
+  }
+
 }

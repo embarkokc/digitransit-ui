@@ -16,3 +16,26 @@
     }
   }
 }
+
+.mobile {
+  h1, .h1 {
+    margin: 20px; // TODO: perhaps better wrap in container instead
+    line-height: 45px;
+  }
+
+  .stops-near-you-page {
+    padding: 5px 20px 0; // was padding: 5px 0.625em 0;
+  }
+
+  .stops-near-you-page .stop-near-you-container .stop-near-you-inner-container {
+    width: calc(100%); // was width: calc(100% + 10px);
+  }
+  .stops-near-you-page .stop-near-you-container {
+    width: calc(100% + 10px); // was width: calc(100% + 20px);
+  }
+
+  .stops-near-you-search-container {
+    /* padding: 0 5px 15px; */
+    padding: 0 0px 15px;
+  }
+}

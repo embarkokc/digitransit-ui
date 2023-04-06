@@ -276,7 +276,7 @@ nav.top-bar {
   }
 }
 nav.top-bar + section.content {
-  max-height: calc(100vh - #{top-bar-height});
+  max-height: calc(100vh - #{$top-bar-height});
 }
 
 .back-to-embark-link {

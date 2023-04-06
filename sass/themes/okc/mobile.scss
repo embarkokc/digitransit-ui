@@ -18,7 +18,7 @@
 }
 
 .mobile.top-bar + section.content {
-  max-height: calc(100vh - #{mobile-top-bar-height});
+  max-height: calc(100vh - #{$mobile-top-bar-height});
 }
 
 $mobile-gutter: 16px;

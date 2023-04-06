@@ -1,6 +1,6 @@
 .mobile.top-bar {
-  height: 66px;
-  min-height: 66px;
+  height: $mobile-top-bar-height;
+  min-height: $mobile-top-bar-height;
 
   section.title {
     padding-left: 20px;
@@ -15,6 +15,10 @@
       display: none;
     }
   }
+}
+
+.mobile.top-bar + section.content {
+  max-height: calc(100vh - #{mobile-top-bar-height});
 }
 
 .mobile {

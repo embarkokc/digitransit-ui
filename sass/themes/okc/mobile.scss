@@ -21,6 +21,8 @@
   max-height: calc(100vh - #{mobile-top-bar-height});
 }
 
+$mobile-gutter: 16px;
+
 .mobile {
   h1, .h1 {
     margin: 20px; // TODO: perhaps better wrap in container instead
@@ -61,4 +63,28 @@
     margin-top: 30px;
   }
 
+  /* Route page */
+  .header.card-header {
+    padding: 8px $mobile-gutter 0em $mobile-gutter;
+  }
+  .route-header .route-info .route-short-name {
+    font-weight: bold;
+    font-size: $font-size-xlarge;
+    margin-bottom: 15px;
+  }
+  .card-header.header {
+    border-bottom: initial;
+  }
+  .route-pattern-select {
+    margin: 1px $mobile-gutter 18px $mobile-gutter;
+  }
+  .before-scrollable-area {
+    display: none;
+  }
+  .route-page-control-panel-container {
+    padding-bottom: 10px;
+  }
+  .route-page-container .route-page-control-panel-container {
+    margin: initial;
+  }
 }

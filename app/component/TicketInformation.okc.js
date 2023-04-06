@@ -12,6 +12,8 @@ export default function TicketInformation({ fares }, { intl }) {
     return null;
   }
 
+  // TODO move to config
+  const buyTicketUrl = 'https://embark.indagodigital.dev/bus/buy-passes';
   return (
     <span className="okc-icon-button fare--itinerary-summary">
       <Icon img="icon-icon_ticket" />
@@ -21,6 +23,7 @@ export default function TicketInformation({ fares }, { intl }) {
           currency: 'USD',
         })}
       </span>
+      <a href={buyTicketUrl}>Buy</a>
     </span>
   );
 }

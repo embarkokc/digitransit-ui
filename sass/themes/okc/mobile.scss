@@ -87,4 +87,18 @@ $mobile-gutter: 16px;
   .route-page-container .route-page-control-panel-container {
     margin: initial;
   }
+
+  /* Settings page */
+  .offcanvas-mobile {
+    .customize-search .close-offcanvas {
+      border: initial;
+      top: 1.4em;
+    }
+    .settings-option-container h2 {
+      padding-left: 62px;
+      font-size: 42px; // TODO really 42px?
+      text-align: initial;
+    }
+  }
+
 }

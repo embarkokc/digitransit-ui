@@ -25,16 +25,13 @@ $mobile-gutter: 16px;
 
 .mobile {
   h1, .h1 {
-    margin: 20px; // TODO: perhaps better wrap in container instead
+    margin: 10px 0px 30px 20px ;// TODO: perhaps better wrap in container instead
     line-height: 45px;
   }
 
   /* RouteSearch */
   .control-panel-container > ul:nth-child(4) {
     font-size: 18px;
-  }
-  .mobile .h1, .mobile h1 {
-    margin: 20px 0px 20px;
   }
   .styles_container .styles_input {
     padding-right: 38px;
@@ -112,4 +109,17 @@ $mobile-gutter: 16px;
     }
   }
 
+  /* Trips itinerary page */
+  .swipe-header-container {
+    display: none;
+  }
+  @media only screen {
+    .column, .columns {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+  .small-2 {
+    width: 20%;
+  }
 }

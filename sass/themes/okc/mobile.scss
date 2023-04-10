@@ -29,10 +29,21 @@ $mobile-gutter: 16px;
     line-height: 45px;
   }
 
+  /* RouteSearch */
+  .control-panel-container > ul:nth-child(4) {
+    font-size: 18px;
+  }
+  .mobile .h1, .mobile h1 {
+    margin: 20px 0px 20px;
+  }
+  .styles_container .styles_input {
+    padding-right: 38px;
+  }
+
+  // Stops Near You Page
   .stops-near-you-page {
     padding: 5px 20px 0; // was padding: 5px 0.625em 0;
   }
-
   .stops-near-you-page .stop-near-you-container .stop-near-you-inner-container {
     width: calc(100%); // was width: calc(100% + 10px);
   }

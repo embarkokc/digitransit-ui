@@ -109,6 +109,44 @@ $mobile-gutter: 16px;
     }
   }
 
+  /* Trip Results page */
+  .summary-navigation-container {
+    /* margin: 0 9px 0 1.25em; */
+    margin: 0 $mobile-gutter 0 $mobile-gutter;
+  }
+  .summary h2 {
+    padding-left: $mobile-gutter;
+  }
+  .itinerary-summary-row {
+    padding-left: $mobile-gutter;
+    padding-right: $mobile-gutter;
+  }
+  .street-mode-selector-container {
+    padding-left: $mobile-gutter;
+    padding-top: 25px;
+    h3 {
+      padding: 0px;
+    }
+    .street-mode-selector-button-container {
+      padding: 0px;
+    }
+    .street-mode-button-row {
+      gap: 5px;
+    }
+  }
+  .back-title {
+    // don't show Back-Message
+    display: none;
+  }
+  .summary-navigation-container .back-button .icon-holder {
+    /* position: absolute; */
+    top: 20px;
+    border: none;
+  }
+  .back-button .icon-holder, .mobile .back-button .icon-holder:focus, .mobile .back-button .icon-holder:hover {
+    padding: 0px;
+    left: 0px
+  }
   /* Trips itinerary page */
   .swipe-header-container {
     display: none;

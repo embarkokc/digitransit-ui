@@ -329,8 +329,17 @@ export function AlertsView(props, context) {
         )}
         mobile={() => (
           <MobileView
-            searchBox={renderSearchDialog()}
-            content={renderAlertsList()}
+            header={
+              <h1>
+                <FormattedMessage id="alerts-page-title" />
+              </h1>
+            }
+            content={
+              <>
+                {renderSearchDialog()}
+                {renderAlertsList()}
+              </>
+            }
           />
         )}
       />

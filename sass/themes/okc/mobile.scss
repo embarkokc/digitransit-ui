@@ -1,3 +1,5 @@
+$mobile-gutter: 16px;
+
 .mobile.top-bar {
   height: $mobile-top-bar-height;
   min-height: $mobile-top-bar-height;
@@ -21,11 +23,9 @@
   max-height: calc(100vh - #{$mobile-top-bar-height});
 }
 
-$mobile-gutter: 16px;
-
 .mobile {
   h1, .h1 {
-    margin: 10px 0px 30px 20px ;// TODO: perhaps better wrap in container instead
+    margin: 10px 0px 30px $mobile-gutter;// TODO: perhaps better wrap in container instead
     line-height: 45px;
   }
 
@@ -121,5 +121,15 @@ $mobile-gutter: 16px;
   }
   .small-2 {
     width: 20%;
+  }
+}
+
+/* Alerts view */
+#mainContent .alerts-view .mobile {
+  .alerts-view-search-dialog {
+    margin: 0 $mobile-gutter;
+  }
+  .alerts-view-alert {
+    padding: 50px $mobile-gutter;
   }
 }

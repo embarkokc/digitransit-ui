@@ -231,8 +231,9 @@ $mobile-gutter: 16px;
   }
   .alerts-list {
     border-left: none;
+    min-height: unset;
   }
   .alerts-view-alert {
-    padding: 50px 0;
+    padding: 30px 0;
   }
 }

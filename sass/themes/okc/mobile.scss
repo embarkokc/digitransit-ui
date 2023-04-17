@@ -174,6 +174,11 @@ $mobile-gutter: 16px;
   .small-2 {
     width: 20%;
   }
+
+  .itinerary-tab .itinerary-main {
+    margin-left: $mobile-gutter;
+    margin-right: $mobile-gutter;
+  }
 }
 
 /* Alerts view */

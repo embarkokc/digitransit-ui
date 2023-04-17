@@ -939,7 +939,6 @@ span.itinerary-stop-code {
 
   .react-autosuggest__container .react-autosuggest__suggestions-container {
     top: calc(100% + 10px);
-    border: 1px solid $gray;
     .react-autosuggest__section-container {
       &:not(:first-child) {
         border-top-color: $gray;

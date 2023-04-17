@@ -25,13 +25,13 @@ $mobile-gutter: 16px;
 
 .mobile {
   h1, .h1 {
-    margin: 10px 0px 30px $mobile-gutter;// TODO: perhaps better wrap in container instead
-    line-height: 45px;
-  }
-  .front-page h1,
-  .front-page .h1 {
-    margin-top: 0;
+    margin: 24px 0px 18px 0;
     margin-left: 0;
+    font-size: 32px;
+    line-height: 1;
+  }
+  .front-page {
+    margin-top: 0;
   }
 
   /* RouteSearch */
@@ -60,11 +60,9 @@ $mobile-gutter: 16px;
 
   /* stops page */
   .card-header-wrapper h1 {
-    /* font-size: 18px; */
-    /* line-height: 22px; */
-    font-size: 42px;
-    line-height: 42px;
-    margin-bottom: 15px;
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 18px;
     font-weight: bold;
   }
 
@@ -82,8 +80,8 @@ $mobile-gutter: 16px;
   }
   .route-header .route-info .route-short-name {
     font-weight: bold;
-    font-size: $font-size-xlarge;
-    margin-bottom: 15px;
+    font-size: 32px;
+    margin-bottom: 18px;
   }
   .card-header.header {
     border-bottom: initial;
@@ -105,18 +103,25 @@ $mobile-gutter: 16px;
   .offcanvas-mobile {
     .customize-search .close-offcanvas {
       border: initial;
-      top: 1.4em;
+      top: calc(24px + 3px);
+      left: 16px;
+      width: 1em;
+      height: 1em;
     }
-    .settings-option-container h2 {
-      padding-left: 62px;
-      font-size: 42px; // TODO really 42px?
-      text-align: initial;
+    .settings-option-container {
+      h2 {
+        padding: calc(24px - 8px) 0 calc(18px - 8px) 0;
+        padding-left: 40px;
+        font-size: 32px;
+        line-height: 1;
+        text-align: initial;
+      }
     }
   }
 
   /* Trip Results page */
   .summary-navigation-container {
-    margin: 25px $mobile-gutter 0 $mobile-gutter;
+    margin: 0 $mobile-gutter;
 
     h1 {
       padding-left: 40px;
@@ -149,7 +154,8 @@ $mobile-gutter: 16px;
   }
   .summary-navigation-container .back-button {
     position: absolute;
-    // top: 20px;
+    top: 7px;
+    padding: 0 !important;
     .icon-holder {
       position: static;
       width: unset;
@@ -157,12 +163,17 @@ $mobile-gutter: 16px;
       font-size: 21px;
       border: none;
       background-color: initial;
+      .icon {
+        width: 1em;
+        height: 1em;
+      }
     }
   }
-  .back-button .icon-holder, .mobile .back-button .icon-holder:focus, .mobile .back-button .icon-holder:hover {
-    padding: 0px;
-  }
   /* Trips itinerary page */
+  // The itinerary page puts the h1 right inside .content-container, so we need margin-left.
+  .drawer-container .content-container > h1 {
+    margin-left: $mobile-gutter;
+  }
   .swipe-header-container {
     display: none;
   }
@@ -184,27 +195,29 @@ $mobile-gutter: 16px;
 
 /* Alerts view */
 #mainContent .alerts-view > .mobile {
-  padding: 25px $mobile-gutter;
+  padding-left: $mobile-gutter;
+  padding-right: $mobile-gutter;
   & > *[role="main"] {
     position: relative;
 
     h1 {
-      margin-left: 50px;
-      margin-top: 0;
+      margin-left: 40px;
     }
 
     .back-button {
       position: absolute;
-      top: 0;
+      top: calc(24px + 6px);
 
       .icon-holder {
         position: static;
-        width: unset;
-        height: unset;
         font-size: 21px;
         border: none;
         background-color: initial;
         box-shadow: none;
+        .icon {
+          width: 1em;
+          height: 1em;
+        }
       }
     }
   }

@@ -106,11 +106,11 @@ div.map {
     bottom: 45px;
   }
 
-  .back-button {
+  .map .back-button {
     .icon-holder,
     .icon-holder:focus,
     .icon-holder:hover {
-      padding: 0.55em 0.2em 0px 0px !important;
+      padding: 0.55em 0.2em 0px 0px;
       font-size: 16px;
       z-index: index($zindex, map-buttons);
       background: white;

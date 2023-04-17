@@ -30,22 +30,27 @@ body.route-search-page .route-search-page {
     }
     .embedded-route-search-container.mobile {
         margin: 1em;
+
+        .embedded-route-search-container-heading {
+            margin-left: 0;
+        }
     }
     .embedded-route-search-container.embedded-seach-container {
         width: initial;
         max-width: 26em;
         height: initial;
     }
-}
 
-.embedded-route-search-container-heading {
-    line-height: 1.5em;
-}
-.embedded-route-search-container-heading-logo {
-    height: 1.3em;
-    padding: 1px 20px 5px 0px;
-}
+    .embedded-route-search-container-heading {
+        line-height: 1.5em;
+        margin-bottom: .5em;
+    }
+    .embedded-route-search-container-heading-logo {
+        height: 1.3em;
+        padding: 1px 20px 5px 0px;
+    }
 
-.control-panel-container ul {
-    margin: 20px 0px;
+    .control-panel-container ul {
+        margin: 20px 0 10px 0;
+    }
 }

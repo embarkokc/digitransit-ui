@@ -429,28 +429,6 @@ class Timetable extends React.Component {
                 </div>
               </div>
               {timeTableRows}
-              <div
-                className="route-remarks"
-                style={{
-                  display:
-                    variantsWithMarks.filter(o => o.duplicate).length > 0
-                      ? 'block'
-                      : 'none',
-                }}
-              >
-                <h1>
-                  <FormattedMessage
-                    id="explanations"
-                    defaultMessage="Explanations"
-                  />
-                  :
-                </h1>
-                {variantsWithMarks.map(o => (
-                  <div className="remark-row" key={`${o.id}-${o.headsign}`}>
-                    <span>{`${o.name}${o.duplicate} = ${o.headsign}`}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </ScrollableWrapper>

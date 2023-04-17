@@ -90,6 +90,15 @@ class SummaryNavigation extends React.Component {
             }
           />
         )}
+        {this.props.breakpoint !== 'large' && (
+          // EMBARK: always show heading, even on mobile
+          <h1>
+            <FormattedMessage
+              id="summary-page.title"
+              defaultMessage="Itinerary suggestions"
+            />
+          </h1>
+        )}
         <span className="sr-only">
           <FormattedMessage
             id="search-fields.sr-instructions"

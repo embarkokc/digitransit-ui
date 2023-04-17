@@ -1,3 +1,5 @@
+$mobile-gutter: 16px;
+
 .mobile.top-bar {
   height: $mobile-top-bar-height;
   min-height: $mobile-top-bar-height;
@@ -21,18 +23,29 @@
   max-height: calc(100vh - #{$mobile-top-bar-height});
 }
 
-$mobile-gutter: 16px;
-
 .mobile {
   h1, .h1 {
-    margin: 20px; // TODO: perhaps better wrap in container instead
+    margin: 10px 0px 30px $mobile-gutter;// TODO: perhaps better wrap in container instead
     line-height: 45px;
   }
+  .front-page h1,
+  .front-page .h1 {
+    margin-top: 0;
+    margin-left: 0;
+  }
 
+  /* RouteSearch */
+  .control-panel-container > ul:nth-child(4) {
+    font-size: 18px;
+  }
+  .styles_container .styles_input {
+    padding-right: 38px;
+  }
+
+  // Stops Near You Page
   .stops-near-you-page {
     padding: 5px 20px 0; // was padding: 5px 0.625em 0;
   }
-
   .stops-near-you-page .stop-near-you-container .stop-near-you-inner-container {
     width: calc(100%); // was width: calc(100% + 10px);
   }
@@ -86,5 +99,123 @@ $mobile-gutter: 16px;
   }
   .route-page-container .route-page-control-panel-container {
     margin: initial;
+  }
+
+  /* Settings page */
+  .offcanvas-mobile {
+    .customize-search .close-offcanvas {
+      border: initial;
+      top: 1.4em;
+    }
+    .settings-option-container h2 {
+      padding-left: 62px;
+      font-size: 42px; // TODO really 42px?
+      text-align: initial;
+    }
+  }
+
+  /* Trip Results page */
+  .summary-navigation-container {
+    margin: 25px $mobile-gutter 0 $mobile-gutter;
+
+    h1 {
+      padding-left: 40px;
+    }
+  }
+  .summary h2 {
+    padding-left: $mobile-gutter;
+  }
+  .itinerary-summary-row {
+    padding-left: $mobile-gutter;
+    padding-right: $mobile-gutter;
+  }
+  .street-mode-selector-container {
+    padding-left: $mobile-gutter;
+    padding-right: $mobile-gutter;
+    padding-top: 25px;
+    h3 {
+      padding: 0px;
+    }
+    .street-mode-selector-button-container {
+      padding: 0px;
+    }
+    .street-mode-button-row {
+      gap: 5px;
+    }
+  }
+  .back-title {
+    // don't show Back-Message
+    display: none;
+  }
+  .summary-navigation-container .back-button {
+    position: absolute;
+    // top: 20px;
+    .icon-holder {
+      position: static;
+      width: unset;
+      height: unset;
+      font-size: 21px;
+      border: none;
+      background-color: initial;
+    }
+  }
+  .back-button .icon-holder, .mobile .back-button .icon-holder:focus, .mobile .back-button .icon-holder:hover {
+    padding: 0px;
+  }
+  /* Trips itinerary page */
+  .swipe-header-container {
+    display: none;
+  }
+  @media only screen {
+    .column, .columns {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+  .small-2 {
+    width: 20%;
+  }
+
+  .itinerary-tab .itinerary-main {
+    margin-left: $mobile-gutter;
+    margin-right: $mobile-gutter;
+  }
+}
+
+/* Alerts view */
+#mainContent .alerts-view > .mobile {
+  padding: 25px $mobile-gutter;
+  & > *[role="main"] {
+    position: relative;
+
+    h1 {
+      margin-left: 50px;
+      margin-top: 0;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 0;
+
+      .icon-holder {
+        position: static;
+        width: unset;
+        height: unset;
+        font-size: 21px;
+        border: none;
+        background-color: initial;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .alerts-view-search-dialog {
+    margin: 0;
+  }
+  .alerts-list {
+    border-left: none;
+  }
+  .alerts-view-alert {
+    padding: 50px 0;
   }
 }

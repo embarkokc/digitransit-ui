@@ -454,11 +454,6 @@ class IndexPage extends React.Component {
                   <div className="datetimepicker-container">
                     <DatetimepickerContainer realtime color={color} />
                   </div>
-                  <FavouritesContainer
-                    onClickFavourite={this.clickFavourite}
-                    lang={lang}
-                    isMobile
-                  />
                   <CtrlPanel.SeparatorLine />
                   <h2>Search Stops &amp; Routes</h2>
                   <div className="stop-route-search-container">

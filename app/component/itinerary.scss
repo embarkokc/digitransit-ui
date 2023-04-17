@@ -2332,9 +2332,10 @@ $font-print-decrease: 0.7;
       padding-left: 10px;
     }
     .divider-bottom {
-      left: 10px;
-      right: 10px;
-      width: calc(100% - 20px);
+      // EMBARK: the parent element has spacing, so we fill its content box
+      left: 0;
+      right: 0;
+      width: unset;
       @media print {
         border: none;
       }

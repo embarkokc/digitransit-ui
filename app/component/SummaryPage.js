@@ -2787,7 +2787,7 @@ class SummaryPage extends React.Component {
               )}
             </span>
           ) : (
-            false
+            <h1>Trip Itinerary</h1>
           )
         }
         content={

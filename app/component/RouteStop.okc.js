@@ -19,7 +19,6 @@ const RouteStop = (
     stop.stopTimesForPattern && stop.stopTimesForPattern.length > 0;
 
   const firstDeparture = patternExists && stop.stopTimesForPattern[0];
-  const nextDeparture = patternExists && stop.stopTimesForPattern[1];
 
   const getDepartureTime = stoptime => {
     let departureText = '';
@@ -151,33 +150,6 @@ const RouteStop = (
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="route-details-bottom-row">
-                {patternExists && (
-                  <div
-                    key={firstDeparture.scheduledDeparture}
-                    className="route-stop-time"
-                  >
-                    {!hideDepartures &&
-                      fromStopTime(
-                        firstDeparture,
-                        currentTime,
-                        true,
-                        false,
-                        true,
-                      )}
-                    &nbsp;&#x2022;&nbsp;
-                  </div>
-                )}
-                {nextDeparture && displayNextDeparture && (
-                  <div
-                    key={nextDeparture.scheduledDeparture}
-                    className="route-stop-time"
-                  >
-                    {!hideDepartures &&
-                      fromStopTime(nextDeparture, currentTime, true, true)}
-                  </div>
-                )}
               </div>
               {patternExists &&
                 stop.stopTimesForPattern[0].pickupType === 'NONE' &&

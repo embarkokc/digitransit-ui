@@ -183,7 +183,31 @@ $mobile-gutter: 16px;
 }
 
 /* Alerts view */
-#mainContent .alerts-view .mobile {
+#mainContent .alerts-view > .mobile {
+  & > *[role="main"] {
+    position: relative;
+
+    h1 {
+      margin-left: 50px;
+      margin-top: 0;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 0;
+
+      .icon-holder {
+        position: static;
+        width: unset;
+        height: unset;
+        font-size: 21px;
+        border: none;
+        background-color: initial;
+        box-shadow: none;
+      }
+    }
+  }
+
   .alerts-view-search-dialog {
     margin: 0 $mobile-gutter;
   }

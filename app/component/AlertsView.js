@@ -8,6 +8,7 @@ import { TransportMode } from '../constants';
 import Icon from './Icon';
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
+import BackButton from './BackButton';
 import { getStopPath, getRoutePath } from '../util/path';
 import { typeToName } from '../util/gtfs';
 import { getAvailableTransportModeConfigs } from '../util/modeUtils';
@@ -330,9 +331,17 @@ export function AlertsView(props, context) {
         mobile={() => (
           <MobileView
             header={
-              <h1>
-                <FormattedMessage id="alerts-page-title" />
-              </h1>
+              <>
+                <h1>
+                  <FormattedMessage id="alerts-page-title" />
+                </h1>
+                <BackButton
+                  title={<FormattedMessage id="back" defaultMessage="Back" />}
+                  titleClassName="back-title"
+                  icon="icon-icon_arrow-collapse--left"
+                  iconClassName="arrow-icon"
+                />
+              </>
             }
             content={
               <>

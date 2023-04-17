@@ -184,6 +184,7 @@ $mobile-gutter: 16px;
 
 /* Alerts view */
 #mainContent .alerts-view > .mobile {
+  padding: 25px $mobile-gutter;
   & > *[role="main"] {
     position: relative;
 
@@ -209,9 +210,12 @@ $mobile-gutter: 16px;
   }
 
   .alerts-view-search-dialog {
-    margin: 0 $mobile-gutter;
+    margin: 0;
+  }
+  .alerts-list {
+    border-left: none;
   }
   .alerts-view-alert {
-    padding: 50px $mobile-gutter;
+    padding: 50px 0;
   }
 }

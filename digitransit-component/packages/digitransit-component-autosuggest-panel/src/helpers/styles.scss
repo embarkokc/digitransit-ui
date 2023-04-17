@@ -40,6 +40,10 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
   }
 }
 
+.origin-input-container {
+  position: relative; // EMBARK
+}
+
 .row {
   display: flex;
   flex-direction: row;

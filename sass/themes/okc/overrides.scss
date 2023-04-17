@@ -335,6 +335,9 @@ nav.top-bar + section.content {
 }
 
 .map-routing-button {
+  font-size: 16px;
+  min-width: unset;
+  height: unset;
   color: $black;
   padding-top: 3px;
   padding-bottom: 3px;

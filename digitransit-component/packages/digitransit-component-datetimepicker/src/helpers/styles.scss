@@ -367,16 +367,16 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       padding: 6px 0 0 8px;
     }
     .departure-now-button {
-      background-color: white;
+      background-color: var(--color); // Embark
       font-family: inherit;
       padding: 5px 15px;
-      border: 1px solid $gray;
+      border: none; // Embark
       border-radius: 50px;
       font-weight: var(--font-weight-medium);
-      font-size: $font-size-normal;
+      font-size: $font-size-smaller; // Embark
       line-height: 18px;
       letter-spacing: -0.02em;
-      color: var(--color);
+      color: white; // Embark
     }
   }
   .tab-row {
@@ -394,10 +394,11 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
       font-weight: normal;
       width: 50%;
       text-align: center;
-      color: $black;
+      color: white; // Embark
       &.active {
         font-weight: var(--font-weight-medium);
         background-color: #ffffff;
+        color: $black; // Embark
       }
     }
     .radio-textbutton {

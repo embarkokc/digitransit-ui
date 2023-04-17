@@ -575,7 +575,8 @@ div.map .leaflet-container .leaflet-control-attribution a {
 
 /* Settings overrides*/
 .settings-option-container h2 {
-  padding-top: 88px;
+  padding-top: 94px;
+  padding-left: 0;
   font-size: $font-size-xlarge;
   font-weight: $font-weight-bold;
 }
@@ -622,6 +623,9 @@ div.map .leaflet-container .leaflet-control-attribution a {
 
 .customize-search .walk-options-container {
   padding-left: 16px;
+  .walk-option-inner {
+    padding-left: 0;
+  }
 }
 
 .customize-search .walk-options-container label.toggle-label {
@@ -645,10 +649,10 @@ div.map .leaflet-container .leaflet-control-attribution a {
   }
 }
 
-.settings-header {
+.customize-search .settings-header {
   color: $black;
-  font-weight: $font-weight-bolder;
-  padding-left: 16px;
+  font-weight: $font-weight-bold;
+  padding-left: 0;
 }
 
 .mode-option-container {

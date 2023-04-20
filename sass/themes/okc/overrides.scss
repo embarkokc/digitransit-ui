@@ -306,7 +306,10 @@ nav.top-bar + section.content {
   display: flex;
   align-items: center;
 
-  &.walk, &.bicycle_walk {
+  &.walk,
+  &.bicycle_walk,
+  &.bicycle,
+  &.wait {
     border: 1px solid $gray;
     background-color: $white;
     color: $black;

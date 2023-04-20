@@ -34,8 +34,13 @@ DropdownIndicator.contextTypes = {
 function DateSelect(props, context) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const onMenuOpen = () => setIsMenuOpen(true);
-  const onMenuClose = () => setIsMenuOpen(false);
+  // https://stackoverflow.com/a/69001161
+  const onMenuOpen = () => {
+    setImmediate(() => setIsMenuOpen(true));
+  };
+  const onMenuClose = () => {
+    setImmediate(() => setIsMenuOpen(false));
+  };
 
   const dates = [];
   const date = moment(props.startDate, props.dateFormat);

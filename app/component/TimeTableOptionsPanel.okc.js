@@ -133,8 +133,12 @@ const TimeTableOptionsPanel = (props, context) => {
         isMulti={false}
         menuIsOpen={isMenuOpen}
         onChange={handleChange}
-        onMenuOpen={() => setIsMenuOpen(true)}
-        onMenuClose={() => setIsMenuOpen(false)}
+        onMenuOpen={() => {
+          setImmediate(() => setIsMenuOpen(true));
+        }}
+        onMenuClose={() => {
+          setImmediate(() => setIsMenuOpen(false));
+        }}
         options={options}
         value={selectedOption}
       />

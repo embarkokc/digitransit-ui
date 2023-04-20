@@ -11,6 +11,11 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 input[type='text'] {
   margin: 0;
   padding: 0;
+  font-size: 16px;
+
+  &::placeholder {
+    font-size: 16px;
+  }
 }
 
 .fullscreen-root {

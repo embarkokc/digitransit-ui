@@ -7,3 +7,10 @@
     display: none;  /* Safari and Chrome */
   }
 }
+
+.container .input {
+  font-size: 16px;
+  &::placeholder {
+    font-size: 16px;
+  }
+}

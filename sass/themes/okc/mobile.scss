@@ -42,6 +42,17 @@ $mobile-gutter: 16px;
     padding-right: 38px;
   }
 
+  .container .input {
+    font-size: 16px;
+  }
+
+  #stop-route-station {
+    padding-right: 2px;
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+
   // Stops Near You Page
   .stops-near-you-page {
     padding: 5px 20px 0; // was padding: 5px 0.625em 0;
@@ -97,6 +108,9 @@ $mobile-gutter: 16px;
   }
   .route-page-container .route-page-control-panel-container {
     margin: initial;
+  }
+  .location-details_container .route-stop-row_content-container button .route-details_container .route-stop-name {
+    font-size: 16px;
   }
 
   /* Settings page */

@@ -34,9 +34,20 @@ $zindex: base, map-container, map-gradient, map-fullscreen-toggle,
 .destination-input-container {
   display: flex;
   flex: 1 0 100%;
+  
   input[type='text'] {
     margin: 0;
     height: 60px; // EMBARK
+    font-size: 16px;
+    &::placeholder {
+      font-size: 16px;
+    }
+    @include min-width(tablet) {
+      font-size: 21px;
+      &::placeholder {
+        font-size: 21px;
+      }
+    }
   }
 }
 

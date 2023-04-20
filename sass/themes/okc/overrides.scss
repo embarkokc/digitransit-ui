@@ -1121,10 +1121,12 @@ div.origin-popup {
   }
 }
 
+.row.itinerary-row .leg-before.wait .route-number,
 .row.itinerary-row .leg-before.bicycle .route-number {
-  top: 84px;
+  top: calc(40px + 28%);
   right: 8px;
-
+}
+.row.itinerary-row .leg-before.bicycle .route-number {
   .icon {
     color: #686869;
     width: 1.5em;
@@ -1134,8 +1136,10 @@ div.origin-popup {
 
 // shift walk line 1 px left
 .row.itinerary-row .leg-before-line.walk,
+.row.itinerary-row .leg-before-line.bicycle,
 .row.itinerary-row .leg-before-line.bicycle_walk,
-.row.itinerary-row .leg-before-line.car-park-walk {
+.row.itinerary-row .leg-before-line.car-park-walk,
+.row.itinerary-row .leg-before-line.wait {
   height: 30%;
   top: 40px;
   left: 7px;

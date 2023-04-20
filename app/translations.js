@@ -1246,7 +1246,7 @@ const translations = {
     'modes.to-tram': 'streetcar stop',
     'more-departures': 'More departures',
     'more-settings': 'More settings',
-    'move-on-map': 'Move on the map',
+    'move-on-map': 'Move on the Map',
     'move-to-tab': 'Go to tab {number}',
     navigate: 'Navigate',
     'nearby-stops': 'Nearby Stops',

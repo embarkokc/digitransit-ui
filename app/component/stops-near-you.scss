@@ -510,11 +510,14 @@
 
 .mobile {
   .stops-near-you-location-search {
-    width: 145px;
+    width: 165px;
     margin: 25px 15px 0 0;
     z-index: 5;
     div > div > .origin-stop-near-you-selector {
       height: 34px;
+      &::placeholder {
+        font-size: 16px;
+      }
     }
   }
   .stops-near-you-search-container {

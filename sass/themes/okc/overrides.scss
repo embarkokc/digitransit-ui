@@ -809,6 +809,10 @@ span.itinerary-stop-code {
 	color: $black
 }
 
+.route-stop-list {
+  margin-left: 0;
+}
+
 .route-details-left-column {
   display: flex;
   gap: 15px;
@@ -821,6 +825,10 @@ span.itinerary-stop-code {
   align-items: center;
 }
 
+.location-details_container .route-stop-row_content-container {
+  width: 100%;
+  margin-left: 0;
+}
 .location-details_container .route-stop-row_content-container button {
   .route-details_container .route-stop-name {
     font-size: $font-size-small;
@@ -842,6 +850,9 @@ span.itinerary-stop-code {
         margin-left: 0px;
       }
     }
+  }
+  .platform-number-container {
+    display: none;
   }
 }
 

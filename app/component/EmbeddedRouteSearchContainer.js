@@ -54,12 +54,15 @@ class EmbeddedRouteSearchContainer extends React.Component {
   componentDidMount() {
     document.body.classList.add(BODY_CLASS_NAME);
 
-    const { secondaryLogo } = this.context.config;
+    const { okcBrandMarks, secondaryLogo } = this.context.config;
+    const okcBrand = 'spokies'; // TODO retrieve from URL
+    const logoMark =
+      this.context.config.okcBrandMarks[okcBrand] || secondaryLogo;
 
     // eslint-disable-next-line no-underscore-dangle
     const _this = this;
     import(
-      /* webpackChunkName: "embedded-search" */ `../configurations/images/${secondaryLogo}`
+      /* webpackChunkName: "embedded-search" */ `../configurations/images/${logoMark}`
     )
       .then(({ default: pathToLogo }) => {
         _this.secondaryLogoPath = pathToLogo;

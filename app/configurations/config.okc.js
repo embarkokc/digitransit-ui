@@ -136,6 +136,13 @@ export default configMerger(walttiConfig, {
   textLogo: false,
   logo: 'okc/embark-logo.svg',
   secondaryLogo: 'okc/embark-favicon.svg',
+  // We have modified the embedded route search to accept a URL query parameter that
+  // determines the logo to be shown.
+  okcBrandLogos: {
+    embark: 'okc/embark-favicon.svg',
+    spokies: 'okc/spokies-logo-mark.svg',
+    streetcar: 'okc/streetcar-logo-mark.svg',
+  },
   favicon: './app/configurations/images/okc/favicon.png',
   
   feedIds: ['embark'],

@@ -185,6 +185,19 @@ export const getStopRoutePath = searchObj => {
           ? searchObj.properties.id
           : searchObj.properties.id.split(':')[1];
       break;
+    // Embark/OKC: When uses are looking for citybikes, we allow searching by addresses.
+    case 'venue':
+    case 'address':
+    case 'street':
+      // todo: the following logic handles `venue`. how do `address` & `street` results look like?
+      path = `/${PREFIX_NEARYOU}/CITYBIKE/`;
+      id = addressToItinerarySearch({
+        // todo: or properties.label? they seem to be equal most of the time
+        address: searchObj.properties?.name,
+        lat: searchObj.geometry?.coordinates[1],
+        lon: searchObj.geometry?.coordinates[0],
+      });
+      break;
     default:
       path = `/${PREFIX_STOPS}/`;
       id = id.replace('GTFS:', '').replace(':', '%3A');

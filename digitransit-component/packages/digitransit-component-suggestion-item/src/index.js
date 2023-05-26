@@ -59,6 +59,7 @@ function getIconProperties(
       ? [`mode-${mode}`, `mode-${mode}`]
       : [`mode-${modeSet}-${mode}`, `mode-${mode}`];
   } else if (item.type === 'OldSearch' && item?.properties?.mode) {
+    // Route
     const mode =
       modeSet === 'default'
         ? getRouteMode(item?.properties)

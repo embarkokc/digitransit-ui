@@ -22,6 +22,26 @@ const modules = {
   EmbeddedRouteSearch: () => importLazy(import('./StopsNearYouContainer')),
 };
 
+const filterResultsByMode = (results, mode) => {
+  return results.filter(result => {
+    // apparently DTAutoSuggest's filtering logic doesn't cover these cases 🤷
+
+    // - all results with `type: 'Route'`
+    // - *some* results with `type: 'OldSearch'`
+    if (result.properties?.mode) {
+      return result.properties?.mode === mode;
+    }
+    // - all results with `type: 'FavouriteStop'`
+    if (Array.isArray(result.properties?.addendum?.GTFS?.modes)) {
+      const modes = result.properties?.addendum?.GTFS?.modes;
+      return modes.includes(mode);
+    }
+
+    // filter out all other results
+    return false;
+  });
+};
+
 // eslint-disable-next-line react/prefer-stateless-function
 class EmbeddedRouteSearchContainer extends React.Component {
   static contextTypes = {
@@ -58,7 +78,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
   }
 
   render() {
-    const { config } = this.context;
+    const { config, match } = this.context;
     const { lang, breakpoint } = this.props;
     const { trafficNowLink, colors, fontWeights } = config;
     const { secondaryLogoPath } = this;
@@ -72,12 +92,38 @@ class EmbeddedRouteSearchContainer extends React.Component {
       window.top.location.href = getStopRoutePath(item);
     };
 
-    const stopAndRouteSearchTargets = ['Stops', 'Routes'];
+    let stopAndRouteSearchTargets = ['Stops', 'Routes'];
     if (useCitybikes(config.cityBike?.networks)) {
       stopAndRouteSearchTargets.push('BikeRentalStations');
     }
     if (config.includeParkAndRideSuggestions) {
       stopAndRouteSearchTargets.push('ParkingAreas');
+    }
+
+    // Embark/OKC: Allow customizing the embedded route search via a `okc-brand`
+    // query parameter.
+    const query = match.location?.query || {};
+    const okcBrand = query['okc-brand'] || null;
+
+    let transportMode = null;
+    let filterResults = results => results;
+    let placeholder = 'stop-near-you';
+    if (okcBrand === 'embark') {
+      // If digitransit has been loaded from Embark's main (a.k.a. bus) page, we
+      // - filter results by mode
+      transportMode = 'route-BUS';
+      filterResults = filterResultsByMode;
+    } else if (okcBrand === 'streetcar') {
+      // If digitransit has been loaded from Embark's Streetcar page, we
+      // - filter results by mode
+      transportMode = 'route-TRAM';
+      filterResults = filterResultsByMode;
+    } else if (okcBrand === 'spokies') {
+      // If digitransit has been loaded from Embark's Spokies (citybikes) page, we
+      // - search for addresses (`Locations`) only.
+      stopAndRouteSearchTargets = ['Locations'];
+      // - adapt the search box placeholder
+      placeholder = 'stop-near-you-citybike';
     }
 
     const isMobile = this.props.breakpoint !== 'large';
@@ -86,7 +132,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
       icon: 'search',
       id: 'stop-route-station',
       className: 'destination',
-      placeholder: 'stop-near-you',
+      placeholder,
       selectHandler: onSelectStopRoute,
       getAutoSuggestIcons: config.getAutoSuggestIcons,
       value: '',
@@ -97,6 +143,8 @@ class EmbeddedRouteSearchContainer extends React.Component {
       accessiblePrimaryColor,
       sources,
       targets: stopAndRouteSearchTargets,
+      transportMode,
+      filterResults,
       fontWeights,
       modeIconColors: config.colors.iconColors,
       modeSet: config.iconModeSet,
@@ -169,8 +217,12 @@ class EmbeddedRouteSearchContainer extends React.Component {
 
 EmbeddedRouteSearchContainer.propTypes = {
   lang: PropTypes.string.isRequired,
-  // match: matchShape.isRequired,
   breakpoint: PropTypes.string.isRequired,
+};
+
+EmbeddedRouteSearchContainer.contextTypes = {
+  config: PropTypes.object.isRequired,
+  match: matchShape.isRequired,
 };
 
 EmbeddedRouteSearchContainer.defaultTypes = {

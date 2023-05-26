@@ -44,47 +44,68 @@ const filterResultsByMode = (results, mode) => {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EmbeddedRouteSearchContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // see importSecondaryLogo()
+      currentSecondaryLogo: null,
+      secondaryLogoPath: null,
+    };
+  }
+
   static contextTypes = {
     router: routerShape.isRequired,
     config: PropTypes.object.isRequired,
   };
 
-  secondaryLogoPath = null;
-
   componentDidMount() {
     document.body.classList.add(BODY_CLASS_NAME);
-
-    const { okcBrandMarks, secondaryLogo } = this.context.config;
-    const okcBrand = 'spokies'; // TODO retrieve from URL
-    const logoMark =
-      this.context.config.okcBrandMarks[okcBrand] || secondaryLogo;
-
-    // eslint-disable-next-line no-underscore-dangle
-    const _this = this;
-    import(
-      /* webpackChunkName: "embedded-search" */ `../configurations/images/${logoMark}`
-    )
-      .then(({ default: pathToLogo }) => {
-        _this.secondaryLogoPath = pathToLogo;
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.error(
-          'EmbeddedRouteSearchContainer: failed to import() config.secondaryLogo',
-          err,
-        );
-      });
   }
 
   componentWillUnmount() {
     document.body.classList.remove(BODY_CLASS_NAME);
   }
 
+  importSecondaryLogo(okcBrand) {
+    const { secondaryLogo } = this.context.config;
+    const logo =
+      (okcBrand && this.context.config.okcBrandLogos?.[okcBrand]) ||
+      secondaryLogo;
+    // We only want to re-import() when `logo` has changed, so we keep track of the
+    // previous `logo` value we've imported for.
+    if (this.state.currentSecondaryLogo === logo) {
+      return;
+    }
+
+    // This function gets called by render(), i.e. very often. It will call import() many times,
+    // until one of the async import()s has finished and mutated state.currentSecondaryLogo, so
+    // that it aborts above. If the async import() takes a long time, this may do hundreds of calls.
+    // todo: find a better way (e.g. memoization) or move to functional components with useEffect()
+
+    // eslint-disable-next-line no-underscore-dangle
+    const _this = this;
+    import(
+      /* webpackChunkName: "embedded-search" */ `../configurations/images/${logo}`
+    )
+      .then(({ default: pathToLogo }) => {
+        _this.setState({
+          currentSecondaryLogo: logo,
+          secondaryLogoPath: pathToLogo,
+        });
+      })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.error(
+          `EmbeddedRouteSearchContainer: failed to import() logo ${logo}`,
+          err,
+        );
+      });
+  }
+
   render() {
     const { config, match } = this.context;
     const { lang, breakpoint } = this.props;
     const { trafficNowLink, colors, fontWeights } = config;
-    const { secondaryLogoPath } = this;
     const color = colors.primary;
     const hoverColor = colors.hover; // || LightenDarkenColor(colors.primary, -20);
     const accessiblePrimaryColor = colors.accessiblePrimary || colors.primary;
@@ -128,6 +149,9 @@ class EmbeddedRouteSearchContainer extends React.Component {
       // - adapt the search box placeholder
       placeholder = 'stop-near-you-citybike';
     }
+
+    const { secondaryLogoPath } = this.state;
+    this.importSecondaryLogo(okcBrand); // make sure secondaryLogoPath matches okcBrand
 
     const isMobile = this.props.breakpoint !== 'large';
     const stopRouteSearchProps = {

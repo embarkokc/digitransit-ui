@@ -189,7 +189,8 @@ function getIconProperties(
   const defaultIcon = 'place';
   // Use more accurate icons in stop/station search, depending on mode from geocoding
   if (modes?.length) {
-    const mode = modes[0];
+    // Embark/OKC: always prefer TRAM over e.g. BUS
+    const mode = modes.includes('TRAM') ? 'TRAM' : modes[0];
     let iconStr;
     if (item.properties.layer === 'station' || (mode === 'FERRY' && stopCode)) {
       const iconProperties = layerIcon.get(
@@ -242,7 +243,7 @@ function hasVehicleStationCode(stationId) {
  * @example
  * <SuggestionItem
  *    item={suggestionObject}
- *    content={['Pysäkki', 'Kuusitie', 'Helsinki', 'H1923']}
+ *    content={['Pysäkki', 'Kuusitie', 'Helsinki', 'H1923', ['TRAM', 'SUBWAY']]}
  *    loading={false}
  * />
  */

@@ -189,6 +189,8 @@ export default configMerger(walttiConfig, {
     },
   },
 
+  maxNearbyStopAmount: 15,
+
   searchParams: {
     'boundary.rect.min_lat': minLat,
     'boundary.rect.max_lat': maxLat,

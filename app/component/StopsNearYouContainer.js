@@ -12,6 +12,10 @@ import Loading from './Loading';
 import Icon from './Icon';
 import { getDefaultNetworks } from '../util/citybikes';
 
+// This value MUST match config.maxNearbyStopAmount (which is passed in as `first`
+// by StopsNearYouPage into the first GraphQL fetch)!
+const NO_OF_INITIAL_RESULTS = 15;
+
 class StopsNearYouContainer extends React.Component {
   static propTypes = {
     stopPatterns: PropTypes.any,
@@ -48,7 +52,7 @@ class StopsNearYouContainer extends React.Component {
     this.state = {
       maxRefetches: context.config.maxNearbyStopRefetches,
       refetches: 0,
-      stopCount: 5,
+      stopCount: NO_OF_INITIAL_RESULTS,
       currentPosition: props.position,
       fetchMoreStops: false,
       isLoadingmoreStops: false,
@@ -81,7 +85,7 @@ class StopsNearYouContainer extends React.Component {
     if (nextProps.stopPatterns) {
       const stopsForFiltering = [...nextProps.stopPatterns.nearest.edges];
       const newestStops = stopsForFiltering.splice(
-        stopsForFiltering.length - 5,
+        stopsForFiltering.length - NO_OF_INITIAL_RESULTS,
       );
       stopsForFiltering.forEach(stop => {
         const node = stop.node.place;
@@ -212,14 +216,14 @@ class StopsNearYouContainer extends React.Component {
         );
       });
       sortedPatterns = filteredCityBikeStopPatterns
-        .slice(0, 5)
+        .slice(0, NO_OF_INITIAL_RESULTS)
         .sort(sortNearbyRentalStations(this.props.favouriteIds));
-      sortedPatterns.push(...filteredCityBikeStopPatterns.slice(5));
+      sortedPatterns.push(...filteredCityBikeStopPatterns.slice(NO_OF_INITIAL_RESULTS));
     } else {
       sortedPatterns = stopPatterns
-        .slice(0, 5)
+        .slice(0, NO_OF_INITIAL_RESULTS)
         .sort(sortNearbyStops(this.props.favouriteIds, walkRoutingThreshold));
-      sortedPatterns.push(...stopPatterns.slice(5));
+      sortedPatterns.push(...stopPatterns.slice(NO_OF_INITIAL_RESULTS));
     }
 
     const stops = sortedPatterns.map(({ node }) => {
@@ -374,7 +378,7 @@ const refetchContainer = createPaginationContainer(
         lon: { type: "Float!", defaultValue: 0 }
         filterByPlaceTypes: { type: "[FilterPlaceType]", defaultValue: null }
         filterByModes: { type: "[Mode]", defaultValue: null }
-        first: { type: "Int!", defaultValue: 5 }
+        first: { type: "Int!", defaultValue: 123 } # always overridden
         after: { type: "String" }
         maxResults: { type: "Int" }
         maxDistance: { type: "Int" }

@@ -218,7 +218,9 @@ class StopsNearYouContainer extends React.Component {
       sortedPatterns = filteredCityBikeStopPatterns
         .slice(0, NO_OF_INITIAL_RESULTS)
         .sort(sortNearbyRentalStations(this.props.favouriteIds));
-      sortedPatterns.push(...filteredCityBikeStopPatterns.slice(NO_OF_INITIAL_RESULTS));
+      sortedPatterns.push(
+        ...filteredCityBikeStopPatterns.slice(NO_OF_INITIAL_RESULTS),
+      );
     } else {
       sortedPatterns = stopPatterns
         .slice(0, NO_OF_INITIAL_RESULTS)
@@ -402,6 +404,7 @@ const refetchContainer = createPaginationContainer(
                   ...CityBikeStopNearYouContainer_stop
                   stationId
                   networks
+                  bikesAvailable
                 }
                 ... on Stop {
                   ...StopNearYouContainer_stop

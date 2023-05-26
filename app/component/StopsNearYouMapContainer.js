@@ -70,6 +70,7 @@ const containerComponent = createPaginationContainer(
                   lon
                   stationId
                   networks
+                  bikesAvailable
                 }
                 ... on Stop {
                   gtfsId

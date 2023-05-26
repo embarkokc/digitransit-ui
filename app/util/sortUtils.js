@@ -14,6 +14,24 @@ export const sortNearbyRentalStations = favouriteRentalStationsIds => {
       favouriteRentalStationsIds.has(second.node.place.stationId) &&
       secondIsClose;
     if (firstIsFavourite === secondIsFavourite) {
+      // Embark/OKC: prefer stations with available bikes
+      const firstHasBikes =
+        Number.isInteger(first.node.place.bikesAvailable) &&
+        first.node.place.bikesAvailable > 0;
+      const secondHasBikes =
+        Number.isInteger(second.node.place.bikesAvailable) &&
+        second.node.place.bikesAvailable > 0;
+      if (firstHasBikes && !secondHasBikes) {
+        return -1;
+      }
+      if (!firstHasBikes && secondHasBikes) {
+        return 1;
+      }
+
+      // Note: This implicitly assumes that our sorting algorithm is stable, because we
+      // - assume our input array to be pre-sorted by OTP, and
+      // - don't explicitly sort by distance.
+      // see also https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sort_stability
       return 0;
     }
     if (firstIsFavourite) {

@@ -39,7 +39,9 @@ function StopsNearYouSearch({ mode, breakpoint, lang }, { router, config }) {
           filterResults={filter}
           sources={searchSources}
           targets={
-            mode === 'CITYBIKE' ? ['BikeRentalStations'] : ['Stops', 'Routes']
+            mode === 'CITYBIKE'
+              ? ['BikeRentalStations', 'Locations']
+              : ['Stops', 'Routes']
           }
           isMobile={isMobile}
           selectHandler={selectHandler} // prop for context handler

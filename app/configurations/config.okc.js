@@ -121,6 +121,18 @@ export default configMerger(walttiConfig, {
   socialMedia: {
     title: APP_TITLE,
     description: APP_DESCRIPTION,
+    locale: 'en_US',
+
+    image: {
+      url: '/img/embark-social-share.jpg',
+      width: 1440,
+      height: 720,
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      site: '@EMBARKOK',
+    },
   },
 
   map: {

@@ -13,7 +13,7 @@ export default function TicketInformation({ fares }, { intl }) {
   }
 
   // TODO move to config
-  const buyTicketUrl = 'https://embark.indagodigital.dev/bus/buy-passes';
+  const buyTicketUrl = 'https://embarkok.com/bus/buy-passes';
   return (
     <span className="okc-icon-button fare--itinerary-summary">
       <Icon img="icon-icon_ticket" />

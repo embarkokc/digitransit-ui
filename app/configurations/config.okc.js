@@ -2,10 +2,10 @@
 import configMerger from '../util/configMerger';
 
 const CONFIG = 'okc';
-const APP_TITLE = 'Embark Oklahoma City';
-const APP_DESCRIPTION = 'Uusi Reittiopas - okc';
+const APP_TITLE = 'EMBARK Oklahoma City';
+const APP_DESCRIPTION = 'EMBARK OK Trip Planner';
 
-const ROOTLINK = process.env.ROOTLINK || 'https://digitransit.indagodigital.dev';
+const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
 const API_URL = process.env.API_URL || 'https://otp.okc.leonard.io';
 const OTP_URL = process.env.OTP_URL || API_URL
@@ -27,7 +27,7 @@ realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
 export default configMerger(walttiConfig, {
   CONFIG,
 
-  appBarLink: { name: 'Return to EMBARK', href: 'https://embark.indagodigital.dev/' },
+  appBarLink: { name: 'Return to EMBARK', href: 'https://embarkok.com/' },
 
   // todo: breaks in moment, it doesn't have an explicit en-us
   availableLanguages: ['en'],

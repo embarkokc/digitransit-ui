@@ -1,7 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { matchShape, routerShape } from 'found';
+import MarkerPopupBottom from './map/MarkerPopupBottom';
+import { redirectToItinerarySearch } from '../util/mapPopupUtils';
 
-const SelectedStopPopupContent = ({ stop }) => {
+const SelectedStopPopupContent = ({ stop }, { router, match }) => {
+  const { location } = match;
+  // this implementation follows mapRoutingButton.js
+  const onSelectLocation = (item, itemRole) => {
+    redirectToItinerarySearch(location, router, itemRole, item);
+  };
+
   return (
     <div className="origin-popup">
       <div className="origin-popup-header">
@@ -13,6 +22,11 @@ const SelectedStopPopupContent = ({ stop }) => {
             <p className="card-code">{stop.name}</p>
             {stop.desc && <span className="description">{stop.desc}</span>}
           </div>
+          <MarkerPopupBottom
+            location={stop}
+            locationPopup="origindestination"
+            onSelectLocation={onSelectLocation}
+          />
         </div>
         <div className="shade-to-white" />
       </div>
@@ -22,6 +36,11 @@ const SelectedStopPopupContent = ({ stop }) => {
 
 SelectedStopPopupContent.propTypes = {
   stop: PropTypes.object.isRequired,
+};
+
+SelectedStopPopupContent.contextTypes = {
+  router: routerShape.isRequired,
+  match: matchShape.isRequired,
 };
 
 SelectedStopPopupContent.displayName = 'SelectedStopPopupContent';

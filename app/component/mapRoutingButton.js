@@ -4,12 +4,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { matchShape, routerShape } from 'found';
 import Modal from '@hsl-fi/modal';
 import Icon from './Icon';
-import { addressToItinerarySearch, locationToOTP } from '../util/otpStrings';
-import {
-  getPathWithEndpointObjects,
-  getSummaryPath,
-  PREFIX_ITINERARY_SUMMARY,
-} from '../util/path';
+import { redirectToItinerarySearch } from '../util/mapPopupUtils';
 
 const MapRoutingButton = ({ stop }, { intl, router, match, config }) => {
   const [showModal, setShowModal] = useState(false);
@@ -27,44 +22,8 @@ const MapRoutingButton = ({ stop }, { intl, router, match, config }) => {
   }, [stop]);
   const { location } = match;
   const closeModal = () => setShowModal(false);
-  // Reset query parameters from timetablepage  that is not needed in summary page
-  const locationWithoutQuery = { ...location, query: {}, search: '' };
-  const onSelectLocation = (item, id) => {
-    // eslint-disable-next-line no-param-reassign
-    item = { ...item, address: item.name };
-    if (id === 'origin') {
-      const newLocation = {
-        ...locationWithoutQuery,
-        pathname: getPathWithEndpointObjects(
-          item,
-          {},
-          PREFIX_ITINERARY_SUMMARY,
-        ),
-      };
-      router.push(newLocation);
-    } else if (id === 'destination') {
-      const newLocation = {
-        ...locationWithoutQuery,
-        pathname: getPathWithEndpointObjects(
-          {},
-          item,
-          PREFIX_ITINERARY_SUMMARY,
-        ),
-      };
-      router.push(newLocation);
-    } else {
-      const newLocation = {
-        ...location,
-        pathname: getSummaryPath(
-          addressToItinerarySearch({}),
-          addressToItinerarySearch({}),
-        ),
-        query: {
-          intermediatePlaces: locationToOTP(item),
-        },
-      };
-      router.push(newLocation);
-    }
+  const onSelectLocation = (item, itemRole) => {
+    redirectToItinerarySearch(location, router, itemRole, item);
   };
 
   return (

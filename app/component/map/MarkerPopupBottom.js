@@ -16,7 +16,7 @@ class MarkerPopupBottom extends React.Component {
       }).isRequired,
     }).isRequired,
     onSelectLocation: PropTypes.func.isRequired,
-    locationPopup: PropTypes.string,
+    locationPopup: PropTypes.oneOf(['all', 'origindestination']),
   };
 
   static defaultProps = {

@@ -10712,6 +10712,7 @@ __metadata:
     terser-webpack-plugin: 4.1.0
     universal-cookie: 4.0.4
     url-loader: 3.0.0
+    url-template: ^2.0.8
     uuid: 8.3.0
     webpack: ^4.46.0
     webpack-assets-manifest: ^4.0.0
@@ -27590,6 +27591,13 @@ resolve@1.1.7:
   dependencies:
     ip-regex: ^1.0.1
   checksum: 31bb90057f5f708e8c134ff98812d42d941c2d3792f0b81a51d65e085b0c9ef5aa05ceed765878f2b3bb95ea3576cf71bec3d5312c629af0ccd48876e15d5b11
+  languageName: node
+  linkType: hard
+
+"url-template@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "url-template@npm:2.0.8"
+  checksum: 55f59a311a794830d6fac190c86bd1800b31da37e2ea9f1aa54a2bec2fcd098f916b0d0c62936c92a873c16e858e98165e4f58caba6c7b9dbd5d22a61bcbf0ae
   languageName: node
   linkType: hard
 

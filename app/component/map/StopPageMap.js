@@ -21,7 +21,6 @@ import { addressToItinerarySearch } from '../../util/otpStrings';
 import ItineraryLine from './ItineraryLine';
 import Loading from '../Loading';
 import { getMapLayerOptions } from '../../util/mapLayerUtils';
-import MapRoutingButton from '../mapRoutingButton';
 
 const getModeFromProps = props => {
   if (props.citybike) {
@@ -185,7 +184,7 @@ const StopPageMap = (
       {...mwtProps}
       mapLayers={mapLayers}
       mapLayerOptions={mapLayerOptions}
-      topButtons={<MapRoutingButton stop={stop} />}
+      /* OKC: disable topbuttons: topButtons={<MapRoutingButton stop={stop} />} */
     >
       {children}
     </MapWithTracking>

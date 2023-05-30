@@ -1010,10 +1010,30 @@ $tram-color: $okc-tram-pink;
   color: inherit;
 }
 div.origin-popup .origin-popup-name {
-  width: 300px;
+  // allow expanding
+  width: auto;
+  height: auto;
+  margin-right: 16px; // for some reason, the parent container is too large
+  .bottom.location {
+    margin-top: 8px;
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    > * {
+      flex-grow: 1;
+      flex-basis: 50%;
+      line-height: 2;
+      text-align: center;
+      border-left: 1px solid #ddd;
+      &:first-child {
+        border-left: none;
+      }
+    }
+  }
 }
 div.origin-popup {
   min-width: 350px;
+  cursor: initial;
 }
 
 // Trip Itinerary

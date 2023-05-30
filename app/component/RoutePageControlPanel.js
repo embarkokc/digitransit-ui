@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+import urlTemplate from 'url-template';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -360,6 +361,14 @@ class RoutePageControlPanel extends React.Component {
     const { patternId } = match.params;
     const { config } = this.context;
 
+    let routePdfUrl = null;
+    if (config.URL.ROUTE_PDF) {
+      const routePdfUrlTemplate = urlTemplate.parse(config.URL.ROUTE_PDF);
+      routePdfUrl = routePdfUrlTemplate.expand({
+        routeShortName: route.shortName,
+      });
+    }
+
     const routeNotifications = [];
     if (
       config.NODE_ENV !== 'test' &&
@@ -474,14 +483,24 @@ class RoutePageControlPanel extends React.Component {
         >
           {routeNotifications}
           {patternId && (
-            <RoutePatternSelect
-              params={match.params}
-              route={route}
-              onSelectChange={this.onPatternChange}
-              gtfsId={route.gtfsId}
-              className={cx({ 'bp-large': breakpoint === 'large' })}
-              useCurrentTime={useCurrentTime}
-            />
+            <>
+              <RoutePatternSelect
+                params={match.params}
+                route={route}
+                onSelectChange={this.onPatternChange}
+                gtfsId={route.gtfsId}
+                className={cx({ 'bp-large': breakpoint === 'large' })}
+                useCurrentTime={useCurrentTime}
+              />
+              {routePdfUrl ? (
+                <span className="okc-pdf-download-button okc-icon-button">
+                  <a download href={routePdfUrl}>
+                    <Icon img="icon-icon_download" />
+                    <span>Map &amp; Schedule PDF</span>
+                  </a>
+                </span>
+              ) : null}
+            </>
           )}
           {/* eslint-disable jsx-a11y/interactive-supports-focus */}
           <div

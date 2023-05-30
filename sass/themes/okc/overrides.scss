@@ -68,7 +68,7 @@ body {
 
 .tab-container {
   background-color: $gray;
-  margin: 34px 56px 16px 58px;
+  margin: 44px 56px 16px 58px;
 }
 .tab-singletab + .tab-singletab, .tab-singletab:hover + .tab-singletab {
   border-left: none;
@@ -918,8 +918,7 @@ span.itinerary-stop-code {
 
 .route-pattern-select {
   margin: 1px 60px 18px 60px;
-  padding-bottom: 34px;
-  border-bottom: 1px solid $light-gray;
+  padding-bottom: 14px;
 
   .route-pattern-toggle, .react-autosuggest__container {
     border-color: $gray;
@@ -1316,4 +1315,16 @@ div.origin-popup {
 .itinerary-summary-row .itinerary-legs .special-icon.bus .icon,
 .itinerary-summary-row .itinerary-legs .special-icon.tram .icon {
   vertical-align: middle;
+}
+
+.okc-pdf-download-button {
+  margin: 1px 60px 18px 60px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid $light-gray;
+}
+
+.okc-icon-button a {
+  display: flex;
+  gap: 10px;
+  text-decoration: none;
 }

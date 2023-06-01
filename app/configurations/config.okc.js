@@ -5,6 +5,7 @@ const CONFIG = 'okc';
 const APP_TITLE = 'EMBARK Oklahoma City';
 const APP_DESCRIPTION = 'EMBARK OK Trip Planner';
 
+const EMBARK_BASE_URL = process.env.EMBARK_BASE_URL || 'https://beta.embarkok.com';
 const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
 const API_URL = process.env.API_URL || 'https://otp.okc.leonard.io';
@@ -27,7 +28,7 @@ realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
 export default configMerger(walttiConfig, {
   CONFIG,
 
-  appBarLink: { name: 'Return to EMBARK', href: 'https://embarkok.com/' },
+  appBarLink: { name: 'Return to EMBARK', href: EMBARK_BASE_URL },
 
   // todo: breaks in moment, it doesn't have an explicit en-us
   availableLanguages: ['en'],

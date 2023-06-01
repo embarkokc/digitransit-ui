@@ -149,10 +149,19 @@ export default configMerger(walttiConfig, {
   logo: 'okc/embark-logo.svg',
   secondaryLogo: 'okc/embark-favicon.svg',
   // We have modified the embedded route search to accept a URL query parameter that
-  // determines the logo to be shown.
+  // determines
+  // - the kind of search results
+  // - the logo to be shown.
+  modesByOkcBrand: {
+    bike: 'CITYBIKE',
+    bus: 'BUS',
+    embark: 'BUS',
+    streetcar: 'TRAM',
+  },
   okcBrandLogos: {
+    bike: 'okc/spokies-logo-mark.svg',
+    bus: 'okc/embark-favicon.svg',
     embark: 'okc/embark-favicon.svg',
-    spokies: 'okc/spokies-logo-mark.svg',
     streetcar: 'okc/streetcar-logo-mark.svg',
   },
   favicon: './app/configurations/images/okc/favicon.png',

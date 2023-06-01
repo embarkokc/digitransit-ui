@@ -128,21 +128,22 @@ class EmbeddedRouteSearchContainer extends React.Component {
     // query parameter.
     const query = match.location?.query || {};
     const okcBrand = query['okc-brand'] || null;
+    const mode = (config.modesByOkcBrand || {})[okcBrand] || null;
 
     let transportMode = null;
     let filterResults = results => results;
     let placeholder = 'stop-near-you';
-    if (okcBrand === 'embark') {
+    if (mode === 'BUS') {
       // If digitransit has been loaded from Embark's main (a.k.a. bus) page, we
       // - filter results by mode
       transportMode = 'route-BUS';
       filterResults = filterResultsByMode;
-    } else if (okcBrand === 'streetcar') {
+    } else if (mode === 'TRAM') {
       // If digitransit has been loaded from Embark's Streetcar page, we
       // - filter results by mode
       transportMode = 'route-TRAM';
       filterResults = filterResultsByMode;
-    } else if (okcBrand === 'spokies') {
+    } else if (mode === 'CITYBIKE') {
       // If digitransit has been loaded from Embark's Spokies (citybikes) page, we
       // - search for addresses (`Locations`) only.
       stopAndRouteSearchTargets = ['Locations'];

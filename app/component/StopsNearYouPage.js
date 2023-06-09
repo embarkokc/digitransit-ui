@@ -937,12 +937,7 @@ class StopsNearYouPage extends React.Component {
               bckBtnFallback="back"
               content={this.renderContent()}
               scrollable
-              map={
-                <>
-                  {this.renderSearchBox()}
-                  {this.renderMap()}
-                </>
-              }
+              map={<>{this.renderMap()}</>}
             />
           )}
           mobile={() => (
@@ -950,7 +945,6 @@ class StopsNearYouPage extends React.Component {
               header={<h1>{title}</h1>}
               content={this.renderContent()}
               map={this.renderMap()}
-              searchBox={this.renderSearchBox()}
             />
           )}
         />

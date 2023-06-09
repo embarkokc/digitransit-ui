@@ -908,12 +908,14 @@ class StopsNearYouPage extends React.Component {
   render() {
     const { mode } = this.props.match.params;
     const { phase } = this.state;
+    const titleMessageId =
+      mode.toLowerCase() === 'citybike' ? 'nearest-stops-citybike' : 'nearest';
     const title =
       mode === 'FAVORITE' ? (
         <FormattedMessage id="nearest-favorites" />
       ) : (
         <FormattedMessage
-          id="nearest"
+          id={titleMessageId}
           defaultMessage="Stops near you"
           values={{
             mode: (

@@ -1260,7 +1260,7 @@ const translations = {
     'nearest-stops': 'The closest stops',
     'nearest-stops-airplane': 'airports',
     'nearest-stops-bus': 'bus stops',
-    'nearest-stops-citybike': 'bike stations',
+    'nearest-stops-citybike': 'Find A Bike',
     'nearest-stops-favorite': 'stops nearby me',
     'nearest-stops-ferry': 'ferry piers',
     'nearest-stops-rail': 'train stations',

@@ -495,6 +495,7 @@ class StopsNearYouPage extends React.Component {
                         mode={nearByStopMode}
                         breakpoint={this.props.breakpoint}
                         lang={this.props.lang}
+                        showNearbyStops={this.selectHandler}
                       />
                       <div className="divider-bottom" />
                     </>

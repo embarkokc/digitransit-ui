@@ -9,7 +9,8 @@
   flex-direction: column;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  // EMBARK OKC: should scroll, so don't hide overflow
+  // overflow: hidden;
   background-color: white;
 
   @media print {

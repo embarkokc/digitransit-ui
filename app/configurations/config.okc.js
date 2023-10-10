@@ -237,6 +237,8 @@ export default configMerger(walttiConfig, {
     'en': 'alerts'
   },
 
+  nationalServiceLink: null,
+
   menu: {
     copyright: { label: `© Oklahoma City ${walttiConfig.YEAR}` },
     content: [

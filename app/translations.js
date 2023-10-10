@@ -1214,7 +1214,7 @@ const translations = {
     'map-layer-stop-bus': 'Bus stops',
     'map-layer-stop-ferry': 'Ferries',
     'map-layer-stop-funicular': 'Funiculars',
-    'map-layer-stop-tram': 'Streetcar pylons',
+    'map-layer-stop-tram': 'Streetcar platforms',
     'map-layer-terminal-bus': 'Bus terminals',
     'map-layer-terminal-rail': 'Train stations',
     'map-layer-terminal-subway': 'Metro stations',

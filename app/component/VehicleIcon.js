@@ -92,12 +92,14 @@ const VehicleIcon = ({
       };
     } else if (['805', '806'].indexOf(vehicleNumber) > -1) {
       style = {
-        transform: 'scale(5)',
         '--color-bright': '#CDDA2A',
         '--color-regular': '#3DAF2A',
         '--color-dark': '#47A238',
       };
     }
+    style.transform = 'scale(5)';
+    const textRotate =
+      90 + (rotate || 0) + (rotate > 0 && rotate < 180 ? 180 : 0);
     return (
       <span>
         <svg
@@ -113,10 +115,7 @@ const VehicleIcon = ({
           >
             <use xlinkHref="#icon-icon_streetcar-live-marker" />
           </g>
-          <g
-            transform={`rotate(${(rotate || 0) + 90})`}
-            transform-origin="center"
-          >
+          <g transform={`rotate(${textRotate})`} transform-origin="center">
             <text textAnchor="middle" fontSize="13px" color="black">
               <tspan x="40" y="45">
                 {vehicleNumber}

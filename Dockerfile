@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.4
-FROM node:14-alpine as builder
+FROM node:16-alpine as builder
 
 WORKDIR /opt/digitransit-ui
 
@@ -34,7 +34,7 @@ RUN --mount=type=cache,id=yarn-cache,target=.yarn/cache,sharing=locked \
   # https://github.com/microsoft/playwright/blob/v1.16.2/installation-tests/installation-tests.sh#L200-L216
   export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
   && yarn install --immutable --inline-builds \
-  && yarn run node14-patch \
+  && yarn cache clean --all \
   && rm -rf /tmp/phantomjs
 
 # Setting $CONFIG causes digitransit-ui to only build assets for *one* instance (see app/configurations).
@@ -59,7 +59,8 @@ RUN \
 RUN \
   rm -rf static docs .cache
 
-FROM node:14-alpine
+
+FROM node:16-alpine
 LABEL org.opencontainers.image.title="digitransit-ui"
 LABEL org.opencontainers.image.description="open nationwide journey planning platform"
 LABEL org.opencontainers.image.authors="digitransit@hsl.fi"
@@ -110,6 +111,6 @@ ENV \
 RUN apk add --no-cache curl
 HEALTHCHECK \
   --interval=5s --timeout=3s --retries=3 --start-period=5s \
-  CMD curl -fsSLI "http://localhost:$PORT/"
+  CMD curl -fsSLI "http://localhost:$PORT/" || exit 1
 
 CMD yarn run start

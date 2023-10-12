@@ -35,7 +35,7 @@ function getEntries(theme, sprites = null) {
   if (!fs.existsSync(themeCss)) {
     themeCss = './sass/themes/default/main.scss';
   }
-  return {
+  const entries = {
     [`${theme}_theme`]: themeCss,
     ...(sprites !== null
       ? {
@@ -43,6 +43,7 @@ function getEntries(theme, sprites = null) {
         }
       : {}),
   };
+  return entries;
 }
 
 function getAllThemeEntries() {
@@ -91,19 +92,17 @@ function faviconPluginFromConfig(config) {
     title: config.title,
     appName: config.title,
     appDescription: config.meta.description,
-    favicons: {
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: false,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
-      },
+    icons: {
+      android: true,
+      appleIcon: true,
+      appleStartup: false,
+      coast: false,
+      favicons: true,
+      firefox: true,
+      opengraph: false,
+      twitter: false,
+      yandex: false,
+      windows: false,
     },
   });
 }

@@ -10,11 +10,17 @@ const SelectedStopPopupContent = ({ stop }, { router, match }) => {
   const onSelectLocation = (item, itemRole) => {
     redirectToItinerarySearch(location, router, itemRole, item);
   };
+  // EMBARK: Bike stations should not be labeled as Stop. As stop has no type,
+  // we recur to pathname to detect if selected stop is bike station :-/
+  const { pathname } = location;
+  const stopHeader = pathname.startsWith('/bikestations')
+    ? 'Bike station'
+    : `Stop ${stop.code}`;
 
   return (
     <div className="origin-popup">
       <div className="origin-popup-header">
-        <div className="selected-stop-header">Stop {stop.code}</div>
+        <div className="selected-stop-header">{stopHeader}</div>
       </div>
       <div>
         <div className="origin-popup-name">

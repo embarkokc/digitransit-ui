@@ -82,6 +82,17 @@ function VehicleMarkerContainer(props) {
       ?.type;
     const mode =
       type === ExtendedRouteTypes.BusExpress ? 'bus-express' : message.mode;
+
+    let vehicleNumber;
+    if (mode === 'tram' && message.license_plate) {
+      // EMBARK OKC Row 117: licence plate instead of shortname
+      vehicleNumber = message.license_plate;
+    } else if (message.shortName) {
+      vehicleNumber = message.shortName;
+    } else {
+      [, vehicleNumber] = message.route.split(':');
+    }
+
     return (
       <IconMarker
         key={id}
@@ -93,7 +104,7 @@ function VehicleMarkerContainer(props) {
         icon={getVehicleIcon(
           mode,
           message.heading,
-          message.shortName ? message.shortName : message.route.split(':')[1],
+          vehicleNumber,
           message.color,
           props.useLargeIcon,
         )}

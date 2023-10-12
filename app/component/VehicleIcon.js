@@ -39,6 +39,7 @@ const getSvgContent = (rotate, useLargeIcon) => {
   const transform = useLargeIcon
     ? 'translate(24 24) scale(1.3)'
     : 'translate(10 10) scale(0.7)';
+
   return rotate ? (
     <g transform={`rotate(${(rotate || 0) + 180} 40 40)`}>
       <use
@@ -71,39 +72,96 @@ const VehicleIcon = ({
   vehicleNumber = '',
   useLargeIcon = false,
   color,
-}) => (
-  <span>
-    {useLargeIcon ? (
-      <svg
-        id={id}
-        viewBox="0 0 80 80"
-        style={{ color: color ? `#${color}` : null }}
-        className={cx('icon', 'large-vehicle-icon', className, mode)}
-        ref={el => scrollIntoView && el && el.scrollIntoView()}
-      >
-        {getSvgContent(rotate, useLargeIcon)}
-        <text
-          textAnchor="middle"
-          fontSize={getFontSize(vehicleNumber.length)}
-          fontStyle="condensed"
+}) => {
+  if (useLargeIcon && mode === 'tram') {
+    // EMBARK OKC Row 117: colors depend on license_plate
+    // Note: we set the darkest color, brighter ones need to
+    // to be calculated from these
+    let style;
+    if (['801', '802', '807'].indexOf(vehicleNumber) > -1) {
+      style = {
+        '--color-bright': '#D21F7B',
+        '--color-regular': '#C71666',
+        '--color-dark': '#860C44',
+      };
+    } else if (['803', '804'].indexOf(vehicleNumber) > -1) {
+      style = {
+        '--color-bright': '#2686B4',
+        '--color-regular': '#2C85B3',
+        '--color-dark': '#094881',
+      };
+    } else if (['805', '806'].indexOf(vehicleNumber) > -1) {
+      style = {
+        transform: 'scale(5)',
+        '--color-bright': '#CDDA2A',
+        '--color-regular': '#3DAF2A',
+        '--color-dark': '#47A238',
+      };
+    }
+    return (
+      <span>
+        <svg
+          id={id}
+          viewBox="0 0 80 80"
+          style={style}
+          className={cx('icon', className, mode)}
+          ref={el => scrollIntoView && el && el.scrollIntoView()}
         >
-          <tspan x="40" y={35 + getTextOffSet(vehicleNumber.length)}>
-            {vehicleNumber}
-          </tspan>
-        </text>
-      </svg>
-    ) : (
-      <svg
-        id={id}
-        viewBox="0 0 120 120"
-        className={cx('icon', 'small-vehicle-icon', className)}
-        ref={el => scrollIntoView && el && el.scrollIntoView()}
-      >
-        {getSvgContent(rotate, useLargeIcon)}
-      </svg>
-    )}
-  </span>
-);
+          <g
+            transform={`rotate(${(rotate || 0) + 180})`}
+            transform-origin="center"
+          >
+            <use xlinkHref="#icon-icon_streetcar-live-marker" />
+          </g>
+          <g
+            transform={`rotate(${(rotate || 0) + 90})`}
+            transform-origin="center"
+          >
+            <text textAnchor="middle" fontSize="13px" color="black">
+              <tspan x="40" y="45">
+                {vehicleNumber}
+              </tspan>
+            </text>
+          </g>
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <span>
+      {useLargeIcon ? (
+        <svg
+          id={id}
+          viewBox="0 0 80 80"
+          style={{ color: color ? `#${color}` : null }}
+          className={cx('icon', 'large-vehicle-icon', className, mode)}
+          ref={el => scrollIntoView && el && el.scrollIntoView()}
+        >
+          {getSvgContent(rotate, useLargeIcon)}
+          <text
+            textAnchor="middle"
+            fontSize={getFontSize(vehicleNumber.length)}
+            fontStyle="condensed"
+          >
+            <tspan x="40" y={35 + getTextOffSet(vehicleNumber.length)}>
+              {vehicleNumber}
+            </tspan>
+          </text>
+        </svg>
+      ) : (
+        <svg
+          id={id}
+          viewBox="0 0 120 120"
+          className={cx('icon', 'small-vehicle-icon', className)}
+          ref={el => scrollIntoView && el && el.scrollIntoView()}
+        >
+          {getSvgContent(rotate, useLargeIcon)}
+        </svg>
+      )}
+    </span>
+  );
+};
 
 VehicleIcon.displayName = 'VehicleIcon';
 

@@ -53,10 +53,12 @@ export const parseFeedMQTT = (feedParser, data, topic, agency) => {
           geoHash: [geoHashDeg1, geoHashDeg2, geoHashDeg3, geoHashDeg4],
           shortName: shortName === '' ? undefined : shortName,
           color: color === '' ? undefined : color,
+          license_plate:
+            vehicle.license_plate === '' ? undefined : vehicle.license_plate,
         };
         messages.push(message);
       }
     }
   });
-  return messages.length > 0 ? messages : null;
+  return messages;
 };

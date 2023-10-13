@@ -372,7 +372,7 @@ div.leaflet-marker-icon.vehicle-icon {
 }
 
 .vehicle-popup {
-  left: -19px !important;
+  //left: -19px !important;
 
   .route-header {
     height: 5em;
@@ -394,7 +394,7 @@ div.leaflet-marker-icon.vehicle-icon {
   }
   .leaflet-popup-content {
     margin: 0;
-    width: 18rem !important;
+    //width: 18rem !important;
     &.leaflet-popup-scrolled {
       overflow: inherit;
     }

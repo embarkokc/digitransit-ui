@@ -212,7 +212,9 @@ body select {
   padding: 10px 0;
 }
 .leaflet-container a {
-  color: currentColor;
+  // EMBARK: Use black for links
+  //color: currentColor;
+  color: #000000;
 }
 
 .subicon-caution,

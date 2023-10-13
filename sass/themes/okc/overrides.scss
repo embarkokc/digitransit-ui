@@ -1348,3 +1348,21 @@ div.origin-popup {
   gap: 10px;
   text-decoration: none;
 }
+
+// Vehicle popup overrides
+.single-popup .leaflet-popup-content {
+  /* width: 320px; */
+  width: 350px;
+}
+.route-header .route-header-trip {
+  /* color: #686869; */
+  color: #000000;
+}
+.vehicle-popup .route-header {
+  /* height: 5em; */
+  height: initial;
+}
+.leaflet-container a {
+  /* color: #0078A8; */
+  color: #000000 !important;
+}

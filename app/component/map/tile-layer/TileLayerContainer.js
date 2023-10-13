@@ -367,6 +367,9 @@ class TileLayerContainer extends GridLayer {
             {...this.PopupOptions}
             key={id}
             position={latlng}
+            maxWidth={
+              this.context.config.map?.genericMarker?.popup?.maxWidth || '300px'
+            }
             className={`${this.PopupOptions.className} ${
               this.PopupOptions.className === 'vehicle-popup'
                 ? 'single-popup'

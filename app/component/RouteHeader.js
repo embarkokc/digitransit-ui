@@ -3,16 +3,14 @@ import React from 'react';
 import Link from 'found/Link';
 import cx from 'classnames';
 import { PREFIX_ROUTES, PREFIX_STOPS } from '../util/path';
-import { convertTo24HourFormat } from '../util/timeUtils';
+import { localizeTime } from '../util/timeUtils';
 import { getRouteMode } from '../util/modeUtils';
 
 export default function RouteHeader({ route, pattern, trip, className }) {
   const mode = getRouteMode(route);
-
   let tripEl;
   if (trip && trip.length > 3) {
-    // change to 24h format
-    const startTime = convertTo24HourFormat(trip);
+    const startTime = localizeTime(trip);
     tripEl = <span className="route-header-trip">{startTime} →</span>;
   } else {
     tripEl = '';
@@ -22,19 +20,22 @@ export default function RouteHeader({ route, pattern, trip, className }) {
 
   const routeLine =
     trip && pattern ? (
-      <Link
-        to={`/${PREFIX_ROUTES}/${route.gtfsId}/${PREFIX_STOPS}/${pattern.code}`}
-      >
-        {routeLineText}
-      </Link>
+      <>
+        Route{' '}
+        <Link
+          to={`/${PREFIX_ROUTES}/${route.gtfsId}/${PREFIX_STOPS}/${pattern.code}`}
+        >
+          {routeLineText === '' ? pattern.headsign : routeLineText}
+        </Link>
+      </>
     ) : (
-      routeLineText
+      `Route {routeLineText}`
     );
 
   return (
     <div className={cx('route-header', className)}>
       <h1 className={mode}>
-        <span>Route {routeLine}</span>
+        <span>{routeLine}</span>
         {tripEl}
       </h1>
     </div>
@@ -49,6 +50,9 @@ RouteHeader.propTypes = {
     color: PropTypes.string,
   }).isRequired,
   trip: PropTypes.string,
-  pattern: PropTypes.shape({ code: PropTypes.string.isRequired }),
+  pattern: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    headsign: PropTypes.string,
+  }),
   className: PropTypes.string,
 };

@@ -142,6 +142,11 @@ export default configMerger(walttiConfig, {
       corner2: [30.643271, -91.82987],
     },
     zoom: 16,
+    genericMarker: {
+      popup: {
+        maxWidth: "500px"
+      }
+    }
   },
 
   title: APP_TITLE,

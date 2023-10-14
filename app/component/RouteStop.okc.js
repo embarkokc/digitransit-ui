@@ -12,7 +12,15 @@ import { addAnalyticsEvent } from '../util/analyticsUtils';
 import Icon from './Icon';
 
 const RouteStop = (
-  { className, currentTime, last, stop, displayNextDeparture, hideDepartures },
+  {
+    className,
+    currentTime,
+    last,
+    stop,
+    nextStop,
+    displayNextDeparture,
+    hideDepartures,
+  },
   { config, intl },
 ) => {
   const patternExists =
@@ -89,10 +97,16 @@ const RouteStop = (
     }
     return text;
   };
-
+  const stopPosition =
+    patternExists &&
+    nextStop &&
+    getDepartureTime(stop.stopTimesForPattern[0]) >
+      getDepartureTime(nextStop.stopTimesForPattern[0])
+      ? 'last-stop-in-pattern'
+      : '';
   return (
     <li className={cx('route-stop location-details_container ', className)}>
-      <div className="route-stop-row_content-container">
+      <div className={cx('route-stop-row_content-container', stopPosition)}>
         <Link
           as="button"
           type="button"
@@ -200,6 +214,19 @@ RouteStop.propTypes = {
       }),
     ),
   }).isRequired,
+  nextStop: PropTypes.shape({
+    stopTimesForPattern: PropTypes.arrayOf(
+      PropTypes.shape({
+        realtimeDeparture: PropTypes.number,
+        realtimeArrival: PropTypes.number,
+        serviceDay: PropTypes.number,
+        pickupType: PropTypes.string,
+        stop: PropTypes.shape({
+          platformCode: PropTypes.string,
+        }),
+      }),
+    ),
+  }),
   className: PropTypes.string,
   currentTime: PropTypes.number.isRequired,
   last: PropTypes.bool,

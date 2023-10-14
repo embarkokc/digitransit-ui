@@ -851,6 +851,7 @@ span.itinerary-stop-code {
       &.first {
         width: inherit;
         margin-left: 0px;
+        text-wrap: nowrap;
       }
     }
   }
@@ -1365,4 +1366,8 @@ div.origin-popup {
 .leaflet-container a {
   /* color: #0078A8; */
   color: #000000 !important;
+}
+// in RouteStopList, between new trips a separator should be shown
+.location-details_container .route-stop-row_content-container.last-stop-in-pattern {
+  border-color: black;
 }

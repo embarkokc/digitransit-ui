@@ -36,8 +36,13 @@ const PatternRedirector = ({ router, match, route }, context) => {
   let sortedPatternsByCountOfTrips;
   const tripsExists = route.patterns ? 'trips' in route.patterns[0] : false;
   if (tripsExists) {
+    // EMBARK: instead of all patterns, we prefer inboud patterns
+    // weekday/weekend preference is respected via serviceDate
+    const inboundPatterns = route.patterns.filter(p => {
+      return p.headsign && p.headsign.includes('nbound');
+    });
     sortedPatternsByCountOfTrips = sortBy(
-      sortBy(route.patterns, 'code').reverse(),
+      sortBy(inboundPatterns, 'code').reverse(),
       'trips.length',
     ).reverse();
   }
@@ -82,6 +87,7 @@ const containerComponent = createFragmentContainer(PatternRedirector, {
     @argumentDefinitions(date: { type: "String" }) {
       patterns {
         code
+        headsign
         trips: tripsForDate(serviceDate: $date) {
           gtfsId
         }

@@ -354,8 +354,8 @@ class RoutePatternSelect extends Component {
             id="select-route-pattern"
             suggestions={optionArray}
             multiSection
-            renderSectionTitle={s => {
-              return s.name || null;
+            renderSectionTitle={() => {
+              return null;
             }}
             getSectionSuggestions={s => {
               return s.options;

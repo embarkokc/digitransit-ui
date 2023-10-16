@@ -239,6 +239,8 @@ export default configMerger(walttiConfig, {
     lon: -97.5146
   },
 
+  nationalServiceLink: null,
+
   trafficNowLink: {
     'en': 'alerts'
   },

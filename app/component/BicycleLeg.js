@@ -96,7 +96,7 @@ function BicycleLeg(
     circleLine = (
       <ItineraryCircleLineLong index={index} modeClassNames={modeClassNames} />
     );
-  } else if (mode === 'BICYCLE') {
+  } else if (mode === 'BICYCLE' || mode === 'CITYBIKE') {
     circleLine = (
       <ItineraryCircleLineWithIcon
         index={index}

@@ -15,13 +15,13 @@ $gray: #888888;
 }
 
 .mobile {
-  height: 69px; // EMBARK, was 59px;
+  height: inital; // EMBARK, was 59px;
   margin: 0 10px;
   &.CurrentLocation {
-    height: 69px; // EMBARK, was 50px;
+    height: inital; // EMBARK, was 50px;
   }
   &.SelectFromMap {
-    height: 69px; // EMBARK, was 50px;
+    height: inital; // EMBARK, was 50px;
   }
 }
 
@@ -35,6 +35,8 @@ li:last-child > div.suggestion-item-container.mobile {
 
 .search-result {
   display: flex;
+  justify-content: space-between; // EMBARK: prevent "Use current location" wrapped annd to short
+  width: 100%; // EMBARK prevent "Use current location" wrapped annd to short
   flex-direction: row;
   align-items: center;
   min-height: 49px;
@@ -45,11 +47,11 @@ li:last-child > div.suggestion-item-container.mobile {
 
   .suggestion-result {
     display: flex;
-    width: 100%;
+    width: calc(100% - 76px); // was: width: 100%; EMBARK: reduce give room
     flex-direction: column;
-    position: absolute;
-    padding-left: 49px;
-    padding-right: 40px;// EMBARK: tweak padding because we don't word-wrap
+    // position: absolute; EMBARK: No absoulute positioning to let height expand
+    padding-left: 3px;
+    padding-right: 3px;// EMBARK: tweak padding because we don't word-wrap
 
     .suggestion-name {
       margin: 0;
@@ -94,7 +96,7 @@ li:last-child > div.suggestion-item-container.mobile {
       font-weight: 400;
       letter-spacing: -0.43px;
       line-height: 1.38;
-      white-space: nowrap;
+      // white-space: nowrap; EMBARK: Avoid label expands div
       overflow: hidden;
       text-overflow: ellipsis;
       position: relative;
@@ -103,7 +105,7 @@ li:last-child > div.suggestion-item-container.mobile {
       @include min-width(tablet) {
         font-size: 16px !important;
         letter-spacing: -0.37px;
-        line-height: 1.64;
+        line-height: 1.24; // EMBARK. was: line-height: 1.64;
       }
       .stop-code {
         border-radius: 3px;
@@ -139,10 +141,11 @@ li:last-child > div.suggestion-item-container.mobile {
 
   .arrow-icon {
     display: flex;
-    width: 27px;
+    //width: 27px; EMBARK
     align-items: center;
-    position: absolute;
-    right: 0px;
+    //position: absolute;  EMBARK
+    //right: 0px; EMBARK
+    padding-right: 10px;
     svg {
       fill: var(--accessible-primary-color) !important;
       width: 17px;

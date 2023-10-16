@@ -80,7 +80,7 @@ export default configMerger(walttiConfig, {
   showItineraryMapActions: false,
   showSwipeableTabs: false,
   showSpacesAvailable: false,
-  showCityBikeOptionAsSingleMode: true,
+  showCityBikeOptionAsSingleMode: false,
   viaPointsEnabled: false,
   switchOriginDestinationEnabled: true,
   includeCarSuggestions: false,
@@ -196,6 +196,7 @@ export default configMerger(walttiConfig, {
     },
     citybike: {
       availableForSelection: true,
+      defaultValue: true,
     },
   },
 

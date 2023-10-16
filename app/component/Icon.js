@@ -45,6 +45,8 @@ IconBadge.defaultProps = {
 };
 
 IconBadge.asString = (badgeFill, badgeText, badgeTextFill) => {
+  // Note: unintuitivly, the badge is styles in style sheets, so be aware that changes here
+  // need to be reflected by changes in the corresponding style-sheets
   if (!badgeFill || (!badgeText && badgeText !== 0)) {
     return '';
   }

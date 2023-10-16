@@ -1180,6 +1180,9 @@ div.origin-popup {
 .row.itinerary-row .leg-before :last-child {
     bottom: -3.5em;
 }
+.row.itinerary-row .leg-before.citybike :last-child {
+    bottom: 0em;
+}
 
 .itinerary-summary .divider-top {
   visibility: hidden;
@@ -1205,7 +1208,8 @@ div.origin-popup {
 }
 
 .row.itinerary-row .leg-before-line.bus,
-.row.itinerary-row .leg-before-line.tram {
+.row.itinerary-row .leg-before-line.tram,
+.row.itinerary-row .leg-before-line.citybike {
   height: calc(100% - 4em);
   top: 3.5em;
   border-radius: 4px;
@@ -1218,13 +1222,15 @@ div.origin-popup {
 // start position/length of leg line must reflect lolipops sizes when trip starts with transit leg
 .row.itinerary-row .leg-before.first .leg-before-line.bus,
 .row.itinerary-row .leg-before.first .leg-before-line.tram,
+.row.itinerary-row .leg-before.first .leg-before-line.citybike,
  {
   height: calc(100% - 6em);
   top: 6em;
 }
 
 .row.itinerary-row .leg-before.bus,
-.row.itinerary-row .leg-before.tram {
+.row.itinerary-row .leg-before.tram,
+.row.itinerary-row .leg-before.citybike, {
   &:not(.first) .icon-container,
   > .icon-container:last-child {
     left: -12px;
@@ -1241,13 +1247,15 @@ div.origin-popup {
   padding-top: 6px;
 }
 .itinerary-leg-container .row.itinerary-row .leg-before.bus,
-.itinerary-leg-container .row.itinerary-row .leg-before.tram {
+.itinerary-leg-container .row.itinerary-row .leg-before.tram,
+.itinerary-leg-container .row.itinerary-row .leg-before.citybike, {
   .icon {
     height: 2em;
   }
 }
 .itinerary-leg-container .row.itinerary-row:last-child .leg-before.bus,
-.itinerary-leg-container .row.itinerary-row:last-child .leg-before.tram {
+.itinerary-leg-container .row.itinerary-row:last-child .leg-before.tram,
+.itinerary-leg-container .row.itinerary-row:last-child .leg-before.citybike {
   .icon-container:last-child .icon {
     height: 3em;
   }
@@ -1255,7 +1263,8 @@ div.origin-popup {
 
 // position/size of stop symbol at when trip starts with transit leg
 .leg-before-circle.circle.bus.top,
-.leg-before-circle.circle.tram.top {
+.leg-before-circle.circle.tram.top,
+.leg-before-circle.circle.citybike.top, {
   .icon-container {
     position: absolute;
     left: -12px;
@@ -1367,6 +1376,60 @@ div.origin-popup {
   /* color: #0078A8; */
   color: #000000 !important;
 }
+
+// --- Bike sharing badges
+.leaflet-map-pane .city-bike-medium-size svg.icon-badge {
+  transform: translate(0.4em, -3.3em);
+  border-radius: 50%;
+}
+.leaflet-map-pane svg.icon-badge {
+  /* transform: translate(-0.5em, -2.5em); */
+  transform: translate(0.4em, -3.3em);
+}
+.itinerary-summary-row .itinerary-legs .leg .route-number .vcenter-children.citybike .icon {
+  /* width: 24px; */
+  width: 34px;
+}
+.itinerary-summary-row .itinerary-legs .special-icon .icon-badge, .itinerary-summary-row .itinerary-legs .icon .icon-badge {
+      width: 0.4em;
+      height: 0.75em;
+      left: 0.5em;
+      top: -0.2em;
+}
+
+// Bike Rental Trip Details
+.row.itinerary-row .itinerary-instruction-column .itinerary-leg-row-bike .citybike-leg-header {
+  /* font-size: 15px; */
+  font-size: $font-size-small;
+}
+
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route-bike .citybike-itinerary .headsign {
+  /* font-size: 15px; */
+  font-size: $font-size-small;
+}
+
+.row.itinerary-row .itinerary-instruction-column .itinerary-transit-leg-route-bike .citybike-itinerary .citybike-icon .icon-badge {
+  /* width: 1.34em; */
+  /* top: 2.33em; */
+  /* left: 1.66em; */
+  width: 1.1em;
+  top: 2.5em;
+  left: 1.8em;
+}
+
+// Settings (hide Bike rental header, reduce logo size and reduce height)
+div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > legend:nth-child(1) {
+  display: none;
+}
+.citybike-icon {
+  /* height: 1em; */
+  /* width: 1em; */
+}
+// Spkies mode-opion-contaiener
+div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  /*! height: 3.5em; */
+}
+
 // in RouteStopList, between new trips a separator should be shown
 .location-details_container .route-stop-row_content-container.last-stop-in-pattern {
   border-color: black;

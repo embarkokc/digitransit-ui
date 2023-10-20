@@ -12,6 +12,7 @@ const API_URL = process.env.API_URL || 'https://otp.okc.leonard.io';
 const OTP_URL = process.env.OTP_URL || API_URL
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
+const BUY_TICKET_URL = process.env.BUY_TICKET_URL || 'https://embarkok.com/bus/buy-passes';
 
 const walttiConfig = require('./config.waltti').default;
 
@@ -54,6 +55,7 @@ export default configMerger(walttiConfig, {
     PELIAS_PLACE: `${GEOCODING_BASE_URL}/place`,
     FONT: null,
     ROUTE_PDF: EMBARK_BASE_URL + '/assets/documents/Maps-Schedules/Route-{routeShortName}-Schedule-Map.pdf',
+    BUY_TICKET_URL: BUY_TICKET_URL,
   },
 
   colors: {

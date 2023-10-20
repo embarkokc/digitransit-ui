@@ -13,6 +13,7 @@ import moment from 'moment';
 import storeOrigin from '../action/originActions';
 import storeDestination from '../action/destinationActions';
 import withSearchContext from './WithSearchContext';
+import TravelToolRow from './TravelToolRow';
 import {
   getPathWithEndpointObjects,
   getStopPath,
@@ -71,8 +72,6 @@ class IndexPage extends React.Component {
     destination: dtLocationShape.isRequired,
     lang: PropTypes.string,
     currentTime: PropTypes.number.isRequired,
-    // eslint-disable-next-line react/no-unused-prop-types
-    query: PropTypes.object.isRequired,
     favouriteModalAction: PropTypes.string,
     fromMap: PropTypes.string,
     locationState: dtLocationShape.isRequired,
@@ -350,6 +349,15 @@ class IndexPage extends React.Component {
       );
     };
 
+    // Embark/OKC: Allow customizing the embedded route search via a `okc-brand`
+    // query parameter.
+    const query = this.context.match.location?.query || {};
+    const okcBrand = query['okc-brand'] || null;
+    const okcSystemMapUrl = config.URL.OKC_SYSTEM_MAP_URL.replace(
+      '${okcBrand}', // eslint-disable-line no-template-curly-in-string
+      okcBrand,
+    );
+
     return (
       <LazilyLoad modules={modules}>
         {({
@@ -419,6 +427,12 @@ class IndexPage extends React.Component {
                           lang={lang}
                           handleClick={this.trafficNowHandler}
                         />
+                        <TravelToolRow
+                          icon="icon-icon_show-on-map"
+                          href={okcSystemMapUrl}
+                        >
+                          System Map
+                        </TravelToolRow>
                         <CtrlPanel.SeparatorLine />
                       </>
                     ))}
@@ -477,6 +491,12 @@ class IndexPage extends React.Component {
                           handleClick={this.trafficNowHandler}
                           fontWeights={fontWeights}
                         />
+                        <TravelToolRow
+                          icon="icon-icon_show-on-map"
+                          href={okcSystemMapUrl}
+                        >
+                          System Map
+                        </TravelToolRow>
                       </>
                     ))}
                 </CtrlPanel>

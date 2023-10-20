@@ -129,6 +129,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
     const query = match.location?.query || {};
     const okcBrand = query['okc-brand'] || null;
     const mode = (config.modesByOkcBrand || {})[okcBrand] || null;
+    const okcSystemMapUrl = config.URL.OKC_SYSTEM_MAP_URL;
 
     let transportMode = null;
     let filterResults = results => results;
@@ -206,9 +207,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
             Find A Ride
           </h1>
           <StopRouteSearch {...stopRouteSearchProps} />
-          <ul
-            style={{ listStyle: 'none', paddingLeft: 0, fontWeight: 'normal' }}
-          >
+          <ul className="okc-travel-tools">
             <li style={{ display: 'inline-block' }}>
               <a
                 href={systemAlertsPath}
@@ -220,19 +219,30 @@ class EmbeddedRouteSearchContainer extends React.Component {
                 System Alerts
               </a>
             </li>
-            <li style={{ display: 'inline-block', marginLeft: '1em' }}>
+            <li style={{ display: 'inline-block' }}>
               <a
-                href="/"
+                href={`/?okc-brand=${okcBrand}`}
                 target="_top"
                 style={{ color: 'inherit', textDecoration: 'none' }}
               >
                 {/* todo: aria-hidden=true */}
                 <Icon
-                  img="icon-icon_show-on-map"
+                  img="icon-icon_point-to-point"
                   height={1}
                   color="#000"
                 />{' '}
                 Plan A Trip
+              </a>
+            </li>
+            <li style={{ display: 'inline-block' }}>
+              <a
+                // eslint-disable-next-line no-template-curly-in-string
+                href={okcSystemMapUrl.replace('${okcBrand}', okcBrand)}
+                target="_top"
+                style={{ color: 'inherit', textDecoration: 'none' }}
+              >
+                <Icon img="icon-icon_show-on-map" height={1} color="#000" />{' '}
+                System Map
               </a>
             </li>
           </ul>

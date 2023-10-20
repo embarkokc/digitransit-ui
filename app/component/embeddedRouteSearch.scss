@@ -27,6 +27,18 @@ body.route-search-page .route-search-page {
         border-radius: 4px;
         // allow the search dropdown menu to overlap the container
         overflow: visible;
+
+        .okc-travel-tools {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1em;
+            list-style: none;
+            padding-left: 0;
+            font-weight: normal;
+            a {
+              white-space: nowrap;
+            }
+        }
     }
     .embedded-route-search-container.mobile {
         margin: 1em;

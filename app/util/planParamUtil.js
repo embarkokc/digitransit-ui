@@ -1,5 +1,5 @@
 import omitBy from 'lodash/omitBy';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import {
   filterModes,

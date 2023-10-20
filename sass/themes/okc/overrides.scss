@@ -1349,8 +1349,10 @@ div.origin-popup {
 
 .okc-pdf-download-button {
   margin: 1px 60px 18px 60px;
-  padding-bottom: 44px;
   border-bottom: 1px solid $light-gray;
+  a {
+    padding-bottom: 44px;
+  }
 }
 
 .okc-icon-button a {

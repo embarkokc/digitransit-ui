@@ -12,6 +12,7 @@ import connectToStores from 'fluxible-addons-react/connectToStores';
 import CallAgencyWarning from './CallAgencyWarning';
 import RoutePatternSelect from './RoutePatternSelect';
 import RouteNotification from './routeNotification';
+import PrecheckedLink from './PrecheckedLink';
 import { AlertSeverityLevelType, DATE_FORMAT } from '../constants';
 import {
   startRealTimeClient,
@@ -494,10 +495,10 @@ class RoutePageControlPanel extends React.Component {
               />
               {routePdfUrl ? (
                 <span className="okc-pdf-download-button okc-icon-button">
-                  <a download href={routePdfUrl}>
+                  <PrecheckedLink href={routePdfUrl}>
                     <Icon img="icon-icon_download" />
                     <span>Map &amp; Schedule PDF</span>
-                  </a>
+                  </PrecheckedLink>
                 </span>
               ) : null}
             </>

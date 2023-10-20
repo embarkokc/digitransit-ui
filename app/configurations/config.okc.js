@@ -13,6 +13,8 @@ const OTP_URL = process.env.OTP_URL || API_URL
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
 const BUY_TICKET_URL = process.env.BUY_TICKET_URL || 'https://embarkok.com/bus/buy-passes';
+// eslint-disable-next-line no-template-curly-in-string
+const OKC_SYSTEM_MAP_URL = process.env.OKC_SYSTEM_MAP_URL || 'https://beta.embarkok.com/system-map/?config=${okcBrand}';
 
 const walttiConfig = require('./config.waltti').default;
 
@@ -56,6 +58,7 @@ export default configMerger(walttiConfig, {
     FONT: null,
     ROUTE_PDF: EMBARK_BASE_URL + '/assets/documents/Maps-Schedules/Route-{routeShortName}-Schedule-Map.pdf',
     BUY_TICKET_URL: BUY_TICKET_URL,
+    OKC_SYSTEM_MAP_URL: OKC_SYSTEM_MAP_URL,
   },
 
   colors: {
@@ -164,12 +167,14 @@ export default configMerger(walttiConfig, {
     bike: 'CITYBIKE',
     bus: 'BUS',
     embark: 'BUS',
+    norman: 'BUS',
     streetcar: 'TRAM',
   },
   okcBrandLogos: {
     bike: 'okc/spokies-logo-mark.svg',
     bus: 'okc/embark-favicon.svg',
     embark: 'okc/embark-favicon.svg',
+    norman: 'okc/embark-favicon.svg',
     streetcar: 'okc/streetcar-logo-mark.svg',
   },
   favicon: './app/configurations/images/okc/favicon.png',

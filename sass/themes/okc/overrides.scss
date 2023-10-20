@@ -851,7 +851,7 @@ span.itinerary-stop-code {
       &.first {
         width: inherit;
         margin-left: 0px;
-        text-wrap: nowrap;
+        white-space: nowrap;
       }
     }
   }
@@ -1427,12 +1427,28 @@ div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > l
   /* height: 1em; */
   /* width: 1em; */
 }
-// Spkies mode-opion-contaiener
-div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
-  /*! height: 3.5em; */
-}
 
 // in RouteStopList, between new trips a separator should be shown
 .location-details_container .route-stop-row_content-container.last-stop-in-pattern {
   border-color: black;
+}
+
+.okc-travel-tool-row {
+  padding: 7px 13px 6px 16px;
+  display: flex;
+  gap: 12px;
+  font-size: 20px;
+
+  > span:nth-child(1) {
+    line-height: 1.8;
+  }
+
+  a {
+    padding-left: 10px;
+  }
+
+  span.icon-container:nth-child(3) {
+    font-size: 15px;
+    line-height: 2.2;
+  }
 }

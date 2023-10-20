@@ -4,7 +4,7 @@ import { intlShape } from 'react-intl';
 import Icon from './Icon';
 import { FareShape } from '../util/shapes';
 
-export default function TicketInformation({ fares }, { intl }) {
+export default function TicketInformation({ fares }, { intl, config }) {
   if (!fares || fares.length !== 1 || !fares[0].cents) {
     // FOR EMBARK, we assume that exactly one fare is returned.
     // Should there be more than one, we better show nothing, than
@@ -12,8 +12,7 @@ export default function TicketInformation({ fares }, { intl }) {
     return null;
   }
 
-  // TODO move to config
-  const buyTicketUrl = 'https://embarkok.com/bus/buy-passes';
+  const buyTicketUrl = config.URL?.BUY_TICKET_URL;
   return (
     <span className="okc-icon-button fare--itinerary-summary">
       <Icon img="icon-icon_ticket" />
@@ -38,6 +37,7 @@ TicketInformation.defaultProps = {
 
 TicketInformation.contextTypes = {
   intl: intlShape,
+  config: PropTypes.object.isRequired,
 };
 
 TicketInformation.displayName = 'TicketInformation';

@@ -29,35 +29,42 @@ const RouteStop = (
   const firstDeparture = patternExists && stop.stopTimesForPattern[0];
 
   const getDepartureTime = stoptime => {
-    let departureText = '';
-    if (stoptime) {
-      const departureTime =
-        stoptime.serviceDay +
-        (stoptime.realtimeState === 'CANCELED' ||
-        stoptime.realtimeDeparture === -1
-          ? stoptime.scheduledDeparture
-          : stoptime.realtimeDeparture);
-      const timeDiffInMinutes = Math.floor((departureTime - currentTime) / 60);
-      if (
-        timeDiffInMinutes < 0 ||
-        timeDiffInMinutes > config.minutesToDepartureLimit
-      ) {
-        const date = new Date(departureTime * 1000);
-        departureText = `${
-          (date.getHours() < 10 ? '0' : '') + date.getHours()
-        }:${date.getMinutes()}`;
-      } else if (timeDiffInMinutes === 0) {
-        departureText = intl.formatMessage({
-          id: 'arriving-soon',
-          defaultMessage: 'Now',
-        });
-      } else {
-        departureText = intl.formatMessage(
-          { id: 'departure-time-in-minutes', defaultMessage: '{minutes} min' },
-          { minutes: timeDiffInMinutes },
-        );
-      }
+    return (
+      stoptime.serviceDay +
+      (stoptime.realtimeState === 'CANCELED' ||
+      stoptime.realtimeDeparture === -1
+        ? stoptime.scheduledDeparture
+        : stoptime.realtimeDeparture)
+    );
+  };
+
+  const getDepartureTimeText = stoptime => {
+    if (!stoptime) {
+      return '';
     }
+    const departureTime = getDepartureTime(stoptime);
+    let departureText = '';
+    const timeDiffInMinutes = Math.floor((departureTime - currentTime) / 60);
+    if (
+      timeDiffInMinutes < 0 ||
+      timeDiffInMinutes > config.minutesToDepartureLimit
+    ) {
+      const date = new Date(departureTime * 1000);
+      departureText = `${
+        (date.getHours() < 10 ? '0' : '') + date.getHours()
+      }:${date.getMinutes()}`;
+    } else if (timeDiffInMinutes === 0) {
+      departureText = intl.formatMessage({
+        id: 'arriving-soon',
+        defaultMessage: 'Now',
+      });
+    } else {
+      departureText = intl.formatMessage(
+        { id: 'departure-time-in-minutes', defaultMessage: '{minutes} min' },
+        { minutes: timeDiffInMinutes },
+      );
+    }
+
     return departureText;
   };
 
@@ -75,14 +82,14 @@ const RouteStop = (
 
     if (patternExists) {
       text += `${intl.formatMessage({ id: 'leaves' })},`;
-      text += `${getDepartureTime(stop.stopTimesForPattern[0])},`;
+      text += `${getDepartureTimeText(stop.stopTimesForPattern[0])},`;
       if (stop.stopTimesForPattern[0].stop.platformCode) {
         text += `${intl.formatMessage({ id: 'platform' })},`;
         text += `${stop.stopTimesForPattern[0].stop.platformCode},`;
       }
       if (displayNextDeparture) {
         text += `${intl.formatMessage({ id: 'next' })},`;
-        text += `${getDepartureTime(
+        text += `${getDepartureTimeText(
           stop.stopTimesForPattern[1],
           currentTime,
         )},`;
@@ -97,6 +104,7 @@ const RouteStop = (
     }
     return text;
   };
+
   const stopPosition =
     patternExists &&
     nextStop &&

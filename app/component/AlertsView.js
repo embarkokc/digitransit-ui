@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';

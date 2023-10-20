@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export const TIME_PATTERN = 'LT';
 export const DATE_PATTERN = 'ddd MM/DD';

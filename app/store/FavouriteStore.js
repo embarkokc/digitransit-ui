@@ -5,7 +5,7 @@ import findIndex from 'lodash/findIndex';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
 import isEmpty from 'lodash/isEmpty';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { v4 as uuid } from 'uuid';
 import getGeocodingResults from '@digitransit-search-util/digitransit-search-util-get-geocoding-results';
 import { isStop } from '@digitransit-search-util/digitransit-search-util-helpers';

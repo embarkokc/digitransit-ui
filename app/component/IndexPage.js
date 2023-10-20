@@ -9,7 +9,7 @@ import DTAutoSuggest from '@digitransit-component/digitransit-component-autosugg
 import DTAutosuggestPanel from '@digitransit-component/digitransit-component-autosuggest-panel';
 import { getModesWithAlerts } from '@digitransit-search-util/digitransit-search-util-query-utils';
 import { createUrl } from '@digitransit-store/digitransit-store-future-route';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import storeOrigin from '../action/originActions';
 import storeDestination from '../action/destinationActions';
 import withSearchContext from './WithSearchContext';

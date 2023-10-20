@@ -2,7 +2,7 @@ import React from 'react';
 import Route from 'found/Route';
 import { graphql } from 'react-relay';
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Error404 from './component/404';
 import Loading from './component/LoadingPage';
 import {

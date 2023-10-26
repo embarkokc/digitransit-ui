@@ -20,6 +20,10 @@ const ItinerarySummary = ({
     window.print();
   };
 
+  const faresUrl = it => {
+    const transitLegs = it.legs.filter(leg => leg.transitLeg === true);
+    return transitLegs.length > 0 ? transitLegs[0].route.agency.faresUrl : null;
+  };
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -32,7 +36,10 @@ const ItinerarySummary = ({
           futureText={futureText}
           multiRow={isMultiRow}
         />
-        <TicketInformation fares={itinerary.fares} />
+        <TicketInformation
+          fares={itinerary.fares}
+          faresUrl={faresUrl(itinerary)}
+        />
       </div>
       <div className="itinerary-summary-info-row">
         {walking && walking.distance > 0 && (

@@ -106,6 +106,7 @@ export default createFragmentContainer(withBreakpoint(PatternStopsContainer), {
       mode
       type
       url
+      desc
       ...RouteAgencyInfo_route
       ...RoutePatternSelect_route @arguments(date: $date)
       alerts {

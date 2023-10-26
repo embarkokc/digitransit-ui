@@ -9,6 +9,7 @@ import { matchShape, routerShape } from 'found';
 import { enrichPatterns } from '@digitransit-util/digitransit-util';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import CallAgencyWarning from './CallAgencyWarning';
+import RouteAdditionalInfos from './RouteAdditionalInfos';
 import RoutePatternSelect from './RoutePatternSelect';
 import RouteNotification from './routeNotification';
 import PrecheckedLink from './PrecheckedLink';
@@ -80,6 +81,7 @@ class RoutePageControlPanel extends React.Component {
         name: PropTypes.string.isRequired,
       }).isRequired,
       url: PropTypes.string,
+      desc: PropTypes.string,
     }).isRequired,
     match: matchShape.isRequired,
     breakpoint: PropTypes.string.isRequired,
@@ -131,6 +133,7 @@ class RoutePageControlPanel extends React.Component {
             link: location.pathname,
             agency: { name: route.agency.name },
             url: route.url,
+            desc: route.desc,
           },
           type: 'Route',
         },
@@ -485,6 +488,7 @@ class RoutePageControlPanel extends React.Component {
                 className={cx({ 'bp-large': breakpoint === 'large' })}
                 useCurrentTime={useCurrentTime}
               />
+              <RouteAdditionalInfos route={route} />
               {route.url ? (
                 <span className="okc-pdf-download-button okc-icon-button">
                   <PrecheckedLink href={route.url}>

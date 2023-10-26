@@ -41,6 +41,7 @@ export default createFragmentContainer(withBreakpoint(RouteTitle), {
       color
       mode
       type
+      url
     }
   `,
 });

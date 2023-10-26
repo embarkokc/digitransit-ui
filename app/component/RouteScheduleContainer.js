@@ -1071,6 +1071,7 @@ const containerComponent = createFragmentContainer(
         longName
         mode
         type
+        url
         ...RouteAgencyInfo_route
         ...RoutePatternSelect_route @arguments(date: $date)
         alerts {

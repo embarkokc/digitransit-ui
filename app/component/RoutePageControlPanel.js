@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-import urlTemplate from 'url-template';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -80,6 +79,7 @@ class RoutePageControlPanel extends React.Component {
       agency: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
+      url: PropTypes.string,
     }).isRequired,
     match: matchShape.isRequired,
     breakpoint: PropTypes.string.isRequired,
@@ -130,6 +130,7 @@ class RoutePageControlPanel extends React.Component {
             layer: `route-${route.mode}`,
             link: location.pathname,
             agency: { name: route.agency.name },
+            url: route.url,
           },
           type: 'Route',
         },
@@ -361,15 +362,6 @@ class RoutePageControlPanel extends React.Component {
     const { breakpoint, match, route, language } = this.props;
     const { patternId } = match.params;
     const { config } = this.context;
-
-    let routePdfUrl = null;
-    if (config.URL.ROUTE_PDF) {
-      const routePdfUrlTemplate = urlTemplate.parse(config.URL.ROUTE_PDF);
-      routePdfUrl = routePdfUrlTemplate.expand({
-        routeShortName: route.shortName,
-      });
-    }
-
     const routeNotifications = [];
     if (
       config.NODE_ENV !== 'test' &&
@@ -493,9 +485,9 @@ class RoutePageControlPanel extends React.Component {
                 className={cx({ 'bp-large': breakpoint === 'large' })}
                 useCurrentTime={useCurrentTime}
               />
-              {routePdfUrl ? (
+              {route.url ? (
                 <span className="okc-pdf-download-button okc-icon-button">
-                  <PrecheckedLink href={routePdfUrl}>
+                  <PrecheckedLink href={route.url}>
                     <Icon img="icon-icon_download" />
                     <span>Map &amp; Schedule PDF</span>
                   </PrecheckedLink>

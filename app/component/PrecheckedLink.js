@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  * headers need to be returned by that server.
  */
 const PrecheckedLink = ({ href, children }) => {
-  const [linkVisible, setLinkVisible] = useState(false);
+  const [linkVisible, setLinkVisible] = useState(true);
 
   useEffect(() => {
     axios
@@ -18,11 +18,8 @@ const PrecheckedLink = ({ href, children }) => {
       })
       .catch(error => {
         if (error.response && error.response.status === 404) {
-          // If the request returns a 404 status, hide the link
+          // Iff the request returns a 404 status, hide the link
           setLinkVisible(false);
-        } else {
-          // eslint-disable-next-line no-console
-          console.info('Cannot retrieve url, will hide link:', error);
         }
       });
   }, [href]);

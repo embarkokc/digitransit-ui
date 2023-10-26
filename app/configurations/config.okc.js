@@ -55,7 +55,6 @@ export default configMerger(walttiConfig, {
     PELIAS_REVERSE_GEOCODER: `${GEOCODING_BASE_URL}/reverse`,
     PELIAS_PLACE: `${GEOCODING_BASE_URL}/place`,
     FONT: null,
-    ROUTE_PDF: EMBARK_BASE_URL + '/assets/documents/Maps-Schedules/Route-{routeShortName}-Schedule-Map.pdf',
     OKC_SYSTEM_MAP_URL: OKC_SYSTEM_MAP_URL,
   },
 

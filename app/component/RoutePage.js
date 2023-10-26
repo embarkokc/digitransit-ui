@@ -148,6 +148,7 @@ class RoutePage extends React.Component {
 }
 
 // DT-2531: added activeDates
+// EMBARK: Added url for schedule pdf
 const containerComponent = createFragmentContainer(withBreakpoint(RoutePage), {
   route: graphql`
     fragment RoutePage_route on Route
@@ -158,6 +159,7 @@ const containerComponent = createFragmentContainer(withBreakpoint(RoutePage), {
       longName
       mode
       type
+      url
       ...RouteAgencyInfo_route
       ...RoutePatternSelect_route @arguments(date: $date)
       alerts {

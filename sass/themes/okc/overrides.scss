@@ -1452,3 +1452,21 @@ div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > l
     line-height: 2.2;
   }
 }
+
+.mobile .route-additional-infos {
+    margin: 1px 16px 18px 16px;
+}
+
+.route-additional-infos {
+  margin: 1px 60px 18px 60px;
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    padding: 5px;
+  }
+
+  li:nth-child(odd) {
+    background-color: $light-gray;
+  }
+}

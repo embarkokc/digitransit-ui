@@ -54,8 +54,7 @@ function shouldShowVehicle(message, direction, tripStart, pattern, headsign) {
       pattern.substr(0, message.route.length) === message.route) &&
     (headsign === undefined ||
       message.headsign === undefined ||
-      // EMBARK OKC: we omit parenthese suffixes, as vehicles don't carry them
-      headsign.split(' (', 1)[0] === message.headsign.split(' (', 1)[0]) &&
+      headsign === message.headsign) &&
     (direction === undefined ||
       message.direction === undefined ||
       message.direction === direction) &&

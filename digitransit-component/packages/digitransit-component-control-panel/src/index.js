@@ -324,7 +324,7 @@ function NearStopsAndRoutes({
     >
       {showTitle && (
         <h2 className={styles['near-you-title']}>
-          <Icon width="1" color="#686869" img="position" />
+          <Icon width={1} color="#686869" img="position" />
           {!modes
             ? i18next.t('title-route-stop-station', { lng: language })
             : title[language]}

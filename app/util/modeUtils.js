@@ -344,6 +344,8 @@ export const getBicycleCompatibleModes = (config, modes) =>
  */
 export const modesAsOTPModes = modes =>
   modes
+    // Hot fix as somehow digitransit modes get here but should not
+    .map(mode => (mode === 'CITYBIKE' ? 'BICYCLE_RENT' : mode))
     .map(mode => mode.split('_'))
     .map(modeAndQualifier =>
       modeAndQualifier.length > 1

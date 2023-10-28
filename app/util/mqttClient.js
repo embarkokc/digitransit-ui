@@ -30,8 +30,7 @@ function getTopic(options, settings) {
   // headsigns with / cause problems
   const headsign =
     options.headsign && options.headsign.indexOf('/') === -1
-      ? // EMBARK OKC: we omit parenthese suffixes, as vehicles don't carry them
-        options.headsign.split(' (', 1)[0]
+      ? options.headsign
       : '+';
   const tripStartTime = options.tripStartTime
     ? convertTo24HourFormat(options.tripStartTime)

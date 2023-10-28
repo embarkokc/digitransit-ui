@@ -256,6 +256,7 @@ class DepartureListContainer extends Component {
     const departures = asDepartures(stoptimes)
       .filter(departure => !(isTerminal && departure.isArrival))
       .filter(departure => currentTime < departure.stoptime)
+      .filter(departure => currentTime + 86400 > departure.stoptime)
       .slice(0, limit);
 
     // EMBARK: Group departures by route_short_name and headsign

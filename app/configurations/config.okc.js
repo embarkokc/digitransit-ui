@@ -13,7 +13,7 @@ const OTP_URL = process.env.OTP_URL || API_URL
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
 // eslint-disable-next-line no-template-curly-in-string
-const OKC_SYSTEM_MAP_URL = process.env.OKC_SYSTEM_MAP_URL || 'https://beta.embarkok.com/system-map/?config=${okcBrand}';
+const OKC_SYSTEM_MAP_URL = (process.env.OKC_SYSTEM_MAP_URL || 'https://beta.embarkok.com/system-map/') + '?config=${okcBrand}';
 
 const walttiConfig = require('./config.waltti').default;
 

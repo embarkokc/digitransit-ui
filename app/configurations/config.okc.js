@@ -41,7 +41,7 @@ export default configMerger(walttiConfig, {
   URL: {
     ROOTLINK: ROOTLINK,
     OTP: process.env.OTP_URL || `${API_URL}/otp/routers/default/`,
-    MAP: `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
+    MAP: `https://api.maptiler.com/maps/e8203d24-1fd9-4a3f-b301-4135cbc11b04/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
     STOP_MAP: {
       default: `${API_URL}/otp/routers/default/vectorTiles/stops/`,
     },

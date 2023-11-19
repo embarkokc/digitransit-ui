@@ -66,8 +66,8 @@ const alertMatchesModes = (alert, modes) => {
 // TODO `L` includes the year, which we usually don't want in digitransit-ui
 // we need a localized "current-year-aware" formatting
 // with Luxon, one might use https://moment.github.io/luxon/api-docs/index.html#datetimetolocaleparts ?
-const localizeDate = dateTime => {
-  return moment.unix(dateTime).format('L');
+const localizeDate = dateTimeInMs => {
+  return moment.unix(dateTimeInMs / 1000).format('L');
 };
 
 const AgencyAlertEntity = ({ alert }) => {
@@ -178,9 +178,13 @@ export function Alert({ alertData }) {
     id,
     alertHeaderText,
     alertDescriptionText,
-    effectiveStartDate,
-    effectiveEndDate,
+    effectiveStartDate: effectiveStartDateInS,
+    effectiveEndDate: effectiveEndDateInS,
   } = alertData;
+
+  const effectiveStartDate = effectiveStartDateInS * 1000;
+  const effectiveEndDate = effectiveEndDateInS * 1000;
+
   const entities = Array.isArray(alertData.entities) ? alertData.entities : [];
 
   const renderFullDateTime = (timestamp, classNamePrefix = '') => {

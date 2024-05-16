@@ -4,13 +4,14 @@ import { intlShape } from 'react-intl';
 import Icon from './Icon';
 import { FareShape } from '../util/shapes';
 
-export default function TicketInformation({ fares, faresUrl }, { intl }) {
+export default function TicketInformation({ fares }, { intl }) {
   if (!fares || fares.length !== 1 || !fares[0].cents) {
     // FOR EMBARK, we assume that exactly one fare is returned.
     // Should there be more than one, we better show nothing, than
     // an unexpected partial fare
     return null;
   }
+  const fareUrl = fares?.[0]?.components?.[0]?.routes?.[0]?.agency?.fareUrl;
 
   return (
     <span className="okc-icon-button fare--itinerary-summary">
@@ -21,19 +22,17 @@ export default function TicketInformation({ fares, faresUrl }, { intl }) {
           currency: 'USD',
         })}
       </span>
-      <a href={faresUrl}>Buy</a>
+      <a href={fareUrl}>Buy</a>
     </span>
   );
 }
 
 TicketInformation.propTypes = {
   fares: PropTypes.arrayOf(FareShape),
-  faresUrl: PropTypes.string,
 };
 
 TicketInformation.defaultProps = {
   fares: [],
-  faresUrl: null,
 };
 
 TicketInformation.contextTypes = {

@@ -243,7 +243,7 @@ export function Alert({ alertData }) {
       {/* todo: i18n, proper fallback heading */}
       <h2>{alertHeaderText || 'notice'}</h2>
       <p className="alerts-view-alert-time-frame">{dateTimeEls}</p>
-      <p>{alertDescriptionText}</p>
+      {alertDescriptionText ? <p>{alertDescriptionText}</p> : null}
     </div>
   );
 }
@@ -406,7 +406,8 @@ const AlertPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
   // alertId
   alertHeaderText: PropTypes.string,
-  alertDescriptionText: PropTypes.string.isRequired,
+  // OKC 213/207 alertDescriptionText might be empty, so removed the isRequired constraint
+  alertDescriptionText: PropTypes.string,
   effectiveStartDate: PropTypes.number,
   effectiveEndDate: PropTypes.number,
   alertSeverityLevel: PropTypes.string,

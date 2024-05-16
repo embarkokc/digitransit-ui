@@ -209,7 +209,7 @@ export default configMerger(walttiConfig, {
       spokies: {
         capacity: BIKEAVL_WITHMAX,
         url: {
-          'en': 'https://spokiesokc.com/findabike.html',
+          'en': 'https://www.embarkok.com/bike/how-it-works',
         },
         enabled: true,
         icon: 'citybike',

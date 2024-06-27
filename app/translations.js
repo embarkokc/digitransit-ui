@@ -859,7 +859,14 @@ const translations = {
     'add-via-duration-button-label-open':
       'Open stop duration selector at via point {index}',
     'add-work': 'Add Work',
-    'alerts-page-modes-select-label': 'Filter Alerts',
+    'alerts-page-level-select-aria-label':
+      'Type selection dropdown menu, currently selected: {option}',
+    'alerts-page-level-select-label': 'Filter by Alert Type',
+    'alerts-page-level-select-placeholder': 'Any Type',
+    'alerts-page-service-select-aria-label':
+      'Service selection dropdown menu, currently selected: {option}',
+    'alerts-page-service-select-label': 'Filter by Service',
+    'alerts-page-service-select-placeholder': 'Any Service',
     'alerts-page-title': 'System Alerts',
     all: 'All',
     'aria-itinerary-summary':
@@ -1467,6 +1474,10 @@ const translations = {
       'View results in the adjacent “About the route or stop” tab',
     'searching-position': 'Detecting location...',
     'select-all-routes': 'Select all routes',
+    'select-dropdown-aria-message-change': 'option {option} selected',
+    'select-dropdown-aria-message-focused': 'option {option} focused',
+    'select-dropdown-aria-message-guidance':
+      'select one or more options from a dropdown menu',
     'select-map-layers-header': 'Show on map',
     'select-position': 'Select your location from your previous searches',
     'select-route': 'Select {mode} route {shortName} to {headsign}',

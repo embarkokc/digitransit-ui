@@ -6,6 +6,7 @@ const APP_TITLE = 'EMBARK Oklahoma City';
 const APP_DESCRIPTION = 'EMBARK OK Trip Planner';
 
 const EMBARK_BASE_URL = process.env.EMBARK_BASE_URL || 'https://beta.embarkok.com';
+const EMBARK_ALERTS_URL = process.env.EMBARK_ALERTS_URL;
 const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
 const API_URL = process.env.API_URL || 'https://otp.okc.leonard.io';
@@ -57,6 +58,8 @@ export default configMerger(walttiConfig, {
     FONT: null,
     OKC_SYSTEM_MAP_URL: OKC_SYSTEM_MAP_URL,
   },
+
+  embarkAlertsUrl: EMBARK_ALERTS_URL,
 
   colors: {
     primary: '#000000',

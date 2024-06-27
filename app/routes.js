@@ -422,7 +422,7 @@ export default config => {
         path={`/${PREFIX_ALERTS}`}
         getComponent={() =>
           import(
-            /* webpackChunkName: "itinerary" */ './component/AlertsView'
+            /* webpackChunkName: "itinerary" */ './component/AlertsViewEmbark'
           ).then(getDefault)
         }
         render={getComponentOrLoadingRenderer}

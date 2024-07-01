@@ -3,6 +3,7 @@ import React from 'react';
 import { matchShape, routerShape } from 'found';
 import MarkerPopupBottom from './map/MarkerPopupBottom';
 import { redirectToItinerarySearch } from '../util/mapPopupUtils';
+import Icon from './Icon';
 
 const SelectedStopPopupContent = ({ stop }, { router, match }) => {
   const { location } = match;
@@ -27,6 +28,9 @@ const SelectedStopPopupContent = ({ stop }, { router, match }) => {
           <div className="selected-stop-popup">
             <p className="card-code">{stop.name}</p>
             {stop.desc && <span className="description">{stop.desc}</span>}
+            {stop.alerts?.length > 0 && (
+              <Icon img="icon-icon_caution" className="caution inline-icon" />
+            )}
           </div>
           <MarkerPopupBottom
             location={stop}

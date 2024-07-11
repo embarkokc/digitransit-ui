@@ -60,7 +60,15 @@ body {
      gap: 10px;
      align-items: center;
   }
+
+  .stop-wheelchair-boarding-icon {
+    height: 0.65em;
+    color: $gray;
+    margin-left: 0.35em;
+    position: relative;
+  }
 }
+
 .route-address-row-container .route-stop-address-row {
    color: $black;
    font-size: $font-size-normal;

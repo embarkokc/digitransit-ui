@@ -28,6 +28,9 @@ const SelectedStopPopupContent = ({ stop }, { router, match }) => {
           <div className="selected-stop-popup">
             <p className="card-code">{stop.name}</p>
             {stop.desc && <span className="description">{stop.desc}</span>}
+            {stop.wheelchairBoarding === 'POSSIBLE' && (
+              <Icon img="icon-icon_wheelchair" className="inline-icon" />
+            )}
             {stop.alerts?.length > 0 && (
               <Icon img="icon-icon_caution" className="caution inline-icon" />
             )}

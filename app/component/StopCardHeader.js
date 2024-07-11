@@ -7,6 +7,7 @@ import { getJson } from '../util/xhrPromise';
 import { saveSearch } from '../action/SearchActions';
 import { isIOS } from '../util/browser';
 import LazilyLoad, { importLazy } from './LazilyLoad';
+import Icon from './Icon';
 
 const modules = {
   FavouriteStopContainer: () => importLazy(import('./FavouriteStopContainer')),
@@ -104,6 +105,14 @@ class StopCardHeader extends React.Component {
         showBackButton={breakpoint === 'large'}
         stop={stop}
         headerConfig={this.headerConfig}
+        headerIcon={
+          stop.wheelchairBoarding === 'POSSIBLE' && (
+            <Icon
+              img="icon-icon_wheelchair"
+              className="stop-wheelchair-boarding-icon"
+            />
+          )
+        }
         isTerminal={isTerminal}
         favouriteContainer={
           <LazilyLoad modules={modules}>
@@ -139,6 +148,7 @@ StopCardHeader.propTypes = {
     ),
     lat: PropTypes.number,
     lon: PropTypes.number,
+    wheelchairBoarding: PropTypes.string,
   }),
   /* eslint-disable react/no-unused-prop-types */
   distance: PropTypes.number,

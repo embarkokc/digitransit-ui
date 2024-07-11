@@ -26,6 +26,7 @@ export default createFragmentContainer(
           name
           desc
         }
+        wheelchairBoarding
       }
     `,
   },

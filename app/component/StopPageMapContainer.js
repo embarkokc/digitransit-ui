@@ -28,7 +28,6 @@ StopPageMapContainer.defaultProps = {
 };
 
 const containerComponent = createFragmentContainer(StopPageMapContainer, {
-  // TODO 136/141 add wheelchairAccessible info
   stop: graphql`
     fragment StopPageMapContainer_stop on Stop {
       lat

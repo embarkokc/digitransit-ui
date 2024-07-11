@@ -209,6 +209,7 @@ export default configMerger(walttiConfig, {
 
   cityBike: {
     networks: {
+      /*
       spokies: {
         capacity: BIKEAVL_WITHMAX,
         url: {
@@ -221,6 +222,7 @@ export default configMerger(walttiConfig, {
         },
         type: 'citybike',
       },
+      */
     },
   },
 

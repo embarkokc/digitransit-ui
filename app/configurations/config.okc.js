@@ -297,4 +297,6 @@ export default configMerger(walttiConfig, {
       },
     ],
   },
+
+  customDisclaimer: 'If you need assistance, please email info@embarkok.com, visit EMBARK\'s Online Help Center, or call 405-235-RIDE (7433).',
 });

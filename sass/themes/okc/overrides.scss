@@ -1483,3 +1483,36 @@ div.settings-section:nth-child(3) > div:nth-child(1) > fieldset:nth-child(1) > l
     background-color: $light-gray;
   }
 }
+
+// Print styling
+
+.print.okc-icon-button {
+  @media print {
+    display: none;
+  }
+}
+
+// #137 add footer
+.itinerary-disclaimer {
+  // per default, disclaimer is hidden
+  display: none;
+
+  @media print {
+    display: inline;
+    line-height: normal;
+    margin: 30px 0px 0px 0px;
+    font-size:20px;
+  }
+}
+
+.itinerary-summary-container {
+  @media print {
+    padding: 30px 65px 0px 65px;
+  }
+}
+
+.logo, .leg-before-line {
+  -webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
+  color-adjust: exact !important;                 /* Firefox 48 – 96 */
+  print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */ /* stylelint-disable-line property-no-unknown */
+}

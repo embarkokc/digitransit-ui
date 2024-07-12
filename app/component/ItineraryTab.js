@@ -323,6 +323,11 @@ class ItineraryTab extends React.Component {
                   />
                 </div>
               )}
+              { config.customDisclaimer &&
+                <div className="itinerary-disclaimer">
+                  {config.customDisclaimer}
+                </div>
+              }
               <div className="itinerary-empty-space" />
             </div>,
           ]}

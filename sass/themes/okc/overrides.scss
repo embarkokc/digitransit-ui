@@ -324,6 +324,11 @@ nav.top-bar + section.content {
   }
 }
 
+// #208: remove alert badge on route label
+.itinerary-transit-leg-route .bar .subicon-caution {
+  display: none;
+}
+
 .vehicle-number-container-v .vehicle-number {
   color: $black;
 }

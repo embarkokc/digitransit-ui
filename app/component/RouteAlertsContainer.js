@@ -52,6 +52,7 @@ function RouteAlertsContainer({ route }, { intl, match }) {
   return (
     <AlertList
       showRouteNameLink={false}
+      disableScrolling
       cancelations={cancelations}
       serviceAlerts={serviceAlerts}
     />

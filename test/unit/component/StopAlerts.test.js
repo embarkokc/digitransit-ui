@@ -37,6 +37,7 @@ describe('<StopAlerts />', () => {
     const wrapper = shallowWithIntl(<StopAlerts {...props} />);
     expect(wrapper.find(AlertList).props()).to.deep.equal({
       cancelations: [],
+      disableScrolling: true,
       serviceAlerts: [],
       showRouteNameLink: false,
     });

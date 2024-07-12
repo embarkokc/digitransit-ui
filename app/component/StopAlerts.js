@@ -74,6 +74,7 @@ const StopAlerts = ({ stop }, { intl }) => {
   return (
     <AlertList
       showRouteNameLink={false}
+      disableScrolling
       cancelations={cancelations}
       serviceAlerts={serviceAlerts}
     />

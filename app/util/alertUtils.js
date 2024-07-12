@@ -173,9 +173,10 @@ export const legHasCancelation = leg => {
 };
 
 /**
- * The default validity period (30 days for OKC, was 5 minutes for HSL) for an alert without a set end time.
+ * The default validity period (300 days for OKC, was 5 minutes for HSL) for an alert without a set end time.
+ * # 233
  */
-export const DEFAULT_VALIDITY = 5 * 60 * 12 * 24 * 30;
+export const DEFAULT_VALIDITY = 5 * 60 * 12 * 24 * 300;
 
 /**
  * Checks if the given validity period is valid or not.

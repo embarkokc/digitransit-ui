@@ -18,8 +18,6 @@ import TravelToolRow from './TravelToolRow';
 
 // EMBARK questions:
 // * Values to filter for?
-// * Marketing panel
-// * Travel-Tools links
 
 // Generalization TODOs
 // A couple of actions should be performed, if this alerts page would become general use.
@@ -502,6 +500,15 @@ export function AlertsView(props, context) {
           </section>
         </div>
         <TravelTools />
+        <div className="get-service-alerts">
+          <a href="https://www.embarkok.com/create-an-account">
+            <img
+              className="get-service-alerts-image"
+              src="/img/okc-get-service-alerts.png"
+              alt="Get Service Alerts"
+            />
+          </a>
+        </div>
       </>
     );
   };

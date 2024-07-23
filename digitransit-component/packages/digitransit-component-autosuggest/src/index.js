@@ -679,7 +679,7 @@ class DTAutosuggest extends React.Component {
 
   clearInput = () => {
     const newState = {
-      editing: true,
+      editing: false, // EMBARK: was true, but want to really clear the input
       value: '',
       sources: this.props.sources,
       ownPlaces: false,
@@ -692,7 +692,8 @@ class DTAutosuggest extends React.Component {
     if (this.props.onClear) {
       this.props.onClear(this.props.id);
     }
-    this.input.focus();
+    // EMBARK: No focus, as we really want to clear the input
+    // this.input.focus();
   };
 
   inputClicked = inputValue => {

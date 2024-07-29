@@ -385,6 +385,12 @@ export function AlertsView(props, context) {
     }
   };
 
+  const onClearStopRoute = () => {
+    setStop(undefined);
+    setRoute(undefined);
+    setStopRouteSearchValue('');
+  };
+
   const onSelectLevel = value => {
     setLevel(value);
   };
@@ -400,6 +406,7 @@ export function AlertsView(props, context) {
     className: 'destination',
     placeholder: 'stop-near-you',
     selectHandler: onSelectStopRoute,
+    onClear: onClearStopRoute,
     getAutoSuggestIcons: config.getAutoSuggestIcons,
     value: stopRouteSearchValue,
     lang: 'en',

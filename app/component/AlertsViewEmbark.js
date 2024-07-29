@@ -462,7 +462,7 @@ export function AlertsView(props, context) {
                 },
                 {
                   value: 'CART',
-                  label: 'Cart',
+                  label: 'CART',
                 },
                 {
                   value: 'NORMAN',

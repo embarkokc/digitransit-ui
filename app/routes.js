@@ -426,58 +426,6 @@ export default config => {
           ).then(getDefault)
         }
         render={getComponentOrLoadingRenderer}
-        // alerts(
-        // feeds: [String!]
-        // severityLevel: [AlertSeverityLevelType!]
-        // effect: [AlertEffectType!]
-        // cause: [AlertCauseType!]
-        // route: [String!]
-        // stop: [String!]
-        // ): [Alert]
-        // todo: filter by feed?
-        query={graphql`
-          query routes_alerts_Query {
-            alerts {
-              id
-              # alertId
-              alertHeaderText
-              alertDescriptionText
-              effectiveStartDate
-              effectiveEndDate
-              alertSeverityLevel
-              entities {
-                ... on Route {
-                  __typename
-                  id
-                  gtfsId
-                  shortName
-                  # longName(language: $language)
-                  mode
-                  color
-                }
-                ... on Stop {
-                  __typename
-                  id
-                  gtfsId
-                  code
-                  # name(language: $language)
-                  vehicleMode
-                }
-                ... on Agency {
-                  __typename
-                  id
-                  name
-                  url
-                }
-                ... on RouteType {
-                  __typename
-                  routeType
-                }
-                # todo: how to handle others?
-              }
-            }
-          }
-        `}
       />
       <Route
         path="/tietoja-palvelusta"

@@ -233,7 +233,8 @@ jobs:
         run: yarn run test-coverage
 
   docker-push:
-    if: github.ref == 'refs/heads/v3'
+    # todo: re-add this before merging!
+    # if: github.ref == 'refs/heads/v3'
     needs:
       - lint
       - unit-test
@@ -267,6 +268,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          build-args:
+            # speed up build by not building for all configs
+            CONFIG=okc
           tags: |
             ghcr.io/embarkokc/digitransit-ui:v3
             ghcr.io/embarkokc/digitransit-ui:${{ steps.docker-tags.outputs.permanent-tag }}

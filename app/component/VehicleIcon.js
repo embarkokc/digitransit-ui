@@ -90,7 +90,8 @@ const VehicleIcon = ({
         '--color-regular': '#2C85B3',
         '--color-dark': '#094881',
       };
-    } else if (['805', '806'].indexOf(vehicleNumber) > -1) {
+    } else {
+      // if (['805', '806'].indexOf(vehicleNumber) > -1) {
       style = {
         '--color-bright': '#CDDA2A',
         '--color-regular': '#3DAF2A',

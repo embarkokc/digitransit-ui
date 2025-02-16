@@ -265,7 +265,7 @@ function NearStopsAndRoutes({
           </span>
           <span className={styles['transport-mode-icon-container']}>
             <span
-              className={styles['transport-mode-icon-with-icon']}
+              className={`${styles['transport-mode-icon-with-icon']} modes[mode]['color']`}
               style={{
                 '--bckColor': `${
                   modes[mode]['color']

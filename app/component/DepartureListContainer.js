@@ -356,7 +356,7 @@ class DepartureListContainer extends Component {
           <tbody>{departureObjs}</tbody>
         </table>
         <span className="departure-list-legend">
-          <span className="realtime">Realtime arrivals are estimates</span>
+          <span className="realtime">Realtime departures are estimates</span>
           <span className="scheduled">* Scheduled</span>
         </span>
       </>

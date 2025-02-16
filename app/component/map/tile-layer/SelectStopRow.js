@@ -5,10 +5,6 @@ import Icon from '../../Icon';
 import { PREFIX_TERMINALS, PREFIX_STOPS } from '../../../util/path';
 import { ExtendedRouteTypes } from '../../../constants';
 
-function isNull(val) {
-  return val === 'null' || val === undefined || val === null;
-}
-
 function SelectStopRow(
   { code, type, desc, gtfsId, name, patterns, terminal, colors },
   { config },
@@ -59,7 +55,7 @@ function SelectStopRow(
       iconOptions.className = 'funicular-stop';
       break;
     case 'FERRY':
-      iconOptions.iconId = !isNull(code)
+      iconOptions.iconId = terminal
         ? 'icon-icon_ferry'
         : 'icon-icon_stop_ferry';
       iconOptions.className = 'ferry-stop';

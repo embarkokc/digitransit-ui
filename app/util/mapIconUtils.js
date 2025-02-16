@@ -407,9 +407,9 @@ export function drawStopIcon(
     x = geom.x / tile.ratio - width / 2;
     y = geom.y / tile.ratio - height;
     getImageFromSpriteCache(
-      !isFerryTerminal
-        ? `icon-icon_stop_${type.toLowerCase()}`
-        : `icon-icon_${type.toLowerCase()}`,
+      //! isFerryTerminal ?
+      `icon-icon_stop_${type.toLowerCase()}`,
+      //  : `icon-icon_${type.toLowerCase()}`,
       width,
       height,
       color,

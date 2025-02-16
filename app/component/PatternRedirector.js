@@ -34,6 +34,7 @@ const PatternRedirector = ({ router, match, route }, context) => {
     return <Error404 />;
   }
   let sortedPatternsByCountOfTrips;
+
   const tripsExists = route.patterns ? 'trips' in route.patterns[0] : false;
   if (tripsExists) {
     // EMBARK: instead of all patterns, we prefer inboud patterns
@@ -41,8 +42,13 @@ const PatternRedirector = ({ router, match, route }, context) => {
     const inboundPatterns = route.patterns.filter(p => {
       return p.headsign && p.headsign.includes('nbound');
     });
+    // EMBARK issue: Not all patterns have inbound string
+    const patternsToSelectFrom =
+      inboundPatterns.length > 0 ? inboundPatterns : route.patterns;
+
     sortedPatternsByCountOfTrips = sortBy(
-      sortBy(inboundPatterns, 'code').reverse(),
+      patternsToSelectFrom,
+      sortBy(patternsToSelectFrom, 'code').reverse(),
       'trips.length',
     ).reverse();
   }

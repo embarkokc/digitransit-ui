@@ -209,11 +209,10 @@ export default configMerger(walttiConfig, {
 
   cityBike: {
     networks: {
-      /*
       spokies: {
         capacity: BIKEAVL_WITHMAX,
         url: {
-          'en': 'https://www.embarkok.com/bike/how-it-works',
+          'en': 'https://bikespokies.com/',
         },
         enabled: true,
         icon: 'citybike',
@@ -222,7 +221,6 @@ export default configMerger(walttiConfig, {
         },
         type: 'citybike',
       },
-      */
     },
   },
 

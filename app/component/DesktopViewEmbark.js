@@ -36,7 +36,7 @@ export default function DesktopView({
                 our schedule, we want you to know about it. Here, you will find
                 information on detours, delays, stop closures, elevator outages,
                 and other issues that may affect your EMBARK stop, route,
-                plattform, or parking facility.
+                platform, or parking facility.
               </div>
             </div>
           </div>

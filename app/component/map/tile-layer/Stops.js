@@ -68,10 +68,12 @@ class Stops {
           ? feature.properties.platform
           : false,
         isHilighted,
-        !!(
+        /* No HSL sepcial handling for ferries
+           !!(
           feature.properties.type === 'FERRY' &&
           !isNull(feature.properties.code)
-        ),
+        ) */
+        false,
         this.config.colors.iconColors,
       );
     }

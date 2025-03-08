@@ -44,6 +44,7 @@ const AlertShape = PropTypes.shape({
   activeFrom: PropTypes.instanceOf(Date),
   activeTo: PropTypes.instanceOf(Date),
   level: PropTypes.number,
+  url: PropTypes.string,
 });
 
 export const AlertContext = createContext({
@@ -243,6 +244,11 @@ export function Alert(props, context) {
             <div className="details-heading">{alert.title}</div>
           )}
           <div className="details">{alert.description}</div>
+          {alert.url ? (
+            <div className="alert-link" target="_blank" rel="noreferrer">
+              <a href={alert.url}>Details...</a>
+            </div>
+          ) : null}
         </ToggableSection>
       </div>
     </div>

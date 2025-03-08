@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Icon from './Icon';
 
 function ToggableSection({ children }) {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   const header = React.Children.toArray(children)[0];
   const content = React.Children.toArray(children);

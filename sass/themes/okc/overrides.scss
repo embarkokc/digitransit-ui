@@ -829,16 +829,28 @@ span.itinerary-stop-code {
   margin-left: 0;
 }
 
+.tabpanel-header {
+  font-size: 16px;
+  padding-left: calc(51% + 65px);
+  font-weight: $font-weight-bold;
+}
+
 .route-details-left-column {
   display: flex;
   gap: 15px;
   align-items: center;
 }
-
+.route-details-middle-column {
+  padding-left: 10px;
+  display: flex;
+  align-items: left;
+  width: 51%
+}
 .route-details-right-column {
   padding-left: 10px;
   display: flex;
-  align-items: center;
+  align-items: left;
+  width: 30%
 }
 
 .location-details_container .route-stop-row_content-container {

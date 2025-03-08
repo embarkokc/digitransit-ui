@@ -12,21 +12,11 @@ import { addAnalyticsEvent } from '../util/analyticsUtils';
 import Icon from './Icon';
 
 const RouteStop = (
-  {
-    className,
-    currentTime,
-    last,
-    stop,
-    nextStop,
-    displayNextDeparture,
-    hideDepartures,
-  },
+  { className, currentTime, last, stop, displayNextDeparture, hideDepartures },
   { config, intl },
 ) => {
   const patternExists =
     stop.stopTimesForPattern && stop.stopTimesForPattern.length > 0;
-
-  const firstDeparture = patternExists && stop.stopTimesForPattern[0];
 
   const getDepartureTime = stoptime => {
     return (
@@ -105,16 +95,9 @@ const RouteStop = (
     return text;
   };
 
-  const stopPosition =
-    patternExists &&
-    nextStop &&
-    getDepartureTime(stop.stopTimesForPattern[0]) >
-      getDepartureTime(nextStop.stopTimesForPattern[0])
-      ? 'last-stop-in-pattern'
-      : '';
   return (
     <li className={cx('route-stop location-details_container ', className)}>
-      <div className={cx('route-stop-row_content-container', stopPosition)}>
+      <div className={cx('route-stop-row_content-container')}>
         <Link
           as="button"
           type="button"
@@ -130,25 +113,9 @@ const RouteStop = (
         >
           <div className="route-stop-container">
             <div className="route-details-left-column">
-              {patternExists && (
-                <div
-                  key={firstDeparture.scheduledDeparture}
-                  className="route-stop-time"
-                >
-                  {!hideDepartures &&
-                    fromStopTime(
-                      firstDeparture,
-                      currentTime,
-                      true,
-                      false,
-                      true,
-                    )}
-                </div>
-              )}
-
               <StopCode code={stop.code} />
             </div>
-            <div className="route-details-right-column">
+            <div className="route-details-middle-column">
               <div className="route-details-upper-row">
                 <div className="route-details_container">
                   <div className="route-stop-name">
@@ -184,6 +151,16 @@ const RouteStop = (
                     />
                   </div>
                 )}
+            </div>
+            <div className="route-details-right-column">
+              {patternExists &&
+                !hideDepartures &&
+                stop.stopTimesForPattern.map((st, index) => (
+                  <div key={st.scheduledDeparture} className="route-stop-time">
+                    {index > 0 && <span>,</span>}
+                    {fromStopTime(st, currentTime, true, false, true)}
+                  </div>
+                ))}
             </div>
           </div>
         </Link>

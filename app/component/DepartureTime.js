@@ -71,6 +71,7 @@ function DepartureTime(props, context) {
             id: 'next',
             defaultMessage: 'Next',
           })} `}
+        {!props.realtime && '*'}
         <LocalTime forceUtc={props.useUTC} time={props.departureTime} />
       </span>
       {props.canceled && props.showCancelationIcon && (

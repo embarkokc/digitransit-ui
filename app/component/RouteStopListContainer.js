@@ -106,9 +106,16 @@ class RouteStopListContainer extends React.PureComponent {
             default="Departure times for each stop update in real time."
           />
         </span>
+        <div className="tabpanel-header">
+          <span>Next departures</span>
+        </div>
         <ul className={cx('route-stop-list', this.props.className)}>
           {this.getStops()}
         </ul>
+        <div className="tabpanel-footer departure-list-legend">
+          <span>* scheduled departure times</span>
+          <span className="realtime">Realtime estimated departure times</span>
+        </div>
       </div>
     );
   }

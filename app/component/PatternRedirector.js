@@ -50,7 +50,7 @@ const PatternRedirector = ({ router, match, route }, context) => {
       patternsToSelectFrom,
       sortBy(patternsToSelectFrom, 'code').reverse(),
       'trips.length',
-    ).reverse();
+    );
   }
   let pattern;
   if (

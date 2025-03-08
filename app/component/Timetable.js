@@ -11,7 +11,7 @@ import cx from 'classnames';
 import Icon from './Icon';
 // import FilterTimeTableModal from './FilterTimeTableModal';
 import TimeTableOptionsPanel, {
-  getTripPatternsAvailableForSelection,
+  getPatternsAvailableForSelection,
 } from './TimeTableOptionsPanel.okc';
 import TimetableRow from './TimetableRow.okc';
 import { RealtimeStateType } from '../constants';
@@ -83,12 +83,11 @@ class Timetable extends React.Component {
   };
 
   componentDidMount = () => {
-    const patterns = getTripPatternsAvailableForSelection(this.props.stop);
-    const fallbackRoute = patterns[0]?.code;
+    const options = getPatternsAvailableForSelection(this.props.stop);
+    const fallbackRoute = Object.values(options)[0].value;
     this.setState({
-      showRoutes: this.context.match.location.query.routes?.split(',') || [
-        fallbackRoute,
-      ],
+      showRoutes:
+        this.context.match.location.query.routes?.split(',') || fallbackRoute,
     });
   };
 

@@ -3,18 +3,26 @@ import React, { useState } from 'react';
 import { intlShape } from 'react-intl';
 import uniqBy from 'lodash/uniqBy';
 import sortBy from 'lodash/sortBy';
+import groupBy from 'lodash/groupBy';
 import Select, { components } from 'react-select';
 import Icon from './Icon';
-// import RouteScheduleDropdown from './RouteScheduleDropdown';
 
-export const getTripPatternsAvailableForSelection = stop => {
+export const getPatternsAvailableForSelection = stop => {
   const patterns = uniqBy(
     stop.stoptimesForServiceDate
       .filter(stoptimesInPattern => stoptimesInPattern.stoptimes.length > 0)
       .map(stoptimesInPattern => stoptimesInPattern.pattern),
     tripPattern => tripPattern.code,
   );
-  return sortBy(patterns, tripPattern => tripPattern.route.shortName);
+  const routes = groupBy(patterns, tripPattern => tripPattern.route.shortName);
+
+  return sortBy(
+    Object.entries(routes).map(([shortName, routePatterns]) => ({
+      value: routePatterns.map(routePattern => routePattern.code),
+      label: `Route ${shortName}`,
+    })),
+    option => option.label,
+  );
 };
 
 // todo: DRY with ModesSelectDropdown
@@ -45,26 +53,21 @@ const TimeTableOptionsPanel = (props, context) => {
   const { stop, showRoutes, setShowRoutes } = props;
   const { intl } = context;
 
-  const patterns = getTripPatternsAvailableForSelection(stop);
-  if (patterns.length === 0) {
-    return null;
-  }
+  const options = getPatternsAvailableForSelection(stop) || [];
 
-  const options = patterns.map(pattern => ({
-    value: pattern.code,
-    label: `Route ${pattern.route.shortName}`,
-  }));
+  // To figure out selected option, we check if first pattern is
+  // in currently shown routes
   const selectedOption =
     (showRoutes.length > 0 &&
-      options.find(({ value }) => value === showRoutes[0])) ||
+      options.find(({ value }) => showRoutes.includes(value[0]))) ||
     null;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleChange = newSelectedOption => {
-    const { value: newSelectedRoute } = newSelectedOption;
+    const { value: newSelectedRoutes } = newSelectedOption;
     setShowRoutes({
-      showRoutes: [newSelectedRoute],
+      showRoutes: newSelectedRoutes,
     });
   };
 

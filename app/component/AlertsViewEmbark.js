@@ -157,6 +157,9 @@ export function Alert(props, context) {
     'STREETCAR',
     'RAPID',
     'NORMAN',
+    'CART',
+    'CITYLINK',
+    'FERRY',
   ];
   const groups = new Set(
     alert.routes.map(route => {
@@ -475,6 +478,14 @@ export function AlertsView(props, context) {
                 {
                   value: 'RAPID',
                   label: 'RAPID',
+                },
+                {
+                  value: 'CITYLINK',
+                  label: 'City Link',
+                },
+                {
+                  value: 'FERRY',
+                  label: 'Ferry',
                 },
               ]}
               onSelectionChanged={onSelectService}

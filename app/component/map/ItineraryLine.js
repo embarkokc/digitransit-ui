@@ -240,6 +240,17 @@ class ItineraryLine extends React.Component {
 export default createFragmentContainer(ItineraryLine, {
   legs: graphql`
     fragment ItineraryLine_legs on Leg @relay(plural: true) {
+      fareProducts {
+        id
+        product {
+          id
+          ... on DefaultFareProduct {
+            price {
+              amount
+            }
+          }
+        }
+      }
       mode
       rentedBike
       startTime

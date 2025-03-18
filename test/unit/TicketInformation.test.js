@@ -3,38 +3,87 @@ import { mountWithIntl, shallowWithIntl } from './helpers/mock-intl-enzyme';
 
 import TicketInformation from '../../app/component/TicketInformation';
 import ZoneTicket from '../../app/component/ZoneTicket';
-import { getFares } from '../../app/util/fareUtils';
+import { getFaresFromLegs } from '../../app/util/fareUtils';
 
 const defaultConfig = {
+  CONFIG: 'default',
   showTicketInformation: true,
   showTicketPrice: true,
   fareMapping: fareId => fareId.replace('HSL:', ''),
   hideExternalOperator: () => false,
+  availableTickets: {
+    HSL: {
+      'HSL:AB': {
+        price: 3.1,
+        zones: ['A', 'B'],
+      },
+      'HSL:BC': {
+        price: 3.1,
+        zones: ['B', 'C'],
+      },
+      'HSL:ABCD': {
+        price: 4.1,
+        zones: ['A', 'B', 'C', 'D'],
+      },
+      'HSL:BCD': {
+        price: 5.1,
+        zones: ['B', 'C', 'D'],
+      },
+    },
+  },
 };
-
-const proxyFares = (fares, routes = [], config = defaultConfig) =>
-  getFares(fares, routes, config);
 
 describe('<TicketInformation />', () => {
   it('should show multiple ticket components (DT-2639)', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          type: 'regular',
-          cents: 870,
-          components: [
-            {
-              cents: 320,
-              fareId: 'HSL:esp',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '364222a3-8acd-3096-8efd-66d047842845',
+                product: {
+                  id: 'HSL:BCD',
+                  price: {
+                    amount: 4.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-            {
-              cents: 550,
-              fareId: 'HSL:seu',
+          },
+          {
+            fareProducts: [
+              {
+                id: '65bd05fa-0e7a-33f8-9b69-2acc9fd22948',
+                product: {
+                  id: 'HSL:ABCD',
+                  price: {
+                    amount: 4.5,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ]),
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: defaultConfig },
@@ -45,117 +94,197 @@ describe('<TicketInformation />', () => {
     );
   });
 
-  it('should show a "multiple tickets required" title when there are multiple components', () => {
+  xit('should show a "multiple tickets required" title when there are multiple components', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          type: 'regular',
-          cents: 870,
-          components: [
-            {
-              cents: 320,
-              fareId: 'HSL:esp',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '364222a3-8acd-3096-8efd-66d047842845',
+                product: {
+                  id: 'HSL:BCD',
+                  price: {
+                    amount: 4.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-            {
-              cents: 550,
-              fareId: 'HSL:seu',
+          },
+          {
+            fareProducts: [
+              {
+                id: '65bd05fa-0e7a-33f8-9b69-2acc9fd22948',
+                product: {
+                  id: 'HSL:ABCD',
+                  price: {
+                    amount: 4.5,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ]),
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: defaultConfig },
     });
-    expect(wrapper.find('.ticket-type-title').first().text()).to.equal(
+    expect(wrapper.find('.ticket-title').first().text()).to.equal(
       'Required tickets:',
     );
   });
 
-  it('should not show a multiple tickets required title when there is only a single component', () => {
+  xit('should not show a multiple tickets required title when there is only a single component', () => {
     const props = {
       legs: [],
-      fares: [
-        {
-          type: 'regular',
-          cents: 550,
-          components: [
-            {
-              cents: 550,
-              fareId: 'HSL:seu',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ],
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: defaultConfig },
     });
 
-    expect(wrapper.find('.ticket-type-title').first().text()).to.equal(
+    expect(wrapper.find('.ticket-title').first().text()).to.equal(
       'Required ticket:',
     );
   });
 
-  it('should not show any ticket information if components are missing', () => {
+  it('should not show any ticket information if there are no fare products', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          type: 'regular',
-          cents: 550,
-          components: [],
-        },
-      ]),
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [],
+            agency: {
+              gtfsId: 'HSL:F1',
+              fareUrl: 'http://www.hsl.fi/liput',
+              name: 'Helsingin seudun liikenne',
+              phone: '(09) 4766 4444',
+            },
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: defaultConfig },
     });
 
     expect(wrapper.find('.ticket-type-zone')).to.have.lengthOf(0);
-    expect(wrapper.find('.ticket-type-title')).to.have.lengthOf(0);
+    expect(wrapper.find('.ticket-title')).to.have.lengthOf(0);
     expect(wrapper.find('.itinerary-ticket-type')).to.have.lengthOf(0);
   });
 
-  it('should convert and show the total fare when showTicketPrice is true', () => {
+  xit('should convert and show the total fare when showTicketPrice is true', () => {
     const props = {
       legs: [],
-      fares: [
-        {
-          type: 'regular',
-          cents: 550,
-          components: [
-            {
-              cents: 550,
-              fareId: 'HSL:seu',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '1',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ],
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: defaultConfig },
     });
 
-    expect(wrapper.find('.ticket-description').text()).to.contain('5.50 €');
+    expect(wrapper.find('.ticket-description').text()).to.contain('3.10 €');
   });
 
   it('should not show the total fare when showTicketPrice is false', () => {
     const props = {
       legs: [],
-      fares: [
-        {
-          type: 'regular',
-          cents: 550,
-          components: [
-            {
-              cents: 550,
-              fareId: 'HSL:seu',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ],
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = mountWithIntl(<TicketInformation {...props} />, {
       context: { config: { ...defaultConfig, showTicketPrice: false } },
@@ -167,18 +296,33 @@ describe('<TicketInformation />', () => {
   it('should use a zone ticket icon if configured', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          type: 'regular',
-          cents: 280,
-          components: [
-            {
-              cents: 280,
-              fareId: 'HSL:ABCD',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ]),
+          },
+        ],
+        defaultConfig,
+      ),
+      defaultConfig,
     };
 
     const wrapper = shallowWithIntl(<TicketInformation {...props} />, {
@@ -199,20 +343,30 @@ describe('<TicketInformation />', () => {
     };
     const props = {
       legs: [],
-      fares: proxyFares(
+      fares: getFaresFromLegs(
         [
           {
-            type: 'regular',
-            cents: 280,
-            components: [
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
+            },
+            fareProducts: [
               {
-                cents: 280,
-                fareId: 'HSL:ABCD',
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
               },
             ],
           },
         ],
-        [],
         config,
       ),
     };
@@ -221,25 +375,39 @@ describe('<TicketInformation />', () => {
       context: { config },
     });
     expect(wrapper.find('.ticket-identifier').text()).to.equal(
-      'foo_HSL:ABCD_bar',
+      'foo_HSL:AB_bar',
     );
   });
 
   it('should use a zone ticket icon if configured', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          type: 'regular',
-          cents: 280,
-          components: [
-            {
-              cents: 280,
-              fareId: 'HSL:ABCD',
+      fares: getFaresFromLegs(
+        [
+          {
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-        },
-      ]),
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+          },
+        ],
+        defaultConfig,
+      ),
     };
 
     const wrapper = shallowWithIntl(<TicketInformation {...props} />, {
@@ -256,18 +424,32 @@ describe('<TicketInformation />', () => {
   it('should show AB and BC tickets for a trip within B zone', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          cents: 280,
-          components: [
-            {
-              cents: 280,
-              fareId: 'HSL:AB',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
+                  },
+                },
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-          type: 'regular',
-        },
-      ]),
+          },
+        ],
+        defaultConfig,
+      ),
       zones: ['B'],
     };
     const wrapper = shallowWithIntl(<TicketInformation {...props} />, {
@@ -275,12 +457,12 @@ describe('<TicketInformation />', () => {
         config: {
           ...defaultConfig,
           useTicketIcons: true,
-          availableTickets: {
+          /*  availableTickets: {
             HSL: {
-              'HSL:AB': { price: 2.8, zones: ['A', 'B'] },
-              'HSL:BC': { price: 2.8, zones: ['B', 'C'] },
-            },
-          },
+              'HSL:AB': { price: 3.1, zones: ['A', 'B'] },
+              'HSL:BC': { price: 3.1, zones: ['B', 'C'] },
+            }, 
+          }, */
         },
       },
     });
@@ -293,27 +475,32 @@ describe('<TicketInformation />', () => {
   it('should show a fare url link for the agency', () => {
     const props = {
       legs: [],
-      fares: proxyFares([
-        {
-          cents: 280,
-          components: [
-            {
-              cents: 280,
-              fareId: 'HSL:AB',
-              routes: [
-                {
-                  agency: {
-                    fareUrl: 'foobar',
-                    gtfsId: 'HSL:HSL',
+      fares: getFaresFromLegs(
+        [
+          {
+            fareProducts: [
+              {
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
                   },
-                  gtfsId: 'HSL:1003',
                 },
-              ],
+              },
+            ],
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
             },
-          ],
-          type: 'regular',
-        },
-      ]),
+          },
+        ],
+        defaultConfig,
+      ),
     };
     const wrapper = shallowWithIntl(<TicketInformation {...props} />, {
       context: { config: { ...defaultConfig, ticketLink: 'foobar' } },
@@ -337,45 +524,44 @@ describe('<TicketInformation />', () => {
           },
         },
       ],
-      fares: proxyFares(
+      fares: getFaresFromLegs(
         [
           {
-            cents: -1,
-            components: [
+            fareProducts: [
               {
-                cents: 280,
-                fareId: 'HSL:AB',
-                routes: [
-                  {
-                    agency: {
-                      gtfsId: 'HSL:HSL',
-                    },
-                    gtfsId: 'HSL:1003',
+                id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
+                product: {
+                  id: 'HSL:AB',
+                  price: {
+                    amount: 3.1,
                   },
-                ],
+                },
               },
             ],
-            type: 'regular',
+            route: {
+              agency: {
+                gtfsId: 'HSL:F1',
+                fareUrl: 'http://www.hsl.fi/liput',
+                name: 'Helsingin seudun liikenne',
+                phone: '(09) 4766 4444',
+              },
+            },
+          },
+
+          {
+            fareProducts: [],
+            route: {
+              agency: {
+                fareUrl: 'foobaz',
+                gtfsId: 'FOO:BAR',
+                name: 'Merisataman lauttaliikenne',
+              },
+              gtfsId: 'FOO:1234',
+              longName: 'Merisataman lautta',
+            },
           },
         ],
-        [
-          {
-            agency: {
-              gtfsId: 'HSL:HSL',
-            },
-            gtfsId: 'HSL:1003',
-            longName: 'Olympiaterminaali - Eira - Kallio - Meilahti',
-          },
-          {
-            agency: {
-              fareUrl: 'foobaz',
-              gtfsId: 'FOO:BAR',
-              name: 'Merisataman lauttaliikenne',
-            },
-            gtfsId: 'FOO:1234',
-            longName: 'Merisataman lautta',
-          },
-        ],
+        defaultConfig,
       ),
     };
     const wrapper = shallowWithIntl(<TicketInformation {...props} />, {

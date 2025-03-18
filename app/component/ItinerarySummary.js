@@ -5,21 +5,17 @@ import Duration from './Duration';
 import WalkDistance from './WalkDistance';
 import SecondaryButton from './SecondaryButton';
 import TicketInformation from './TicketInformation.okc';
+import { getFaresFromLegs } from '../util/fareUtils';
 
-const ItinerarySummary = ({
-  itinerary,
-  walking,
-  biking,
-  driving,
-  futureText,
-  isMultiRow,
-  isMobile,
-}) => {
+const ItinerarySummary = (
+  { itinerary, walking, biking, driving, futureText, isMultiRow, isMobile },
+  { config },
+) => {
   const printItinerary = e => {
     e.stopPropagation();
     window.print();
   };
-
+  const fares = getFaresFromLegs(itinerary.legs, config);
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -32,7 +28,7 @@ const ItinerarySummary = ({
           futureText={futureText}
           multiRow={isMultiRow}
         />
-        <TicketInformation fares={itinerary.fares} />
+        <TicketInformation fares={fares} />
       </div>
       <div className="itinerary-summary-info-row">
         {walking && walking.distance > 0 && (
@@ -98,6 +94,10 @@ ItinerarySummary.defaultTypes = {
   futureText: '',
   isMultiRow: false,
   isMobile: false,
+};
+
+ItinerarySummary.contextTypes = {
+  config: PropTypes.object.isRequired,
 };
 
 ItinerarySummary.displayName = 'ItinerarySummary';

@@ -3,7 +3,9 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const { getIntrospectionQuery } = require('graphql');
 
-const introspectionQuery = getIntrospectionQuery();
+const introspectionQuery = getIntrospectionQuery({
+  inputValueDeprecation: true,
+});
 const outputFilename = 'schema.json';
 
 fetch(

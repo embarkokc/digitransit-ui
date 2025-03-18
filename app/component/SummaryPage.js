@@ -1017,6 +1017,17 @@ class SummaryPage extends React.Component {
             ...ItineraryTab_itinerary
             ...SummaryPlanContainer_itineraries
             legs {
+              fareProducts {
+                id
+                product {
+                  id
+                  ... on DefaultFareProduct {
+                    price {
+                      amount
+                    }
+                  }
+                }
+              }
               mode
               ...ItineraryLine_legs
               transitLeg

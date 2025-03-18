@@ -9,7 +9,7 @@ const EMBARK_BASE_URL = process.env.EMBARK_BASE_URL || 'https://beta.embarkok.co
 const EMBARK_ALERTS_URL = process.env.EMBARK_ALERTS_URL;
 const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
-const API_URL = process.env.API_URL || 'https://otp.okc.leonard.io';
+const API_URL = process.env.API_URL || 'https://otp.dev.okc.leonard.io';
 const OTP_URL = process.env.OTP_URL || API_URL
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;

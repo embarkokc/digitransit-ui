@@ -568,6 +568,10 @@ TransitLeg.propTypes = {
         name: PropTypes.string,
         fareUrl: PropTypes.string,
       }),
+      fareId: PropTypes.string,
+      cents: PropTypes.number,
+      routeName: PropTypes.string,
+      ticketName: PropTypes.string,
     }),
     from: PropTypes.shape({
       stop: PropTypes.shape({

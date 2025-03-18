@@ -5,26 +5,26 @@ import Icon from './Icon';
 import { FareShape } from '../util/shapes';
 
 export default function TicketInformation({ fares }, { intl }) {
-  if (!fares || fares.length !== 1 || typeof fares[0].cents !== 'number') {
+  if (!fares || fares.length !== 1 || typeof fares[0].price !== 'number') {
     // FOR EMBARK, we assume that exactly one fare is returned.
     // Should there be more than one, we better show nothing, than
     // an unexpected partial fare
     return null;
   }
-  const fareUrl = fares?.[0]?.components?.[0]?.routes?.[0]?.agency?.fareUrl;
+  const fareUrl = fares?.[0]?.agency?.fareUrl;
 
   return (
     <span className="okc-icon-button fare--itinerary-summary">
       <Icon img="icon-icon_ticket" />
-      {fares[0].cents > 0 ? (
+      {fares[0].price > 0 ? (
         <>
           <span>
-            {intl.formatNumber(fares[0].cents / 100, {
+            {intl.formatNumber(fares[0].price, {
               style: 'currency',
               currency: 'USD',
             })}
           </span>
-          {fares[0].cents > 0 && fareUrl && <a href={fareUrl}>Buy</a>}
+          {fares[0].price > 0 && fareUrl && <a href={fareUrl}>Buy</a>}
         </>
       ) : (
         <span>free</span>

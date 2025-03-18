@@ -159,7 +159,7 @@ export function Alert(props, context) {
     'RAPID',
     'NORMAN',
     'CART',
-    'CITYLINK',
+    'EDMOND',
     'FERRY',
   ];
   const groups = new Set(
@@ -486,7 +486,7 @@ export function AlertsView(props, context) {
                   label: 'RAPID',
                 },
                 {
-                  value: 'CITYLINK',
+                  value: 'EDMOND',
                   label: 'City Link',
                 },
                 {

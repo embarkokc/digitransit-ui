@@ -181,6 +181,7 @@ body {
   min-width: 4.5em;
   justify-content: flex-end;
   height: 44px;
+  align-items: center; // fix cancelled strike-through #304
 }
 
 .timetable-note h2 {

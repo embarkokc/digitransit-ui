@@ -471,7 +471,7 @@ export function AlertsView(props, context) {
                 },
                 {
                   value: 'CART',
-                  label: 'CART',
+                  label: 'OU CART',
                 },
                 {
                   value: 'NORMAN',
@@ -487,7 +487,7 @@ export function AlertsView(props, context) {
                 },
                 {
                   value: 'EDMOND',
-                  label: 'City Link',
+                  label: 'Citylink Edmond',
                 },
                 {
                   value: 'FERRY',

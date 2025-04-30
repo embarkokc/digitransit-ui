@@ -157,7 +157,7 @@ const RouteStop = (
                 !hideDepartures &&
                 stop.stopTimesForPattern.map((st, index) => (
                   <div key={st.scheduledDeparture} className="route-stop-time">
-                    {index > 0 && <span>,</span>}
+                    {index > 0 && <span>,&nbsp;</span>}
                     {fromStopTime(st, currentTime, true, false, true)}
                   </div>
                 ))}

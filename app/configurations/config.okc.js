@@ -9,8 +9,9 @@ const EMBARK_BASE_URL = process.env.EMBARK_BASE_URL || 'https://beta.embarkok.co
 const EMBARK_ALERTS_URL = process.env.EMBARK_ALERTS_URL;
 const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
-const API_URL = process.env.API_URL || 'https://otp.dev.okc.leonard.io';
+const API_URL = process.env.API_URL || 'https://otp.prod.okc.leonard.io';
 const OTP_URL = process.env.OTP_URL || API_URL
+const MQTT_URL = process.env.MQTT_URL || 'wss://mqtt.prod.okc.leonard.io/';
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
 // eslint-disable-next-line no-template-curly-in-string
@@ -26,7 +27,7 @@ const maxLon = -97.08659510;
 import { BIKEAVL_WITHMAX } from '../util/citybikes';
 
 const realtimeOkc = require('./realtimeUtils').default.embark;
-realtimeOkc.mqtt = `wss://mqtt.okc.leonard.io/`;
+realtimeOkc.mqtt = MQTT_URL;
 
 export default configMerger(walttiConfig, {
   CONFIG,

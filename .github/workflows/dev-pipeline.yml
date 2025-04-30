@@ -104,10 +104,11 @@ jobs:
 
       - name: Run linters
         run: yarn lint
-      - name: lint SVG icons using xmllint
-        run: |
-          sudo apt install -y libxml2-utils
-          xmllint --nonet --noout static/svg-icons/*/*.svg
+      # Skip SVG linting due to (temporary?) 404 on http://azure.archive.ubuntu.com/ubuntu/pool/main/libx/libxml2/libxml2-utils_2.9.14%2bdfsg-1.3ubuntu3.2_amd64.deb 
+      #- name: lint SVG icons using xmllint
+      #  run: |
+      #    sudo apt install -y libxml2-utils
+      #    xmllint --nonet --noout static/svg-icons/*/*.svg
 
   build:
     needs: install

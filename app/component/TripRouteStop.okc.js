@@ -126,25 +126,9 @@ const TripRouteStop = (
         >
           <div className="route-stop-container">
             <div className="route-details-left-column">
-              {firstDeparture && (
-                <div
-                  key={firstDeparture.scheduledDeparture}
-                  className="route-stop-time"
-                >
-                  {!hideDepartures &&
-                    fromStopTime(
-                      firstDeparture,
-                      currentTime,
-                      true,
-                      false,
-                      true,
-                    )}
-                </div>
-              )}
-
               <StopCode code={stop.code} />
             </div>
-            <div className="route-details-right-column">
+            <div className="route-details-middle-column">
               <div className="route-details-upper-row">
                 <div className="route-details_container">
                   <div className="route-stop-name">
@@ -169,7 +153,18 @@ const TripRouteStop = (
                   </div>
                 </div>
               </div>
-              <div className="route-details-bottom-row">
+              {patternExists &&
+                stop.stopTimesForPattern[0].pickupType === 'NONE' &&
+                !last && (
+                  <div className="drop-off-container">
+                    <Icon img="icon-icon_info" color={config.colors.primary} />
+                    <FormattedMessage
+                      id="route-destination-arrives"
+                      defaultMessage="Drop-off only"
+                    />
+                  </div>
+                )}
+              <div className="route-details-right-column">
                 {firstDeparture && (
                   <div
                     key={firstDeparture.scheduledDeparture}
@@ -196,17 +191,6 @@ const TripRouteStop = (
                   </div>
                 )}
               </div>
-              {patternExists &&
-                stop.stopTimesForPattern[0].pickupType === 'NONE' &&
-                !last && (
-                  <div className="drop-off-container">
-                    <Icon img="icon-icon_info" color={config.colors.primary} />
-                    <FormattedMessage
-                      id="route-destination-arrives"
-                      defaultMessage="Drop-off only"
-                    />
-                  </div>
-                )}
             </div>
           </div>
         </Link>

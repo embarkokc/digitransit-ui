@@ -145,6 +145,9 @@ class TripStopListContainer extends React.PureComponent {
   render() {
     return (
       <>
+        <div className="tabpanel-header">
+          <span>Next departures</span>
+        </div>
         <div
           className={cx('route-stop-list', this.props.className)}
           role="tabpanel"
@@ -152,6 +155,11 @@ class TripStopListContainer extends React.PureComponent {
         >
           {this.getStops()}
         </div>
+        <div className="tabpanel-footer departure-list-legend">
+          <span>* scheduled departure times</span>
+          <span className="realtime">Realtime estimated departure times</span>
+        </div>
+
         <div className="bottom-whitespace" />
       </>
     );

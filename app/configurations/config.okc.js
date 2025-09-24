@@ -102,6 +102,7 @@ export default configMerger(walttiConfig, {
   defaultSettings: {
     bikeSpeed: 5.59,
     showBikeAndParkItineraries: false,
+    walkBoardCost: 120
   },
 
   defaultOptions: {

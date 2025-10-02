@@ -84,7 +84,7 @@ class Timetable extends React.Component {
 
   componentDidMount = () => {
     const options = getPatternsAvailableForSelection(this.props.stop);
-    const fallbackRoute = Object.values(options)[0].value;
+    const fallbackRoute = Object.values(options)[0]?.value;
     this.setState({
       showRoutes:
         this.context.match.location.query.routes?.split(',') || fallbackRoute,

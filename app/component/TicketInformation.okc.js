@@ -3,42 +3,76 @@ import React from 'react';
 import { intlShape } from 'react-intl';
 import Icon from './Icon';
 import { FareShape } from '../util/shapes';
+import { getFareRange } from '../util/fareUtils';
 
-export default function TicketInformation({ fares }, { intl }) {
-  if (!fares || fares.length !== 1 || typeof fares[0].price !== 'number') {
-    // FOR EMBARK, we assume that exactly one fare is returned.
-    // Should there be more than one, we better show nothing, than
-    // an unexpected partial fare
+function formatPrice(intl, price) {
+  return intl.formatNumber(price, {
+    style: 'currency',
+    currency: 'USD',
+  });
+}
+
+export default function TicketInformation({ fares, transitLegCount }, { intl }) {
+  if (!fares || fares.length === 0) {
     return null;
   }
-  const fareUrl = fares?.[0]?.agency?.fareUrl;
+
+  const knownFares = fares.filter(f => !f.isUnknown && typeof f.price === 'number');
+  if (knownFares.length === 0) {
+    return null;
+  }
+
+  const isMultiLeg = transitLegCount > 1;
+
+  // Single transit leg: show exact fare
+  if (!isMultiLeg && knownFares.length === 1) {
+    const fare = knownFares[0];
+    const fareUrl = fare.agency?.fareUrl;
+    return (
+      <span className="okc-icon-button fare--itinerary-summary">
+        <Icon img="icon-icon_ticket" />
+        {fare.price > 0 ? (
+          <>
+            <span>{formatPrice(intl, fare.price)}</span>
+            {fareUrl && <a href={fareUrl}>Buy</a>}
+          </>
+        ) : (
+          <span>free</span>
+        )}
+      </span>
+    );
+  }
+
+  // Multi transit leg: show fare range with note
+  const range = getFareRange(knownFares);
+  if (!range) return null;
+
+  const hasUnknown = fares.some(f => f.isUnknown);
 
   return (
-    <span className="okc-icon-button fare--itinerary-summary">
+    <span className="okc-icon-button fare--itinerary-summary fare--multi-leg">
       <Icon img="icon-icon_ticket" />
-      {fares[0].price > 0 ? (
-        <>
-          <span>
-            {intl.formatNumber(fares[0].price, {
-              style: 'currency',
-              currency: 'USD',
-            })}
-          </span>
-          {fares[0].price > 0 && fareUrl && <a href={fareUrl}>Buy</a>}
-        </>
-      ) : (
-        <span>free</span>
-      )}
+      <span className="fare-range">
+        {range.min === range.max
+          ? formatPrice(intl, range.min)
+          : `${formatPrice(intl, range.min)} – ${formatPrice(intl, range.max)}`}
+        {hasUnknown && '+'}
+      </span>
+      <span className="fare-details-note">
+        See legs for fare details
+      </span>
     </span>
   );
 }
 
 TicketInformation.propTypes = {
   fares: PropTypes.arrayOf(FareShape),
+  transitLegCount: PropTypes.number,
 };
 
 TicketInformation.defaultProps = {
   fares: [],
+  transitLegCount: 1,
 };
 
 TicketInformation.contextTypes = {

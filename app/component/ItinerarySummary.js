@@ -5,7 +5,7 @@ import Duration from './Duration';
 import WalkDistance from './WalkDistance';
 import SecondaryButton from './SecondaryButton';
 import TicketInformation from './TicketInformation.okc';
-import { getFaresFromLegs } from '../util/fareUtils';
+import { getFaresFromLegs, getTransitLegCount } from '../util/fareUtils';
 
 const ItinerarySummary = (
   { itinerary, walking, biking, driving, futureText, isMultiRow, isMobile },
@@ -16,6 +16,7 @@ const ItinerarySummary = (
     window.print();
   };
   const fares = getFaresFromLegs(itinerary.legs, config);
+  const transitLegCount = getTransitLegCount(itinerary.legs);
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -28,7 +29,7 @@ const ItinerarySummary = (
           futureText={futureText}
           multiRow={isMultiRow}
         />
-        <TicketInformation fares={fares} />
+        <TicketInformation fares={fares} transitLegCount={transitLegCount} />
       </div>
       <div className="itinerary-summary-info-row">
         {walking && walking.distance > 0 && (

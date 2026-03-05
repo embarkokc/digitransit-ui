@@ -35,18 +35,42 @@ export const getFaresFromLegs = (legs, config) => {
       .flat();
   }
 
+  // Reduced/concession fare category IDs to exclude (adult fares only)
+  const reducedCategoryPatterns = /reduced|concession|child|senior|student|youth|disabled/i;
+
   const filteredLegs = legs.map(leg => {
     if (!leg.fareProducts || leg.fareProducts.length === 0) {
       return { ...leg, fareProducts: [] };
     }
-    return {
-      ...leg,
-      fareProducts: shouldFilter
-        ? leg.fareProducts.filter(fp =>
-            availableTickets.includes(fp.product.id),
-          )
-        : leg.fareProducts,
-    };
+
+    let products = leg.fareProducts;
+
+    // Filter by availableTickets if configured
+    if (shouldFilter) {
+      products = products.filter(fp =>
+        availableTickets.includes(fp.product.id),
+      );
+    }
+
+    // Filter out reduced/concession fares — show adult fares only.
+    // Only filter if riderCategory data is present on any product.
+    const hasRiderCategories = products.some(
+      fp => fp.product.riderCategory,
+    );
+    if (hasRiderCategories) {
+      products = products.filter(fp => {
+        const cat = fp.product.riderCategory;
+        if (!cat) return true;
+        const catId = cat.id || '';
+        const catName = cat.name || '';
+        return (
+          !reducedCategoryPatterns.test(catId) &&
+          !reducedCategoryPatterns.test(catName)
+        );
+      });
+    }
+
+    return { ...leg, fareProducts: products };
   });
 
   // Deduplicate fare products across legs using FareProductUse.id.

@@ -3,7 +3,6 @@ import React from 'react';
 import { intlShape } from 'react-intl';
 import Icon from './Icon';
 import { FareShape } from '../util/shapes';
-import { getFareRange } from '../util/fareUtils';
 
 function formatPrice(intl, price) {
   return intl.formatNumber(price, {
@@ -12,12 +11,17 @@ function formatPrice(intl, price) {
   });
 }
 
-export default function TicketInformation({ fares, transitLegCount }, { intl }) {
+export default function TicketInformation(
+  { fares, transitLegCount },
+  { intl },
+) {
   if (!fares || fares.length === 0) {
     return null;
   }
 
-  const knownFares = fares.filter(f => !f.isUnknown && typeof f.price === 'number');
+  const knownFares = fares.filter(
+    f => !f.isUnknown && typeof f.price === 'number',
+  );
   if (knownFares.length === 0) {
     return null;
   }
@@ -43,24 +47,18 @@ export default function TicketInformation({ fares, transitLegCount }, { intl }) 
     );
   }
 
-  // Multi transit leg: show fare range with note
-  const range = getFareRange(knownFares);
-  if (!range) return null;
-
+  // Multi transit leg: show combined total fare
+  const totalFare = knownFares.reduce((sum, f) => sum + f.price, 0);
   const hasUnknown = fares.some(f => f.isUnknown);
 
   return (
     <span className="okc-icon-button fare--itinerary-summary fare--multi-leg">
       <Icon img="icon-icon_ticket" />
       <span className="fare-range">
-        {range.min === range.max
-          ? formatPrice(intl, range.min)
-          : `${formatPrice(intl, range.min)} – ${formatPrice(intl, range.max)}`}
+        {formatPrice(intl, totalFare)}
         {hasUnknown && '+'}
       </span>
-      <span className="fare-details-note">
-        See legs for fare details
-      </span>
+      <span className="fare-details-note">See legs for fare details</span>
     </span>
   );
 }

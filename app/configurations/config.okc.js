@@ -112,14 +112,17 @@ export default configMerger(walttiConfig, {
 
   realtime: { embark: realtimeOkc },
 
-  // do not show classic DT TicketInformation, as OKC has it's one
+  // do not show classic DT TicketInformation, as OKC has its own
   showTicketInformation: false,
   useTicketIcons: false,
+  fareDisplayCurrency: 'USD',
 
   fareMapping: function mapFareId(fareId) {
     return fareId;
   },
 
+  // Empty availableTickets: fareUtils will skip filtering and show
+  // all fare products returned by OTP (supports both Fares V1 and V2)
   availableTickets: {
     embark: {}
   },

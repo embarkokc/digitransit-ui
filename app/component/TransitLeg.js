@@ -31,7 +31,7 @@ import {
   getHeadsignFromRouteLongName,
   getStopHeadsignFromStoptimes,
 } from '../util/legUtils';
-import { shouldShowFareInfo } from '../util/fareUtils';
+import { shouldShowFareInfo, getTransitLegCount } from '../util/fareUtils';
 import { AlertSeverityLevelType } from '../constants';
 import ZoneIcon from './ZoneIcon';
 import StopInfo from './StopInfo';
@@ -542,6 +542,24 @@ class TransitLeg extends React.Component {
               </div>
             </div>
           )}
+          {leg.fare && !leg.fare.isUnknown && typeof leg.fare.price === 'number' && (
+            <div className="fare-information__leg">
+              <div className="fare-leg-price">
+                {intl.formatNumber(leg.fare.price, {
+                  style: 'currency',
+                  currency: config.fareDisplayCurrency || 'USD',
+                })}
+              </div>
+              {leg.fare.agency && leg.fare.agency.fareUrl && (
+                <ExternalLink
+                  className="fare-leg-link"
+                  href={leg.fare.agency.fareUrl}
+                >
+                  {intl.formatMessage({ id: 'extra-info' })}
+                </ExternalLink>
+              )}
+            </div>
+          )}
         </div>
         <span className="sr-only">{alertSeverityDescription}</span>
       </div>
@@ -570,6 +588,7 @@ TransitLeg.propTypes = {
       }),
       fareId: PropTypes.string,
       cents: PropTypes.number,
+      price: PropTypes.number,
       routeName: PropTypes.string,
       ticketName: PropTypes.string,
     }),

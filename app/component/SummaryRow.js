@@ -28,6 +28,7 @@ import {
   getCitybikeCapacity,
 } from '../util/citybikes';
 import { getRouteMode } from '../util/modeUtils';
+import { getFaresFromLegs } from '../util/fareUtils';
 
 const Leg = ({
   mode,
@@ -235,6 +236,15 @@ const SummaryRow = (
   const startTime = moment(data.startTime);
   const endTime = moment(data.endTime);
   const duration = endTime.diff(startTime);
+
+  const fares = getFaresFromLegs(data.legs, config);
+  const knownFares = fares
+    ? fares.filter(f => !f.isUnknown && typeof f.price === 'number')
+    : [];
+  const totalFare =
+    knownFares.length > 0
+      ? knownFares.reduce((sum, f) => sum + f.price, 0)
+      : null;
 
   const mobile = bp => !(bp === 'large');
   const legs = [];
@@ -778,6 +788,15 @@ const SummaryRow = (
                   <Icon img="icon-icon_point-to-point" />
                   <RelativeDuration duration={duration} />
                 </div>
+                {totalFare !== null && (
+                  <div className="itinerary-fare">
+                    <Icon img="icon-icon_ticket" />
+                    {intl.formatNumber(totalFare, {
+                      style: 'currency',
+                      currency: config.fareDisplayCurrency || 'USD',
+                    })}
+                  </div>
+                )}
               </div>
               <div
                 className="legs-container"

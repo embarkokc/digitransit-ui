@@ -558,6 +558,21 @@ nav.top-bar + section.content {
      .itinerary-start-date {
       float: right;
      }
+     .itinerary-fare {
+      float: left;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: 12px;
+      font-size: $font-size-xsmall;
+      color: $gray;
+
+      .icon-container {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+     }
    }
 }
 

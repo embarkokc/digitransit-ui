@@ -38,7 +38,9 @@ export const FareShape = PropTypes.shape({
   }),
   fareId: PropTypes.string,
   cents: PropTypes.number,
+  price: PropTypes.number,
   isUnknown: PropTypes.bool,
+  routeGtfsId: PropTypes.string,
   routeName: PropTypes.string,
   ticketName: PropTypes.string,
 });

@@ -1173,8 +1173,17 @@ div.origin-popup {
   font-size: $font-size-small;
 
   .fare-leg-price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-weight: $font-weight-bold;
     color: $black;
+
+    .fare-leg-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
   }
 
   .fare-leg-link {

@@ -357,9 +357,14 @@ const withRelay = createFragmentContainer(
             id
             product {
               id
+              name
               ... on DefaultFareProduct {
                 price {
                   amount
+                }
+                riderCategory {
+                  id
+                  name
                 }
               }
             }

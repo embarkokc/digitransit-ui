@@ -5,38 +5,81 @@ export function formatFare(fare) {
   return `${fare.price.toFixed(2)} $`;
 }
 
+/**
+ * Checks if availableTickets config has any actual ticket entries.
+ * Returns true if the config has ticket data to filter against.
+ */
+const hasAvailableTickets = config => {
+  if (!config.availableTickets) return false;
+  const tickets = Object.values(config.availableTickets)
+    .map(r => Object.keys(r))
+    .flat();
+  return tickets.length > 0;
+};
+
 export const getFaresFromLegs = (legs, config) => {
   if (
     !Array.isArray(legs) ||
-    legs.size === 0
-    // OKC shows it's onw fare calculation. We want it calculatedes nevertheless
-    // || !config.showTicketInformation
+    legs.length === 0
   ) {
     return null;
   }
-  const availableTickets = Object.values(config.availableTickets)
-    .map(r => Object.keys(r))
-    .flat();
-  const filteredLegs = legs.map(leg => ({
-    ...leg,
-    fareProducts: leg.fareProducts.filter(fp =>
-      availableTickets.includes(fp.product.id),
-    ),
-  }));
 
-  const knownFareLegs = uniqBy(
-    filteredLegs.filter(l => l.fareProducts.length > 0),
-    'fareProducts[0].id',
-  ).map(leg => ({
-    fareProducts: leg.fareProducts,
-    agency: leg.route.agency,
-    price: leg.fareProducts[0].product.price.amount,
-    ticketName:
-      // E2E-testing does not work without this check
-      (config.NODE_ENV === 'test' &&
-        leg.fareProducts[0].product.id.split(':')[1]) ||
-      config.fareMapping(leg.fareProducts[0].product.id),
-  }));
+  // If availableTickets has entries, filter fare products against them.
+  // If empty (e.g. OKC), skip filtering and show all fare products from OTP.
+  const shouldFilter = hasAvailableTickets(config);
+  let availableTickets = [];
+  if (shouldFilter) {
+    availableTickets = Object.values(config.availableTickets)
+      .map(r => Object.keys(r))
+      .flat();
+  }
+
+  const filteredLegs = legs.map(leg => {
+    if (!leg.fareProducts || leg.fareProducts.length === 0) {
+      return { ...leg, fareProducts: [] };
+    }
+    return {
+      ...leg,
+      fareProducts: shouldFilter
+        ? leg.fareProducts.filter(fp =>
+            availableTickets.includes(fp.product.id),
+          )
+        : leg.fareProducts,
+    };
+  });
+
+  // Deduplicate fare products across legs using FareProductUse.id.
+  // In OTP2 Fares V2, a fare product covering multiple legs (e.g. day pass)
+  // gets the same FareProductUse.id on each leg — we count it only once.
+  const seenFareProductUseIds = new Set();
+
+  const knownFareLegs = filteredLegs
+    .filter(l => l.fareProducts.length > 0 && l.route)
+    .map(leg => {
+      // Pick the first fare product that hasn't been seen yet (dedup)
+      const uniqueProducts = leg.fareProducts.filter(fp => {
+        if (seenFareProductUseIds.has(fp.id)) return false;
+        seenFareProductUseIds.add(fp.id);
+        return true;
+      });
+
+      if (uniqueProducts.length === 0) return null;
+
+      const primaryProduct = uniqueProducts[0];
+      return {
+        fareProducts: uniqueProducts,
+        agency: leg.route.agency,
+        price: primaryProduct.product.price.amount,
+        ticketName:
+          (config.NODE_ENV === 'test' &&
+            primaryProduct.product.id.split(':')[1]) ||
+          config.fareMapping(primaryProduct.product.id),
+        routeGtfsId: leg.route.gtfsId,
+        routeName: leg.route.shortName || leg.route.longName,
+      };
+    })
+    .filter(Boolean);
 
   // Legs that have empty fares but still have a route, i.e. transit legs
   const unknownFareLegs = filteredLegs
@@ -49,9 +92,31 @@ export const getFaresFromLegs = (legs, config) => {
       },
       isUnknown: true,
       routeGtfsId: leg.route.gtfsId,
-      routeName: leg.route.longName,
+      routeName: leg.route.shortName || leg.route.longName,
     }));
   return [...knownFareLegs, ...unknownFareLegs];
+};
+
+/**
+ * Returns the number of transit legs (legs with a route) in an itinerary.
+ */
+export const getTransitLegCount = legs => {
+  if (!Array.isArray(legs)) return 0;
+  return legs.filter(l => l.route).length;
+};
+
+/**
+ * Computes fare range from an array of fare objects.
+ * Returns { min, max } or null if no valid prices.
+ */
+export const getFareRange = fares => {
+  if (!fares || fares.length === 0) return null;
+  const prices = fares.filter(f => !f.isUnknown && typeof f.price === 'number').map(f => f.price);
+  if (prices.length === 0) return null;
+  return {
+    min: Math.min(...prices),
+    max: Math.max(...prices),
+  };
 };
 
 /**

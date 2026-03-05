@@ -1146,6 +1146,41 @@ div.origin-popup {
 
 .fare--itinerary-summary {
   font-size: 21px;
+
+  &.fare--multi-leg {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .fare-range {
+      font-weight: $font-weight-bold;
+    }
+
+    .fare-details-note {
+      font-size: $font-size-xxsmall;
+      color: $gray;
+      font-weight: $font-weight-normal;
+    }
+  }
+}
+
+.fare-information__leg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: $padding-medium;
+  padding: 8px 0;
+  font-size: $font-size-small;
+
+  .fare-leg-price {
+    font-weight: $font-weight-bold;
+    color: $black;
+  }
+
+  .fare-leg-link {
+    color: $primary-color;
+    font-size: $font-size-xxsmall;
+  }
 }
 
 .vehicle-number {

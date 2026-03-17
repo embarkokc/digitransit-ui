@@ -351,12 +351,29 @@ const containerComponent = createFragmentContainer(
           rentedBike
           interlineWithPreviousLeg
           intermediatePlace
+          fareProducts {
+            id
+            product {
+              id
+              name
+              ... on DefaultFareProduct {
+                price {
+                  amount
+                }
+                riderCategory {
+                  id
+                  name
+                }
+              }
+            }
+          }
           intermediatePlaces {
             stop {
               zoneId
             }
           }
           route {
+            gtfsId
             mode
             shortName
             type

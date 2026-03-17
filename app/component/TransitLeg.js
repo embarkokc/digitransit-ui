@@ -554,12 +554,15 @@ class TransitLeg extends React.Component {
                   })}
                 </div>
                 {leg.fare.agency && leg.fare.agency.fareUrl && (
-                  <ExternalLink
+                  <a
                     className="fare-leg-link"
                     href={leg.fare.agency.fareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
                   >
                     {intl.formatMessage({ id: 'extra-info' })}
-                  </ExternalLink>
+                  </a>
                 )}
               </div>
             )}

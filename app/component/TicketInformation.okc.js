@@ -53,10 +53,12 @@ export default function TicketInformation(
 
   return (
     <span className="okc-icon-button fare--itinerary-summary fare--multi-leg">
-      <Icon img="icon-icon_ticket" />
-      <span className="fare-range">
-        {formatPrice(intl, totalFare)}
-        {hasUnknown && '+'}
+      <span className="fare-amount-row">
+        <Icon img="icon-icon_ticket" />
+        <span className="fare-range">
+          {formatPrice(intl, totalFare)}
+          {hasUnknown && '+'}
+        </span>
       </span>
       <span className="fare-details-note">See legs for fare details</span>
     </span>

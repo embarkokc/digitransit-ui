@@ -560,12 +560,13 @@ nav.top-bar + section.content {
      }
      .itinerary-fare {
       float: left;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 2px;
       margin-left: 12px;
       font-size: $font-size-xsmall;
       color: $gray;
+      padding-top: 0.15em;
 
       .icon-container {
         width: 14px;
@@ -1167,6 +1168,12 @@ div.origin-popup {
     align-items: flex-start;
     gap: 4px;
 
+    .fare-amount-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .fare-range {
       font-weight: $font-weight-bold;
     }
@@ -1201,9 +1208,14 @@ div.origin-popup {
     }
   }
 
-  .fare-leg-link {
+  a.fare-leg-link {
     color: $primary-color;
     font-size: $font-size-xxsmall;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -1373,6 +1385,7 @@ div.origin-popup {
 
 .itinerary-summary-info-row {
   display: flex;
+  align-items: flex-start;
   gap: 40px;
   padding-bottom: 20px;
 }

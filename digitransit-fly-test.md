@@ -10,39 +10,36 @@ This document covers how to deploy updates to the **test** environment on Fly.io
 
 The app is deployed under the **EMBARK** organization (`embark-396`) on Fly.io.
 
-## Prerequisites
-
-1. Install the Fly.io CLI: https://fly.io/docs/flyctl/install/
-2. Authenticate with Fly.io:
-   ```bash
-   fly auth login
-   ```
-3. Docker Desktop must be installed and running (used for local builds).
-4. You must be a member of the **EMBARK** organization (`embark-396`) on Fly.io. Ask the project owner to add you.
-
 ## Deploying to Test
 
-All commands are run from the root of the `digitransit-ui` repository.
+Deployments are automated via GitHub Actions. Push or merge to the `staging` branch and it will automatically build and deploy.
 
-1. **Check out the branch you want to deploy:**
+1. **Create a feature branch off `staging`, do your work, then merge back:**
    ```bash
-   git checkout <your-branch>
+   git checkout staging
+   git pull
+   git checkout -b feat/my-feature
+   # ... make changes ...
+   git push -u origin feat/my-feature
+   # Open a PR targeting `staging` on GitHub, then merge
    ```
 
-2. **Make sure Docker Desktop is running.**
+2. **The GitHub Actions workflow (`.github/workflows/deploy-staging.yml`) will automatically build and deploy to Fly.**
 
-3. **Deploy:**
+3. **Verify the deployment:**
+   - Visit https://go-test-embarkok-com.fly.dev
+   - Check the workflow status on GitHub: https://github.com/embarkokc/digitransit-ui/actions
+
+### Manual Deploy (optional)
+
+If you need to deploy locally without going through GitHub Actions:
+
+1. Install the [Fly.io CLI](https://fly.io/docs/flyctl/install/) and run `fly auth login`
+2. Install and start Docker Desktop
+3. Run:
    ```bash
    fly deploy --local-only --config fly.staging.toml
    ```
-   This builds the Docker image on your machine and pushes it to Fly. The build takes several minutes (webpack, Relay compilation, etc.).
-
-4. **Verify the deployment:**
-   - Visit https://go-test-embarkok-com.fly.dev
-   - Check the app logs if something looks wrong:
-     ```bash
-     fly logs --app go-test-embarkok-com
-     ```
 
 ## Environment Variables
 

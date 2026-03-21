@@ -14,6 +14,8 @@ The app is deployed under the **EMBARK** organization (`embark-396`) on Fly.io.
 
 Deployments are automated via GitHub Actions. Push or merge to the `staging` branch and it will automatically build and deploy.
 
+The `staging` branch includes all current work plus the Fly deployment config. Use `staging` as your base branch going forward.
+
 1. **Create a feature branch off `staging`, do your work, then merge back:**
    ```bash
    git checkout staging
@@ -53,7 +55,7 @@ To update a secret:
 fly secrets set VARIABLE_NAME="value" --app go-test-embarkok-com
 ```
 
-**Note:** Some env vars (like `MAPTILER_KEY`) are read at build time by webpack and baked into the client bundle. Changing these via `fly secrets set` requires a full redeploy (`fly deploy --local-only --config fly.staging.toml`) to take effect.
+**Note:** Some env vars (like `MAPTILER_KEY`) are read at build time by webpack and baked into the client bundle. Changing these via `fly secrets set` requires a full redeploy (push to `staging` or run `fly deploy --local-only --config fly.staging.toml`) to take effect.
 
 `CONFIG=okc` and `NODE_ENV=production` are set in `fly.staging.toml`, not as secrets.
 
@@ -81,15 +83,11 @@ Map tiles are configured in `app/configurations/config.okc.js` on the `URL.MAP` 
 ```javascript
 MAP: `https://api.maptiler.com/maps/YOUR_CUSTOM_STYLE_ID/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
 ```
-Then redeploy:
-```bash
-fly deploy --local-only --config fly.staging.toml
-```
-
-If you also need to change the MapTiler key, update the secret first:
+Then push to `staging` to trigger an automatic redeploy. If you also need to change the MapTiler key, update the Fly secret:
 ```bash
 fly secrets set MAPTILER_KEY="your-key-here" --app go-test-embarkok-com
 ```
+Then push to `staging` again to rebuild with the new key.
 
 **Important:** The MapTiler key must have `go-test-embarkok-com.fly.dev` listed in its Allowed HTTP Origins, and the key must have access to the map style being used.
 
@@ -98,6 +96,7 @@ fly secrets set MAPTILER_KEY="your-key-here" --app go-test-embarkok-com
 | File | Purpose |
 |---|---|
 | `fly.staging.toml` | Fly.io config for the test environment |
+| `.github/workflows/deploy-staging.yml` | GitHub Actions workflow for auto-deploy on push to `staging` |
 | `app/configurations/config.okc.js` | OKC theme configuration (API URLs, map tiles, branding, etc.) |
 
 ## Useful Commands

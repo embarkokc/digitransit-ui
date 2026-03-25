@@ -77,7 +77,7 @@ Current Fly secrets:
 
 Map tiles are configured in `app/configurations/config.okc.js` on the `URL.MAP` line. The tile URL is baked into the client bundle at build time, so any change requires a full redeploy.
 
-**Currently using:** MapTiler Streets v2 (`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=MAPTILER_KEY`)
+**Currently using:** Custom MapTiler style (`https://api.maptiler.com/maps/e8203d24-1fd9-4a3f-b301-4135cbc11b04/{z}/{x}/{y}@2x.png?key=MAPTILER_KEY`)
 
 **To use a custom MapTiler style:** Update the style ID in the `MAP` value in `config.okc.js`:
 ```javascript

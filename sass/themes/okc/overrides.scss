@@ -1168,6 +1168,19 @@ div.origin-popup {
     align-items: flex-start;
     gap: 4px;
 
+    .fare-summary-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-size: inherit;
+      color: inherit;
+      font-family: inherit;
+    }
+
     .fare-amount-row {
       display: flex;
       align-items: center;
@@ -1178,10 +1191,41 @@ div.origin-popup {
       font-weight: $font-weight-bold;
     }
 
-    .fare-details-note {
-      font-size: $font-size-xxsmall;
+    .fare-expand-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      transform: rotate(0deg);
+
+      &.expanded {
+        transform: rotate(90deg);
+      }
+    }
+
+    .fare-options-list {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0;
+      font-size: $font-size-small;
+      width: 100%;
+    }
+
+    .fare-option-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      gap: 12px;
+    }
+
+    .fare-option-name {
       color: $gray;
-      font-weight: $font-weight-normal;
+    }
+
+    .fare-option-price {
+      font-weight: $font-weight-bold;
+      white-space: nowrap;
     }
   }
 }

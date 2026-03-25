@@ -48,7 +48,7 @@ export const getFaresFromLegs = (legs, config) => {
     // populated by the server's ticketTypes query, so skip filtering in that case.
     if (shouldFilter) {
       const filtered = products.filter(fp =>
-        availableTickets.includes(fp.product.id),
+        availableTickets.includes(fp.product.productId),
       );
       if (filtered.length > 0) {
         products = filtered;
@@ -94,8 +94,8 @@ export const getFaresFromLegs = (legs, config) => {
         price: primaryProduct.product.price.amount,
         ticketName:
           (config.NODE_ENV === 'test' &&
-            primaryProduct.product.id.split(':')[1]) ||
-          config.fareMapping(primaryProduct.product.id),
+            primaryProduct.product.productId.split(':')[1]) ||
+          config.fareMapping(primaryProduct.product.productId),
         routeGtfsId: leg.route.gtfsId,
         routeName: leg.route.shortName || leg.route.longName,
       };
@@ -160,7 +160,7 @@ export const getAlternativeFares = (zones, currentFares, allFares) => {
   const alternativeFares = [];
   if (zones.length === 1 && currentFares.length === 1 && allFares) {
     const { fareProducts } = currentFares[0];
-    const fareId = fareProducts[0].product.id;
+    const fareId = fareProducts[0].product.productId;
     const ticketFeed = fareId.split(':')[0];
     const faresForFeed = allFares[ticketFeed];
     if (faresForFeed && faresForFeed[fareId]) {
@@ -241,7 +241,7 @@ export const getFareOptions = (legs, config) => {
         }
       }
 
-      const pid = fp.product.id;
+      const pid = fp.product.productId;
       if (!productMap.has(pid)) {
         productMap.set(pid, {
           productId: pid,

@@ -354,7 +354,7 @@ const containerComponent = createFragmentContainer(
           fareProducts {
             id
             product {
-              id
+              productId: id
               name
               ... on DefaultFareProduct {
                 price {

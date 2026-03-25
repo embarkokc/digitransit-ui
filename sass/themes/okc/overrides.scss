@@ -1230,6 +1230,103 @@ div.origin-popup {
   }
 }
 
+// Full category-based fare display (Adult + Reduced with 24h pass)
+.fare-categories-display {
+  width: 100%;
+  padding: 8px 0;
+  font-size: $font-size-small;
+}
+
+.fare-category-section {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fare-category-header {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-normal;
+  margin-bottom: 4px;
+  text-decoration: underline;
+}
+
+.fare-single-tickets {
+  margin-bottom: 4px;
+}
+
+.fare-single-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 2px 0;
+  cursor: pointer;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+.fare-single-total {
+  font-weight: $font-weight-bold;
+}
+
+.fare-single-count {
+  color: $gray;
+}
+
+.fare-rides-list {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0 0 0 8px;
+}
+
+.fare-ride-item {
+  padding: 1px 0;
+  color: $gray;
+  font-size: $font-size-xsmall;
+}
+
+.fare-pass-option {
+  padding: 2px 0;
+}
+
+.fare-pass-price {
+  font-weight: $font-weight-bold;
+}
+
+.fare-pass-name {
+  // inherit
+}
+
+.fare-pass-suggested {
+  color: $gray;
+  font-style: italic;
+}
+
+a.fare-buy-ticket-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: $primary-color;
+  font-size: $font-size-small;
+  text-decoration: none;
+  font-weight: $font-weight-bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  .fare-buy-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
 .fare-information__leg {
   display: flex;
   align-items: center;

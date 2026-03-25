@@ -8,6 +8,8 @@ import TicketInformation from './TicketInformation.okc';
 import {
   getFaresFromLegs,
   getFareOptions,
+  getFareOptionsByCategory,
+  getSingleLegFareByCategory,
   getTransitLegCount,
 } from '../util/fareUtils';
 
@@ -23,6 +25,18 @@ const ItinerarySummary = (
   const transitLegCount = getTransitLegCount(itinerary.legs);
   const fareOptions =
     transitLegCount > 1 ? getFareOptions(itinerary.legs, config) : null;
+
+  // Compute full category-based fares (Adult + Reduced with 24h pass)
+  const transitLegs = itinerary.legs.filter(
+    l => l.route && l.fareProducts && l.fareProducts.length > 0,
+  );
+  let fareCategories = null;
+  if (transitLegCount > 1) {
+    fareCategories = getFareOptionsByCategory(itinerary.legs, config);
+  } else if (transitLegs.length === 1) {
+    fareCategories = getSingleLegFareByCategory(transitLegs[0]);
+  }
+
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -39,6 +53,7 @@ const ItinerarySummary = (
           fares={fares}
           transitLegCount={transitLegCount}
           fareOptions={fareOptions}
+          fareCategories={fareCategories}
         />
       </div>
       <div className="itinerary-summary-info-row">

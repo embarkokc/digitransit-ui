@@ -281,6 +281,228 @@ export const getFareOptions = (legs, config) => {
   return options;
 };
 
+/**
+ * Computes fare options grouped by rider category for the V2 fare display.
+ * Returns an array of categories, each containing single-ticket and pass options.
+ *
+ * Each category: {
+ *   categoryName: string (e.g. "Adult universal"),
+ *   singleTickets: { totalPrice, count, rides: [{ name, price }] },
+ *   passes: [{ name, productId, price, isPass: true }],
+ *   fareUrl: string|null
+ * }
+ */
+export const getFareOptionsByCategory = (legs, config) => {
+  if (!Array.isArray(legs) || legs.length === 0 || !config) {
+    return [];
+  }
+
+  const transitLegs = legs.filter(
+    l => l.route && l.fareProducts && l.fareProducts.length > 0,
+  );
+  if (transitLegs.length === 0) {
+    return [];
+  }
+
+  // Collect all fare products grouped by riderCategory + productId
+  // Key: "categoryName::productId"
+  const categoryProductMap = new Map();
+  // Track fareUrl from agency
+  let fareUrl = null;
+
+  transitLegs.forEach((leg, legIndex) => {
+    if (!fareUrl && leg.route && leg.route.agency && leg.route.agency.fareUrl) {
+      fareUrl = leg.route.agency.fareUrl;
+    }
+
+    const seenOnThisLeg = new Set();
+    leg.fareProducts.forEach(fp => {
+      const catName = fp.product.riderCategory
+        ? fp.product.riderCategory.name
+        : 'General';
+      const pid = fp.product.productId;
+      const key = `${catName}::${pid}`;
+
+      if (!categoryProductMap.has(key)) {
+        categoryProductMap.set(key, {
+          categoryName: catName,
+          productId: pid,
+          name: fp.product.name,
+          unitPrice: fp.product.price.amount,
+          useIds: new Set(),
+          legIndices: new Set(),
+        });
+      }
+      const entry = categoryProductMap.get(key);
+      entry.useIds.add(fp.id);
+      if (!seenOnThisLeg.has(key)) {
+        seenOnThisLeg.add(key);
+        entry.legIndices.add(legIndex);
+      }
+    });
+  });
+
+  // Group by category
+  const categoriesMap = new Map();
+  categoryProductMap.forEach(entry => {
+    if (!categoriesMap.has(entry.categoryName)) {
+      categoriesMap.set(entry.categoryName, []);
+    }
+    categoriesMap.get(entry.categoryName).push(entry);
+  });
+
+  // Build structured result per category
+  const result = [];
+  categoriesMap.forEach((products, categoryName) => {
+    const singleRides = [];
+    const passes = [];
+
+    products.forEach(entry => {
+      const isPass = entry.useIds.size < entry.legIndices.size;
+      const count = isPass ? entry.useIds.size : entry.legIndices.size;
+
+      if (isPass) {
+        passes.push({
+          name: entry.name,
+          productId: entry.productId,
+          price: entry.unitPrice * count,
+          isPass: true,
+        });
+      } else {
+        // Single ride: one entry per leg it appears on
+        for (let i = 0; i < count; i++) {
+          singleRides.push({
+            name: entry.name,
+            price: entry.unitPrice,
+          });
+        }
+      }
+    });
+
+    const singleTicketTotal = singleRides.reduce((s, r) => s + r.price, 0);
+
+    result.push({
+      categoryName,
+      singleTickets:
+        singleRides.length > 0
+          ? {
+              totalPrice: singleTicketTotal,
+              count: singleRides.length,
+              rides: singleRides,
+            }
+          : null,
+      passes,
+      fareUrl,
+    });
+  });
+
+  // Sort: adult-like categories first (non-reduced), then reduced
+  const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
+  result.sort((a, b) => {
+    const aReduced = reducedPattern.test(a.categoryName);
+    const bReduced = reducedPattern.test(b.categoryName);
+    if (aReduced !== bReduced) {
+      return aReduced ? 1 : -1;
+    }
+    return 0;
+  });
+
+  return result;
+};
+
+/**
+ * Simplified version of getFareOptionsByCategory for single-leg trips.
+ * Returns the same structure but with per-category single fare + pass options.
+ */
+export const getSingleLegFareByCategory = leg => {
+  if (
+    !leg ||
+    !leg.fareProducts ||
+    leg.fareProducts.length === 0 ||
+    !leg.route
+  ) {
+    return [];
+  }
+
+  let fareUrl = null;
+  if (leg.route.agency && leg.route.agency.fareUrl) {
+    fareUrl = leg.route.agency.fareUrl;
+  }
+
+  // Group products by category
+  const categoriesMap = new Map();
+  leg.fareProducts.forEach(fp => {
+    const catName = fp.product.riderCategory
+      ? fp.product.riderCategory.name
+      : 'General';
+    if (!categoriesMap.has(catName)) {
+      categoriesMap.set(catName, []);
+    }
+    categoriesMap.get(catName).push(fp);
+  });
+
+  const result = [];
+  categoriesMap.forEach((products, categoryName) => {
+    // Separate single rides from passes by productId pattern
+    const singleRides = [];
+    const passes = [];
+    const seenProductIds = new Set();
+
+    products.forEach(fp => {
+      const pid = fp.product.productId;
+      if (seenProductIds.has(pid)) {
+        return;
+      }
+      seenProductIds.add(pid);
+
+      // Passes typically contain "pass" in name or productId
+      const isLikelyPass = /pass/i.test(pid) || /pass/i.test(fp.product.name);
+      if (isLikelyPass) {
+        passes.push({
+          name: fp.product.name,
+          productId: pid,
+          price: fp.product.price.amount,
+          isPass: true,
+        });
+      } else {
+        singleRides.push({
+          name: fp.product.name,
+          price: fp.product.price.amount,
+        });
+      }
+    });
+
+    const singleTicketTotal = singleRides.reduce((s, r) => s + r.price, 0);
+
+    result.push({
+      categoryName,
+      singleTickets:
+        singleRides.length > 0
+          ? {
+              totalPrice: singleTicketTotal,
+              count: singleRides.length,
+              rides: singleRides,
+            }
+          : null,
+      passes,
+      fareUrl,
+    });
+  });
+
+  // Sort: adult first, reduced second
+  const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
+  result.sort((a, b) => {
+    const aReduced = reducedPattern.test(a.categoryName);
+    const bReduced = reducedPattern.test(b.categoryName);
+    if (aReduced !== bReduced) {
+      return aReduced ? 1 : -1;
+    }
+    return 0;
+  });
+
+  return result;
+};
+
 export const shouldShowFarePurchaseInfo = (config, breakpoint, fares) => {
   const unknownFares = fares?.some(fare => fare.isUnknown);
   // Windows phones or Huawei should only show ticket information.

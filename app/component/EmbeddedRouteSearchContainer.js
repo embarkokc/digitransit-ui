@@ -221,7 +221,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
             </li>
             <li style={{ display: 'inline-block' }}>
               <a
-                href={`/?okc-brand=${okcBrand}`}
+                href={`${config.appBarLink?.href || ''}/trip-planner`}
                 target="_top"
                 style={{ color: 'inherit', textDecoration: 'none' }}
               >

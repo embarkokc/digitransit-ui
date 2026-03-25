@@ -144,7 +144,10 @@ class TopLevel extends React.Component {
       {},
       ...this.props.match.routes.map(route => route.topBarOptions),
     );
-    if (this.props.match.location.query.embed === 'true') {
+    if (
+      this.props.match.location.query.embed === 'true' ||
+      (typeof window !== 'undefined' && window.self !== window.top)
+    ) {
       this.topBarOptions.hidden = true;
     }
     this.disableMapOnMobile = some(

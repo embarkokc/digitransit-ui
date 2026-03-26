@@ -134,20 +134,40 @@ SCSS with BEM-like naming. Base styles in `sass/base/`, theme overrides in `sass
 
 ## Deployment
 
-The app deploys to Fly.io via local Docker builds. See `digitransit-fly-test.md` for full instructions.
+See `digitransit-fly-test.md` for full instructions.
 
-| Environment | Fly App | Config File | API Backend |
+| Environment | URL | Infrastructure | Branch |
 |---|---|---|---|
-| Test | `go-test-embarkok-com` | `fly.staging.toml` | `otp.dev.okc.leonard.io` |
+| Local dev | `http://localhost:8080` | Native Node 16 + env from `.env` | `staging` |
+| Staging (Fly) | `https://go-test-embarkok-com.fly.dev` | Fly.io (`go-test-embarkok-com`) | `staging` |
+| Production (Vultr) | `https://go.embarkok.com` | Vultr server (CloudPanel) | — |
+
+**Staging deploy**: Push to `staging` → GitHub Actions (`deploy-staging.yml`) builds remotely on Fly.
+**Manual fallback**: `fly deploy --local-only --config fly.staging.toml` (requires Docker Desktop).
 
 ```bash
-# Deploy to test (Docker Desktop must be running)
-fly deploy --local-only --config fly.staging.toml
+# Local Docker build (must use amd64 on Apple Silicon)
+docker build --platform linux/amd64 --build-arg CONFIG=okc -t go-test-embarkok-com .
 ```
 
-The primary branch is `v3` (not `main`). The `feat/fares-updates` branch contains the latest third-party developer work.
+**Git workflow**: Feature branches off `staging` → PR to `staging` → merge triggers staging deploy. Merge `staging` into `v3` to deploy to production.
+**Primary branches**: `v3` (production), `staging` (staging/test).
 
-Map tiles use MapTiler Streets v2 (`MAPTILER_KEY` env var, baked in at build time).
+Map tiles use a custom MapTiler style `e8203d24-1fd9-4a3f-b301-4135cbc11b04` (`MAPTILER_KEY` env var, baked in at build time).
+
+### Local Dev Setup
+
+Digitransit does NOT use dotenv. Env vars must be exported before starting:
+```bash
+export PATH="$HOME/.nvm/versions/node/v16.20.2/bin:$PATH"
+set -a && source .env && set +a
+export CONFIG=okc
+yarn dev
+```
+
+Key local env vars (in `.env`):
+- `HOT_LOAD_PORT=9001` — avoids port 9000 conflict with DDEV's php-fpm
+- `MAPTILER_KEY` — must have `http://localhost:8080` as allowed HTTP origin in MapTiler console
 
 ## Code Style
 

@@ -113,7 +113,11 @@ class EmbeddedRouteSearchContainer extends React.Component {
 
     const StopRouteSearch = withSearchContext(DTAutoSuggest);
     const onSelectStopRoute = item => {
-      window.top.location.href = getStopRoutePath(item);
+      const path = getStopRoutePath(item);
+      const embarkBase = config.appBarLink?.href || '';
+      window.top.location.href = `${embarkBase}/trip-planner?path=${encodeURIComponent(
+        path,
+      )}`;
     };
 
     let stopAndRouteSearchTargets = ['Stops', 'Routes'];
@@ -182,7 +186,8 @@ class EmbeddedRouteSearchContainer extends React.Component {
       isMobile,
     };
 
-    const systemAlertsPath = '/alerts';
+    const embarkBaseUrl = config.appBarLink?.href || '';
+    const systemAlertsPath = `${embarkBaseUrl}/trip-planner?path=%2Falerts`;
     const container = (
       // todo: detect mobile devices using props.breakpoint?
       <div

@@ -9,13 +9,14 @@ const EMBARK_BASE_URL = process.env.EMBARK_BASE_URL || 'https://beta.embarkok.co
 const EMBARK_ALERTS_URL = process.env.EMBARK_ALERTS_URL;
 const ROOTLINK = process.env.ROOTLINK || 'https://go.embarkok.com';
 const MAPTILER_KEY = process.env.MAPTILER_KEY
+const MAPTILER_STYLE = process.env.MAPTILER_STYLE || 'e8203d24-1fd9-4a3f-b301-4135cbc11b04'
 const API_URL = process.env.API_URL || 'https://otp.prod.okc.leonard.io';
 const OTP_URL = process.env.OTP_URL || API_URL
 const MQTT_URL = process.env.MQTT_URL || 'wss://mqtt.prod.okc.leonard.io/';
 const GEOCODING_BASE_URL =
   process.env.GEOCODING_BASE_URL || `${API_URL}/geocoder`;
 // eslint-disable-next-line no-template-curly-in-string
-const OKC_SYSTEM_MAP_URL = (process.env.OKC_SYSTEM_MAP_URL || 'https://beta.embarkok.com/system-map/') + '?config=${okcBrand}';
+const OKC_SYSTEM_MAP_URL = (process.env.OKC_SYSTEM_MAP_URL || `${EMBARK_BASE_URL}/system-map/`) + '?config=${okcBrand}';
 
 const walttiConfig = require('./config.waltti').default;
 
@@ -43,7 +44,7 @@ export default configMerger(walttiConfig, {
   URL: {
     ROOTLINK: ROOTLINK,
     OTP: process.env.OTP_URL || `${API_URL}/otp/`,
-    MAP: `https://api.maptiler.com/maps/e8203d24-1fd9-4a3f-b301-4135cbc11b04/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
+    MAP: `https://api.maptiler.com/maps/${MAPTILER_STYLE}/{z}/{x}/{y}@2x.png?key=${MAPTILER_KEY}`,
     STOP_MAP: {
       default: `${API_URL}/otp/routers/default/vectorTiles/stops/`,
     },

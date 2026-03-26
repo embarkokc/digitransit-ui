@@ -82,6 +82,15 @@ class TopLevel extends React.Component {
     ).then(logo => {
       this.setState({ logo: logo.default });
     });
+
+    // Notify parent of initial route + listen for navigation commands
+    if (typeof window !== 'undefined' && window.self !== window.top) {
+      const { pathname } = this.props.match.location;
+      window.parent.postMessage(
+        { type: 'digitransit:route-change', path: pathname },
+        '*',
+      );
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -94,6 +103,15 @@ class TopLevel extends React.Component {
         event: 'Pageview',
         url: newLocation,
       });
+
+      // Notify parent frame of route change (pathname only — exclude
+      // ?embed=true&okc-brand=... which are internal iframe params)
+      if (typeof window !== 'undefined' && window.self !== window.top) {
+        window.parent.postMessage(
+          { type: 'digitransit:route-change', path: newLocation },
+          '*',
+        );
+      }
     }
 
     // send tracking calls when visiting a new stop or route

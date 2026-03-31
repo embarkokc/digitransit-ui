@@ -12,6 +12,8 @@ primary_region = 'dfw'
   PORT = '8080'
   NODE_ENV = 'production'
   CONFIG = 'okc'
+  EMBARK_BASE_URL = 'https://staging.embarkok.com'
+  ROOTLINK = 'https://go-test.embarkok.com'
 
 [http_service]
   internal_port = 8080

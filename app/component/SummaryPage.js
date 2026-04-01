@@ -1020,10 +1020,15 @@ class SummaryPage extends React.Component {
               fareProducts {
                 id
                 product {
-                  id
+                  productId: id
+                  name
                   ... on DefaultFareProduct {
                     price {
                       amount
+                    }
+                    riderCategory {
+                      id
+                      name
                     }
                   }
                 }

@@ -1,5 +1,5 @@
 .DS_Store
-.claude/settings.json
+.claude
 _static
 npm-debug.log
 node_modules
@@ -39,3 +39,4 @@ dump.rdb
 .pnp.*
 .npmrc
 .env
+.claude/conversations/

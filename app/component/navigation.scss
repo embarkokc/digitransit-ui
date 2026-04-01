@@ -308,7 +308,7 @@ $content-background-color: $background-color;
   }
   h1 {
     font-size: 1.2em;
-    margin: 0 0 0 2.5em;
+    margin: 0;
     font-weight: $font-weight-medium;
     font-family: $heading-font-family;
     &::first-letter {

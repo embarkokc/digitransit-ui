@@ -243,10 +243,15 @@ export default createFragmentContainer(ItineraryLine, {
       fareProducts {
         id
         product {
-          id
+          productId: id
+          name
           ... on DefaultFareProduct {
             price {
               amount
+            }
+            riderCategory {
+              id
+              name
             }
           }
         }

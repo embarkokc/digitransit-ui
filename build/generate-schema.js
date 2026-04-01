@@ -10,7 +10,7 @@ const outputFilename = 'schema.json';
 
 fetch(
   `${
-    process.env.SERVER_ROOT || 'https://dev-api.digitransit.fi/routing/v2'
+    process.env.SERVER_ROOT
   }/routers/hsl/gtfs/v1`,
   {
     method: 'post',

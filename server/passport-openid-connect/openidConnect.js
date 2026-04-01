@@ -18,13 +18,12 @@ export default function setUpOIDC(app, port, indexPath, hostnames) {
   const callbackPath = '/oid_callback'; // connect callback path
   const logoutCallbackPath = '/logout/callback';
   // Use Passport with OpenId Connect strategy to authenticate users
-  const OIDCHost = process.env.OIDCHOST || 'https://hslid-dev.t5.fi';
+  const OIDCHost = process.env.OIDCHOST;
   const FavouriteHost =
-    process.env.FAVOURITE_HOST || 'https://dev-api.digitransit.fi/favourites';
+    process.env.FAVOURITE_HOST;
 
   const NotificationHost =
-    process.env.NOTIFICATION_HOST ||
-    'https://test.hslfi.hsldev.com/user/api/v1/notifications';
+    process.env.NOTIFICATION_HOST;
 
   const RedisHost = process.env.REDIS_HOST || 'localhost';
   const RedisPort = process.env.REDIS_PORT || 6379;

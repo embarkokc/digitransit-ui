@@ -64,6 +64,11 @@ export default class BackButton extends React.Component {
   };
 
   render() {
+    // Hide back button when embedded in an iframe
+    if (typeof window !== 'undefined' && window.self !== window.top) {
+      return null;
+    }
+
     let url;
     if (!this.props.onBackBtnClick) {
       const { config, intl } = this.context;

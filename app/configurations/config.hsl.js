@@ -2,17 +2,17 @@
 import { BIKEAVL_WITHMAX } from '../util/citybikes';
 
 const CONFIG = 'hsl';
-const API_URL = process.env.API_URL || 'https://dev-api.digitransit.fi';
+const API_URL = process.env.API_URL;
 const OTP_URL = process.env.OTP_URL || `${API_URL}/routing/v2/routers/hsl/`;
 const MAP_URL =
-  process.env.MAP_URL || 'https://digitransit-dev-cdn-origin.azureedge.net';
+  process.env.MAP_URL;
 const POI_MAP_PREFIX = `${MAP_URL}/map/v3/hsl`;
 const APP_DESCRIPTION = 'Helsingin seudun liikenteen Reittiopas.';
 
 const HSLTimetables = require('./timetableConfigUtils').default.HSL;
 const HSLParkAndRideUtils = require('../util/ParkAndRideUtils').default.HSL;
 
-const rootLink = process.env.ROOTLINK || 'https://test.hslfi.hsldev.com';
+const rootLink = process.env.ROOTLINK;
 const BANNER_URL = 'https://content.hsl.fi/api/v1/banners?site=JourneyPlanner';
 // 'https://test-api.hslfi.hsldev.com/api/v1/banners?site=JourneyPlanner';
 

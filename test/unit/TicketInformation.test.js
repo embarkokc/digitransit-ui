@@ -44,7 +44,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '364222a3-8acd-3096-8efd-66d047842845',
                 product: {
-                  id: 'HSL:BCD',
+                  productId: 'HSL:BCD',
                   price: {
                     amount: 4.1,
                   },
@@ -65,7 +65,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '65bd05fa-0e7a-33f8-9b69-2acc9fd22948',
                 product: {
-                  id: 'HSL:ABCD',
+                  productId: 'HSL:ABCD',
                   price: {
                     amount: 4.5,
                   },
@@ -104,7 +104,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '364222a3-8acd-3096-8efd-66d047842845',
                 product: {
-                  id: 'HSL:BCD',
+                  productId: 'HSL:BCD',
                   price: {
                     amount: 4.1,
                   },
@@ -125,7 +125,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '65bd05fa-0e7a-33f8-9b69-2acc9fd22948',
                 product: {
-                  id: 'HSL:ABCD',
+                  productId: 'HSL:ABCD',
                   price: {
                     amount: 4.5,
                   },
@@ -163,7 +163,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -229,7 +229,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '1',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -266,7 +266,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -303,7 +303,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -358,7 +358,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -397,7 +397,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -431,7 +431,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -482,7 +482,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },
@@ -531,7 +531,7 @@ describe('<TicketInformation />', () => {
               {
                 id: '511c1709-3a49-3e39-88d5-7bd67f845c32',
                 product: {
-                  id: 'HSL:AB',
+                  productId: 'HSL:AB',
                   price: {
                     amount: 3.1,
                   },

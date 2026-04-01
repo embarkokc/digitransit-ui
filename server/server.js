@@ -60,6 +60,7 @@ function setUpOpenId() {
       contentSecurityPolicy: false,
       referrerPolicy: false,
       expectCt: false,
+      frameguard: false,
     }),
   );
   setUpOIDC(app, port, indexPath, hostnames);

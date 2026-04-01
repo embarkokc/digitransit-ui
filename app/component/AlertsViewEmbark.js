@@ -325,38 +325,30 @@ AlertsList.defaultProps = {
 
 // ---------------------------------------------------------------
 
-export function TravelTools() {
+// eslint-disable-next-line react/prop-types
+export function TravelTools({ baseUrl }) {
   return (
     <div className="travel-tools">
       <h2>Travel Tools</h2>
       <TravelToolRow
         icon="icon-icon_point-to-point"
-        href="https://go.embarkok.com/"
+        href={`${baseUrl}/trip-planner`}
       >
         Plan a Trip
       </TravelToolRow>
       <TravelToolRow
         icon="icon-icon_show-on-map"
-        href="https://www.embarkok.com/system-map/"
+        href={`${baseUrl}/system-map/`}
       >
         System Map
       </TravelToolRow>
-      <TravelToolRow
-        icon="icon-icon_ticket"
-        href="https://www.embarkok.com/bus/buy-passes"
-      >
+      <TravelToolRow icon="icon-icon_ticket" href={`${baseUrl}/bus/buy-passes`}>
         Buy Passes
       </TravelToolRow>
-      <TravelToolRow
-        icon="icon-icon_help"
-        href="https://www.embarkok.com/help-center"
-      >
+      <TravelToolRow icon="icon-icon_help" href={`${baseUrl}/help-center`}>
         Help Center
       </TravelToolRow>
-      <TravelToolRow
-        icon="icon-icon_account"
-        href="https://www.embarkok.com/login"
-      >
+      <TravelToolRow icon="icon-icon_account" href={`${baseUrl}/your-account`}>
         Your Account
       </TravelToolRow>
     </div>
@@ -523,9 +515,9 @@ export function AlertsView(props, context) {
             />
           </section>
         </div>
-        <TravelTools />
+        <TravelTools baseUrl={config.appBarLink?.href || ''} />
         <div className="get-service-alerts">
-          <a href="https://www.embarkok.com/create-an-account">
+          <a href={`${config.appBarLink?.href || ''}/create-an-account`}>
             <img
               className="get-service-alerts-image"
               src="/img/okc-get-service-alerts.png"

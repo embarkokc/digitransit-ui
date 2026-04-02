@@ -363,6 +363,7 @@ const containerComponent = createFragmentContainer(
                 riderCategory {
                   id
                   name
+                  isDefault
                 }
               }
             }

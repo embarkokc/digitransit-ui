@@ -247,6 +247,7 @@ export const getFareOptions = (legs, config) => {
           productId: pid,
           name: fp.product.name,
           unitPrice: fp.product.price.amount,
+          legPrices: [],
           useIds: new Set(),
           legIndices: new Set(),
         });
@@ -256,6 +257,7 @@ export const getFareOptions = (legs, config) => {
       if (!seenOnThisLeg.has(pid)) {
         seenOnThisLeg.add(pid);
         entry.legIndices.add(legIndex);
+        entry.legPrices.push(fp.product.price.amount);
       }
     });
   });
@@ -267,11 +269,15 @@ export const getFareOptions = (legs, config) => {
     // A pass has fewer unique useIds than legs it appears on
     const isPass = entry.useIds.size < entry.legIndices.size;
     const count = isPass ? entry.useIds.size : entry.legIndices.size;
+    // Use actual per-leg prices sum for single rides (prices may differ across legs)
+    const totalPrice = isPass
+      ? entry.unitPrice * count
+      : entry.legPrices.reduce((sum, p) => sum + p, 0);
     return {
       name: entry.name,
       productId: entry.productId,
       unitPrice: entry.unitPrice,
-      totalPrice: entry.unitPrice * count,
+      totalPrice,
       count,
       isPass,
     };
@@ -317,18 +323,20 @@ export const getFareOptionsByCategory = (legs, config) => {
 
     const seenOnThisLeg = new Set();
     leg.fareProducts.forEach(fp => {
-      const catName = fp.product.riderCategory
-        ? fp.product.riderCategory.name
-        : 'General';
+      const cat = fp.product.riderCategory;
+      const catName = cat ? cat.name : 'General';
+      const catIsDefault = cat ? cat.isDefault : false;
       const pid = fp.product.productId;
       const key = `${catName}::${pid}`;
 
       if (!categoryProductMap.has(key)) {
         categoryProductMap.set(key, {
           categoryName: catName,
+          isDefault: catIsDefault,
           productId: pid,
           name: fp.product.name,
           unitPrice: fp.product.price.amount,
+          legPrices: [],
           useIds: new Set(),
           legIndices: new Set(),
         });
@@ -338,17 +346,23 @@ export const getFareOptionsByCategory = (legs, config) => {
       if (!seenOnThisLeg.has(key)) {
         seenOnThisLeg.add(key);
         entry.legIndices.add(legIndex);
+        entry.legPrices.push(fp.product.price.amount);
       }
     });
   });
 
   // Group by category
   const categoriesMap = new Map();
+  const categoryDefaultFlags = new Map();
   categoryProductMap.forEach(entry => {
     if (!categoriesMap.has(entry.categoryName)) {
       categoriesMap.set(entry.categoryName, []);
+      categoryDefaultFlags.set(entry.categoryName, false);
     }
     categoriesMap.get(entry.categoryName).push(entry);
+    if (entry.isDefault) {
+      categoryDefaultFlags.set(entry.categoryName, true);
+    }
   });
 
   // Build structured result per category
@@ -359,23 +373,22 @@ export const getFareOptionsByCategory = (legs, config) => {
 
     products.forEach(entry => {
       const isPass = entry.useIds.size < entry.legIndices.size;
-      const count = isPass ? entry.useIds.size : entry.legIndices.size;
 
       if (isPass) {
         passes.push({
           name: entry.name,
           productId: entry.productId,
-          price: entry.unitPrice * count,
+          price: entry.unitPrice * entry.useIds.size,
           isPass: true,
         });
       } else {
-        // Single ride: one entry per leg it appears on
-        for (let i = 0; i < count; i++) {
+        // Single ride: use actual per-leg prices (may differ across legs)
+        entry.legPrices.forEach(legPrice => {
           singleRides.push({
             name: entry.name,
-            price: entry.unitPrice,
+            price: legPrice,
           });
-        }
+        });
       }
     });
 
@@ -383,6 +396,7 @@ export const getFareOptionsByCategory = (legs, config) => {
 
     result.push({
       categoryName,
+      isDefault: categoryDefaultFlags.get(categoryName) || false,
       singleTickets:
         singleRides.length > 0
           ? {
@@ -396,9 +410,14 @@ export const getFareOptionsByCategory = (legs, config) => {
     });
   });
 
-  // Sort: adult-like categories first (non-reduced), then reduced
+  // Sort: isDefault categories first, then non-reduced, then reduced.
+  // Falls back to non-reduced-first ordering when isDefault is not available.
   const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
   result.sort((a, b) => {
+    // isDefault takes priority
+    if (a.isDefault !== b.isDefault) {
+      return a.isDefault ? -1 : 1;
+    }
     const aReduced = reducedPattern.test(a.categoryName);
     const bReduced = reducedPattern.test(b.categoryName);
     if (aReduced !== bReduced) {
@@ -431,14 +450,18 @@ export const getSingleLegFareByCategory = leg => {
 
   // Group products by category
   const categoriesMap = new Map();
+  const categoryDefaultFlags = new Map();
   leg.fareProducts.forEach(fp => {
-    const catName = fp.product.riderCategory
-      ? fp.product.riderCategory.name
-      : 'General';
+    const cat = fp.product.riderCategory;
+    const catName = cat ? cat.name : 'General';
     if (!categoriesMap.has(catName)) {
       categoriesMap.set(catName, []);
+      categoryDefaultFlags.set(catName, false);
     }
     categoriesMap.get(catName).push(fp);
+    if (cat && cat.isDefault) {
+      categoryDefaultFlags.set(catName, true);
+    }
   });
 
   const result = [];
@@ -476,6 +499,7 @@ export const getSingleLegFareByCategory = leg => {
 
     result.push({
       categoryName,
+      isDefault: categoryDefaultFlags.get(categoryName) || false,
       singleTickets:
         singleRides.length > 0
           ? {
@@ -489,9 +513,12 @@ export const getSingleLegFareByCategory = leg => {
     });
   });
 
-  // Sort: adult first, reduced second
+  // Sort: isDefault first, then adult-like, then reduced
   const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
   result.sort((a, b) => {
+    if (a.isDefault !== b.isDefault) {
+      return a.isDefault ? -1 : 1;
+    }
     const aReduced = reducedPattern.test(a.categoryName);
     const bReduced = reducedPattern.test(b.categoryName);
     if (aReduced !== bReduced) {

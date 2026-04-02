@@ -204,7 +204,7 @@ FareSummaryToggle.defaultProps = { currency: 'USD', fareCategories: null };
  * category-based fare breakdown (Adult + Reduced, per-ride detail, 24h pass, buy link).
  */
 export default function TicketInformation(
-  { fares, transitLegCount, fareOptions, fareCategories },
+  { fares, transitLegCount, fareCategories },
   { intl, config },
 ) {
   if (!fares || fares.length === 0) {
@@ -222,11 +222,21 @@ export default function TicketInformation(
 
   const isMultiLeg = transitLegCount > 1;
 
-  // Build the toggle label
+  // Build the toggle label.
+  // For multi-leg trips, show the cheapest total trip cost from the default
+  // rider category (isDefault from the API), falling back to the first
+  // category (adult-like, sorted first by getFareOptionsByCategory).
   let label;
-  if (isMultiLeg && fareOptions && fareOptions.length > 0) {
-    const cheapest = fareOptions[0];
-    label = `From ${formatPrice(intl, cheapest.totalPrice, currency)}`;
+  if (isMultiLeg && fareCategories && fareCategories.length > 0) {
+    const defaultCategory =
+      fareCategories.find(c => c.isDefault) || fareCategories[0];
+    const prices = [];
+    if (defaultCategory.singleTickets) {
+      prices.push(defaultCategory.singleTickets.totalPrice);
+    }
+    defaultCategory.passes.forEach(p => prices.push(p.price));
+    const cheapestTotal = Math.min(...prices);
+    label = `From ${formatPrice(intl, cheapestTotal, currency)}`;
   } else if (knownFares.length === 1 && knownFares[0].price > 0) {
     label = formatPrice(intl, knownFares[0].price, currency);
   } else if (knownFares.length === 1 && knownFares[0].price === 0) {
@@ -260,21 +270,12 @@ export default function TicketInformation(
 TicketInformation.propTypes = {
   fares: PropTypes.arrayOf(FareShape),
   transitLegCount: PropTypes.number,
-  fareOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      productId: PropTypes.string,
-      totalPrice: PropTypes.number,
-      count: PropTypes.number,
-    }),
-  ),
   fareCategories: PropTypes.arrayOf(fareCategoryShape),
 };
 
 TicketInformation.defaultProps = {
   fares: [],
   transitLegCount: 1,
-  fareOptions: null,
   fareCategories: null,
 };
 

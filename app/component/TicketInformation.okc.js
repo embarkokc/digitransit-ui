@@ -102,7 +102,6 @@ class CategoryFareSection extends React.Component {
               {formatPrice(intl, pass.price, currency)}
             </span>{' '}
             <span className="fare-pass-name">{pass.name}</span>{' '}
-            <span className="fare-pass-suggested">(suggested)</span>
           </div>
         ))}
       </div>

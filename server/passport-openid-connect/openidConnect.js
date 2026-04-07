@@ -19,11 +19,9 @@ export default function setUpOIDC(app, port, indexPath, hostnames) {
   const logoutCallbackPath = '/logout/callback';
   // Use Passport with OpenId Connect strategy to authenticate users
   const OIDCHost = process.env.OIDCHOST;
-  const FavouriteHost =
-    process.env.FAVOURITE_HOST;
+  const FavouriteHost = process.env.FAVOURITE_HOST;
 
-  const NotificationHost =
-    process.env.NOTIFICATION_HOST;
+  const NotificationHost = process.env.NOTIFICATION_HOST;
 
   const RedisHost = process.env.REDIS_HOST || 'localhost';
   const RedisPort = process.env.REDIS_PORT || 6379;

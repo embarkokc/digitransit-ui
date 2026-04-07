@@ -8,21 +8,16 @@ const introspectionQuery = getIntrospectionQuery({
 });
 const outputFilename = 'schema.json';
 
-fetch(
-  `${
-    process.env.SERVER_ROOT
-  }/routers/hsl/gtfs/v1`,
-  {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: introspectionQuery,
-    }),
+fetch(`${process.env.SERVER_ROOT}/routers/hsl/gtfs/v1`, {
+  method: 'post',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
-)
+  body: JSON.stringify({
+    query: introspectionQuery,
+  }),
+})
   .then(response => {
     console.log(response.headers);
     return response.json();

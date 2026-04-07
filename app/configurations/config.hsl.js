@@ -2,10 +2,8 @@
 import { BIKEAVL_WITHMAX } from '../util/citybikes';
 
 const CONFIG = 'hsl';
-const API_URL = process.env.API_URL;
+const { API_URL, MAP_URL } = process.env;
 const OTP_URL = process.env.OTP_URL || `${API_URL}/routing/v2/routers/hsl/`;
-const MAP_URL =
-  process.env.MAP_URL;
 const POI_MAP_PREFIX = `${MAP_URL}/map/v3/hsl`;
 const APP_DESCRIPTION = 'Helsingin seudun liikenteen Reittiopas.';
 

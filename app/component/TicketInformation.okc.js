@@ -74,7 +74,7 @@ class CategoryFareSection extends React.Component {
               </span>
               <span className="fare-single-count">
                 ({singleTickets.count}{' '}
-                {singleTickets.count === 1 ? 'ticket' : 'tickets'})
+                {singleTickets.count === 1 ? 'pass' : 'passes'})
               </span>
               <Icon
                 img="icon-icon_arrow-collapse--right"
@@ -179,7 +179,7 @@ class FareSummaryToggle extends React.Component {
                 onClick={e => e.stopPropagation()}
               >
                 <Icon img="icon-icon_ticket" className="fare-buy-icon" />
-                buy ticket
+                buy pass
               </a>
             )}
           </div>

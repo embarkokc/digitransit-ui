@@ -5,7 +5,13 @@ import Duration from './Duration';
 import WalkDistance from './WalkDistance';
 import SecondaryButton from './SecondaryButton';
 import TicketInformation from './TicketInformation.okc';
-import { getFaresFromLegs } from '../util/fareUtils';
+import {
+  getFaresFromLegs,
+  getFareOptions,
+  getFareOptionsByCategory,
+  getSingleLegFareByCategory,
+  getTransitLegCount,
+} from '../util/fareUtils';
 
 const ItinerarySummary = (
   { itinerary, walking, biking, driving, futureText, isMultiRow, isMobile },
@@ -16,6 +22,21 @@ const ItinerarySummary = (
     window.print();
   };
   const fares = getFaresFromLegs(itinerary.legs, config);
+  const transitLegCount = getTransitLegCount(itinerary.legs);
+  const fareOptions =
+    transitLegCount > 1 ? getFareOptions(itinerary.legs, config) : null;
+
+  // Compute full category-based fares (Adult + Reduced with 24h pass)
+  const transitLegs = itinerary.legs.filter(
+    l => l.route && l.fareProducts && l.fareProducts.length > 0,
+  );
+  let fareCategories = null;
+  if (transitLegCount > 1) {
+    fareCategories = getFareOptionsByCategory(itinerary.legs, config);
+  } else if (transitLegs.length === 1) {
+    fareCategories = getSingleLegFareByCategory(transitLegs[0]);
+  }
+
   return (
     <div className="itinerary-summary">
       {!isMobile && <div className="divider-top" />}
@@ -28,7 +49,12 @@ const ItinerarySummary = (
           futureText={futureText}
           multiRow={isMultiRow}
         />
-        <TicketInformation fares={fares} />
+        <TicketInformation
+          fares={fares}
+          transitLegCount={transitLegCount}
+          fareOptions={fareOptions}
+          fareCategories={fareCategories}
+        />
       </div>
       <div className="itinerary-summary-info-row">
         {walking && walking.distance > 0 && (

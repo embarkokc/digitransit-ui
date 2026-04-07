@@ -26,7 +26,9 @@ describe('fareUtils', () => {
     it('should return individual tickets even if the total cost is unknown', () => {
       const fares = [
         {
-          fareProducts: [{ id: 1, product: { id: 'HSL:AB', price: '3.1' } }],
+          fareProducts: [
+            { id: 1, product: { productId: 'HSL:AB', price: '3.1' } },
+          ],
           route: { agency: {} },
         },
         { fareProducts: [], route: { agency: {} } },
@@ -42,7 +44,9 @@ describe('fareUtils', () => {
     it('should return an array containing a single fare', () => {
       const fares = [
         {
-          fareProducts: [{ id: 1, product: { id: 'HSL:AB', price: '3.1' } }],
+          fareProducts: [
+            { id: 1, product: { productId: 'HSL:AB', price: '3.1' } },
+          ],
           route: { agency: {} },
         },
       ];
@@ -56,7 +60,7 @@ describe('fareUtils', () => {
           fareProducts: [
             {
               id: '1',
-              product: { id: 'HSL:AB', price: { amount: 3.1 } },
+              product: { productId: 'HSL:AB', price: { amount: 3.1 } },
             },
           ],
           route: { agency: { id: 'HSL:HSL' } },
@@ -75,7 +79,7 @@ describe('fareUtils', () => {
           fareProducts: [
             {
               id: '1',
-              product: { id: 'HSL:AB', price: { amount: 3.1 } },
+              product: { productId: 'HSL:AB', price: { amount: 3.1 } },
             },
           ],
           route: { agency: { id: 'HSL:HSL' } },
@@ -88,7 +92,7 @@ describe('fareUtils', () => {
       expect(getFaresFromLegs(fares, config)[0].fareProducts).to.deep.equal([
         {
           id: '1',
-          product: { id: 'HSL:AB', price: { amount: 3.1 } },
+          product: { productId: 'HSL:AB', price: { amount: 3.1 } },
         },
       ]);
     });
@@ -99,7 +103,7 @@ describe('fareUtils', () => {
           fareProducts: [
             {
               id: '1',
-              product: { id: 'HSL:AB', price: { amount: 3.1 } },
+              product: { productId: 'HSL:AB', price: { amount: 3.1 } },
             },
           ],
           route: {
@@ -129,7 +133,7 @@ describe('fareUtils', () => {
         fareProducts: [
           {
             id: '1',
-            product: { id: 'HSL:AB', price: { amount: 3.1 } },
+            product: { productId: 'HSL:AB', price: { amount: 3.1 } },
           },
         ],
         route: {
@@ -212,7 +216,9 @@ describe('fareUtils', () => {
   it('should not suggest unknown tickets if the total fare is known', () => {
     const fares = [
       {
-        fareProducts: [{ id: 1, product: { id: 'HSL:AB', price: '3.1' } }],
+        fareProducts: [
+          { id: 1, product: { productId: 'HSL:AB', price: '3.1' } },
+        ],
         route: {
           agency: {
             gtfsId: 'HSL:HSL',

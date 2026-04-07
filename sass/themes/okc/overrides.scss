@@ -552,11 +552,27 @@ nav.top-bar + section.content {
      .itinerary-duration {
     float: left;
     .icon-container {
-      padding-right: 20px;
+      padding-right: 8px;
     }
      }
      .itinerary-start-date {
       float: right;
+     }
+     .itinerary-fare {
+      float: left;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 16px;
+      font-size: $font-size-small;
+      color: $black;
+      padding-top: 0;
+
+      .icon-container {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
      }
    }
 }
@@ -1146,6 +1162,202 @@ div.origin-popup {
 
 .fare--itinerary-summary {
   font-size: 21px;
+
+  &.fare--multi-leg {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .fare-summary-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-size: inherit;
+      color: inherit;
+      font-family: inherit;
+    }
+
+    .fare-amount-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fare-range {
+      font-weight: $font-weight-bold;
+    }
+
+    .fare-expand-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      transform: rotate(0deg);
+
+      &.expanded {
+        transform: rotate(90deg);
+      }
+    }
+
+    .fare-options-list {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0;
+      font-size: $font-size-small;
+      width: 100%;
+    }
+
+    .fare-option-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      gap: 12px;
+    }
+
+    .fare-option-name {
+      color: $gray;
+    }
+
+    .fare-option-price {
+      font-weight: $font-weight-bold;
+      white-space: nowrap;
+    }
+  }
+}
+
+// Full category-based fare display (Adult + Reduced with 24h pass)
+.fare-categories-display {
+  width: 100%;
+  padding: 8px 0;
+  font-size: $font-size-small;
+}
+
+.fare-category-section {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fare-category-header {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-normal;
+  margin-bottom: 4px;
+  text-decoration: underline;
+}
+
+.fare-single-tickets {
+  margin-bottom: 4px;
+}
+
+.fare-single-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 2px 0;
+  cursor: pointer;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+.fare-single-total {
+  font-weight: $font-weight-bold;
+}
+
+.fare-single-count {
+  color: $gray;
+}
+
+.fare-rides-list {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0 0 0 8px;
+}
+
+.fare-ride-item {
+  padding: 1px 0;
+  color: $gray;
+  font-size: $font-size-xsmall;
+}
+
+.fare-pass-option {
+  padding: 2px 0;
+}
+
+.fare-pass-price {
+  font-weight: $font-weight-bold;
+}
+
+.fare-pass-name {
+  // inherit
+}
+
+.fare-pass-suggested {
+  color: $gray;
+  font-style: italic;
+}
+
+a.fare-buy-ticket-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: $primary-color;
+  font-size: $font-size-small;
+  text-decoration: none;
+  font-weight: $font-weight-bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  .fare-buy-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+.fare-information__leg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: $padding-medium;
+  padding: 8px 0;
+  font-size: $font-size-small;
+
+  .fare-leg-price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: $font-weight-bold;
+    color: $black;
+
+    .fare-leg-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+  }
+
+  a.fare-leg-link {
+    color: $primary-color;
+    font-size: $font-size-xxsmall;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .vehicle-number {
@@ -1305,7 +1517,7 @@ div.origin-popup {
 .okc-icon-button {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   line-height: 1;
   .icon-container {
     height: 1em;
@@ -1314,6 +1526,7 @@ div.origin-popup {
 
 .itinerary-summary-info-row {
   display: flex;
+  align-items: flex-start;
   gap: 40px;
   padding-bottom: 20px;
 }

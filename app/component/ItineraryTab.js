@@ -8,13 +8,12 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 
 import Icon from './Icon';
-import TicketInformation from './TicketInformation';
+import TicketInformation from './TicketInformation.okc';
 import RouteInformation from './RouteInformation';
 import ItinerarySummary from './ItinerarySummary';
 import ItineraryLegs from './ItineraryLegs';
 import BackButton from './BackButton';
 import {
-  getZones,
   compressLegs,
   getTotalBikingDistance,
   getTotalBikingDuration,
@@ -26,7 +25,14 @@ import {
 } from '../util/legUtils';
 import { BreakpointConsumer } from '../util/withBreakpoint';
 
-import { getFaresFromLegs, shouldShowFareInfo } from '../util/fareUtils';
+import {
+  getFaresFromLegs,
+  getTransitLegCount,
+  getFareOptions,
+  getFareOptionsByCategory,
+  getSingleLegFareByCategory,
+  shouldShowFareInfo,
+} from '../util/fareUtils';
 import { addAnalyticsEvent } from '../util/analyticsUtils';
 import {
   isToday,
@@ -177,6 +183,18 @@ class ItineraryTab extends React.Component {
     }
 
     const fares = getFaresFromLegs(itinerary.legs, config);
+    const transitLegCount = getTransitLegCount(itinerary.legs);
+    const fareOptions =
+      transitLegCount > 1 ? getFareOptions(itinerary.legs, config) : null;
+    const transitLegs = itinerary.legs.filter(
+      l => l.route && l.fareProducts && l.fareProducts.length > 0,
+    );
+    let fareCategories = null;
+    if (transitLegCount > 1) {
+      fareCategories = getFareOptionsByCategory(itinerary.legs, config);
+    } else if (transitLegs.length === 1) {
+      fareCategories = getSingleLegFareByCategory(transitLegs[0]);
+    }
     const extraProps = this.setExtraProps(itinerary);
     const legsWithRentalBike = compressLegs(itinerary.legs).filter(leg =>
       legContainsRentalBike(leg),
@@ -272,8 +290,9 @@ class ItineraryTab extends React.Component {
             shouldShowFareInfo(config) && (
               <TicketInformation
                 fares={fares}
-                zones={getZones(itinerary.legs)}
-                legs={itinerary.legs}
+                transitLegCount={transitLegCount}
+                fareOptions={fareOptions}
+                fareCategories={fareCategories}
               />
             ),
             <div
@@ -356,10 +375,16 @@ const withRelay = createFragmentContainer(
           fareProducts {
             id
             product {
-              id
+              productId: id
+              name
               ... on DefaultFareProduct {
                 price {
                   amount
+                }
+                riderCategory {
+                  id
+                  name
+                  isDefault
                 }
               }
             }

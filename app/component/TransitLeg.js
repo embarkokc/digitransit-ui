@@ -542,6 +542,30 @@ class TransitLeg extends React.Component {
               </div>
             </div>
           )}
+          {leg.fare &&
+            !leg.fare.isUnknown &&
+            typeof leg.fare.price === 'number' && (
+              <div className="fare-information__leg">
+                <div className="fare-leg-price">
+                  <Icon img="icon-icon_ticket" className="fare-leg-icon" />
+                  {intl.formatNumber(leg.fare.price, {
+                    style: 'currency',
+                    currency: config.fareDisplayCurrency || 'USD',
+                  })}
+                </div>
+                {leg.fare.agency && leg.fare.agency.fareUrl && (
+                  <a
+                    className="fare-leg-link"
+                    href={leg.fare.agency.fareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
+                  >
+                    {intl.formatMessage({ id: 'extra-info' })}
+                  </a>
+                )}
+              </div>
+            )}
         </div>
         <span className="sr-only">{alertSeverityDescription}</span>
       </div>
@@ -570,6 +594,7 @@ TransitLeg.propTypes = {
       }),
       fareId: PropTypes.string,
       cents: PropTypes.number,
+      price: PropTypes.number,
       routeName: PropTypes.string,
       ticketName: PropTypes.string,
     }),

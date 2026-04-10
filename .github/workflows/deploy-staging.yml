@@ -11,6 +11,10 @@ on:
       - 'docs/**'
       - 'fly.production.toml'
 
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

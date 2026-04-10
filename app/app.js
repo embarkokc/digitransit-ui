@@ -1,5 +1,4 @@
 import Fluxible from 'fluxible';
-
 import routes from './routes';
 import MessageStore from './store/MessageStore';
 import OldSearchesStore from './store/OldSearchesStore';

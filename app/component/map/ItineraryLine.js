@@ -252,6 +252,7 @@ export default createFragmentContainer(ItineraryLine, {
             riderCategory {
               id
               name
+              isDefault
             }
           }
         }

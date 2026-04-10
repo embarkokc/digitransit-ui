@@ -9,6 +9,7 @@ on:
       - '.gitignore'
       - '.claude/**'
       - 'docs/**'
+      - 'fly.production.toml'
 
 jobs:
   deploy:

@@ -90,7 +90,7 @@ ENV \
   PORT=8080 \
   API_URL='' \
   MAP_URL='' \
-  OTP_URL='' \
+  # OTP_URL set via fly.toml [env], not here \
   GEOCODING_BASE_URL='' \
   APP_PATH='' \
   CONFIG=$CONFIG \

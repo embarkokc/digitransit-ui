@@ -14,6 +14,7 @@ primary_region = 'dfw'
   CONFIG = 'okc'
   EMBARK_BASE_URL = 'https://www.embarkok.com'
   ROOTLINK = 'https://go.embarkok.com'
+  OTP_URL = 'https://otp.prod.okc.leonard.io/otp/'
 
 [http_service]
   internal_port = 8080

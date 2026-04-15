@@ -14,8 +14,6 @@ primary_region = 'dfw'
   CONFIG = 'okc'
   EMBARK_BASE_URL = 'https://staging.embarkok.com'
   ROOTLINK = 'https://go-test.embarkok.com'
-  OTP_URL = 'https://otp.dev.okc.leonard.io/otp/'
-  OTP_URL_PROD = 'https://otp.prod.okc.leonard.io/otp/'
 
 [http_service]
   internal_port = 8080

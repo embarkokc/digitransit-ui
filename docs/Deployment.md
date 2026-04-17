@@ -50,12 +50,11 @@ The frontend does not talk to a database directly. It calls the OTP API for rout
 | Environment | URL | Fly App Name | Branch | API Backend |
 |---|---|---|---|---|
 | **Staging** | https://go-test.embarkok.com | `go-test-embarkok-com` | `staging` | `otp.dev.okc.leonard.io` |
-| **Production** | https://go.embarkok.com | `go-embarkok-com` | `v3` (see note) | `otp.prod.okc.leonard.io` |
+| **Production** | https://go.embarkok.com | `go-embarkok-com` | `main` | `otp.prod.okc.leonard.io` |
 | **Local dev** | http://localhost:8080 | — | any | configurable via `.env` |
 
 Both Fly apps are in the **EMBARK** organization (`embark-396`), region `dfw` (Dallas/Fort Worth).
 
-> **Branch warning:** The GitHub Actions production workflow (`deploy-production.yml`) currently triggers on the `main` branch, **not** `v3`. The `main` and `v3` branches have diverged. See [Branches and Git Workflow](#branches-and-git-workflow) for details and recommended fix.
 
 ---
 
@@ -116,8 +115,8 @@ Both Fly apps are in the **EMBARK** organization (`embark-396`), region `dfw` (D
 | Branch | Purpose | Auto-deploys to |
 |---|---|---|
 | `staging` | Active development & testing | Staging (Fly) |
-| `v3` | Production code | **None currently** (see warning below) |
-| `main` | Unclear / diverged from v3 | Production (Fly) per workflow |
+| `main` | Production code | Production (Fly) |
+| `v3` | Legacy (previous release) | — |
 | `feat/*` | Feature branches | — |
 
 ### Intended workflow
@@ -127,7 +126,7 @@ feat/my-feature ──► PR to staging ──► merge ──► auto-deploy to
                                                        │
                                             (test & verify)
                                                        │
-                                        staging ──► merge to v3 ──► deploy to production
+                                        staging ──► merge to main ──► deploy to production
 ```
 
 ### Commit message format (commitlint)
@@ -175,15 +174,7 @@ git commit -m "WIP"
 
 The type must be lowercase. The subject should not end with a period.
 
-### Known issue: `main` vs `v3` branch mismatch
-
-The production deploy workflow (`.github/workflows/deploy-production.yml`) triggers on pushes to `main`, but the intended production branch is `v3`. These two branches have **diverged** — neither is an ancestor of the other.
-
-**Impact:** Pushing to `v3` does NOT trigger a production deploy. The last production deploy would have come from a push to `main`.
-
-**Recommended fix (pick one):**
-1. Update `deploy-production.yml` to trigger on `v3` instead of `main`
-2. Or reconcile `main` and `v3` and decide on a single production branch
+> **Note:** The `v3` branch is a legacy branch from a previous release? It is should not be used for deployments.
 
 ---
 
@@ -215,7 +206,6 @@ The workflow:
 
 **Automatic:** Push to `main` triggers `.github/workflows/deploy-production.yml`.
 
-> **Remember:** `v3` pushes do NOT trigger this? See the [branch mismatch issue](#known-issue-main-vs-v3-branch-mismatch).
 
 ```
 push to main → .github/workflows/deploy-production.yml → fly deploy --config fly.production.toml
@@ -480,7 +470,9 @@ fly releases --app go-test-embarkok-com
 - Verify the `FLY_API_TOKEN` GitHub secret is valid
 
 ### Production deploy not triggering
-- The workflow triggers on `main`, **not** `v3`. See [branch mismatch issue](#known-issue-main-vs-v3-branch-mismatch).
+- Ensure you pushed to `main` (not `staging` or another branch)
+- Check GitHub Actions: https://github.com/embarkokc/digitransit-ui/actions
+- Verify the `FLY_API_TOKEN` GitHub secret is valid
 
 ### App crashes or OOM
 - Check logs: `fly logs --app <app-name>`

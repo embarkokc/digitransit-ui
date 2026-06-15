@@ -341,5 +341,13 @@ module.exports = {
       'Access-Control-Allow-Origin': '*',
     },
     overlay: true,
+    // HMR over a remote host (e.g. Tailscale). Bind WDS to 127.0.0.1 (not 0.0.0.0) so it does
+    // NOT collide with Tailscale Serve's own <tailnet-ip>:HOT_LOAD_PORT listener (0.0.0.0 would
+    // EADDRINUSE). The page-side client derives wss://<page-host>:HOT_LOAD_PORT from
+    // window.location, Tailscale proxies that to localhost, and disableHostCheck accepts the
+    // tailnet Host. Gated on HOT_LOAD_PUBLIC, so Mac/prod builds are a no-op.
+    ...(process.env.HOT_LOAD_PUBLIC
+      ? { host: '127.0.0.1', disableHostCheck: true }
+      : {}),
   },
 };

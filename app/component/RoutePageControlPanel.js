@@ -491,7 +491,7 @@ class RoutePageControlPanel extends React.Component {
               <RouteAdditionalInfos route={route} />
               {route.url ? (
                 <span className="okc-pdf-download-button okc-icon-button">
-                  <PrecheckedLink href={route.url}>
+                  <PrecheckedLink href={route.url} target="_blank">
                     <Icon img="icon-icon_download" />
                     <span>Map &amp; Schedule PDF</span>
                   </PrecheckedLink>

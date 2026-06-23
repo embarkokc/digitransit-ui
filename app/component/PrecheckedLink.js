@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * Note: in case the url references anothter host, appropriate Access-Control-Allow-Origin
  * headers need to be returned by that server.
  */
-const PrecheckedLink = ({ href, children }) => {
+const PrecheckedLink = ({ href, children, target }) => {
   const [linkVisible, setLinkVisible] = useState(true);
 
   useEffect(() => {
@@ -24,12 +24,27 @@ const PrecheckedLink = ({ href, children }) => {
       });
   }, [href]);
 
-  return linkVisible && <a href={href}>{children}</a>;
+  return (
+    linkVisible && (
+      <a
+        href={href}
+        target={target}
+        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+      >
+        {children}
+      </a>
+    )
+  );
 };
 
 PrecheckedLink.propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  target: PropTypes.string,
+};
+
+PrecheckedLink.defaultProps = {
+  target: undefined,
 };
 
 export default PrecheckedLink;

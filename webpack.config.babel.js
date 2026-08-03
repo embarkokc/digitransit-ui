@@ -343,11 +343,18 @@ module.exports = {
     overlay: true,
     // HMR over a remote host (e.g. Tailscale). Bind WDS to 127.0.0.1 (not 0.0.0.0) so it does
     // NOT collide with Tailscale Serve's own <tailnet-ip>:HOT_LOAD_PORT listener (0.0.0.0 would
-    // EADDRINUSE). The page-side client derives wss://<page-host>:HOT_LOAD_PORT from
-    // window.location, Tailscale proxies that to localhost, and disableHostCheck accepts the
-    // tailnet Host. Gated on HOT_LOAD_PUBLIC, so Mac/prod builds are a no-op.
+    // EADDRINUSE). `public` is what the injected client dials — webpack-dev-server 3 bakes that
+    // URL from `host`:`port` at injection time, so without it the client would chase the
+    // 127.0.0.1 we just bound to and never reach the browser's machine. Set it to the tailnet
+    // host:port; Tailscale proxies that back to localhost, WDS upgrades the socket to wss
+    // because the page host matches, and disableHostCheck accepts the tailnet Host header.
+    // Gated on HOT_LOAD_PUBLIC, so Mac/prod builds are a no-op.
     ...(process.env.HOT_LOAD_PUBLIC
-      ? { host: '127.0.0.1', disableHostCheck: true }
+      ? {
+          host: '127.0.0.1',
+          public: process.env.HOT_LOAD_PUBLIC,
+          disableHostCheck: true,
+        }
       : {}),
   },
 };

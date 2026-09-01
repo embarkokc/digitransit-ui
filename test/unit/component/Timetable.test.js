@@ -65,6 +65,61 @@ describe('<Timetable />', () => {
     );
   });
 
+  it('should not render stoptimes at the last stop of their pattern', () => {
+    // End-of-line arrivals (e.g. before a driver break) are not boardable,
+    // but EMBARK's GTFS leaves pickup_type unset on final stops.
+    const base = props.stop.stoptimesForServiceDate[0];
+    const eolProps = {
+      ...props,
+      stop: {
+        ...props.stop,
+        stoptimesForServiceDate: [
+          {
+            pattern: {
+              ...base.pattern,
+              stops: [
+                { gtfsId: 'HSL:1000001' },
+                { gtfsId: 'HSL:1000002' },
+                { gtfsId: `HSL:${stopIdNumber}` },
+              ],
+            },
+            stoptimes: [
+              {
+                headsign: 'Kamppi via Töölö',
+                pickupType: 'SCHEDULED',
+                realtimeState: 'SCHEDULED',
+                scheduledDeparture: 32460,
+                serviceDay: 1547071200,
+                stopPositionInPattern: 2,
+              },
+              {
+                headsign: 'Kamppi via Töölö',
+                pickupType: 'SCHEDULED',
+                realtimeState: 'SCHEDULED',
+                scheduledDeparture: 33000,
+                serviceDay: 1547071200,
+                stopPositionInPattern: 0,
+              },
+            ],
+          },
+        ],
+      },
+    };
+    const wrapper = shallowWithIntl(<Timetable {...eolProps} />, {
+      context: {
+        ...mockContext,
+        config: {
+          URL: {},
+        },
+      },
+    });
+    expect(wrapper.find(TimetableRow)).to.have.lengthOf(1);
+    expect(wrapper.find(TimetableRow).prop('stoptimes')).to.have.lengthOf(1);
+    expect(
+      wrapper.find(TimetableRow).prop('stoptimes')[0].scheduledDeparture,
+    ).to.equal(33000);
+  });
+
   it('should set valid stopPDFURL for StopPageActionBar', () => {
     const baseTimetableURL = 'https://timetabletest.com/stops/';
     const wrapper = shallowWithIntl(<Timetable {...props} />, {

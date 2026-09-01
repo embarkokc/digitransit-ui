@@ -14,6 +14,9 @@ export default createFragmentContainer(Timetable, {
         pattern {
           headsign
           code
+          stops {
+            gtfsId
+          }
           route {
             id
             shortName
@@ -32,6 +35,7 @@ export default createFragmentContainer(Timetable, {
           serviceDay
           headsign
           pickupType
+          stopPositionInPattern
         }
       }
     }

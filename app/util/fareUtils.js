@@ -150,6 +150,83 @@ export const getFareRange = fares => {
 };
 
 /**
+ * Resolves the cap price of a config.modeFareCaps entry for a rider category.
+ * `pricesByCategoryId` wins when it lists the category; otherwise `price`
+ * applies to non-reduced (adult/default) categories only, so a reduced
+ * category is never capped at the adult day pass price by accident.
+ */
+const resolveModeCapPrice = (cap, categoryId, isReducedCategory) => {
+  if (
+    cap.pricesByCategoryId &&
+    categoryId &&
+    categoryId in cap.pricesByCategoryId
+  ) {
+    return cap.pricesByCategoryId[categoryId];
+  }
+  return isReducedCategory ? undefined : cap.price;
+};
+
+/**
+ * Applies config.modeFareCaps to a list of single-ride items [{ name, price,
+ * mode }]. When a capped mode's rides sum above the cap, they collapse into
+ * one entry at the cap price (e.g. two $8 ferry rides become one $12
+ * "Ferry day pass"). Rides of other modes are left alone, so a mixed
+ * bus + ferry total stays bus fares + capped ferry subtotal.
+ * Returns { rides, totalPrice }.
+ */
+const applyModeFareCaps = (rides, config, categoryId, isReducedCategory) => {
+  const totalOf = list => list.reduce((sum, r) => sum + r.price, 0);
+  const caps = config && config.modeFareCaps;
+  if (!caps || !Array.isArray(rides) || rides.length === 0) {
+    return { rides: rides || [], totalPrice: totalOf(rides || []) };
+  }
+  let result = rides;
+  Object.keys(caps).forEach(mode => {
+    const capPrice = resolveModeCapPrice(
+      caps[mode],
+      categoryId,
+      isReducedCategory,
+    );
+    if (typeof capPrice !== 'number') {
+      return;
+    }
+    const modeRides = result.filter(r => r.mode === mode);
+    if (modeRides.length > 0 && totalOf(modeRides) > capPrice) {
+      result = [
+        ...result.filter(r => r.mode !== mode),
+        { name: caps[mode].name, price: capPrice, mode },
+      ];
+    }
+  });
+  return { rides: result, totalPrice: totalOf(result) };
+};
+
+/**
+ * Sums known per-leg fares with config.modeFareCaps applied (adult fares:
+ * getFaresFromLegs is adult-only by construction). Legs supply each fare's
+ * mode via routeGtfsId. Returns the capped total, or null without known fares.
+ */
+export const getCappedTotalFare = (legs, fares, config) => {
+  const knownFares = (fares || []).filter(
+    f => !f.isUnknown && typeof f.price === 'number',
+  );
+  if (knownFares.length === 0) {
+    return null;
+  }
+  const modeByRoute = new Map();
+  (legs || []).forEach(leg => {
+    if (leg.route && leg.route.gtfsId) {
+      modeByRoute.set(leg.route.gtfsId, leg.mode);
+    }
+  });
+  const rides = knownFares.map(fare => ({
+    price: fare.price,
+    mode: modeByRoute.get(fare.routeGtfsId),
+  }));
+  return applyModeFareCaps(rides, config).totalPrice;
+};
+
+/**
  * Returns alternative fares that cost as much as the one given by OpenTripPlanner
  *
  * @param {*} zones zones that are visited.
@@ -313,6 +390,8 @@ export const getFareOptionsByCategory = (legs, config) => {
   // Collect all fare products grouped by riderCategory + productId
   // Key: "categoryName::productId"
   const categoryProductMap = new Map();
+  // Track riderCategory.id per category name (for per-category fare caps)
+  const categoryIds = new Map();
   // Track fareUrl from agency
   let fareUrl = null;
 
@@ -328,6 +407,9 @@ export const getFareOptionsByCategory = (legs, config) => {
       const catIsDefault = cat ? cat.isDefault : false;
       const pid = fp.product.productId;
       const key = `${catName}::${pid}`;
+      if (cat && cat.id && !categoryIds.has(catName)) {
+        categoryIds.set(catName, cat.id);
+      }
 
       if (!categoryProductMap.has(key)) {
         categoryProductMap.set(key, {
@@ -337,6 +419,7 @@ export const getFareOptionsByCategory = (legs, config) => {
           name: fp.product.name,
           unitPrice: fp.product.price.amount,
           legPrices: [],
+          legModes: [],
           useIds: new Set(),
           legIndices: new Set(),
         });
@@ -347,6 +430,7 @@ export const getFareOptionsByCategory = (legs, config) => {
         seenOnThisLeg.add(key);
         entry.legIndices.add(legIndex);
         entry.legPrices.push(fp.product.price.amount);
+        entry.legModes.push(leg.mode);
       }
     });
   });
@@ -366,6 +450,7 @@ export const getFareOptionsByCategory = (legs, config) => {
   });
 
   // Build structured result per category
+  const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
   const result = [];
   categoriesMap.forEach((products, categoryName) => {
     const singleRides = [];
@@ -383,26 +468,33 @@ export const getFareOptionsByCategory = (legs, config) => {
         });
       } else {
         // Single ride: use actual per-leg prices (may differ across legs)
-        entry.legPrices.forEach(legPrice => {
+        entry.legPrices.forEach((legPrice, i) => {
           singleRides.push({
             name: entry.name,
             price: legPrice,
+            mode: entry.legModes[i],
           });
         });
       }
     });
 
-    const singleTicketTotal = singleRides.reduce((s, r) => s + r.price, 0);
+    // Cap single rides per mode (e.g. ferry day pass), per rider category
+    const capped = applyModeFareCaps(
+      singleRides,
+      config,
+      categoryIds.get(categoryName),
+      reducedPattern.test(categoryName),
+    );
 
     result.push({
       categoryName,
       isDefault: categoryDefaultFlags.get(categoryName) || false,
       singleTickets:
-        singleRides.length > 0
+        capped.rides.length > 0
           ? {
-              totalPrice: singleTicketTotal,
-              count: singleRides.length,
-              rides: singleRides,
+              totalPrice: capped.totalPrice,
+              count: capped.rides.length,
+              rides: capped.rides,
             }
           : null,
       passes,
@@ -412,7 +504,6 @@ export const getFareOptionsByCategory = (legs, config) => {
 
   // Sort: isDefault categories first, then non-reduced, then reduced.
   // Falls back to non-reduced-first ordering when isDefault is not available.
-  const reducedPattern = /reduced|concession|child|senior|student|youth|disabled/i;
   result.sort((a, b) => {
     // isDefault takes priority
     if (a.isDefault !== b.isDefault) {

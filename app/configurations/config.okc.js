@@ -128,23 +128,6 @@ export default configMerger(walttiConfig, {
     embark: {}
   },
 
-  // UI-side per-mode fare cap. OTP's ferry transfer fare rule is disabled,
-  // so two ferry single rides sum to $16 even though the $12 day pass is the
-  // most anyone pays. Capped rides collapse into one day pass line. `price`
-  // caps the default (Adult) category; other categories use
-  // pricesByCategoryId (prices from the EMBARK fares V2 spec: adult day
-  // pass $12, reduced day pass $6). Remove the FERRY entry if OTP
-  // re-enables its transfer rule, otherwise the fare would be capped twice.
-  modeFareCaps: {
-    FERRY: {
-      name: 'Ferry day pass',
-      price: 12,
-      pricesByCategoryId: {
-        'embark:reduced': 6,
-      },
-    },
-  },
-
   sprites: 'assets/svg-sprite.okc.svg',
 
   socialMedia: {

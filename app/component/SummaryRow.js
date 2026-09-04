@@ -28,7 +28,7 @@ import {
   getCitybikeCapacity,
 } from '../util/citybikes';
 import { getRouteMode } from '../util/modeUtils';
-import { getFaresFromLegs, getCappedTotalFare } from '../util/fareUtils';
+import { getFaresFromLegs } from '../util/fareUtils';
 
 const Leg = ({
   mode,
@@ -238,8 +238,13 @@ const SummaryRow = (
   const duration = endTime.diff(startTime);
 
   const fares = getFaresFromLegs(data.legs, config);
-  // Total with config.modeFareCaps applied (e.g. ferry day pass)
-  const totalFare = getCappedTotalFare(data.legs, fares, config);
+  const knownFares = fares
+    ? fares.filter(f => !f.isUnknown && typeof f.price === 'number')
+    : [];
+  const totalFare =
+    knownFares.length > 0
+      ? knownFares.reduce((sum, f) => sum + f.price, 0)
+      : null;
 
   const mobile = bp => !(bp === 'large');
   const legs = [];

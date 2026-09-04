@@ -128,23 +128,6 @@ export default configMerger(walttiConfig, {
     embark: {}
   },
 
-  // UI-side per-mode fare cap. OTP's ferry transfer fare rule is disabled,
-  // so two ferry single rides sum to $16 even though the $12 day pass is the
-  // most anyone pays. Capped rides collapse into one day pass line. `price`
-  // caps the default (Adult) category; other categories use
-  // pricesByCategoryId (prices from the EMBARK fares V2 spec: adult day
-  // pass $12, reduced day pass $6). Remove the FERRY entry if OTP
-  // re-enables its transfer rule, otherwise the fare would be capped twice.
-  modeFareCaps: {
-    FERRY: {
-      name: 'Ferry day pass',
-      price: 12,
-      pricesByCategoryId: {
-        'embark:reduced': 6,
-      },
-    },
-  },
-
   sprites: 'assets/svg-sprite.okc.svg',
 
   socialMedia: {
@@ -257,18 +240,6 @@ export default configMerger(walttiConfig, {
   },
 
   maxNearbyStopAmount: 15,
-
-  // Never send focus.point to the geocoder. Once an origin or destination is
-  // set, the app adds focus.point.lat/lon to every autosuggest request, and
-  // the OKC geocoder backend then stops enforcing boundary.rect and returns
-  // out-of-state matches (verified: "dallas" returns "Dallas, TX" with
-  // focus.point, Oklahoma-only without). Costs proximity ranking, but keeps
-  // every search behaving like the correct no-endpoint state.
-  autoSuggest: { locationAware: false },
-
-  // Hide previously saved out-of-state searches (picked while the geocoder
-  // leaked them) that would otherwise resurface from localStorage forever.
-  filterOldSearchesToBoundary: true,
 
   searchParams: {
     'boundary.rect.min_lat': minLat,

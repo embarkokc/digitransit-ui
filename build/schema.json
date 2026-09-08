@@ -2896,6 +2896,95 @@
         },
         {
           "kind": "OBJECT",
+          "name": "DependentFareProduct",
+          "description": "A (possibly discounted) fare product that requires another fare product to be purchased previously in order to be valid.",
+          "fields": [
+            {
+              "name": "id",
+              "description": "Identifier for the fare product.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "medium",
+              "description": "The 'medium' that this product applies to, for example \"Oyster Card\" or \"Berlin Ticket App\".\n  \nThis communicates to riders that a specific way of buying or keeping this product is required.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "FareMedium",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Human readable name of the product, for example example \"Day pass\" or \"Single ticket\".",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "price",
+              "description": "The price of the product",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Money",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "riderCategory",
+              "description": "The category of riders this product applies to, for example students or pensioners.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "RiderCategory",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "FareProduct",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "DepartureRow",
           "description": "Departure row is a combination of a pattern and a stop of that pattern.\n\nThey are de-duplicated so for each pattern there will only be a single departure row.\n\nThis is useful if you want to show a list of stop/pattern combinations but want each pattern to be\nlisted only once.",
           "fields": [
@@ -3374,6 +3463,11 @@
             {
               "kind": "OBJECT",
               "name": "DefaultFareProduct",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "DependentFareProduct",
               "ofType": null
             }
           ]

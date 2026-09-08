@@ -1032,6 +1032,16 @@ class SummaryPage extends React.Component {
                       isDefault
                     }
                   }
+                  ... on DependentFareProduct {
+                    price {
+                      amount
+                    }
+                    riderCategory {
+                      id
+                      name
+                      isDefault
+                    }
+                  }
                 }
               }
               mode

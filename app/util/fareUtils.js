@@ -40,7 +40,11 @@ export const getFaresFromLegs = (legs, config) => {
       return { ...leg, fareProducts: [] };
     }
 
-    let products = leg.fareProducts;
+    // The GraphQL fragments fetch price/riderCategory only for known
+    // concrete product types (DefaultFareProduct, DependentFareProduct), so
+    // a product of any other type arrives without a price. Treat it as
+    // absent rather than crashing on price.amount below.
+    let products = leg.fareProducts.filter(fp => fp.product.price);
 
     // Filter by availableTickets if configured.
     // Only apply if at least one product matches — V2 fare product IDs
@@ -229,6 +233,10 @@ export const getFareOptions = (legs, config) => {
     // Track which productIds we've already recorded for this leg
     const seenOnThisLeg = new Set();
     leg.fareProducts.forEach(fp => {
+      // Products of unknown concrete types arrive without a price
+      if (!fp.product.price) {
+        return;
+      }
       const cat = fp.product.riderCategory;
       if (cat) {
         const catId = cat.id || '';
@@ -323,6 +331,10 @@ export const getFareOptionsByCategory = (legs, config) => {
 
     const seenOnThisLeg = new Set();
     leg.fareProducts.forEach(fp => {
+      // Products of unknown concrete types arrive without a price
+      if (!fp.product.price) {
+        return;
+      }
       const cat = fp.product.riderCategory;
       const catName = cat ? cat.name : 'General';
       const catIsDefault = cat ? cat.isDefault : false;
@@ -448,10 +460,13 @@ export const getSingleLegFareByCategory = leg => {
     fareUrl = leg.route.agency.fareUrl;
   }
 
+  // Products of unknown concrete types arrive without a price
+  const pricedProducts = leg.fareProducts.filter(fp => fp.product.price);
+
   // Group products by category
   const categoriesMap = new Map();
   const categoryDefaultFlags = new Map();
-  leg.fareProducts.forEach(fp => {
+  pricedProducts.forEach(fp => {
     const cat = fp.product.riderCategory;
     const catName = cat ? cat.name : 'General';
     if (!categoriesMap.has(catName)) {

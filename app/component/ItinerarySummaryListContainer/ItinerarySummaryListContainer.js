@@ -366,6 +366,16 @@ const containerComponent = createFragmentContainer(
                   isDefault
                 }
               }
+              ... on DependentFareProduct {
+                price {
+                  amount
+                }
+                riderCategory {
+                  id
+                  name
+                  isDefault
+                }
+              }
             }
           }
           intermediatePlaces {

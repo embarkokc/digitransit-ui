@@ -387,6 +387,16 @@ const withRelay = createFragmentContainer(
                   isDefault
                 }
               }
+              ... on DependentFareProduct {
+                price {
+                  amount
+                }
+                riderCategory {
+                  id
+                  name
+                  isDefault
+                }
+              }
             }
           }
           mode

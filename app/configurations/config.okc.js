@@ -241,6 +241,16 @@ export default configMerger(walttiConfig, {
 
   maxNearbyStopAmount: 15,
 
+  // Never send focus.point to the geocoder. The OKC geocoder cannot apply a
+  // focus point ("at") and a bounding box ("in") at the same time: once an
+  // origin or destination is set, the app would add focus.point.lat/lon to
+  // every autosuggest request and the backend would then stop enforcing
+  // boundary.rect, returning out-of-state matches (issue 434 - "dallas"
+  // returns "Dallas, TX"). Costs nearest-first ranking, keeps every search
+  // inside the service area. Current location still reaches the planner;
+  // only the geocoder loses it.
+  autoSuggest: { locationAware: false },
+
   searchParams: {
     'boundary.rect.min_lat': minLat,
     'boundary.rect.max_lat': maxLat,

@@ -9,6 +9,8 @@ import DefaultExport, {
   Component as ItineraryLegs,
 } from '../../../app/component/ItineraryLegs';
 
+import EndLeg from '../../../app/component/EndLeg';
+
 import data from '../test-data/dcw12';
 import dt2831b from '../test-data/dt2831b';
 
@@ -98,5 +100,80 @@ describe('<ItineraryLegs />', () => {
     expect(component.prop('waitThreshold')).to.equal(
       config.itinerary.waitThreshold,
     );
+  });
+
+  describe('realtime arrival at the destination (issue 404)', () => {
+    const stop = gtfsId => ({ gtfsId, name: 'stop', vehicleMode: 'BUS' });
+
+    const walkLeg = {
+      mode: 'WALK',
+      transitLeg: false,
+      realTime: false,
+      rentedBike: false,
+      distance: 200,
+      duration: 240,
+      startTime: 1529588565000,
+      endTime: 1529588805000,
+      from: { name: 'Origin', stop: null },
+      to: { name: 'S Robinson Ave @ SW 22 St', stop: stop('embark:1') },
+      intermediatePlaces: [],
+    };
+
+    const busLeg = realTime => ({
+      mode: 'BUS',
+      transitLeg: true,
+      realTime,
+      rentedBike: false,
+      distance: 10918,
+      duration: 1320,
+      startTime: 1529588805000,
+      endTime: 1529590125000,
+      route: { gtfsId: 'embark:013', shortName: '013', mode: 'BUS' },
+      trip: { gtfsId: 'embark:t1', stoptimes: [] },
+      from: { name: 'S Robinson Ave @ SW 22 St', stop: stop('embark:1') },
+      to: { name: 'Transit Center-BAY C', stop: stop('embark:156') },
+      intermediatePlaces: [],
+      intermediatePlace: false,
+    });
+
+    const propsFor = legs => ({
+      itinerary: { legs, endTime: legs[legs.length - 1].endTime },
+      toggleCanceledLegsBanner: () => {},
+      waitThreshold: 180,
+    });
+
+    it('should mark the destination row as realtime when the itinerary ends on a realtime transit leg', () => {
+      const wrapper = shallowWithIntl(
+        <ItineraryLegs {...propsFor([walkLeg, busLeg(true)])} />,
+        { context: mockContext },
+      );
+
+      expect(wrapper.find(EndLeg).prop('realTime')).to.equal(true);
+    });
+
+    it('should not mark the destination row as realtime when the final transit leg is scheduled', () => {
+      const wrapper = shallowWithIntl(
+        <ItineraryLegs {...propsFor([walkLeg, busLeg(false)])} />,
+        { context: mockContext },
+      );
+
+      expect(wrapper.find(EndLeg).prop('realTime')).to.equal(false);
+    });
+
+    it('should not mark the destination row as realtime when the itinerary ends on a walk', () => {
+      const finalWalk = {
+        ...walkLeg,
+        startTime: 1529590125000,
+        endTime: 1529590365000,
+        from: { name: 'Transit Center-BAY C', stop: stop('embark:156') },
+        to: { name: 'Destination', stop: null },
+      };
+      const wrapper = shallowWithIntl(
+        <ItineraryLegs {...propsFor([walkLeg, busLeg(true), finalWalk])} />,
+        { context: mockContext },
+      );
+
+      expect(wrapper.find(EndLeg).prop('realTime')).to.equal(false);
+    });
   });
 });

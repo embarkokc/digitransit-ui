@@ -222,4 +222,104 @@ describe('<WalkLeg />', () => {
       context: { config: { colors: { primary: '#007ac9' } } },
     });
   });
+
+  it('should show the time as realtime when the preceding transit leg has realtime data', () => {
+    const props = {
+      focusAction: () => {},
+      focusToLeg: () => {},
+      index: 2,
+      leg: {
+        distance: 100,
+        duration: 120,
+        from: { name: 'Transit Center-BAY C', stop: null },
+        to: { name: 'Destination', stop: null },
+        mode: 'WALK',
+        rentedBike: false,
+        startTime: 1529589709000,
+        endTime: 1529589829000,
+      },
+      previousLeg: {
+        mode: 'BUS',
+        distance: 10918,
+        duration: 1320,
+        transitLeg: true,
+        realTime: true,
+        from: { name: 'S Robinson Ave @ SW 22 St', stop: null },
+        to: { name: 'Transit Center-BAY C', stop: null },
+        startTime: 1529588805000,
+        endTime: 1529589709000,
+      },
+    };
+
+    const wrapper = shallowWithIntl(<WalkLeg {...props} />, {
+      context: { config: { colors: { primary: '#007ac9' } } },
+    });
+
+    expect(
+      wrapper.find('.itinerary-time-column-time').find('.realtime'),
+    ).to.have.lengthOf(1);
+  });
+
+  it('should not show the time as realtime when the preceding transit leg is scheduled', () => {
+    const props = {
+      focusAction: () => {},
+      focusToLeg: () => {},
+      index: 2,
+      leg: {
+        distance: 100,
+        duration: 120,
+        from: { name: 'Transit Center-BAY C', stop: null },
+        to: { name: 'Destination', stop: null },
+        mode: 'WALK',
+        rentedBike: false,
+        startTime: 1529589709000,
+        endTime: 1529589829000,
+      },
+      previousLeg: {
+        mode: 'BUS',
+        distance: 10918,
+        duration: 1320,
+        transitLeg: true,
+        realTime: false,
+        from: { name: 'S Robinson Ave @ SW 22 St', stop: null },
+        to: { name: 'Transit Center-BAY C', stop: null },
+        startTime: 1529588805000,
+        endTime: 1529589709000,
+      },
+    };
+
+    const wrapper = shallowWithIntl(<WalkLeg {...props} />, {
+      context: { config: { colors: { primary: '#007ac9' } } },
+    });
+
+    expect(
+      wrapper.find('.itinerary-time-column-time').find('.realtime'),
+    ).to.have.lengthOf(0);
+  });
+
+  it('should not show the time as realtime when there is no preceding leg', () => {
+    const props = {
+      focusAction: () => {},
+      focusToLeg: () => {},
+      index: 0,
+      leg: {
+        distance: 100,
+        duration: 120,
+        from: { name: 'Origin', stop: null },
+        to: { name: 'S Robinson Ave @ SW 22 St', stop: null },
+        mode: 'WALK',
+        rentedBike: false,
+        startTime: 1529588685000,
+        endTime: 1529588805000,
+      },
+    };
+
+    const wrapper = shallowWithIntl(<WalkLeg {...props} />, {
+      context: { config: { colors: { primary: '#007ac9' } } },
+    });
+
+    expect(
+      wrapper.find('.itinerary-time-column-time').find('.realtime'),
+    ).to.have.lengthOf(0);
+  });
 });

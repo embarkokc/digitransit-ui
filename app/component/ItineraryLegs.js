@@ -403,6 +403,10 @@ class ItineraryLegs extends React.Component {
         endTime={itinerary.endTime}
         focusAction={this.focus(compressedLegs[numberOfLegs - 1].to)}
         to={compressedLegs[numberOfLegs - 1].to}
+        realTime={Boolean(
+          compressedLegs[numberOfLegs - 1].transitLeg &&
+            compressedLegs[numberOfLegs - 1].realTime,
+        )}
       />,
     );
 

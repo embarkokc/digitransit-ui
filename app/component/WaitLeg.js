@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'found/Link';
@@ -26,7 +27,9 @@ function WaitLeg(
       </span>
       <div className="small-2 columns itinerary-time-column" aria-hidden="true">
         <div className="itinerary-time-column-time">
-          {localizeTime(startTime)}
+          <span className={cx({ realtime: leg.transitLeg && leg.realTime })}>
+            {localizeTime(startTime)}
+          </span>
         </div>
       </div>
       <ItineraryCircleLineWithIcon
@@ -84,6 +87,8 @@ WaitLeg.propTypes = {
   children: PropTypes.node,
   waitTime: PropTypes.number.isRequired,
   leg: PropTypes.shape({
+    transitLeg: PropTypes.bool,
+    realTime: PropTypes.bool,
     from: PropTypes.shape({
       stop: PropTypes.shape({
         gtfsId: PropTypes.string.isRequired,

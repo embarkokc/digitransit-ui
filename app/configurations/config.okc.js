@@ -111,6 +111,22 @@ export default configMerger(walttiConfig, {
     bikeSpeed: [4.47, 5.59, 6.71, 7.82, 8.94],
   },
 
+  // Offer bike on board itineraries: cycle to a stop, carry the bike on the
+  // vehicle, cycle onward (issue 436). OTP already returns these on the plan
+  // API this frontend uses, so no backend change is needed. Both flags are
+  // required: showBikeAndPublicItineraries gates whether the bikeAndPublicPlan
+  // query is sent at all, and includePublicWithBikePlan gates the street mode
+  // button that surfaces the results. This is the combination HSL runs.
+  //
+  // Which services actually accept a bike is not decided here. EMBARK's feed
+  // declares bikes_allowed per trip and OTP enforces it, so modesWithNoBike is
+  // deliberately left unset rather than duplicating that policy into the theme.
+  //
+  // Side effect to be aware of: includePublicWithBikePlan also hides the bike
+  // park and ride toggle from the search settings panel, as it does for HSL.
+  showBikeAndPublicItineraries: true,
+  includePublicWithBikePlan: true,
+
   realtime: { embark: realtimeOkc },
 
   // do not show classic DT TicketInformation, as OKC has its own

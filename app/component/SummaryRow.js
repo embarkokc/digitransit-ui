@@ -28,7 +28,11 @@ import {
   getCitybikeCapacity,
 } from '../util/citybikes';
 import { getRouteMode } from '../util/modeUtils';
-import { getFaresFromLegs } from '../util/fareUtils';
+import {
+  getFaresFromLegs,
+  getFareOptionsByCategory,
+  getTransitLegCount,
+} from '../util/fareUtils';
 
 const Leg = ({
   mode,
@@ -241,10 +245,21 @@ const SummaryRow = (
   const knownFares = fares
     ? fares.filter(f => !f.isUnknown && typeof f.price === 'number')
     : [];
-  const totalFare =
+  // On multi-leg trips, summing each leg's cheapest product double-counts a
+  // pass that one purchase covers across legs, so use the cheapest cover.
+  const fareCategories =
+    getTransitLegCount(data.legs) > 1
+      ? getFareOptionsByCategory(data.legs, config)
+      : [];
+  const defaultFareCategory =
+    fareCategories.find(c => c.isDefault) || fareCategories[0];
+  let totalFare =
     knownFares.length > 0
       ? knownFares.reduce((sum, f) => sum + f.price, 0)
       : null;
+  if (defaultFareCategory && defaultFareCategory.cheapestTotal !== null) {
+    totalFare = defaultFareCategory.cheapestTotal;
+  }
 
   const mobile = bp => !(bp === 'large');
   const legs = [];

@@ -3,6 +3,7 @@ import {
   getFareOptions,
   getFareOptionsByCategory,
   getSingleLegFareByCategory,
+  getCheapestTripFare,
 } from '../../../app/util/fareUtils';
 
 const defaultConfig = {
@@ -331,7 +332,9 @@ describe('fareUtils', () => {
     it('getFareOptionsByCategory should skip priceless products without throwing', () => {
       const categories = getFareOptionsByCategory(twoFerryLegs, okcConfig);
       expect(categories).to.have.lengthOf(1);
-      expect(categories[0].singleTickets.totalPrice).to.equal(4.0);
+      // The $4.00 east single leaves the priceless WRRC leg unpaid
+      expect(categories[0].singleTickets).to.equal(null);
+      expect(categories[0].cheapestTotal).to.equal(null);
     });
 
     it('getSingleLegFareByCategory should skip priceless products without throwing', () => {
@@ -377,6 +380,106 @@ describe('fareUtils', () => {
       expect(result.filter(fare => fare.isUnknown)).to.have.lengthOf(0);
       const wrrc = result.find(f => f.routeGtfsId === 'embark:rt-WRRC');
       expect(wrrc.price).to.equal(12.0);
+    });
+  });
+  describe('cheapest total for a multi-leg trip (issue 447)', () => {
+    const adult = {
+      id: 'embark:adult',
+      name: 'Adult universal',
+      isDefault: true,
+    };
+    const reduced = {
+      id: 'embark:reduced',
+      name: 'Reduced universal',
+      isDefault: false,
+    };
+    const use = (useId, productId, amount, riderCategory) => ({
+      id: useId,
+      product: { productId, name: productId, price: { amount }, riderCategory },
+    });
+    const config = { fareMapping: fareId => fareId };
+
+    // OTP response for ERRC then WRRC once the ferry transfer rule is in:
+    // the day pass bought on ERRC carries to WRRC under the same use id.
+    const ferryLegs = [
+      {
+        route: { gtfsId: 'embark:rt-ERRC', shortName: 'ERRC', agency: {} },
+        fareProducts: [
+          use('66e7ece0', 'embark:ferry_day_pass', 12, adult),
+          use('67f7929b', 'embark:ferry_day_pass', 6, reduced),
+          use('cff70646', 'embark:ferry_east', 4, adult),
+        ],
+      },
+      {
+        route: { gtfsId: 'embark:rt-WRRC', shortName: 'WRRC', agency: {} },
+        fareProducts: [
+          use('66e7ece0', 'embark:ferry_day_pass', 12, adult),
+          use('67f7929b', 'embark:ferry_day_pass', 6, reduced),
+        ],
+      },
+    ];
+
+    // Routes 011 then 003: singles have their own use ids, the pass shares one.
+    const busLegs = [
+      {
+        route: { gtfsId: 'embark:rt-011', shortName: '011', agency: {} },
+        fareProducts: [
+          use('8c502c77', 'embark:single_ride_local', 1.75, adult),
+          use('d476c2b1', 'embark:24h_universal_pass', 4, adult),
+        ],
+      },
+      {
+        route: { gtfsId: 'embark:rt-003', shortName: '003', agency: {} },
+        fareProducts: [
+          use('69641b64', 'embark:single_ride_local', 1.75, adult),
+          use('d476c2b1', 'embark:24h_universal_pass', 4, adult),
+        ],
+      },
+    ];
+
+    it('charges a pass shared across legs once', () => {
+      expect(getCheapestTripFare(ferryLegs, 'Adult universal')).to.equal(12);
+      expect(getCheapestTripFare(ferryLegs, 'Reduced universal')).to.equal(6);
+    });
+
+    it('prefers singles when they are cheaper than the pass', () => {
+      expect(getCheapestTripFare(busLegs, 'Adult universal')).to.equal(3.5);
+    });
+
+    it('returns null when a leg has no product in the category', () => {
+      const legs = [ferryLegs[0], { ...busLegs[0], fareProducts: [] }];
+      expect(getCheapestTripFare(legs, 'Adult universal')).to.equal(null);
+    });
+
+    it('does not count separate purchases of the same product as one', () => {
+      const legs = ferryLegs.map((leg, i) => ({
+        ...leg,
+        fareProducts: [use(`pass-${i}`, 'embark:ferry_day_pass', 12, adult)],
+      }));
+      expect(getCheapestTripFare(legs, 'Adult universal')).to.equal(24);
+    });
+
+    it('exposes the cheapest total on each rider category', () => {
+      const [adultCategory, reducedCategory] = getFareOptionsByCategory(
+        ferryLegs,
+        config,
+      );
+      expect(adultCategory.cheapestTotal).to.equal(12);
+      expect(reducedCategory.cheapestTotal).to.equal(6);
+    });
+
+    it('hides single tickets that do not cover every leg', () => {
+      const [adultCategory] = getFareOptionsByCategory(ferryLegs, config);
+      expect(adultCategory.singleTickets).to.equal(null);
+      expect(adultCategory.passes).to.have.lengthOf(1);
+      expect(adultCategory.passes[0].price).to.equal(12);
+    });
+
+    it('keeps single tickets that cover every leg', () => {
+      const [adultCategory] = getFareOptionsByCategory(busLegs, config);
+      expect(adultCategory.singleTickets.totalPrice).to.equal(3.5);
+      expect(adultCategory.singleTickets.count).to.equal(2);
+      expect(adultCategory.cheapestTotal).to.equal(3.5);
     });
   });
 });

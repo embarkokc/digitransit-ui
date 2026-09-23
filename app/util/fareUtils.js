@@ -296,6 +296,54 @@ export const getFareOptions = (legs, config) => {
 };
 
 /**
+ * Returns the cheapest total that pays for every leg in legs for one rider
+ * category, or null if some leg has no priced product in that category.
+ *
+ * A fare product use id shared by several legs is a single purchase (e.g. a
+ * day pass carried over to the next leg by a transfer rule), so each use id
+ * is paid for once, however many legs it covers.
+ */
+export const getCheapestTripFare = (legs, categoryName) => {
+  const uses = new Map();
+  legs.forEach((leg, legIndex) => {
+    leg.fareProducts.forEach(fp => {
+      const { price, riderCategory } = fp.product;
+      const catName = riderCategory ? riderCategory.name : 'General';
+      if (!price || catName !== categoryName) {
+        return;
+      }
+      if (!uses.has(fp.id)) {
+        uses.set(fp.id, { price: price.amount, legIndices: new Set() });
+      }
+      uses.get(fp.id).legIndices.add(legIndex);
+    });
+  });
+
+  // Pay for the first uncovered leg with each use that covers it, then
+  // recurse on what remains. Trips have a handful of legs, so this is cheap.
+  const cheapestFrom = covered => {
+    const next = covered.findIndex(c => !c);
+    if (next === -1) {
+      return 0;
+    }
+    let best = null;
+    uses.forEach(use => {
+      if (!use.legIndices.has(next)) {
+        return;
+      }
+      const rest = cheapestFrom(
+        covered.map((c, i) => c || use.legIndices.has(i)),
+      );
+      if (rest !== null && (best === null || use.price + rest < best)) {
+        best = use.price + rest;
+      }
+    });
+    return best;
+  };
+  return cheapestFrom(legs.map(() => false));
+};
+
+/**
  * Computes fare options grouped by rider category for the V2 fare display.
  * Returns an array of categories, each containing single-ticket and pass options.
  *
@@ -303,8 +351,12 @@ export const getFareOptions = (legs, config) => {
  *   categoryName: string (e.g. "Adult universal"),
  *   singleTickets: { totalPrice, count, rides: [{ name, price }] },
  *   passes: [{ name, productId, price, isPass: true }],
+ *   cheapestTotal: number|null (see getCheapestTripFare),
  *   fareUrl: string|null
  * }
+ *
+ * singleTickets is null unless single rides cover every transit leg, since
+ * a partial total is not a price anyone can pay for the trip.
  */
 export const getFareOptionsByCategory = (legs, config) => {
   if (!Array.isArray(legs) || legs.length === 0 || !config) {
@@ -381,6 +433,7 @@ export const getFareOptionsByCategory = (legs, config) => {
   const result = [];
   categoriesMap.forEach((products, categoryName) => {
     const singleRides = [];
+    const singleLegIndices = new Set();
     const passes = [];
 
     products.forEach(entry => {
@@ -395,6 +448,7 @@ export const getFareOptionsByCategory = (legs, config) => {
         });
       } else {
         // Single ride: use actual per-leg prices (may differ across legs)
+        entry.legIndices.forEach(i => singleLegIndices.add(i));
         entry.legPrices.forEach(legPrice => {
           singleRides.push({
             name: entry.name,
@@ -410,7 +464,7 @@ export const getFareOptionsByCategory = (legs, config) => {
       categoryName,
       isDefault: categoryDefaultFlags.get(categoryName) || false,
       singleTickets:
-        singleRides.length > 0
+        singleLegIndices.size === transitLegs.length
           ? {
               totalPrice: singleTicketTotal,
               count: singleRides.length,
@@ -418,6 +472,7 @@ export const getFareOptionsByCategory = (legs, config) => {
             }
           : null,
       passes,
+      cheapestTotal: getCheapestTripFare(transitLegs, categoryName),
       fareUrl,
     });
   });

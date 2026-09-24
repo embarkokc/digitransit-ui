@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { mockContext, mockChildContextTypes } from '../helpers/mock-context';
-import { mountWithIntl } from '../helpers/mock-intl-enzyme';
+import { mountWithIntl, shallowWithIntl } from '../helpers/mock-intl-enzyme';
+import { ItinerarySummarySubtitle } from '../../../app/component/ItinerarySummarySubtitle';
 import { Component as ItinerarySummaryListContainer } from '../../../app/component/ItinerarySummaryListContainer/ItinerarySummaryListContainer';
 
 const noop = () => {};
@@ -67,5 +68,42 @@ describe('<ItinerarySummaryListContainer />', () => {
     );
 
     expect(wrapper.isEmptyRender()).to.equal(false);
+  });
+
+  it('should give the bike and public subtitle a readable default message', () => {
+    // The translation id is built from the itinerary modes, and only the rail
+    // and subway variants exist. A bus network therefore always falls back to
+    // the defaultMessage, so that string is what riders actually read.
+    const props = {
+      ...PROPS_TEMPLATE,
+      bikeAndPublicItinerariesToShow: 1,
+      itineraries: [
+        {
+          legs: [{ mode: 'BICYCLE' }, { mode: 'BUS' }, { mode: 'BICYCLE' }],
+        },
+      ],
+    };
+
+    const wrapper = shallowWithIntl(
+      <ItinerarySummaryListContainer {...props} />,
+      {
+        context: {
+          ...mockContext,
+          config: { ...mockContext.config, zones: { stops: false } },
+          match: {
+            ...mockContext.match,
+            params: { hash: 'bikeAndVehicle' },
+          },
+        },
+      },
+    );
+
+    const subtitle = wrapper.find(ItinerarySummarySubtitle);
+    expect(subtitle).to.have.lengthOf(1);
+    expect(subtitle.prop('translationId')).to.equal(
+      'itinerary-summary.bikeAndPublic-bus-title',
+    );
+    expect(subtitle.prop('defaultMessage')).to.contain('&');
+    expect(subtitle.prop('defaultMessage')).to.not.contain('u0026');
   });
 });

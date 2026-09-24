@@ -31,7 +31,9 @@ function EndLeg(props, context) {
       </span>
       <div className="small-2 columns itinerary-time-column" aria-hidden="true">
         <div className="itinerary-time-column-time">
-          {localizeTime(props.endTime)}
+          <span className={cx({ realtime: props.realTime })}>
+            {localizeTime(props.endTime)}
+          </span>
         </div>
       </div>
       <div className={`leg-before ${modeClassName}`} aria-hidden="true">
@@ -70,6 +72,13 @@ EndLeg.propTypes = {
   to: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   focusAction: PropTypes.func.isRequired,
+  // True when the itinerary ends on a transit leg carrying realtime data, so
+  // this row's arrival time matches the green times above it (issue 404).
+  realTime: PropTypes.bool,
+};
+
+EndLeg.defaultProps = {
+  realTime: false,
 };
 
 EndLeg.contextTypes = {

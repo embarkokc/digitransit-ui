@@ -169,8 +169,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
       selectHandler: onSelectStopRoute,
       getAutoSuggestIcons: config.getAutoSuggestIcons,
       value: '',
-      // TODO
-      lang: 'en',
+      lang,
       color,
       hoverColor,
       accessiblePrimaryColor,
@@ -259,7 +258,7 @@ class EmbeddedRouteSearchContainer extends React.Component {
 }
 
 EmbeddedRouteSearchContainer.propTypes = {
-  lang: PropTypes.string.isRequired,
+  lang: PropTypes.string,
   breakpoint: PropTypes.string.isRequired,
 };
 
@@ -268,7 +267,7 @@ EmbeddedRouteSearchContainer.contextTypes = {
   match: matchShape.isRequired,
 };
 
-EmbeddedRouteSearchContainer.defaultTypes = {
+EmbeddedRouteSearchContainer.defaultProps = {
   lang: 'en',
 };
 

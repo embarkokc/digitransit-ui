@@ -89,7 +89,7 @@ function ItinerarySummaryListContainer(
           0,
           <ItinerarySummarySubtitle
             translationId="itinerary-summary.bikePark-title"
-            defaultMessage="Biking \u0026 public transport \u0026 walking"
+            defaultMessage="Biking & public transport & walking"
             key="itinerary-summary.bikePark-title"
           />,
         );
@@ -121,7 +121,7 @@ function ItinerarySummaryListContainer(
             translationId={`itinerary-summary.bikeAndPublic-${allModes
               .sort()
               .join('-')}-title`}
-            defaultMessage="Biking \u0026 public transport"
+            defaultMessage="Biking & public transport"
             key="itinerary-summary.bikeAndPublic-title"
           />,
         );
@@ -357,6 +357,16 @@ const containerComponent = createFragmentContainer(
               productId: id
               name
               ... on DefaultFareProduct {
+                price {
+                  amount
+                }
+                riderCategory {
+                  id
+                  name
+                  isDefault
+                }
+              }
+              ... on DependentFareProduct {
                 price {
                   amount
                 }

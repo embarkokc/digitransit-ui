@@ -231,10 +231,14 @@ export default function TicketInformation(
     const defaultCategory =
       fareCategories.find(c => c.isDefault) || fareCategories[0];
     const prices = [];
-    if (defaultCategory.singleTickets) {
-      prices.push(defaultCategory.singleTickets.totalPrice);
+    if (defaultCategory.cheapestTotal !== null) {
+      prices.push(defaultCategory.cheapestTotal);
+    } else {
+      if (defaultCategory.singleTickets) {
+        prices.push(defaultCategory.singleTickets.totalPrice);
+      }
+      defaultCategory.passes.forEach(p => prices.push(p.price));
     }
-    defaultCategory.passes.forEach(p => prices.push(p.price));
     const cheapestTotal = Math.min(...prices);
     label = `From ${formatPrice(intl, cheapestTotal, currency)}`;
   } else if (knownFares.length === 1 && knownFares[0].price > 0) {

@@ -146,11 +146,24 @@ class Timetable extends React.Component {
   //   this.setState({ showFilterModal: val });
   // };
 
+  // A stoptime at the final stop of its pattern is an end-of-line arrival
+  // (nothing can board there). EMBARK's GTFS leaves pickup_type unset on
+  // final stops, so the pickupType filter alone misses these and the
+  // timetable would show arrival times as boardable departures.
+  isLastStopArrival = (pattern, st) =>
+    typeof st.stopPositionInPattern === 'number' &&
+    Array.isArray(pattern.stops) &&
+    st.stopPositionInPattern >= pattern.stops.length - 1;
+
   mapStopTimes = stoptimesObject =>
     stoptimesObject
       .map(stoptime =>
         stoptime.stoptimes
-          .filter(st => st.pickupType !== 'NONE')
+          .filter(
+            st =>
+              st.pickupType !== 'NONE' &&
+              !this.isLastStopArrival(stoptime.pattern, st),
+          )
           .map(st => ({
             id: stoptime.pattern.code,
             name: stoptime.pattern.route.shortName || stoptime.pattern.headsign,

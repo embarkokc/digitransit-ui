@@ -38,6 +38,10 @@ function WalkLeg(
   const modeClassName = 'walk';
   const fromMode = (leg[toOrFrom].stop && leg[toOrFrom].stop.vehicleMode) || '';
   const isFirstLeg = i => i === 0;
+  // This row prints the time at which the PREVIOUS leg ended when walking, and
+  // this leg's own end time otherwise. Colour it as realtime only when the leg
+  // that produced that time is a transit leg carrying realtime data (issue 404).
+  const timeSourceLeg = leg.mode === 'WALK' ? previousLeg : leg;
   const [address, place] = splitStringToAddressAndPlace(leg[toOrFrom].name);
 
   const networkType = getCityBikeNetworkConfig(
@@ -90,7 +94,13 @@ function WalkLeg(
       </span>
       <div className="small-2 columns itinerary-time-column" aria-hidden="true">
         <div className="itinerary-time-column-time">
-          {localizeTime(leg.mode === 'WALK' ? leg.startTime : leg.endTime)}
+          <span
+            className={cx({
+              realtime: timeSourceLeg?.transitLeg && timeSourceLeg?.realTime,
+            })}
+          >
+            {localizeTime(leg.mode === 'WALK' ? leg.startTime : leg.endTime)}
+          </span>
         </div>
       </div>
       <ItineraryCircleLineWithIcon

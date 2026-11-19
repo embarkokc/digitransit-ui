@@ -126,6 +126,9 @@ export default configMerger(walttiConfig, {
   // park and ride toggle from the search settings panel, as it does for HSL.
   showBikeAndPublicItineraries: true,
   includePublicWithBikePlan: true,
+  // Bike on board only: no bike and park itineraries (issue XXX). waltti
+  // turns these on, and defaultSettings above only sets the rider's toggle.
+  showBikeAndParkItineraries: false,
 
   realtime: { embark: realtimeOkc },
 

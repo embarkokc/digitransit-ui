@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import defaultConfig from '../../../app/configurations/config.default';
+import okcConfig from '../../../app/configurations/config.okc';
+import configMerger from '../../../app/util/configMerger';
 import * as utils from '../../../app/util/planParamUtil';
 import { setCustomizedSettings } from '../../../app/store/localStorage';
 
@@ -351,6 +353,16 @@ describe('planParamUtil', () => {
           showBikeAndParkItineraries: false,
           includePublicWithBikePlan: true,
         },
+        false,
+      )(...defaultProps);
+      expect(params.showBikeAndPublicItineraries).to.equal(true);
+      expect(params.showBikeAndParkItineraries).to.equal(false);
+    });
+
+    it('should query bike and public but not bike and park itineraries for okc', () => {
+      setCustomizedSettings({ includeBikeSuggestions: true });
+      const params = utils.preparePlanParams(
+        { ...configMerger(defaultConfig, okcConfig), modePolygons: {} },
         false,
       )(...defaultProps);
       expect(params.showBikeAndPublicItineraries).to.equal(true);

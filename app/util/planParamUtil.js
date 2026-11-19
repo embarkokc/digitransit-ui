@@ -312,10 +312,10 @@ export const preparePlanParams = (config, useDefaultModes) => (
       !wheelchair &&
       config.showBikeAndParkItineraries &&
       modesOrDefault.length > 1 &&
-      !config.includePublicWithBikePlan
+      (!config.includePublicWithBikePlan
         ? settings.showBikeAndParkItineraries ||
           defaultSettings.showBikeAndParkItineraries
-        : includeBikeSuggestions,
+        : includeBikeSuggestions),
     bikeAndPublicModes: [
       { mode: 'BICYCLE' },
       ...modesAsOTPModes(getBicycleCompatibleModes(config, modesOrDefault)),

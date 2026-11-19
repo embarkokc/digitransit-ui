@@ -341,6 +341,35 @@ describe('planParamUtil', () => {
       const { allowedBikeRentalNetworks } = params;
       expect(allowedBikeRentalNetworks).to.deep.equal(['foo']);
     });
+
+    it('should not query bike and park itineraries when the config disables them, even with includePublicWithBikePlan', () => {
+      setCustomizedSettings({ includeBikeSuggestions: true });
+      const params = utils.preparePlanParams(
+        {
+          ...defaultConfig,
+          showBikeAndPublicItineraries: true,
+          showBikeAndParkItineraries: false,
+          includePublicWithBikePlan: true,
+        },
+        false,
+      )(...defaultProps);
+      expect(params.showBikeAndPublicItineraries).to.equal(true);
+      expect(params.showBikeAndParkItineraries).to.equal(false);
+    });
+
+    it('should query bike and park itineraries with bike suggestions when the config enables them with includePublicWithBikePlan', () => {
+      setCustomizedSettings({ includeBikeSuggestions: true });
+      const params = utils.preparePlanParams(
+        {
+          ...defaultConfig,
+          showBikeAndPublicItineraries: true,
+          showBikeAndParkItineraries: true,
+          includePublicWithBikePlan: true,
+        },
+        false,
+      )(...defaultProps);
+      expect(params.showBikeAndParkItineraries).to.equal(true);
+    });
   });
 
   describe('getDefaultSettings', () => {

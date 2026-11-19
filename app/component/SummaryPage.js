@@ -2195,8 +2195,8 @@ class SummaryPage extends React.Component {
 
       if (
         !this.state.isFetchingWalkAndBike &&
-        !this.context.config.showBikeAndParkItineraries &&
-        (!hasBikeAndPublicPlan || !hasBikeParkPlan)
+        !hasBikeAndPublicPlan &&
+        !hasBikeParkPlan
       ) {
         this.toggleStreetMode(''); // go back to showing normal itineraries
         return <Loading />;
@@ -2223,7 +2223,7 @@ class SummaryPage extends React.Component {
       this.bikeAndPublicItinerariesToShow = hasBikeAndPublicPlan
         ? Math.min(bikeAndPublicPlan.itineraries.length, 3)
         : 0;
-      this.bikeAndParkItinerariesToShow = hasBikeAndPublicPlan
+      this.bikeAndParkItinerariesToShow = hasBikeParkPlan
         ? Math.min(bikeParkPlan.itineraries.length, 3)
         : 0;
     } else if (this.props.match.params.hash === 'car') {

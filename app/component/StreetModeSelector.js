@@ -52,20 +52,20 @@ export const StreetModeSelector = ({
               onClick={setStreetModeAndSelect}
             />
           )}
-          {showBikeOptionButton && (
-            <StreetModeSelectorButton
-              icon="icon-icon_cyclist"
-              name="bike"
-              plan={bikePlan}
-              onClick={setStreetModeAndSelect}
-            />
-          )}
           {showBikeAndPublicOptionButton && (
             <StreetModeSelectorButton
               icon="icon-icon_cyclist"
               name="bikeAndVehicle"
               plan={bikeAndVehicle}
               onClick={toggleStreetMode}
+            />
+          )}
+          {showBikeOptionButton && (
+            <StreetModeSelectorButton
+              icon="icon-icon_cyclist"
+              name="bike"
+              plan={bikePlan}
+              onClick={setStreetModeAndSelect}
             />
           )}
 
